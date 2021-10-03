@@ -33,6 +33,8 @@ public class Cassandra {
             String[] splits = line.split(",");
             latencies.add(invokeTransaction(session, splits, scanner));
         }
+
+        session.close();
     }
 
     private static long invokeTransaction(CqlSession session, String[] splits, Scanner scanner) {
