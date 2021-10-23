@@ -3,7 +3,8 @@ package clients;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import java.io.FileInputStream;
-import java.sql.Connection;
+import java.math.BigDecimal;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -75,7 +76,7 @@ public class CockroachDB {
                 int cwid = Integer.parseInt(splits[1]);
                 int cdid = Integer.parseInt(splits[2]);
                 cid = Integer.parseInt(splits[3]);
-                float payment = Float.parseFloat(splits[4]);
+                BigDecimal payment = new BigDecimal(splits[4]);
                 paymentTransaction(conn, cwid, cdid, cid, payment);
                 break;
 
@@ -123,12 +124,47 @@ public class CockroachDB {
     }
 
     private static void newOrderTransaction(Connection conn, int cid, int wid, int did, ArrayList<ArrayList<Integer>> orderItems) {
-//        System.out.println("Hi");
+
 
     }
 
-    private static void paymentTransaction(Connection conn, int cwid, int cdid, int cid, float payment) {
+    private static void paymentTransaction(Connection conn, int cwid, int cdid, int cid, BigDecimal payment) {
+        try {
+            System.out.println(payment);
+            System.out.println(cwid);
+            PreparedStatement p= conn.prepareStatement("UPDATE warehouse_tab SET W_YTD = W_YTD + ? WHERE W_ID = ?;");
+            p.setBigDecimal(1, new BigDecimal(200));
+            p.setInt(2, cwid);
+            System.out.println(p);
 
+            p.executeUpdate();
+
+//            PreparedStatement a = conn.prepareStatement("SELECT * FROM warehouse_tab LIMIT 10;");
+//            System.out.println(a.executeQuery());
+
+        } catch (SQLException e) {
+            System.out.printf("sql state = [%s]\ncause = [%s]\nmessage = [%s]\n", e.getSQLState(), e.getCause(),
+                    e.getMessage());
+        }
+
+
+        try {
+            Statement stmt = conn.createStatement();
+
+
+            ResultSet rs = stmt.executeQuery("SELECT * FROM warehouse_tab LIMIT 10");
+
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String bal = rs.getString(2);
+                System.out.printf("ID: %10s\nBalance: %5s\n", id, bal);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            System.out.printf("sql state = [%s]\ncause = [%s]\nmessage = [%s]\n",
+                    e.getSQLState(), e.getCause(), e.getMessage());
+        }
     }
 
     private static void deliveryTransaction(Connection conn, int wid, int carrierid) {
