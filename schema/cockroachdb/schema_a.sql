@@ -108,7 +108,7 @@ CREATE TABLE order_line_tab (
     ol_number      INT,
     ol_i_id        INT,
     ol_delivery_d  TIMESTAMP,
-    ol_amount      DECIMAL(6,2),
+    ol_amount      NUMERIC,
     ol_supply_w_id INT,
     ol_quantity    DECIMAL(2,0),
     ol_dist_info   CHAR(24),
