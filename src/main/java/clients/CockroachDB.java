@@ -130,40 +130,53 @@ public class CockroachDB {
 
     private static void paymentTransaction(Connection conn, int cwid, int cdid, int cid, BigDecimal payment) {
         try {
-            System.out.println(payment);
-            System.out.println(cwid);
-            PreparedStatement p= conn.prepareStatement("UPDATE warehouse_tab SET W_YTD = W_YTD + ? WHERE W_ID = ?;");
-            p.setBigDecimal(1, new BigDecimal(200));
-            p.setInt(2, cwid);
-            System.out.println(p);
+            PreparedStatement updateWarehouse = conn.prepareStatement(
+                    "UPDATE warehouse_tab SET W_YTD = W_YTD + ? WHERE W_ID = ?;");
+            updateWarehouse.setBigDecimal(1, payment);
+            updateWarehouse.setInt(2, cwid);
+            updateWarehouse.executeUpdate();
 
-            p.executeUpdate();
+            PreparedStatement updateDistrict = conn.prepareStatement(
+                    "UPDATE district_tab SET D_YTD = D_YTD + ? WHERE  D_W_ID = ? AND D_ID=?");
+            updateDistrict.setBigDecimal(1,payment);
+            updateDistrict.setInt(2,cwid);
+            updateDistrict.setInt(3,cdid);
+            updateDistrict.executeUpdate();
 
-//            PreparedStatement a = conn.prepareStatement("SELECT * FROM warehouse_tab LIMIT 10;");
-//            System.out.println(a.executeQuery());
+            PreparedStatement updateCustomer_1 = conn.prepareStatement(
+                    "UPDATE customer_tab " +
+                    "SET C_BANLANCE= C_BANLANCE - ?" +
+                    "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
+            updateCustomer_1.setBigDecimal(1,payment);
+            updateCustomer_1.setInt(2,cwid);
+            updateCustomer_1.setInt(3,cdid);
+            updateCustomer_1.setInt(4,cid);
+            updateCustomer_1.executeUpdate();
+
+            PreparedStatement updateCustomer_2 = conn.prepareStatement(
+                    "UPDATE customer_tab " +
+                    "SET C_YTD_PAYMENT= C_YTD_PAYMENT + ?" +
+                    "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
+            updateCustomer_2.setBigDecimal(1,payment);
+            updateCustomer_2.setInt(2,cwid);
+            updateCustomer_2.setInt(3,cdid);
+            updateCustomer_2.setInt(4,cid);
+            updateCustomer_2.executeUpdate();
+
+            PreparedStatement updateCustomer_3 = conn.prepareStatement(
+                    "UPDATE customer_tab " +
+                    "SET C_PAYMENT_CNT= C_PAYMENT_CNT + 1" +
+                    "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
+            updateCustomer_3.setInt(1,cwid);
+            updateCustomer_3.setInt(2,cdid);
+            updateCustomer_3.setInt(3,cid);
+            updateCustomer_3.executeUpdate();
+
+            conn.commit();
 
         } catch (SQLException e) {
             System.out.printf("sql state = [%s]\ncause = [%s]\nmessage = [%s]\n", e.getSQLState(), e.getCause(),
                     e.getMessage());
-        }
-
-
-        try {
-            Statement stmt = conn.createStatement();
-
-
-            ResultSet rs = stmt.executeQuery("SELECT * FROM warehouse_tab LIMIT 10");
-
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                String bal = rs.getString(2);
-                System.out.printf("ID: %10s\nBalance: %5s\n", id, bal);
-            }
-            rs.close();
-
-        } catch (SQLException e) {
-            System.out.printf("sql state = [%s]\ncause = [%s]\nmessage = [%s]\n",
-                    e.getSQLState(), e.getCause(), e.getMessage());
         }
     }
 
