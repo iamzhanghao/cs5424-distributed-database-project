@@ -12,23 +12,35 @@ public class CockroachDB {
         if (args.length != 4) {
             System.err.println("run the program by: ./CockroachDB <host> <port> <database> <data_dir>");
         }
+        System.out.println(args[0]);
+        System.out.println(args[1]);
+        System.out.println(args[2]);
+        System.out.println(args[3]);
         String host = args[0];
         int port = Integer.parseInt(args[1]);
         String database = args[2];
         String dataDir = args[3];
 
+
         PGSimpleDataSource ds = new PGSimpleDataSource();
-        ds.setServerName(host);
-        ds.setPortNumber(port);
-        ds.setDatabaseName(database);
-        ds.setSsl(false);
+        ds.setServerName("localhost");
+        ds.setPortNumber(26257);
+        ds.setDatabaseName("my_db");
         ds.setUser("root");
+        ds.setPassword(null);
+        ds.setSsl(true);
+        ds.setSslMode("require");
+        ds.setSslCert("certs/client.root.crt");
+        ds.setSslKey("certs/client.root.key.pk8");
+        ds.setReWriteBatchedInserts(true); // add `rewriteBatchedInserts=true` to pg connection string
+        ds.setApplicationName("CockroachDB App");
 
         Connection conn = ds.getConnection();
         conn.setAutoCommit(false);
-
         FileInputStream stream = new FileInputStream(dataDir);
         Scanner scanner = new Scanner(stream);
+
+        System.out.println("Ready to ready xact files");
 
         ArrayList<Long> latencies = new ArrayList<Long>();
         while (scanner.hasNextLine()) {
@@ -111,6 +123,7 @@ public class CockroachDB {
     }
 
     private static void newOrderTransaction(Connection conn, int cid, int wid, int did, ArrayList<ArrayList<Integer>> orderItems) {
+//        System.out.println("Hi");
 
     }
 

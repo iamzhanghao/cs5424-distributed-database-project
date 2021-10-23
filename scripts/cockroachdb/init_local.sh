@@ -15,6 +15,8 @@ root \
 --certs-dir=certs \
 --ca-key=my-safe-directory/ca.key
 
+openssl pkcs8 -topk8 -inform PEM -outform DER -in certs/client.root.key -out certs/client.root.key.pk8 -nocrypt
+
 cockroach start \
 --certs-dir=certs \
 --store=node1 \
