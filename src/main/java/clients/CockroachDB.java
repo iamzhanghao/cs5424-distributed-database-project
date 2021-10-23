@@ -24,9 +24,9 @@ public class CockroachDB {
 
 
         PGSimpleDataSource ds = new PGSimpleDataSource();
-        ds.setServerName("localhost");
-        ds.setPortNumber(26257);
-        ds.setDatabaseName("schema_a");
+        ds.setServerName(host);
+        ds.setPortNumber(port);
+        ds.setDatabaseName(database);
         ds.setUser("root");
         ds.setPassword(null);
         ds.setSsl(true);
@@ -145,7 +145,7 @@ public class CockroachDB {
 
             PreparedStatement updateCustomer_1 = conn.prepareStatement(
                     "UPDATE customer_tab " +
-                    "SET C_BANLANCE= C_BANLANCE - ?" +
+                    "SET C_BALANCE= C_BALANCE - ?" +
                     "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
             updateCustomer_1.setBigDecimal(1,payment);
             updateCustomer_1.setInt(2,cwid);
@@ -175,7 +175,7 @@ public class CockroachDB {
             conn.commit();
 
         } catch (SQLException e) {
-            System.out.printf("sql state = [%s]\ncause = [%s]\nmessage = [%s]\n", e.getSQLState(), e.getCause(),
+            System.out.printf("sql state = [%s]cause = [%s]message = [%s]", e.getSQLState(), e.getCause(),
                     e.getMessage());
         }
     }
@@ -201,6 +201,48 @@ public class CockroachDB {
     }
 
     private static void relatedCustomerTransaction(Connection conn, int cwid, int cdid, int cid) {
+        System.out.println("Related Customer");
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT DISTINCT w_id_1 as c_w_id, d_id_1 as c_d_id, c_id_1 as c_id " +
+                    "   FROM (SELECT o_w_id as w_id_1, o_c_id as c_id_1,  o_d_id as d_id_1, ol_i_id as i_1" +
+                    "          FROM order_tab  ,order_line_tab " +
+                    "          WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id AND o_w_id <> "+cwid+") AS a, " +
+                    "      (SELECT o_w_id as w_id_2, o_c_id as c_id_2,  o_d_id as d_id_2, ol_i_id as i_2" +
+                    "          FROM order_tab  ,order_line_tab " +
+                    "          WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id AND o_w_id <> "+cwid+") AS b" +
+                    "   WHERE w_id_1 = w_id_2 AND c_id_1 = c_id_2 AND d_id_1 = d_id_2 AND i_1 <> i_2 " +
+                    "" +
+                    "   AND i_1 IN (SELECT DISTINCT ol_i_id as c_items" +
+                    "   FROM order_tab , order_line_tab " +
+                    "   WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id " +
+                    "   AND o_w_id = " + cwid +
+                    "   AND o_d_id = " + cdid +
+                    "   AND o_c_id = " + cid +")" +
+                    "   " +
+                    "   AND i_2 IN ( SELECT DISTINCT ol_i_id as c_items" +
+                    "   FROM order_tab , order_line_tab " +
+                    "   WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id " +
+                    "   AND o_w_id = " + cwid +
+                    "   AND o_d_id = " + cdid +
+                    "   AND o_c_id = " + cid +")"
+            );
+
+            while (rs.next()) {
+                int r_cwid = rs.getInt(1);
+                int r_cdid = rs.getInt(2);
+                int r_cid = rs.getInt(3);
+
+                System.out.printf("CWID: %d, C_DID: %d, C_ID: %d" , r_cwid, r_cdid, r_cid);
+                System.out.println();
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            System.out.printf("sql state = [%s]cause = [%s]message = [%s]",
+                    e.getSQLState(), e.getCause(), e.getMessage());
+        }
 
     }
 }
