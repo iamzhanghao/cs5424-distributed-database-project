@@ -25,7 +25,7 @@ public class CockroachDB {
         PGSimpleDataSource ds = new PGSimpleDataSource();
         ds.setServerName("localhost");
         ds.setPortNumber(26257);
-        ds.setDatabaseName("my_db");
+        ds.setDatabaseName("schema_a");
         ds.setUser("root");
         ds.setPassword(null);
         ds.setSsl(true);
