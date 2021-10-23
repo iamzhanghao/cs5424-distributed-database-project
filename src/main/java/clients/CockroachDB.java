@@ -10,23 +10,21 @@ import java.util.Scanner;
 
 public class CockroachDB {
     public static void main(String[] args) throws Exception {
-        if (args.length != 4) {
+        if (args.length != 3) {
             System.err.println("run the program by: ./CockroachDB <host> <port> <database> <data_dir>");
         }
-        System.out.println(args[0]);
-        System.out.println(args[1]);
-        System.out.println(args[2]);
-        System.out.println(args[3]);
+
         String host = args[0];
         int port = Integer.parseInt(args[1]);
-        String database = args[2];
-        String dataDir = args[3];
+        String dataDir = args[2];
 
+        System.out.printf("Running on host: %s:%d", host, port);
+        System.out.println();
 
         PGSimpleDataSource ds = new PGSimpleDataSource();
         ds.setServerName(host);
         ds.setPortNumber(port);
-        ds.setDatabaseName(database);
+        ds.setDatabaseName("schema_a");
         ds.setUser("root");
         ds.setPassword(null);
         ds.setSsl(true);
@@ -41,7 +39,7 @@ public class CockroachDB {
         FileInputStream stream = new FileInputStream(dataDir);
         Scanner scanner = new Scanner(stream);
 
-        System.out.println("Ready to ready xact files");
+        System.out.println("Ready to read Xact file "+ dataDir);
 
         ArrayList<Long> latencies = new ArrayList<Long>();
         while (scanner.hasNextLine()) {
