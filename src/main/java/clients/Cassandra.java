@@ -1,8 +1,13 @@
 package clients;
 
 import com.datastax.oss.driver.api.core.CqlSession;
+import com.datastax.oss.driver.api.core.cql.BoundStatement;
+import com.datastax.oss.driver.api.core.cql.PreparedStatement;
+import com.datastax.oss.driver.api.core.cql.ResultSet;
+import com.datastax.oss.driver.api.core.cql.Row;
 
 import java.io.FileInputStream;
+import java.math.BigDecimal;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -22,8 +27,9 @@ public class Cassandra {
         CqlSession session = CqlSession
                 .builder()
                 .addContactPoint(new InetSocketAddress(host, port))
-                .withLocalDatacenter("cs5424-c")
                 .withKeyspace("schema_a")
+//                .withLocalDatacenter("cs5424-c")
+                .withLocalDatacenter("datacenter1")
                 .build();
 
         FileInputStream stream = new FileInputStream(dataDir);
@@ -64,7 +70,7 @@ public class Cassandra {
                 int cwid = Integer.parseInt(splits[1]);
                 int cdid = Integer.parseInt(splits[2]);
                 cid = Integer.parseInt(splits[3]);
-                float payment = Float.parseFloat(splits[4]);
+                BigDecimal payment = new BigDecimal(splits[4]);
                 paymentTransaction(session, cwid, cdid, cid, payment);
                 break;
 
@@ -115,8 +121,80 @@ public class Cassandra {
 
     }
 
-    private static void paymentTransaction(CqlSession session, int cwid, int cdid, int cid, float payment) {
+    private static void paymentTransaction(CqlSession session, int cwid, int cdid, int cid, BigDecimal payment) {
+        try{
+            ResultSet warehouse_result  = session.execute(
+                "SELECT w_ytd FROM warehouse_tab WHERE w_id = " + cwid + " ;");
+            Row row = warehouse_result.one();
+            BigDecimal old_ytd = row.getBigDecimal("w_ytd");
+            PreparedStatement updateWarehouse = session.prepare(
+                "UPDATE warehouse_tab SET W_YTD = ? WHERE W_ID = ?;");
+            BoundStatement updateWarehouseBound = updateWarehouse.bind()
+                    .setBigDecimal(0,   old_ytd.add(payment))
+                    .setInt(1, cwid);
+            session.execute(updateWarehouseBound);
 
+            ResultSet customer_result - session.execute(
+                "SELECT c_balance, c_ytd_payment, c_payment")
+
+
+
+
+
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+//        try {
+//            PreparedStatement updateWarehouse = conn.prepareStatement(
+//                    "UPDATE warehouse_tab SET W_YTD = W_YTD + ? WHERE W_ID = ?;");
+//            updateWarehouse.setBigDecimal(1, payment);
+//            updateWarehouse.setInt(2, cwid);
+//            updateWarehouse.executeUpdate();
+//
+//            PreparedStatement updateDistrict = conn.prepareStatement(
+//                    "UPDATE district_tab SET D_YTD = D_YTD + ? WHERE  D_W_ID = ? AND D_ID=?");
+//            updateDistrict.setBigDecimal(1,payment);
+//            updateDistrict.setInt(2,cwid);
+//            updateDistrict.setInt(3,cdid);
+//            updateDistrict.executeUpdate();
+//
+//            PreparedStatement updateCustomer_1 = conn.prepareStatement(
+//                    "UPDATE customer_tab " +
+//                            "SET C_BALANCE= C_BALANCE - ?" +
+//                            "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
+//            updateCustomer_1.setBigDecimal(1,payment);
+//            updateCustomer_1.setInt(2,cwid);
+//            updateCustomer_1.setInt(3,cdid);
+//            updateCustomer_1.setInt(4,cid);
+//            updateCustomer_1.executeUpdate();
+//
+//            PreparedStatement updateCustomer_2 = conn.prepareStatement(
+//                    "UPDATE customer_tab " +
+//                            "SET C_YTD_PAYMENT= C_YTD_PAYMENT + ?" +
+//                            "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
+//            updateCustomer_2.setBigDecimal(1,payment);
+//            updateCustomer_2.setInt(2,cwid);
+//            updateCustomer_2.setInt(3,cdid);
+//            updateCustomer_2.setInt(4,cid);
+//            updateCustomer_2.executeUpdate();
+//
+//            PreparedStatement updateCustomer_3 = conn.prepareStatement(
+//                    "UPDATE customer_tab " +
+//                            "SET C_PAYMENT_CNT= C_PAYMENT_CNT + 1" +
+//                            "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
+//            updateCustomer_3.setInt(1,cwid);
+//            updateCustomer_3.setInt(2,cdid);
+//            updateCustomer_3.setInt(3,cid);
+//            updateCustomer_3.executeUpdate();
+//
+//            conn.commit();
+//
+//        } catch (SQLException e) {
+//            System.out.printf("sql state = [%s]cause = [%s]message = [%s]", e.getSQLState(), e.getCause(),
+//                    e.getMessage());
+//        }
     }
 
     private static void deliveryTransaction(CqlSession session, int wid, int carrierid) {
