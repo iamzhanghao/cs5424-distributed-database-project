@@ -50,18 +50,13 @@ mvn clean package
 
 ## Cassandra
 1. start up the cluster
+    
+2. create schema data by:
+    ```zsh
+    $ scripts/cassandra/migrate_schema.sh
+    ```
 
-2. create schema A and dump the data by:
-```
-scripts/cassandra/migrate_schema_a.sh
-```
-
-3. create schema B and dump the data by:
-```
-scripts/cassandra/migrate_schema_b.sh
-```
-
-4. run the driver by
-```
-java -jar target/target/cassandra.jar <host> <port> <keyspace> <data_dir>
-```
+3. run the driver by
+    ```zsh
+    $ java -jar target/target/cassandra.jar <host> <port> <data_dir>
+    ```

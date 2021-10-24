@@ -9,19 +9,21 @@ import java.util.Scanner;
 
 public class Cassandra {
     public static void main(String[] args) throws Exception {
-        if (args.length != 4) {
+        if (args.length != 3) {
             System.err.println("run the program by: ./Cassandra <host> <port> <keyspace> <data_dir>");
         }
         String host = args[0];
         int port = Integer.parseInt(args[1]);
-        String database = args[2];
-        String dataDir = args[3];
+        String dataDir = args[2];
+
+        System.out.printf("Running on host: %s:%d", host, port);
+        System.out.println();
 
         CqlSession session = CqlSession
                 .builder()
                 .addContactPoint(new InetSocketAddress(host, port))
                 .withLocalDatacenter("cs5424-c")
-                .withKeyspace(database)
+                .withKeyspace("schema_a")
                 .build();
 
         FileInputStream stream = new FileInputStream(dataDir);
