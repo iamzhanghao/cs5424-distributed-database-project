@@ -1,1 +1,0 @@
-cqlsh -f schema/cassandra/schema_b.cql
