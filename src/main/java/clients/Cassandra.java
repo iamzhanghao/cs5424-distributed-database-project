@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class Cassandra {
     public static void main(String[] args) throws Exception {
-        if (args.length != 3) {
+        if (args.length != 4) {
             System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <data_dir>");
         }
         String host = args[0];
@@ -28,9 +28,9 @@ public class Cassandra {
         CqlSession session = CqlSession
                 .builder()
                 .addContactPoint(new InetSocketAddress(host, port))
-                .withLocalDatacenter("cs5424-c")
-//                .withLocalDatacenter("datacenter1")
                 .withKeyspace(schema)
+//                .withLocalDatacenter("cs5424-c")
+                .withLocalDatacenter("datacenter1")
                 .build();
 
         FileInputStream stream = new FileInputStream(dataDir);
