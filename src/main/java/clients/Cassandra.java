@@ -15,11 +15,12 @@ import java.util.Scanner;
 public class Cassandra {
     public static void main(String[] args) throws Exception {
         if (args.length != 3) {
-            System.err.println("run the program by: ./Cassandra <host> <port> <keyspace> <data_dir>");
+            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <data_dir>");
         }
         String host = args[0];
         int port = Integer.parseInt(args[1]);
-        String dataDir = args[2];
+        String schema = args[2];
+        String dataDir = args[3];
 
         System.out.printf("Running on host: %s:%d", host, port);
         System.out.println();
@@ -27,9 +28,9 @@ public class Cassandra {
         CqlSession session = CqlSession
                 .builder()
                 .addContactPoint(new InetSocketAddress(host, port))
-                .withKeyspace("schema_a")
                 .withLocalDatacenter("cs5424-c")
 //                .withLocalDatacenter("datacenter1")
+                .withKeyspace(schema)
                 .build();
 
         FileInputStream stream = new FileInputStream(dataDir);

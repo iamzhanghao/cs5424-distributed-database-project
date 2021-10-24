@@ -6,4 +6,5 @@ cockroach nodelocal upload project_files/data_files/item.csv project_files/data_
 cockroach nodelocal upload project_files/data_files/order-line.csv project_files/data_files/order-line.csv --certs-dir="certs"
 cockroach nodelocal upload project_files/data_files/stock.csv project_files/data_files/stock.csv --certs-dir="certs"
 
-cockroach sql --certs-dir="certs" -f schema/cockroachdb/schema.sql
+cockroach sql --certs-dir="certs" -f schema/cockroachdb/schema_a.sql
+cockroach sql --certs-dir="certs" -f schema/cockroachdb/schema_b.sql

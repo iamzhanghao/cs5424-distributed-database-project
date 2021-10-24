@@ -37,9 +37,9 @@ mvn clean package
 
 3. run the driver by
     ```zsh
-    $ java -jar target/target/cockroachdb.jar <host> <port> <data_dir>
+    $ java -jar target/target/cockroachdb.jar  <host> <port> <schema_name> <data_dir>
     ```
-    or setup IntelliJ Configurations: `<host> <port> <data_dir>`
+    or setup IntelliJ Configurations: ` <host> <port> <schema_name> <data_dir>`
 
 
 4. Stop CockroachDB cluster 
@@ -58,5 +58,6 @@ mvn clean package
 
 3. run the driver by
     ```zsh
-    $ java -jar target/target/cassandra.jar <host> <port> <data_dir>
+    $ java -jar target/target/cassandra.jar <host> <port> <schema_name> <data_dir>
     ```
+   or setup IntelliJ Configurations: ` <host> <port> <schema_name> <data_dir>`

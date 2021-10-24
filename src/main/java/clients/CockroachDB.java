@@ -10,13 +10,14 @@ import java.util.Scanner;
 
 public class CockroachDB {
     public static void main(String[] args) throws Exception {
-        if (args.length != 3) {
-            System.err.println("run the program by: ./CockroachDB <host> <port> <database> <data_dir>");
+        if (args.length != 4) {
+            System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <data_dir>");
         }
 
         String host = args[0];
         int port = Integer.parseInt(args[1]);
-        String dataDir = args[2];
+        String schema = args[2];
+        String dataDir = args[3];
 
         System.out.printf("Running on host: %s:%d", host, port);
         System.out.println();
@@ -24,7 +25,7 @@ public class CockroachDB {
         PGSimpleDataSource ds = new PGSimpleDataSource();
         ds.setServerName(host);
         ds.setPortNumber(port);
-        ds.setDatabaseName("schema_a");
+        ds.setDatabaseName(schema);
         ds.setUser("root");
         ds.setPassword(null);
         ds.setSsl(true);
