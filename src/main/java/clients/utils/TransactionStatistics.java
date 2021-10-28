@@ -37,8 +37,16 @@ public class TransactionStatistics {
 
     public static void printStatistics(ArrayList<TransactionStatistics> stats) {
         ArrayList<TransactionStatistics> meanStats = getMeanLatencies(stats);
+        System.out.println("============Statistics============");
+        int count = 0;
+        long totalLatency = 0;
+        for (TransactionStatistics stat : stats) {
+            count += 1;
+            totalLatency += stat.latency;
+        }
+        System.out.printf("Total %d transactions, avg latency %fms \n", count, (float)totalLatency / (float)count);
         for (TransactionStatistics stat : meanStats) {
-            System.out.printf("Txn %c: average latency %d \n", stat.txnType, stat.latency);
+            System.out.printf("Txn %c: avg latency %dms \n", stat.txnType, stat.latency);
         }
         System.out.println();
     }
