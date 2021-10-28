@@ -192,10 +192,10 @@ public class CockroachDB {
                 System.out.printf("last order id: %d, entry datetime: %s, carrier id: %d\n",
                 last_order_id,
                 rs_customer_last_order.getString("o_entry_d"),
-                rs_customer_last_order.getString("o_carrier_id"));     
+                rs_customer_last_order.getInt("o_carrier_id"));     
                 
             }
-            
+
             //Order items
             ResultSet rs_order_items = st.executeQuery(String.format(get_order_items, cwid, cdid, last_order_id));
             
