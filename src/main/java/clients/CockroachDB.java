@@ -169,7 +169,7 @@ public class CockroachDB {
         try {
 
             String get_customer_last_order = "SELECT c_first, c_middle, c_last, c_balance, o_w_id, o_d_id, o_c_id, o_id, o_entry_d, o_carrier_id "
-                + "FROM customer_tab, order WHERE c_id = o_c_id AND c_d_id = o_d_id AND c_w_id = o_w_id "
+                + "FROM customer_tab, order_tab WHERE c_id = o_c_id AND c_d_id = o_d_id AND c_w_id = o_w_id "
                 + "AND c_w_id = %d AND c_d_id = %d AND c_id = %d order by o_id desc LIMIT 1 ";
             String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d from order_line_tab "
                 + "where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
