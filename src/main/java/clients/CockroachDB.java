@@ -40,7 +40,7 @@ public class CockroachDB {
         FileInputStream stream = new FileInputStream(dataDir);
         Scanner scanner = new Scanner(stream);
 
-        System.out.println("Ready to read Xact file "+ dataDir);
+        System.out.println("Ready to read Xact file " + dataDir);
 
         ArrayList<Long> latencies = new ArrayList<Long>();
         while (scanner.hasNextLine()) {
@@ -137,9 +137,9 @@ public class CockroachDB {
 
             PreparedStatement updateDistrict = conn.prepareStatement(
                     "UPDATE district_tab SET D_YTD = D_YTD + ? WHERE  D_W_ID = ? AND D_ID=?");
-            updateDistrict.setBigDecimal(1,payment);
-            updateDistrict.setInt(2,cwid);
-            updateDistrict.setInt(3,cdid);
+            updateDistrict.setBigDecimal(1, payment);
+            updateDistrict.setInt(2, cwid);
+            updateDistrict.setInt(3, cdid);
             updateDistrict.executeUpdate();
 
             PreparedStatement updateCustomer = conn.prepareStatement(
@@ -162,7 +162,86 @@ public class CockroachDB {
     }
 
     private static void deliveryTransaction(Connection conn, int wid, int carrierid) {
+        System.out.printf("Delivery wid:%d carrier:%d", wid, carrierid);
+        try {
+            for (int did = 1; did <= 10; did++) {
+                // get the yet-to-deliver order with its client id
+                PreparedStatement getOrderAndCustomer = conn.prepareStatement(
+                        "SELECT o_id, o_c_id " +
+                                "FROM order_tab " +
+                                "WHERE o_w_id = ? AND o_d_id = ? AND o_carrier_id ISNULL " +
+                                "ORDER BY o_id " +
+                                "LIMIT 1"
+                );
+                getOrderAndCustomer.setInt(1, wid);
+                getOrderAndCustomer.setInt(2, did);
+                ResultSet orderCustomerIdRS = getOrderAndCustomer.executeQuery();
 
+                // proceed only when a yet-to-deliver order exists
+                if (orderCustomerIdRS.next()) {
+                    int oid = orderCustomerIdRS.getInt("o_id");
+                    int cid = orderCustomerIdRS.getInt("o_c_id");
+                    System.out.printf("oid:%d cid:%d\n", oid, cid);
+
+                    // assign the carrier id to the order
+                    PreparedStatement updateOrder = conn.prepareStatement(
+                            "UPDATE order_tab " +
+                                    "SET o_carrier_id = ? " +
+                                    "WHERE o_w_id = ? AND o_d_id = ? AND o_id = ?"
+                    );
+                    updateOrder.setInt(1, carrierid);
+                    updateOrder.setInt(2, wid);
+                    updateOrder.setInt(3, did);
+                    updateOrder.setInt(4, oid);
+                    updateOrder.executeUpdate();
+
+                    // assign the current timestamp to each order line
+                    PreparedStatement updateOrderLine = conn.prepareStatement(
+                            "UPDATE order_line_tab " +
+                                    "SET ol_delivery_d = CURRENT_TIMESTAMP " +
+                                    "WHERE ol_o_id = ? AND ol_w_id = ? AND ol_d_id = ?"
+                    );
+                    updateOrderLine.setInt(1, oid);
+                    updateOrderLine.setInt(2, wid);
+                    updateOrderLine.setInt(3, did);
+                    updateOrderLine.executeUpdate();
+
+                    // get the amount sum of all order lines
+                    PreparedStatement getOrderLineSum = conn.prepareStatement(
+                            "SELECT SUM(ol_amount) " +
+                                    "FROM order_line_tab " +
+                                    "WHERE ol_o_id = ? AND ol_w_id = ? AND ol_d_id = ?"
+                    );
+                    getOrderLineSum.setInt(1, oid);
+                    getOrderLineSum.setInt(2, wid);
+                    getOrderLineSum.setInt(3, did);
+                    ResultSet orderLineSumRS = getOrderLineSum.executeQuery();
+
+                    // parse the sum
+                    orderLineSumRS.next();
+                    BigDecimal orderAmountSum = orderLineSumRS.getBigDecimal("sum");
+//                    System.out.printf("ordersum:%.2f", orderAmountSum);
+
+
+                    // update the customer's balance and delivery count
+                    PreparedStatement updateCustomerInfo = conn.prepareStatement(
+                            "UPDATE customer_tab " +
+                                    "SET c_balance = c_balance + ?, c_delivery_cnt = c_delivery_cnt + ? " +
+                                    "WHERE c_id = ? AND c_w_id = ? AND c_d_id = ?"
+                    );
+                    updateCustomerInfo.setBigDecimal(1, orderAmountSum);
+                    updateCustomerInfo.setInt(2, 1);
+                    updateCustomerInfo.setInt(3, cid);
+                    updateCustomerInfo.setInt(4, wid);
+                    updateCustomerInfo.setInt(5, did);
+                    updateCustomerInfo.executeUpdate();
+                }
+            }
+            conn.commit();
+        } catch (SQLException e) {
+            System.out.printf("sql state = [%s]cause = [%s]message = [%s]",
+                    e.getSQLState(), e.getCause(), e.getMessage());
+        }
     }
 
     private static void orderStatusTransaction(Connection conn, int cwid, int cdid, int cid) {
@@ -187,31 +266,31 @@ public class CockroachDB {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(
                     "SELECT DISTINCT w_id_1 as c_w_id, d_id_1 as c_d_id, c_id_1 as c_id " +
-                    "FROM (SELECT o_w_id as w_id_1, o_c_id as c_id_1,  o_d_id as d_id_1, ol_i_id as i_1" +
-                    "      FROM order_tab  ,order_line_tab " +
-                    "      WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id AND o_w_id <> "+cwid+") AS a, " +
-                    "     (SELECT o_w_id as w_id_2, o_c_id as c_id_2,  o_d_id as d_id_2, ol_i_id as i_2" +
-                    "      FROM order_tab  ,order_line_tab " +
-                    "      WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id AND o_w_id <> "+cwid+") AS b " +
-                    "WHERE w_id_1 = w_id_2 AND c_id_1 = c_id_2 AND d_id_1 = d_id_2 AND i_1 <> i_2 " +
-                    "" +
-                    "AND i_1 IN (SELECT DISTINCT ol_i_id as c_items " +
-                    "            FROM order_tab , order_line_tab " +
-                    "            WHERE o_w_id = ol_w_id " +
-                    "            AND o_d_id = ol_d_id " +
-                    "            AND o_id = ol_o_id " +
-                    "            AND o_w_id = " + cwid +
-                    "            AND o_d_id = " + cdid +
-                    "            AND o_c_id = " + cid +")" +
-                    "" +
-                    "AND i_2 IN (SELECT DISTINCT ol_i_id as c_items " +
-                    "            FROM order_tab , order_line_tab " +
-                    "            WHERE o_w_id = ol_w_id " +
-                    "            AND o_d_id = ol_d_id " +
-                    "            AND o_id = ol_o_id " +
-                    "            AND o_w_id = " + cwid +
-                    "            AND o_d_id = " + cdid +
-                    "            AND o_c_id = " + cid +")"
+                            "FROM (SELECT o_w_id as w_id_1, o_c_id as c_id_1,  o_d_id as d_id_1, ol_i_id as i_1" +
+                            "      FROM order_tab  ,order_line_tab " +
+                            "      WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id AND o_w_id <> " + cwid + ") AS a, " +
+                            "     (SELECT o_w_id as w_id_2, o_c_id as c_id_2,  o_d_id as d_id_2, ol_i_id as i_2" +
+                            "      FROM order_tab  ,order_line_tab " +
+                            "      WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id AND o_w_id <> " + cwid + ") AS b " +
+                            "WHERE w_id_1 = w_id_2 AND c_id_1 = c_id_2 AND d_id_1 = d_id_2 AND i_1 <> i_2 " +
+                            "" +
+                            "AND i_1 IN (SELECT DISTINCT ol_i_id as c_items " +
+                            "            FROM order_tab , order_line_tab " +
+                            "            WHERE o_w_id = ol_w_id " +
+                            "            AND o_d_id = ol_d_id " +
+                            "            AND o_id = ol_o_id " +
+                            "            AND o_w_id = " + cwid +
+                            "            AND o_d_id = " + cdid +
+                            "            AND o_c_id = " + cid + ")" +
+                            "" +
+                            "AND i_2 IN (SELECT DISTINCT ol_i_id as c_items " +
+                            "            FROM order_tab , order_line_tab " +
+                            "            WHERE o_w_id = ol_w_id " +
+                            "            AND o_d_id = ol_d_id " +
+                            "            AND o_id = ol_o_id " +
+                            "            AND o_w_id = " + cwid +
+                            "            AND o_d_id = " + cdid +
+                            "            AND o_c_id = " + cid + ")"
             );
 
             while (rs.next()) {
@@ -219,7 +298,7 @@ public class CockroachDB {
                 int r_cdid = rs.getInt(2);
                 int r_cid = rs.getInt(3);
 
-                System.out.printf("CWID: %d, C_DID: %d, C_ID: %d" , r_cwid, r_cdid, r_cid);
+                System.out.printf("CWID: %d, C_DID: %d, C_ID: %d", r_cwid, r_cdid, r_cid);
                 System.out.println();
             }
             rs.close();
