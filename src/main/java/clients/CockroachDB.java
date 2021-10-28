@@ -1,5 +1,6 @@
 package clients;
 
+import clients.utils.TransactionStatistics;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import java.io.FileInputStream;
@@ -42,12 +43,16 @@ public class CockroachDB {
 
         System.out.println("Ready to read Xact file "+ dataDir);
 
-        ArrayList<Long> latencies = new ArrayList<Long>();
+        ArrayList<TransactionStatistics> latencies = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] splits = line.split(",");
-            latencies.add(invokeTransaction(conn, splits, scanner));
+            char txnType = splits[0].toCharArray()[0];
+            long latency = invokeTransaction(conn, splits, scanner);
+            latencies.add(new TransactionStatistics(txnType,latency));
+            System.out.printf("Tnx %c: %dms \n",txnType, latency);
         }
+        TransactionStatistics.printStatistics(latencies);
     }
 
     private static long invokeTransaction(Connection conn, String[] splits, Scanner scanner) {
@@ -57,12 +62,12 @@ public class CockroachDB {
                 int cid = Integer.parseInt(splits[1]);
                 int wid = Integer.parseInt(splits[2]);
                 int did = Integer.parseInt(splits[3]);
-                ArrayList<ArrayList<Integer>> orderItems = new ArrayList<ArrayList<Integer>>();
+                ArrayList<ArrayList<Integer>> orderItems = new ArrayList<>();
                 int numItems = Integer.parseInt(splits[4]);
                 for (int i = 0; i < numItems; i++) {
                     String line = scanner.nextLine();
                     splits = line.split(",");
-                    ArrayList<Integer> item = new ArrayList<Integer>();
+                    ArrayList<Integer> item = new ArrayList<>();
                     for (String element : splits) {
                         item.add(Integer.parseInt(element));
                     }
@@ -182,7 +187,6 @@ public class CockroachDB {
     }
 
     private static void relatedCustomerTransaction(Connection conn, int cwid, int cdid, int cid) {
-        System.out.println("Related Customer");
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(
