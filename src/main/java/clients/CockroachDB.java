@@ -257,6 +257,59 @@ public class CockroachDB {
     }
 
     private static void topBalanceTransaction(Connection conn) {
+        System.out.println("Customers with top balances");
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(
+                    "SELECT\n" +
+                            "  c.w_id,\n" +
+                            "  c.d_id,\n" +
+                            "  c.c_first,\n" +
+                            "  c.c_middle,\n" +
+                            "  c.c_last,\n" +
+                            "  c.c_balance,\n" +
+                            "  d.d_name,\n" +
+                            "  w.w_name\n" +
+                            "FROM\n" +
+                            "  (\n" +
+                            "    (\n" +
+                            "      SELECT\n" +
+                            "        c_w_id AS w_id,\n" +
+                            "        c_d_id AS d_id,\n" +
+                            "        c_first,\n" +
+                            "        c_middle,\n" +
+                            "        c_last,\n" +
+                            "        c_balance\n" +
+                            "      FROM\n" +
+                            "        customer_tab\n" +
+                            "      ORDER BY\n" +
+                            "        c_balance DESC\n" +
+                            "      LIMIT\n" +
+                            "        10\n" +
+                            "    ) AS c\n" +
+                            "    JOIN district_tab AS d ON c.w_id = d.d_w_id\n" +
+                            "    AND c.d_id = d.d_id\n" +
+                            "  )\n" +
+                            "  JOIN warehouse_tab AS w ON c.w_id = w.w_id\n" +
+                            "ORDER BY\n" +
+                            "  c_balance DESC"
+            );
+
+            while(rs.next()) {
+                String firstName = rs.getString("c_first");
+                String middleName = rs.getString("c_middle");
+                String lastName = rs.getString("c_last");
+                BigDecimal balance = rs.getBigDecimal("c_balance");
+                String warehouseName = rs.getString("w_name");
+                String districtName = rs.getString("d_name");
+
+                System.out.printf("Customer Name: %-36s\tBalance: %-12.2f\tWarehouse Name: %-10s\tDistrict Name: %-10s\n",
+                        firstName+' '+middleName+' '+ lastName, balance, warehouseName, districtName);
+            }
+        } catch (SQLException e) {
+            System.out.printf("sql state = [%s]cause = [%s]message = [%s]",
+                    e.getSQLState(), e.getCause(), e.getMessage());
+        }
 
     }
 
