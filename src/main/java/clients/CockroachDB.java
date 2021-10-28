@@ -142,34 +142,16 @@ public class CockroachDB {
             updateDistrict.setInt(3,cdid);
             updateDistrict.executeUpdate();
 
-            PreparedStatement updateCustomer_1 = conn.prepareStatement(
+            PreparedStatement updateCustomer = conn.prepareStatement(
                     "UPDATE customer_tab " +
-                    "SET C_BALANCE= C_BALANCE - ?" +
+                    "SET C_BALANCE= C_BALANCE - ?, C_YTD_PAYMENT= C_YTD_PAYMENT + ?, C_PAYMENT_CNT= C_PAYMENT_CNT + 1 " +
                     "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
-            updateCustomer_1.setBigDecimal(1,payment);
-            updateCustomer_1.setInt(2,cwid);
-            updateCustomer_1.setInt(3,cdid);
-            updateCustomer_1.setInt(4,cid);
-            updateCustomer_1.executeUpdate();
-
-            PreparedStatement updateCustomer_2 = conn.prepareStatement(
-                    "UPDATE customer_tab " +
-                    "SET C_YTD_PAYMENT= C_YTD_PAYMENT + ?" +
-                    "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
-            updateCustomer_2.setBigDecimal(1,payment);
-            updateCustomer_2.setInt(2,cwid);
-            updateCustomer_2.setInt(3,cdid);
-            updateCustomer_2.setInt(4,cid);
-            updateCustomer_2.executeUpdate();
-
-            PreparedStatement updateCustomer_3 = conn.prepareStatement(
-                    "UPDATE customer_tab " +
-                    "SET C_PAYMENT_CNT= C_PAYMENT_CNT + 1" +
-                    "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
-            updateCustomer_3.setInt(1,cwid);
-            updateCustomer_3.setInt(2,cdid);
-            updateCustomer_3.setInt(3,cid);
-            updateCustomer_3.executeUpdate();
+            updateCustomer.setBigDecimal(1,payment);
+            updateCustomer.setBigDecimal(2,payment);
+            updateCustomer.setInt(3,cwid);
+            updateCustomer.setInt(4,cdid);
+            updateCustomer.setInt(5,cid);
+            updateCustomer.executeUpdate();
 
             conn.commit();
 
