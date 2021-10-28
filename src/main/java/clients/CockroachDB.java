@@ -171,30 +171,34 @@ public class CockroachDB {
             String get_customer_last_order = "SELECT c_first, c_middle, c_last, c_balance, o_w_id, o_d_id, o_c_id, o_id, o_entry_d, o_carrier_id "
                 + "FROM customer_tab, order_tab WHERE c_id = o_c_id AND c_d_id = o_d_id AND c_w_id = o_w_id "
                 + "AND c_w_id = %d AND c_d_id = %d AND c_id = %d order by o_id desc LIMIT 1 ";
-            String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d from order_line_tab "
+            String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d from "
                 + "where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
 
             Statement st = conn.createStatement();
 
             //Customer Last Order
             ResultSet rs_customer_last_order = st.executeQuery(String.format(get_customer_last_order, cwid, cdid, cid));
-            int last_order_id = rs_customer_last_order.getInt("o_id");
+            
+            int last_order_id = -1;
 
+            if (rs_customer_last_order.next()){
+                last_order_id = rs_customer_last_order.getInt("o_id");
+                System.out.printf("Customer's name: %s %s %s, balance: %f\n",
+                rs_customer_last_order.getString("c_first"),
+                rs_customer_last_order.getString("c_middle"),
+                rs_customer_last_order.getString("c_last"),
+                rs_customer_last_order.getBigDecimal("c_balance").doubleValue());  
+    
+                System.out.printf("last order id: %d, entry datetime: %s, carrier id: %d\n",
+                last_order_id,
+                rs_customer_last_order.getString("o_entry_d"),
+                rs_customer_last_order.getString("o_carrier_id"));     
+                
+            }
+            
             //Order items
             ResultSet rs_order_items = st.executeQuery(String.format(get_order_items, cwid, cdid, last_order_id));
-
-            //Output Result
-            System.out.printf("Customer's name: %s %s %s, balance: %f\n",
-            rs_customer_last_order.getString("c_first"),
-            rs_customer_last_order.getString("c_middle"),
-            rs_customer_last_order.getString("c_last"),
-            rs_customer_last_order.getBigDecimal("c_balance").doubleValue());  
-
-            System.out.printf("last order id: %d, entry datetime: %s, carrier id: %d\n",
-            last_order_id,
-            rs_customer_last_order.getString("o_entry_d"),
-            rs_customer_last_order.getString("o_carrier_id"));     
-
+            
             while(rs_order_items.next()){
                 System.out.printf("item id: %d, warehouse id: %d, quantity: %d, price: %d, delivery datetime: %s\n", 
                 rs_order_items.getInt("ol_i_id"), 
@@ -204,6 +208,7 @@ public class CockroachDB {
                 rs_order_items.getString("ol_delivery_d"));
                 System.out.println();
             }
+            
 
             rs_customer_last_order.close();
             rs_order_items.close();
