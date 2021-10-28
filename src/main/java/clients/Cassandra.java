@@ -1,5 +1,6 @@
 package clients;
 
+import clients.utils.TransactionStatistics;
 import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.cql.BoundStatement;
 import com.datastax.oss.driver.api.core.cql.PreparedStatement;
@@ -36,14 +37,17 @@ public class Cassandra {
         FileInputStream stream = new FileInputStream(dataDir);
         Scanner scanner = new Scanner(stream);
 
-        ArrayList<Long> latencies = new ArrayList<Long>();
+        ArrayList<TransactionStatistics> latencies = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] splits = line.split(",");
-            latencies.add(invokeTransaction(session, splits, scanner));
+            char txnType = splits[0].toCharArray()[0];
+            long latency = invokeTransaction(session, splits, scanner);
+            latencies.add(new TransactionStatistics(txnType,latency));
+            System.out.printf("Tnx %c: %dms \n",txnType, latency);
         }
-
         session.close();
+        TransactionStatistics.printStatistics(latencies);
     }
 
     private static long invokeTransaction(CqlSession session, String[] splits, Scanner scanner) {
@@ -53,12 +57,12 @@ public class Cassandra {
                 int cid = Integer.parseInt(splits[1]);
                 int wid = Integer.parseInt(splits[2]);
                 int did = Integer.parseInt(splits[3]);
-                ArrayList<ArrayList<Integer>> orderItems = new ArrayList<ArrayList<Integer>>();
+                ArrayList<ArrayList<Integer>> orderItems = new ArrayList<>();
                 int numItems = Integer.parseInt(splits[4]);
                 for (int i = 0; i < numItems; i++) {
                     String line = scanner.nextLine();
                     splits = line.split(",");
-                    ArrayList<Integer> item = new ArrayList<Integer>();
+                    ArrayList<Integer> item = new ArrayList<>();
                     for (String element : splits) {
                         item.add(Integer.parseInt(element));
                     }
