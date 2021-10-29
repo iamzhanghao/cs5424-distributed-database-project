@@ -12,4 +12,4 @@ cockroach sql --insecure -f schema/cockroachdb/schema_a.sql --host=xcnd30.comp.n
 cockroach sql --insecure -f schema/cockroachdb/schema_b.sql --host=xcnd30.comp.nus.edu.sg:26267
 
 # For Cockroach DB console https://localhost:8090
-cockroach sql --insecure -f schema/cockroachdb/create_user.sql --host=xcnd30.comp.nus.edu.sg:26267
+#cockroach sql --insecure -f schema/cockroachdb/create_user.sql --host=xcnd30.comp.nus.edu.sg:26267
