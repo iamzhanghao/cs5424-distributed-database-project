@@ -31,10 +31,11 @@ public class CockroachDB {
         ds.setDatabaseName(schema);
         ds.setUser("root");
         ds.setPassword(null);
-        ds.setSsl(true);
-        ds.setSslMode("require");
-        ds.setSslCert("certs/client.root.crt");
-        ds.setSslKey("certs/client.root.key.pk8");
+//        ds.setSsl(true);
+//        ds.setSslMode("require");
+//        ds.setSslCert("certs/client.root.crt");
+//        ds.setSslKey("certs/client.root.key.pk8");
+        ds.setSslMode("disable");
         ds.setReWriteBatchedInserts(true); // add `rewriteBatchedInserts=true` to pg connection string
         ds.setApplicationName("CockroachDB App");
 
