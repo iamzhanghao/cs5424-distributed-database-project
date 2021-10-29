@@ -6,8 +6,12 @@ cockroach cert create-ca \
 
 cockroach cert create-node \
 xcnd30.comp.nus.edu.sg \
+xcnd31.comp.nus.edu.sg \
+xcnd32.comp.nus.edu.sg \
+xcnd33.comp.nus.edu.sg \
+xcnd34.comp.nus.edu.sg \
 my_db \
---certs-dir=certs/node1 \
+--certs-dir=certs \
 --ca-key=my-safe-directory/ca.key
 
 cockroach cert create-client \
