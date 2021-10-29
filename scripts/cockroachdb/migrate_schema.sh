@@ -10,3 +10,6 @@ cockroach nodelocal upload project_files/data_files/stock.csv project_files/data
 
 cockroach sql --certs-dir="certs" -f schema/cockroachdb/schema_a.sql --host=localhost:26267
 cockroach sql --certs-dir="certs" -f schema/cockroachdb/schema_b.sql --host=localhost:26267
+
+# For Cockroach DB console https://localhost:8090
+cockroach sql --certs-dir="certs" -f schema/cockroachdb/create_user.sql --host=localhost:26267
