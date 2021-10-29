@@ -5,9 +5,9 @@ cockroach cert create-ca \
 --ca-key=my-safe-directory/ca.key
 
 cockroach cert create-node \
-localhost \
+xcnd30.comp.nus.edu.sg \
 my_db \
---certs-dir=certs \
+--certs-dir=certs/node1 \
 --ca-key=my-safe-directory/ca.key
 
 cockroach cert create-client \
