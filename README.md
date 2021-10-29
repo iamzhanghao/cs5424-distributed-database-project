@@ -37,7 +37,7 @@ mvn clean package
 
 3. run the driver by
     ```zsh
-    $ java -jar target/target/cockroachdb.jar  <host> <port> <schema_name> <data_dir>
+    $ java -jar target/cockroachdb.jar  <host> <port> <schema_name> <data_dir>
     ```
     or setup IntelliJ Configurations: ` <host> <port> <schema_name> <data_dir>`
 
