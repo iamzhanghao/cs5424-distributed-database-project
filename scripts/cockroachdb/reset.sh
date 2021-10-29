@@ -8,3 +8,4 @@ rm -rf node5/
 rm -rf certs/
 rm -rf my-safe-directory/
 
+rm -rf cockroach_store/
