@@ -266,7 +266,7 @@ public class CockroachDB {
             Map<Integer, String> order_descs = new HashMap<Integer, String>();
 
             while(rs_popular_items.next()){
-                int oid = rs_popular_items.getInt("o_id");
+                int oid = rs_popular_items.getInt("ol_o_id");
                 int iid = rs_popular_items.getInt("i_id");
                 String popular_item_desc = String.format("Popular I_NAME: %s, quantity: %d\n", rs_popular_items.getString("i_name"), rs_popular_items.getInt("quantity"));
                 String order_customer_desc = String.format("OID: %d, O_ENTRY_D: %s, Customer Name: %s\n", oid, rs_popular_items.getString("o_entry_d"), rs_popular_items.getString("c_name"));
