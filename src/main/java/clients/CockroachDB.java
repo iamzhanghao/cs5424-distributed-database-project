@@ -255,7 +255,7 @@ public class CockroachDB {
                     + "group by ol.ol_o_id, o.o_entry_d, CONCAT(o.c_first, o.c_middle, o.c_last), i.i_id, i.i_name "
                     + "having (ol.ol_o_id, sum(ol.ol_quantity)) in ("
                         + get_ol_quantity_max
-                    + ")";
+                    + ") order by ol.ol_o_id, i.i_id, quantity desc";
 
         try{
             Statement st = conn.createStatement();
@@ -308,7 +308,7 @@ public class CockroachDB {
             }
 
             for(int iid : items.keySet()){
-                System.out.printf("Percentage of Orders having Popular Items: %2.2f\n", items.get(iid).size() * 1 / orders.size());
+                System.out.printf("Percentage of Orders having Popular Items: %f\n", items.get(iid).size() * 1 / orders.size());
             }
 
             rs_popular_items.close();
