@@ -18,8 +18,10 @@ do
   do
       client=$((i*8 + j))
       nohup ssh ${ssh_host} -n "
-        java -jar cs5424-distributed-database-project/target/${db}.jar ${java_host} ${port} ${schema} ${client}
-      " > /out/${db}/${schema}/${exp}/{client}.out &
+        cd cs5424-distributed-database-project;
+        pwd;
+        java -jar target/${db}.jar ${java_host} ${port} ${schema} ${client}
+      " > /out-${db}-${schema}-${exp}-${client}.out &
       echo "Started client ${client} on ${java_host}"
       sleep 1;
   done
