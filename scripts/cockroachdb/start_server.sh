@@ -2,9 +2,9 @@
 
 for s in xcnd30 xcnd31 xcnd32 xcnd33 xcnd34
 do
-ssh cs4224c@${s}.comp.nus.edu.sg -n "
+nohup ssh cs4224c@${s}.comp.nus.edu.sg -n "
   killall -9 cockroach;
-"
+" &
 done
 
 rm -rf cockroach_store;
@@ -27,7 +27,10 @@ nohup ssh cs4224c@${s}.comp.nus.edu.sg -n "
   --join=xcnd30.comp.nus.edu.sg:26267,xcnd31.comp.nus.edu.sg:26267,xcnd32.comp.nus.edu.sg:26267,xcnd33.comp.nus.edu.sg:26267,xcnd34.comp.nus.edu.sg:26267 \
   --background
 " &
+echo "Started cs4224c@${s}.comp.nus.edu.sg -n"
 done;
+
+sleep 3;
 
 cockroach init --insecure --host=xcnd30.comp.nus.edu.sg:26267;
 
@@ -42,4 +45,4 @@ cockroach nodelocal upload project_files/data_files/stock.csv project_files/data
 cockroach sql --insecure -f schema/cockroachdb/schema_a.sql --host=xcnd30.comp.nus.edu.sg:26267
 cockroach sql --insecure -f schema/cockroachdb/schema_b.sql --host=xcnd30.comp.nus.edu.sg:26267
 
-cockroach sql --insecure -f schema/cockroachdb/add_index_a.sql --host=localhost:26267
+cockroach sql --insecure -f schema/cockroachdb/add_index_a.sql --host=xcnd30.comp.nus.edu.sg:26267
