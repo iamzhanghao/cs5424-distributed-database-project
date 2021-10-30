@@ -64,3 +64,5 @@ cockroach nodelocal upload project_files/data_files/stock.csv project_files/data
 
 cockroach sql --insecure -f schema/cockroachdb/schema_a.sql --host=localhost:26267
 cockroach sql --insecure -f schema/cockroachdb/schema_b.sql --host=localhost:26267
+
+cockroach sql --insecure -f schema/cockroachdb/add_index_a.sql --host=localhost:26267
