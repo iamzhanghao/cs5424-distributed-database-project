@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class CockroachDB {
 
     // Limit number of txns executed
-    private static final int TXN_LIMIT = 100000;
+    private static final int TXN_LIMIT = 200;
 
     public static void main(String[] args) throws Exception {
         if (args.length != 4) {
