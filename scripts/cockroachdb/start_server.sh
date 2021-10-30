@@ -14,7 +14,7 @@ sleep 5;
 
 for s in xcnd30 xcnd31 xcnd32 xcnd33 xcnd34
 do
-ssh cs4224c@${s}.comp.nus.edu.sg -n "
+nohup ssh cs4224c@${s}.comp.nus.edu.sg -n "
   source .bash_profile;
   cd cs5424-distributed-database-project/;
   whoami;
@@ -26,7 +26,7 @@ ssh cs4224c@${s}.comp.nus.edu.sg -n "
   --http-addr=localhost:8090 \
   --join=xcnd30.comp.nus.edu.sg:26267,xcnd31.comp.nus.edu.sg:26267,xcnd32.comp.nus.edu.sg:26267,xcnd33.comp.nus.edu.sg:26267,xcnd34.comp.nus.edu.sg:26267 \
   --background
-"
+" &
 done;
 
 cockroach init --insecure --host=xcnd30.comp.nus.edu.sg:26267;
@@ -41,3 +41,5 @@ cockroach nodelocal upload project_files/data_files/stock.csv project_files/data
 
 cockroach sql --insecure -f schema/cockroachdb/schema_a.sql --host=xcnd30.comp.nus.edu.sg:26267
 cockroach sql --insecure -f schema/cockroachdb/schema_b.sql --host=xcnd30.comp.nus.edu.sg:26267
+
+cockroach sql --insecure -f schema/cockroachdb/add_index_a.sql --host=localhost:26267

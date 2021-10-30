@@ -17,12 +17,11 @@ do
   for j in {1..8}
   do
       client=$((i*8 + j))
-      ssh ${ssh_host} -n "
+      nohup ssh ${ssh_host} -n "
         java -jar cs5424-distributed-database-project/target/${db}.jar ${java_host} ${port} ${schema} ${client} &
-      " > /dev/null 2>&1 &
+      " &
       echo "Started client ${client} on ${java_host}"
-
-      sleep 3;
+      sleep 1;
   done
 done
 
