@@ -13,13 +13,12 @@ mvn clean package
 for i in {0..4}
 do
   host=cs4224c@xcnd$(($i+30)).comp.nus.edu.sg
-
   for j in {1..8}
   do
-      file=$((i*8 + j))
+      client=$((i*8 + j))
       ssh ${host} -n "
-        java -jar target/${db}.jar ${host} ${port} ${schema} project_files/xact_files_${schema}/${file}.txt
+        java -jar target/${db}.jar ${host} ${port} ${schema}  ${client} &
       "
-      echo $n,
+      echo "Started client ${client} on ${host}"
   done
 done

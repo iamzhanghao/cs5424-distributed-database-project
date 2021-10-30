@@ -11,17 +11,37 @@ import java.io.FileInputStream;
 import java.math.BigDecimal;
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Cassandra {
+
+    // Limit number of txns executed
+    private static final int TXN_LIMIT = 200;
+
     public static void main(String[] args) throws Exception {
         if (args.length != 4) {
-            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <data_dir>");
+            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n e.g. ./Cassandra localhost 9042 A 1");
         }
+
         String host = args[0];
         int port = Integer.parseInt(args[1]);
         String schema = args[2];
-        String dataDir = args[3];
+        String client = args[3];
+
+        String schema_name = "schema_a";
+        String dataDir = "project_files/xact_files_A/1.txt";
+
+        if (Objects.equals(schema, "A")) {
+            schema_name = "schema_a";
+            dataDir = "project_files/xact_files_A/"+client+".txt";
+        }else if(Objects.equals(schema, "B")){
+            schema_name = "schema_a";
+            dataDir = "project_files/xact_files_B/"+client+".txt";
+        }else{
+            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n e.g. ./Cassandra localhost 9042 A 1");
+            return;
+        }
 
         System.out.printf("Running on host: %s:%d", host, port);
         System.out.println();
@@ -29,7 +49,7 @@ public class Cassandra {
         CqlSession session = CqlSession
                 .builder()
                 .addContactPoint(new InetSocketAddress(host, port))
-                .withKeyspace(schema)
+                .withKeyspace(schema_name)
 //                .withLocalDatacenter("cs5424-c")
                 .withLocalDatacenter("datacenter1")
                 .build();
@@ -38,13 +58,15 @@ public class Cassandra {
         Scanner scanner = new Scanner(stream);
 
         ArrayList<TransactionStatistics> latencies = new ArrayList<>();
-        while (scanner.hasNextLine()) {
+        int txnCount = 0;
+        while (scanner.hasNextLine() && txnCount<TXN_LIMIT) {
+            txnCount++;
             String line = scanner.nextLine();
             String[] splits = line.split(",");
             char txnType = splits[0].toCharArray()[0];
             long latency = invokeTransaction(session, splits, scanner);
             latencies.add(new TransactionStatistics(txnType,latency));
-            System.out.printf("Tnx %c: %dms \n",txnType, latency);
+            System.out.printf("<%d/20000> Tnx %c: %dms \n", txnCount, txnType, latency);
         }
         session.close();
         TransactionStatistics.printStatistics(latencies);
