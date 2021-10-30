@@ -17,7 +17,8 @@ do
   do
       client=$((i*8 + j))
       ssh ${host} -n "
-        java -jar target/${db}.jar ${host} ${port} ${schema}  ${client} &
+        cd cs5424-distributed-database-project/;
+        java -jar target/${db}.jar ${host} ${port} ${schema} ${client} &
       "
       echo "Started client ${client} on ${host}"
   done
