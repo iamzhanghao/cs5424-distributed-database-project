@@ -1,22 +1,3 @@
-#mkdir certs my-safe-directory
-#
-#cockroach cert create-ca \
-#--certs-dir=certs \
-#--ca-key=my-safe-directory/ca.key
-#
-#cockroach cert create-node \
-#localhost \
-#my_db \
-#--certs-dir=certs \
-#--ca-key=my-safe-directory/ca.key
-#
-#cockroach cert create-client \
-#root \
-#--certs-dir=certs \
-#--ca-key=my-safe-directory/ca.key
-#
-#openssl pkcs8 -topk8 -inform PEM -outform DER -in certs/client.root.key -out certs/client.root.key.pk8 -nocrypt
-
 killall -9 cockroach
 
 rm -rf node1/

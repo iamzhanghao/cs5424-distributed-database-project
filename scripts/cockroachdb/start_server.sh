@@ -1,3 +1,5 @@
+# Run on xcnd30.comp.nus.edu.sg
+
 for s in xcnd30 xcnd31 xcnd32 xcnd33 xcnd34
 do
 ssh cs4224c@${s}.comp.nus.edu.sg -n "
