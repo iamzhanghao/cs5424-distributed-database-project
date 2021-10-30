@@ -1,0 +1,1074 @@
+_______________________________Important_Message________________________________
+
+CRYPTOCURRENCY MINING, PASSWORD CRACKING, NETWORK SCANNING prohibited.
+
+NO BACKUP for homedirs. Please do OWN BACKUP. User homedir quota 500G.
+
+LIST of hardware <https://dochub.comp.nus.edu.sg/cf/guides/compute-cluster/hardware>
+
+USE /temp local-to-node storage for faster computation! Remember to SAVE your results!
+
+Reserved till 10 Nov 2021 : xcnd26-29 (CS4225/CS5425)
+
+Reserved 4 Oct - 12 Nov 2021 : xgpf0-9 (CS3244)
+
+Reserved 27 Aug - 19 Nov 2021 : xgpg0-2 (CS4248)
+
+Reserved till 20 Nov 2021 : xcne5-7 (CS2106)
+
+Reserved till 20 Nov 2021 : xcne3-4 (CS3210)
+
+Reserved 20 Sep -  20 Nov 2021 : xgpc0-7, xgpd0-7 (CS3210)
+
+Reserved till 1 Dec 2021 : xcnc1-10,12-17 (TIC4005)
+
+Reserved 23 Aug - 5 Dec 2021 : xcnc20-49, xcnd30-59 (CS4224/CS5424)
+
+Reserved till 5 Dec 2021 : xcnb14 (FYP)
+
+Reserved till 20 Dec 2021 : xgpe2-11 (CS4246/CS5446)
+
+Reserved till 30 Apr 2022 : xgpb1 (FYP)
+
+Reserved till 30 Apr 2022 : xcne0 (CS3213)
+
+Reserved till 4 Dec 2021 : xgpc8 (CS1010S)
+
+Reserved till 26 Nov 2021 : xcne1-2 (CS3103)
+
+Reserved till 30 Nov 2021 : cpga0-2
+
+Reserved till 7 Nov 2021 : xgpg3
+
+Reserved till 30 Nov 2021 : xgpe1, xgpd9
+
+Reserved till 30 Nov 2021 : xgpg7, xgpg8
+
+************************************************************
+
+
+xgpc and xgpd nodes are now running Ubuntu 20.04 (with CUDA 11.2)
+************************************************************
+
+Offline: xcna15, xcnb15, xcnd9, xcnd11, xgpb2, xcne0
+
+--------------------------------------------------------------------------------
+
+/home/stuproj/cs4224c/cs5424-distributed-database-project
+Running on host: xcnd33.comp.nus.edu.sg:26267
+Ready to read Xact file project_files/xact_files_A/32.txt
+Customer's name: cnmjqfx OE CALLYEINGANTI, balance: -10.000000
+last order id: 821, entry datetime: 2021-08-27 09:50:37.87, carrier id: 5
+item id: 7781, warehouse id: 7, quantity: 5, price: 76, delivery datetime: 2021-08-27 09:50:37.87
+
+item id: 16032, warehouse id: 7, quantity: 5, price: 111, delivery datetime: 2021-08-27 09:50:37.87
+
+item id: 68337, warehouse id: 7, quantity: 5, price: 16, delivery datetime: 2021-08-27 09:50:37.87
+
+item id: 84406, warehouse id: 7, quantity: 5, price: 3, delivery datetime: 2021-08-27 09:50:37.87
+
+item id: 85940, warehouse id: 7, quantity: 5, price: 167, delivery datetime: 2021-08-27 09:50:37.87
+
+<1/20000> Tnx O: 28ms 
+<2/20000> Tnx N: 1ms 
+<3/20000> Tnx P: 14ms 
+<4/20000> Tnx S: 0ms 
+<5/20000> Tnx P: 9ms 
+<6/20000> Tnx N: 1ms 
+Delivery wid:9 carrier:7oid:2112 cid:2065
+oid:2112 cid:2254
+oid:2112 cid:1796
+oid:2112 cid:736
+oid:2112 cid:868
+oid:2112 cid:2427
+oid:2112 cid:2864
+oid:2112 cid:742
+oid:2112 cid:2814
+oid:2112 cid:2596
+<7/20000> Tnx D: 269ms 
+<8/20000> Tnx N: 0ms 
+<9/20000> Tnx N: 0ms 
+CWID: 8, C_DID: 3, C_ID: 1641
+<10/20000> Tnx R: 1895ms 
+WID: 8, DID: 7, Number of last orders: 12
+
+OID: 2992, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: qqejabehbyi OE ABLEATIONBAR
+Popular I_NAME: vdyyvuiaxtuagcssydx, quantity: 5
+Popular I_NAME: uyprmvcmqvapkhlkvyfbvcp, quantity: 5
+Popular I_NAME: cerefqryjkzskdc, quantity: 5
+Popular I_NAME: idkanthephlbcyowkzx, quantity: 5
+Popular I_NAME: sqqahegopwfbqouowihpf, quantity: 5
+Popular I_NAME: egjfhjkaypevokk, quantity: 5
+Popular I_NAME: vszxvxlyzlgbawwvylvad, quantity: 5
+Popular I_NAME: cperlcbwlmeuomhdw, quantity: 5
+Popular I_NAME: pzshzgxjigzsmgsjolqqfs, quantity: 5
+Popular I_NAME: zzkdlkqlhhcvx, quantity: 5
+Popular I_NAME: uhhxkmawzrxxrrjracpifd, quantity: 5
+Popular I_NAME: ljgtedputdkayvkp, quantity: 5
+Popular I_NAME: zasrniznygrgwrhkdfyrtv, quantity: 5
+Popular I_NAME: mpspbalnngffxsoxyustuf, quantity: 5
+Popular I_NAME: pumjwjqslillrzzc, quantity: 5
+Popular I_NAME: fvekyxabvjjangmt, quantity: 5
+Popular I_NAME: wqsdfhelrgvoseea, quantity: 5
+
+OID: 2993, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: yjdfsstvfedml OE ESEEINGANTI
+Popular I_NAME: gbcbzatfhbdnstcf, quantity: 5
+Popular I_NAME: pjzeadubuglmifksgmx, quantity: 5
+Popular I_NAME: qljedzsxtxyzecb, quantity: 5
+Popular I_NAME: dtyiaeucvtcuqrpjo, quantity: 5
+Popular I_NAME: wuvvyimspfygwgs, quantity: 5
+Popular I_NAME: wfgftfebdanvvnesx, quantity: 5
+Popular I_NAME: yfefhiqoqakegzhn, quantity: 5
+Popular I_NAME: mitmilzgxzcjemxueqzdh, quantity: 5
+Popular I_NAME: mfhvrikzgdillu, quantity: 5
+Popular I_NAME: saoawrtuzmwehopxoqfur, quantity: 5
+Popular I_NAME: zusqrajhhesqclu, quantity: 5
+Popular I_NAME: trafrzgpavazgm, quantity: 5
+Popular I_NAME: qrfbhpjmbtwbsvzum, quantity: 5
+Popular I_NAME: iobrtbfqilgiwhvmtye, quantity: 5
+Popular I_NAME: pualmzkiahutdko, quantity: 5
+Popular I_NAME: mnnzrhuawuwtkyijgqp, quantity: 5
+
+OID: 2994, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: yxlcozm OE PRESOUGHTPRI
+Popular I_NAME: ctiisvjuocsrsrhegxcdv, quantity: 5
+Popular I_NAME: qdevpkzzhsywflfaael, quantity: 5
+Popular I_NAME: vlhyzkgnyhvnspojasj, quantity: 5
+Popular I_NAME: zfclmqczlnwwvtaljjgx, quantity: 5
+Popular I_NAME: pqtezynyxrycgzjumacuvfe, quantity: 5
+Popular I_NAME: cevtaiynnspyrbxzm, quantity: 5
+Popular I_NAME: tqqdhxjbzfloaxqjuowjvm, quantity: 5
+
+OID: 2995, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: krkwtzjiy OE ANTIESEANTI
+Popular I_NAME: oyuzipkzwkmzdixjhzw, quantity: 5
+Popular I_NAME: fwmotgmtvrgjyqxjmlw, quantity: 5
+Popular I_NAME: urrshaujrjpkwogupw, quantity: 5
+Popular I_NAME: nxnprqvfzpkncdzgd, quantity: 5
+Popular I_NAME: pphwsklgpckax, quantity: 5
+Popular I_NAME: xlsswwxgutuidttxbme, quantity: 5
+Popular I_NAME: rlxycrdhrprgruitpeosp, quantity: 5
+Popular I_NAME: jorhzosswlfyuokznb, quantity: 5
+Popular I_NAME: hccuqfqxvuwfwf, quantity: 5
+Popular I_NAME: rfbodwbnilvcumcn, quantity: 5
+Popular I_NAME: dwsyukklnpzoj, quantity: 5
+Popular I_NAME: afmrzwtrsuwakiday, quantity: 5
+Popular I_NAME: utxaxsteckahu, quantity: 5
+Popular I_NAME: eefiqqnncijepa, quantity: 5
+Popular I_NAME: zaocylxhykajqtf, quantity: 5
+
+OID: 2996, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: heivmdajaiaut OE PRESCALLYPRI
+Popular I_NAME: glxcvzhmhwdhdiuvywlyltg, quantity: 5
+Popular I_NAME: spvruwyhwlrdvka, quantity: 5
+Popular I_NAME: tboulzecaprcdkkdgvortz, quantity: 5
+Popular I_NAME: ygknjonwedkrlaokvmfrd, quantity: 5
+Popular I_NAME: dutfshqetmojz, quantity: 5
+Popular I_NAME: tyckanttikhoq, quantity: 5
+Popular I_NAME: aegtwdwlyaeyoan, quantity: 5
+Popular I_NAME: vaclbnobjucgn, quantity: 5
+Popular I_NAME: nlaetqqwkaddamyoho, quantity: 5
+Popular I_NAME: dbeiyipgcmljhrrlbkekkwx, quantity: 5
+Popular I_NAME: uovusdylzkiaupeo, quantity: 5
+Popular I_NAME: whnydvgbavzyghqzngszbz, quantity: 5
+Popular I_NAME: sojslleiqhzcgqbvcxsjd, quantity: 5
+Popular I_NAME: endrwleksmpajuie, quantity: 5
+Popular I_NAME: tcuqealabjvqpty, quantity: 5
+
+OID: 2997, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: nnsvdfj OE OUGHTCALLYATION
+Popular I_NAME: tynyjutyzldyy, quantity: 5
+Popular I_NAME: nceoaatknsundbublu, quantity: 5
+Popular I_NAME: whsahzrtpxmplqlst, quantity: 5
+Popular I_NAME: wzuxhxpojvhfgyryxbysopy, quantity: 5
+Popular I_NAME: svxtzlfthfrsawe, quantity: 5
+Popular I_NAME: olpnjjgwediva, quantity: 5
+Popular I_NAME: trwivdoimgtber, quantity: 5
+Popular I_NAME: efdwlhpvlwengehabo, quantity: 5
+Popular I_NAME: uzljjowdiqjnqlozsh, quantity: 5
+Popular I_NAME: gdipavyynbnplakcu, quantity: 5
+Popular I_NAME: obqjoggshimdatsbd, quantity: 5
+Popular I_NAME: likqmjuokkjezacltw, quantity: 5
+Popular I_NAME: dmtvktmmazwpcfoyzwdz, quantity: 5
+Popular I_NAME: vvnopxcajuvmgqxovcha, quantity: 5
+Popular I_NAME: crnmcqihxylzivqetrnrv, quantity: 5
+Popular I_NAME: xjuxdfeialshcwkanrdfgeg, quantity: 5
+Popular I_NAME: wujqftfhnhxvw, quantity: 5
+Popular I_NAME: sccltbdfzjozztqvggvrn, quantity: 5
+
+OID: 2998, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: opckmjcfwxrdj OE PRESOUGHTBAR
+Popular I_NAME: nzkybdfhbojhekaalqs, quantity: 5
+Popular I_NAME: gxhvcdwydlgsryi, quantity: 5
+Popular I_NAME: sfwesogvfcoig, quantity: 5
+Popular I_NAME: zfdjzwzcekwothflwp, quantity: 5
+Popular I_NAME: xblrilbffiutm, quantity: 5
+Popular I_NAME: gfbgqanfpiwaih, quantity: 5
+Popular I_NAME: yafpgmprirfapkq, quantity: 5
+Popular I_NAME: oylkoxoxivowo, quantity: 5
+Popular I_NAME: sacscaegtabmoxfdef, quantity: 5
+Popular I_NAME: fisyefkriszffrnmsax, quantity: 5
+Popular I_NAME: pqolbdrzuyuimroanwkci, quantity: 5
+
+OID: 2999, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: yvnksbp OE BAREINGATION
+Popular I_NAME: cgxtkrptdkoapnhjezjsz, quantity: 5
+Popular I_NAME: fglnmaurlqdsodmpjrmz, quantity: 5
+Popular I_NAME: umnnqrgkcahhyqhpfogpgy, quantity: 5
+Popular I_NAME: rfkmreomrxomj, quantity: 5
+Popular I_NAME: ythbysecylcjy, quantity: 5
+Popular I_NAME: jzklfljzxwyoxumblshyh, quantity: 5
+Popular I_NAME: jftwnxltvqasw, quantity: 5
+Popular I_NAME: alwrftwudthuigxf, quantity: 5
+Popular I_NAME: rcnjduqwvbmqohznwvx, quantity: 5
+Popular I_NAME: yxuvwpssirqhfloqy, quantity: 5
+Popular I_NAME: jlbjgqtdxaljwcndvttprr, quantity: 5
+Popular I_NAME: rdfhmmspjzhyhfxjkf, quantity: 5
+Popular I_NAME: apzbkmwoiahkahoxwrtmlaz, quantity: 5
+Popular I_NAME: sgqyiyvjqlllvjzczt, quantity: 5
+Popular I_NAME: fzxsskdoekzkonlqqa, quantity: 5
+Popular I_NAME: jnlptuvygnxgruzsddgljc, quantity: 5
+Popular I_NAME: xadfllaxnhpzfsbegfzuxvl, quantity: 5
+
+OID: 3000, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: eifevzjkex OE OUGHTCALLYABLE
+Popular I_NAME: ttimlnccaeladdqd, quantity: 5
+Popular I_NAME: cwwlqteoxtnzlq, quantity: 5
+Popular I_NAME: tqbgqbmldksfnlbggfbs, quantity: 5
+Popular I_NAME: ihsdftqcckrqmun, quantity: 5
+Popular I_NAME: rcqdgxcoihgtk, quantity: 5
+Popular I_NAME: njbxhzmfqkoecjkuysl, quantity: 5
+Popular I_NAME: ghgnpekcybnkmdknvufp, quantity: 5
+
+OID: 2989, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: xwfveou OE CALLYESEANTI
+Popular I_NAME: bajvvqdjtyogkpcdn, quantity: 5
+Popular I_NAME: wtgsdqgqtafjejonfm, quantity: 5
+Popular I_NAME: zyoqcnnnzfsmfcnne, quantity: 5
+Popular I_NAME: bqrdtkxoocngpixuykysr, quantity: 5
+Popular I_NAME: cuqcfpanpvdoxrodei, quantity: 5
+Popular I_NAME: xpatntjtmgwogmzech, quantity: 5
+Popular I_NAME: icfzalzqsdnjbncpfoup, quantity: 5
+
+OID: 2990, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: loujrrp OE OUGHTPRIABLE
+Popular I_NAME: cnyozlycsshanumtsrtjjq, quantity: 5
+Popular I_NAME: bypcqnohwcyzlqeyvuzkop, quantity: 5
+Popular I_NAME: vstdoftmzcjswxdy, quantity: 5
+Popular I_NAME: kkjjlhcsuyelxtjkrrkpjj, quantity: 5
+Popular I_NAME: zyxigchnvtcfaf, quantity: 5
+
+OID: 2991, O_ENTRY_D: 2021-08-27 09:50:38.737, Customer Name: duuhlwsn OE CALLYATIONATION
+Popular I_NAME: mbvlqiuyqpygyec, quantity: 5
+Popular I_NAME: ionifivclvszyyjn, quantity: 5
+Popular I_NAME: qafjdcedvskoau, quantity: 5
+Popular I_NAME: enqcwceyycebewfrch, quantity: 5
+Popular I_NAME: pcjckvaqrzumdv, quantity: 5
+Popular I_NAME: eiiemfiiitohieeew, quantity: 5
+Popular I_NAME: iwjboccetijvqutejuxht, quantity: 5
+Popular I_NAME: weronxprnucfhx, quantity: 5
+Popular I_NAME: xaewhwtjfseccqkoc, quantity: 5
+
+Popular I_NAME: dwsyukklnpzoj, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: likqmjuokkjezacltw, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: cevtaiynnspyrbxzm, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: fzxsskdoekzkonlqqa, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: tcuqealabjvqpty, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: vszxvxlyzlgbawwvylvad, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: mitmilzgxzcjemxueqzdh, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: enqcwceyycebewfrch, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: rdfhmmspjzhyhfxjkf, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: xlsswwxgutuidttxbme, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: tboulzecaprcdkkdgvortz, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: sfwesogvfcoig, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: gbcbzatfhbdnstcf, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: ghgnpekcybnkmdknvufp, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: pqolbdrzuyuimroanwkci, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: dtyiaeucvtcuqrpjo, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: vaclbnobjucgn, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: wtgsdqgqtafjejonfm, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: oylkoxoxivowo, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: dutfshqetmojz, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: fisyefkriszffrnmsax, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: zyoqcnnnzfsmfcnne, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: tynyjutyzldyy, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: zfdjzwzcekwothflwp, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: apzbkmwoiahkahoxwrtmlaz, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: pualmzkiahutdko, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: wfgftfebdanvvnesx, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: ttimlnccaeladdqd, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: ythbysecylcjy, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: jorhzosswlfyuokznb, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: saoawrtuzmwehopxoqfur, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: njbxhzmfqkoecjkuysl, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: yafpgmprirfapkq, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: cwwlqteoxtnzlq, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: eiiemfiiitohieeew, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: rlxycrdhrprgruitpeosp, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: rcnjduqwvbmqohznwvx, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: idkanthephlbcyowkzx, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: gdipavyynbnplakcu, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: xaewhwtjfseccqkoc, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: rcqdgxcoihgtk, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: egjfhjkaypevokk, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: umnnqrgkcahhyqhpfogpgy, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: cuqcfpanpvdoxrodei, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: alwrftwudthuigxf, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: cerefqryjkzskdc, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: vstdoftmzcjswxdy, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: nxnprqvfzpkncdzgd, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: jzklfljzxwyoxumblshyh, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: zasrniznygrgwrhkdfyrtv, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: wqsdfhelrgvoseea, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: ihsdftqcckrqmun, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: pphwsklgpckax, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: ljgtedputdkayvkp, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: afmrzwtrsuwakiday, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: bypcqnohwcyzlqeyvuzkop, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: jlbjgqtdxaljwcndvttprr, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: xblrilbffiutm, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: utxaxsteckahu, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: yxuvwpssirqhfloqy, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: mbvlqiuyqpygyec, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: dmtvktmmazwpcfoyzwdz, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: qdevpkzzhsywflfaael, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: iwjboccetijvqutejuxht, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: cnyozlycsshanumtsrtjjq, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: zfclmqczlnwwvtaljjgx, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: pqtezynyxrycgzjumacuvfe, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: uyprmvcmqvapkhlkvyfbvcp, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: wzuxhxpojvhfgyryxbysopy, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: svxtzlfthfrsawe, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: sgqyiyvjqlllvjzczt, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: pumjwjqslillrzzc, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: ctiisvjuocsrsrhegxcdv, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: hccuqfqxvuwfwf, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: ionifivclvszyyjn, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: crnmcqihxylzivqetrnrv, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: uovusdylzkiaupeo, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: endrwleksmpajuie, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: vlhyzkgnyhvnspojasj, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: tqbgqbmldksfnlbggfbs, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: olpnjjgwediva, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: rfkmreomrxomj, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: zzkdlkqlhhcvx, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: mfhvrikzgdillu, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: rfbodwbnilvcumcn, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: efdwlhpvlwengehabo, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: qafjdcedvskoau, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: iobrtbfqilgiwhvmtye, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: dbeiyipgcmljhrrlbkekkwx, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: uzljjowdiqjnqlozsh, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: whsahzrtpxmplqlst, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: qljedzsxtxyzecb, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: fglnmaurlqdsodmpjrmz, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: xadfllaxnhpzfsbegfzuxvl, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: sqqahegopwfbqouowihpf, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: spvruwyhwlrdvka, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: kkjjlhcsuyelxtjkrrkpjj, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: icfzalzqsdnjbncpfoup, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: tyckanttikhoq, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: weronxprnucfhx, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: obqjoggshimdatsbd, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: nlaetqqwkaddamyoho, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: whnydvgbavzyghqzngszbz, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: bqrdtkxoocngpixuykysr, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: fvekyxabvjjangmt, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: gxhvcdwydlgsryi, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: pzshzgxjigzsmgsjolqqfs, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: wujqftfhnhxvw, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: zaocylxhykajqtf, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: yfefhiqoqakegzhn, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: xpatntjtmgwogmzech, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: uhhxkmawzrxxrrjracpifd, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: sojslleiqhzcgqbvcxsjd, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: ygknjonwedkrlaokvmfrd, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: bajvvqdjtyogkpcdn, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: cgxtkrptdkoapnhjezjsz, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: nceoaatknsundbublu, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: zusqrajhhesqclu, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: vvnopxcajuvmgqxovcha, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: gfbgqanfpiwaih, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: zyxigchnvtcfaf, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: qrfbhpjmbtwbsvzum, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: cperlcbwlmeuomhdw, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: xjuxdfeialshcwkanrdfgeg, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: sccltbdfzjozztqvggvrn, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: pcjckvaqrzumdv, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: tqqdhxjbzfloaxqjuowjvm, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: nzkybdfhbojhekaalqs, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: sacscaegtabmoxfdef, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: aegtwdwlyaeyoan, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: jnlptuvygnxgruzsddgljc, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: trafrzgpavazgm, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: glxcvzhmhwdhdiuvywlyltg, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: jftwnxltvqasw, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: wuvvyimspfygwgs, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: trwivdoimgtber, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: pjzeadubuglmifksgmx, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: mnnzrhuawuwtkyijgqp, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: urrshaujrjpkwogupw, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: vdyyvuiaxtuagcssydx, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: oyuzipkzwkmzdixjhzw, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: fwmotgmtvrgjyqxjmlw, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: eefiqqnncijepa, Percentage of Orders having Popular Items: 0.083333
+Popular I_NAME: mpspbalnngffxsoxyustuf, Percentage of Orders having Popular Items: 0.083333
+<11/20000> Tnx I: 173ms 
+<12/20000> Tnx S: 0ms 
+<13/20000> Tnx S: 0ms 
+Customers with top balances
+Customer Name: oxfoakim OE PRIPRESOUGHT            	Balance: 133755.90   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: ichrsluutmcvcn OE PRESBARABLE       	Balance: 131751.12   	Warehouse Name: amzkoudtw 	District Name: ajfywt    
+Customer Name: kohyfbjdrxmq OE OUGHTCALLYABLE      	Balance: 131331.34   	Warehouse Name: bwaxabqr  	District Name: ucjqympbt 
+Customer Name: pdlfwxmdi OE ANTIANTIATION          	Balance: 123056.67   	Warehouse Name: bwaxabqr  	District Name: gbgsjz    
+Customer Name: lneyaiya OE OUGHTBARBAR             	Balance: 122890.71   	Warehouse Name: bwaxabqr  	District Name: tahnj     
+Customer Name: hrifsgovekletx OE ANTIPRESCALLY     	Balance: 122833.92   	Warehouse Name: qccrxfrr  	District Name: naefbf    
+Customer Name: vsvrxfawnpmjiae OE OUGHTATIONBAR    	Balance: 121412.55   	Warehouse Name: skktees   	District Name: mzzfwqbe  
+Customer Name: ehmumjzgzv OE BARANTIBAR            	Balance: 120876.27   	Warehouse Name: cfljbep   	District Name: xpuvppg   
+Customer Name: sgjmrjukgehmyi OE ABLEOUGHTATION    	Balance: 119979.91   	Warehouse Name: skktees   	District Name: xnroyngk  
+Customer Name: zybnbeq OE ESEPRESATION             	Balance: 119829.71   	Warehouse Name: qccrxfrr  	District Name: uvtdnx    
+<14/20000> Tnx T: 510ms 
+WID: 4, DID: 3, Number of last orders: 13
+
+OID: 2988, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: ezlfvvlfdt OE ESEABLEPRI
+Popular I_NAME: caujeaksbavqalmsraf, quantity: 5
+Popular I_NAME: oxtfmouzjjrfdf, quantity: 5
+Popular I_NAME: laxoigxlvixhbfhydaitrtw, quantity: 5
+Popular I_NAME: neiwskwtggkrlizyzz, quantity: 5
+Popular I_NAME: szglnvhuhlrchcigmycqua, quantity: 5
+Popular I_NAME: iigmmowybmmgssfndwsz, quantity: 5
+Popular I_NAME: amuxhrrjygdiupsa, quantity: 5
+Popular I_NAME: cbvtfpyagqjyxptpjsbnj, quantity: 5
+Popular I_NAME: lbsuxknvnqtrqvjwmyk, quantity: 5
+Popular I_NAME: qalnrppzkwieo, quantity: 5
+Popular I_NAME: nanxwtpsjjfxgrbcfvyjkt, quantity: 5
+Popular I_NAME: vnyylndhxzhoyhsordkoka, quantity: 5
+Popular I_NAME: wnelemuypylkcxext, quantity: 5
+Popular I_NAME: lhsrxnrpjkbuqfrl, quantity: 5
+Popular I_NAME: drdwznkhziweqjayxsqdlcb, quantity: 5
+Popular I_NAME: jdtmdppmdefkrh, quantity: 5
+
+OID: 2989, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: sqlidjdsndk OE ANTIANTIPRES
+Popular I_NAME: wxodeirwmzpcce, quantity: 5
+Popular I_NAME: wtqktcntkllwzvzunmpues, quantity: 5
+Popular I_NAME: umwjieorvztwcxltw, quantity: 5
+Popular I_NAME: ubwqkgoxhxudocxoj, quantity: 5
+Popular I_NAME: cauxnzzzjhknhfuedxtpgsa, quantity: 5
+Popular I_NAME: qnxibkgbxqxztervwqzfqf, quantity: 5
+Popular I_NAME: ywltgaxmzssgqzkezbjze, quantity: 5
+Popular I_NAME: herciojbjcxsscbnrfkrs, quantity: 5
+Popular I_NAME: qyllpeiuddmmjqpi, quantity: 5
+Popular I_NAME: zjxamyylsbrocqq, quantity: 5
+Popular I_NAME: jqzpowggbjnjekcfexdsjh, quantity: 5
+Popular I_NAME: rdljxhpjiaxfptvcqzweza, quantity: 5
+Popular I_NAME: jzxjhigcthhptgbt, quantity: 5
+Popular I_NAME: wxkmuzgugtfaldr, quantity: 5
+Popular I_NAME: vnuzjakigolgb, quantity: 5
+Popular I_NAME: tknsybdismillkqv, quantity: 5
+
+OID: 2990, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: hitgwzyawufo OE ATIONPRIPRES
+Popular I_NAME: lcouvviesojafoqzjyh, quantity: 5
+Popular I_NAME: uncftgfjgcwxnzbhr, quantity: 5
+Popular I_NAME: qtwydjunahrqjtaxw, quantity: 5
+Popular I_NAME: wllhsowimiscmbog, quantity: 5
+Popular I_NAME: oejdzvsxqokzqese, quantity: 5
+Popular I_NAME: wfquceizxiglhjaflt, quantity: 5
+Popular I_NAME: ygkjwvvlrhqsqrvnkswm, quantity: 5
+Popular I_NAME: yplrxrdhcpzuklxhvr, quantity: 5
+Popular I_NAME: kspajtomwsyybssztnb, quantity: 5
+Popular I_NAME: wbdfeaufkpvsgmalh, quantity: 5
+
+OID: 2991, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: dsmzcafgbqdub OE ESEEINGATION
+Popular I_NAME: xrflybvygrtvbjhllbiahf, quantity: 5
+Popular I_NAME: etmjzbvdxqagb, quantity: 5
+Popular I_NAME: muanhavhtlgwiymqlr, quantity: 5
+Popular I_NAME: zlaweylctleadxaaa, quantity: 5
+Popular I_NAME: cyzijupsyhbtccnltfns, quantity: 5
+Popular I_NAME: tkfwqfmjbzvwjegdn, quantity: 5
+Popular I_NAME: fzgphmflmjvpdja, quantity: 5
+Popular I_NAME: iabnmbwnxmkmvzlfvlsbmle, quantity: 5
+Popular I_NAME: lklwfznakelgayhkrcneryj, quantity: 5
+Popular I_NAME: sgqfufhycdmuiiwxat, quantity: 5
+
+OID: 2992, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: zzoesscdh OE ATIONESEPRI
+Popular I_NAME: ncwrqizvspsmkiaeoh, quantity: 5
+Popular I_NAME: dnopbbcdnseeumjp, quantity: 5
+Popular I_NAME: gutzjmykulawha, quantity: 5
+Popular I_NAME: ipuuazljusofz, quantity: 5
+Popular I_NAME: ejpkelwtvqohfcrbiqejdjx, quantity: 5
+Popular I_NAME: lxqibyniojypjt, quantity: 5
+
+OID: 2993, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: pcytcafyvzl OE ABLEATIONPRES
+Popular I_NAME: gkeqjknkofbekwyxyk, quantity: 5
+Popular I_NAME: tkkfieezxwaoda, quantity: 5
+Popular I_NAME: llfktubzsbxjcunqqhobkuh, quantity: 5
+Popular I_NAME: ixswxapudxcqio, quantity: 5
+Popular I_NAME: tacpwybxiqejumutwpnuhq, quantity: 5
+Popular I_NAME: mkaiquxyxoohoranta, quantity: 5
+Popular I_NAME: nikgnzwbayxfxeian, quantity: 5
+Popular I_NAME: yybwkrwksmwwulgluchylho, quantity: 5
+Popular I_NAME: djwpmiglcmxrtf, quantity: 5
+
+OID: 2994, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: znqgaou OE OUGHTATIONEING
+Popular I_NAME: aokrpxcjlsnpezzfy, quantity: 5
+Popular I_NAME: yjxmjbhgsacfmd, quantity: 5
+Popular I_NAME: mnybzrymsehmfaggevtgqmx, quantity: 5
+Popular I_NAME: hinhtcazdwdinfkzoltli, quantity: 5
+Popular I_NAME: oshwhsuzoxzfvhfuwb, quantity: 5
+Popular I_NAME: bwqnmfdhahoklbiaxvyxhy, quantity: 5
+Popular I_NAME: fiqmyqxzqxslo, quantity: 5
+Popular I_NAME: docgtgowxziperkvnzk, quantity: 5
+Popular I_NAME: usngmcvfrzpfola, quantity: 5
+Popular I_NAME: xhkfhredkbyrwrfezneyb, quantity: 5
+Popular I_NAME: qzqmmodrynqxvdcs, quantity: 5
+Popular I_NAME: sxgbhcmkxzxqxffyfnuphrs, quantity: 5
+Popular I_NAME: htekpzrbdqyjahq, quantity: 5
+Popular I_NAME: dmgdvicwmhtgqcapcymvygj, quantity: 5
+Popular I_NAME: ovhydmyvouogvdy, quantity: 5
+Popular I_NAME: hzpmlnuxaiyymaciyapukm, quantity: 5
+Popular I_NAME: ifixdhkfouklkbczocjrx, quantity: 5
+Popular I_NAME: xxjthxnibieufadvter, quantity: 5
+Popular I_NAME: okxexhzwltpcisorqfndk, quantity: 5
+Popular I_NAME: ihqpomvielsjdbomaszho, quantity: 5
+
+OID: 2995, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: arjpofxcivwxihj OE ANTIANTIATION
+Popular I_NAME: ucwggckocwvxcgwspzqlwl, quantity: 5
+Popular I_NAME: ljmywlwblnigsmxj, quantity: 5
+Popular I_NAME: ratggshhalmlozuyvtpemx, quantity: 5
+Popular I_NAME: xemuqjkktuaim, quantity: 5
+Popular I_NAME: kuepodzgadquoebkstwvw, quantity: 5
+Popular I_NAME: erjbzorfsxhzdjxsleo, quantity: 5
+Popular I_NAME: ejsidnzhiqvwo, quantity: 5
+Popular I_NAME: kktsqysqbphjuqtlqodckj, quantity: 5
+Popular I_NAME: rocojpbxgxzmd, quantity: 5
+Popular I_NAME: ysdylrcmrewor, quantity: 5
+Popular I_NAME: zcqsukkoxjsfmrdqjpzrs, quantity: 5
+Popular I_NAME: eariwekckjqqlwwqdquvkxi, quantity: 5
+Popular I_NAME: hdauframpvgiztbxqgsqjth, quantity: 5
+Popular I_NAME: epfzgjtdxqoukwzjx, quantity: 5
+Popular I_NAME: ogcrtaypfvbyscmarwud, quantity: 5
+Popular I_NAME: sspufwarwxoboqmdeignid, quantity: 5
+Popular I_NAME: jsmyftqxfxsrdzefykoyb, quantity: 5
+
+OID: 2996, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: kyuyyzhe OE PRIOUGHTANTI
+Popular I_NAME: wwujmzhkrcvhburt, quantity: 5
+Popular I_NAME: drdgoywxxltijwhbqx, quantity: 5
+Popular I_NAME: bqeaufvntrqnzqvkolixy, quantity: 5
+Popular I_NAME: smhkhvjdfxzzezetkmlbrdu, quantity: 5
+Popular I_NAME: qjzsrfislbgrcebrnq, quantity: 5
+Popular I_NAME: mfayagppwcqukcdlz, quantity: 5
+Popular I_NAME: nuaoyukakfmdhpemrqnuob, quantity: 5
+Popular I_NAME: tdhsumaqsmdjizcwui, quantity: 5
+Popular I_NAME: ejiytxpzyojfvi, quantity: 5
+Popular I_NAME: cuvcwoqadijuvigjbla, quantity: 5
+Popular I_NAME: jhgvfjivtsbergl, quantity: 5
+Popular I_NAME: grvtrafkvpwddqijgjysbgc, quantity: 5
+
+OID: 2997, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: kfvucrgibyqbpwp OE ESECALLYANTI
+Popular I_NAME: bwqoqwbgcnfdmeknxmx, quantity: 5
+Popular I_NAME: kftxozdyrrbpc, quantity: 5
+Popular I_NAME: pwctppitapzledqrkhqxkgk, quantity: 5
+Popular I_NAME: dlfvsaasxoftocesnhdd, quantity: 5
+Popular I_NAME: ldgnlarbacdvjkpjpmgc, quantity: 5
+Popular I_NAME: hcvhkfhyxgwskgnuuwxxqse, quantity: 5
+Popular I_NAME: qboaljvqsiirokbkgxf, quantity: 5
+
+OID: 2998, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: oeojycyzdel OE OUGHTESEABLE
+Popular I_NAME: upuukkvipptkjlajkkdex, quantity: 5
+Popular I_NAME: ksuwbrnvbaoebh, quantity: 5
+Popular I_NAME: bidqyfvbxhokygfcdkivyga, quantity: 5
+Popular I_NAME: mimksgakpthhd, quantity: 5
+Popular I_NAME: bpjbfpvdedssszhxvs, quantity: 5
+Popular I_NAME: omtxjkqetbartt, quantity: 5
+Popular I_NAME: xeqnycbizofvisjeezjfoeh, quantity: 5
+Popular I_NAME: qrfrhhyibammj, quantity: 5
+Popular I_NAME: sugtoqomhrkevzikxlnhz, quantity: 5
+Popular I_NAME: hzdoxsrlhzhlh, quantity: 5
+Popular I_NAME: oispeozgrdrbxfkikii, quantity: 5
+Popular I_NAME: quweyudclbuowaztzt, quantity: 5
+Popular I_NAME: zmfzkjixrcgsrqetaanoajj, quantity: 5
+
+OID: 2999, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: jngvlaphkvcfije OE EINGBARESE
+Popular I_NAME: gwzppmxgruclnxukzi, quantity: 5
+Popular I_NAME: sfxuzdssothush, quantity: 5
+Popular I_NAME: bedqnwgdxyerjafnrbkmt, quantity: 5
+Popular I_NAME: lmemczhkqmcszexpmflkuaj, quantity: 5
+Popular I_NAME: byiealfzlwgezglhozvmkmi, quantity: 5
+Popular I_NAME: yizpdpehfiazx, quantity: 5
+Popular I_NAME: tboktcdwgyvzrhcqaqauz, quantity: 5
+Popular I_NAME: vqnrkmohjyeprtexhgqzuxd, quantity: 5
+
+OID: 3000, O_ENTRY_D: 2021-08-27 09:50:35.711, Customer Name: pjpjrgwhnfbwg OE PRESOUGHTABLE
+Popular I_NAME: farvylqwfuncjd, quantity: 5
+Popular I_NAME: pckvpnucswxmjxwewe, quantity: 5
+Popular I_NAME: ggjxjwxbsisikcco, quantity: 5
+Popular I_NAME: kzforasqhleqizpiqn, quantity: 5
+Popular I_NAME: mygjwulaxyikx, quantity: 5
+Popular I_NAME: yajnovcohqbkq, quantity: 5
+Popular I_NAME: zjndbjvfuzdimxdubo, quantity: 5
+Popular I_NAME: koaltpbqjwzmwfzeujku, quantity: 5
+Popular I_NAME: vbbqzhvxljwnrkywh, quantity: 5
+Popular I_NAME: urasbxfgbqzap, quantity: 5
+Popular I_NAME: iwjtpxjpxatxiujmvs, quantity: 5
+Popular I_NAME: mopbspofhqkxbybxteb, quantity: 5
+Popular I_NAME: vpzyiorlgagbvntnx, quantity: 5
+Popular I_NAME: dprbpzgvdzxtuhbnkuyoae, quantity: 5
+Popular I_NAME: yjhyktdccnrjdbbfpi, quantity: 5
+
+Popular I_NAME: wtqktcntkllwzvzunmpues, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hdauframpvgiztbxqgsqjth, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: oispeozgrdrbxfkikii, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: gkeqjknkofbekwyxyk, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qjzsrfislbgrcebrnq, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: pckvpnucswxmjxwewe, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: eariwekckjqqlwwqdquvkxi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: iigmmowybmmgssfndwsz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: upuukkvipptkjlajkkdex, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: bedqnwgdxyerjafnrbkmt, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: zjxamyylsbrocqq, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: vnuzjakigolgb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ixswxapudxcqio, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: lhsrxnrpjkbuqfrl, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: sugtoqomhrkevzikxlnhz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: byiealfzlwgezglhozvmkmi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: umwjieorvztwcxltw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xeqnycbizofvisjeezjfoeh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: neiwskwtggkrlizyzz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: nuaoyukakfmdhpemrqnuob, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ejsidnzhiqvwo, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: cauxnzzzjhknhfuedxtpgsa, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qboaljvqsiirokbkgxf, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: wnelemuypylkcxext, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: erjbzorfsxhzdjxsleo, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: drdgoywxxltijwhbqx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: mnybzrymsehmfaggevtgqmx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: tacpwybxiqejumutwpnuhq, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ncwrqizvspsmkiaeoh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: jqzpowggbjnjekcfexdsjh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: smhkhvjdfxzzezetkmlbrdu, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yjxmjbhgsacfmd, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: iabnmbwnxmkmvzlfvlsbmle, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: jzxjhigcthhptgbt, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: aokrpxcjlsnpezzfy, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ejiytxpzyojfvi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: bidqyfvbxhokygfcdkivyga, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qrfrhhyibammj, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: herciojbjcxsscbnrfkrs, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: etmjzbvdxqagb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xhkfhredkbyrwrfezneyb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: uncftgfjgcwxnzbhr, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: kspajtomwsyybssztnb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: bqeaufvntrqnzqvkolixy, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: cuvcwoqadijuvigjbla, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: tkfwqfmjbzvwjegdn, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: pwctppitapzledqrkhqxkgk, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: amuxhrrjygdiupsa, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: zlaweylctleadxaaa, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: tknsybdismillkqv, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: kuepodzgadquoebkstwvw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xrflybvygrtvbjhllbiahf, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: wbdfeaufkpvsgmalh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: dlfvsaasxoftocesnhdd, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hzdoxsrlhzhlh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: zcqsukkoxjsfmrdqjpzrs, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: tboktcdwgyvzrhcqaqauz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: okxexhzwltpcisorqfndk, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: tkkfieezxwaoda, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: oejdzvsxqokzqese, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ogcrtaypfvbyscmarwud, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ldgnlarbacdvjkpjpmgc, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: docgtgowxziperkvnzk, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: lcouvviesojafoqzjyh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: wfquceizxiglhjaflt, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: llfktubzsbxjcunqqhobkuh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: fzgphmflmjvpdja, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ipuuazljusofz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: wwujmzhkrcvhburt, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hzpmlnuxaiyymaciyapukm, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ggjxjwxbsisikcco, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: omtxjkqetbartt, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: jhgvfjivtsbergl, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ihqpomvielsjdbomaszho, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yplrxrdhcpzuklxhvr, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: oshwhsuzoxzfvhfuwb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: tdhsumaqsmdjizcwui, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: bwqoqwbgcnfdmeknxmx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: sfxuzdssothush, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ifixdhkfouklkbczocjrx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: lxqibyniojypjt, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ovhydmyvouogvdy, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: lklwfznakelgayhkrcneryj, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: fiqmyqxzqxslo, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: wxodeirwmzpcce, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: lbsuxknvnqtrqvjwmyk, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qnxibkgbxqxztervwqzfqf, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: farvylqwfuncjd, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ywltgaxmzssgqzkezbjze, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: djwpmiglcmxrtf, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: epfzgjtdxqoukwzjx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: sgqfufhycdmuiiwxat, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: usngmcvfrzpfola, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: vbbqzhvxljwnrkywh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qzqmmodrynqxvdcs, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: grvtrafkvpwddqijgjysbgc, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: mkaiquxyxoohoranta, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: zmfzkjixrcgsrqetaanoajj, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ratggshhalmlozuyvtpemx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: drdwznkhziweqjayxsqdlcb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hcvhkfhyxgwskgnuuwxxqse, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: gwzppmxgruclnxukzi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ucwggckocwvxcgwspzqlwl, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: jdtmdppmdefkrh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: nikgnzwbayxfxeian, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: iwjtpxjpxatxiujmvs, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yybwkrwksmwwulgluchylho, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: zjndbjvfuzdimxdubo, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ysdylrcmrewor, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ygkjwvvlrhqsqrvnkswm, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: kftxozdyrrbpc, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yizpdpehfiazx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: vqnrkmohjyeprtexhgqzuxd, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: mfayagppwcqukcdlz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: sxgbhcmkxzxqxffyfnuphrs, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: mopbspofhqkxbybxteb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: vnyylndhxzhoyhsordkoka, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: muanhavhtlgwiymqlr, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hinhtcazdwdinfkzoltli, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: dprbpzgvdzxtuhbnkuyoae, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qalnrppzkwieo, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: dmgdvicwmhtgqcapcymvygj, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xxjthxnibieufadvter, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ksuwbrnvbaoebh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: kktsqysqbphjuqtlqodckj, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: kzforasqhleqizpiqn, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: cbvtfpyagqjyxptpjsbnj, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: laxoigxlvixhbfhydaitrtw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: szglnvhuhlrchcigmycqua, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: oxtfmouzjjrfdf, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qtwydjunahrqjtaxw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: quweyudclbuowaztzt, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rdljxhpjiaxfptvcqzweza, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: bwqnmfdhahoklbiaxvyxhy, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: urasbxfgbqzap, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: nanxwtpsjjfxgrbcfvyjkt, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: mimksgakpthhd, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ubwqkgoxhxudocxoj, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yajnovcohqbkq, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ejpkelwtvqohfcrbiqejdjx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: dnopbbcdnseeumjp, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: cyzijupsyhbtccnltfns, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: bpjbfpvdedssszhxvs, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: lmemczhkqmcszexpmflkuaj, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qyllpeiuddmmjqpi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rocojpbxgxzmd, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: sspufwarwxoboqmdeignid, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: htekpzrbdqyjahq, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: caujeaksbavqalmsraf, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: vpzyiorlgagbvntnx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ljmywlwblnigsmxj, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: wllhsowimiscmbog, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xemuqjkktuaim, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: koaltpbqjwzmwfzeujku, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: jsmyftqxfxsrdzefykoyb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: gutzjmykulawha, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: wxkmuzgugtfaldr, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: mygjwulaxyikx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yjhyktdccnrjdbbfpi, Percentage of Orders having Popular Items: 0.076923
+<15/20000> Tnx I: 174ms 
+Delivery wid:1 carrier:3oid:2116 cid:1286
+sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]<16/20000> Tnx D: 122ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<17/20000> Tnx P: 1ms 
+<18/20000> Tnx N: 1ms 
+<19/20000> Tnx N: 0ms 
+Delivery wid:9 carrier:4sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<20/20000> Tnx D: 1ms 
+<21/20000> Tnx N: 0ms 
+<22/20000> Tnx N: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<23/20000> Tnx I: 7ms 
+Delivery wid:7 carrier:5sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<24/20000> Tnx D: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<25/20000> Tnx P: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<26/20000> Tnx P: 1ms 
+<27/20000> Tnx N: 0ms 
+Delivery wid:1 carrier:6sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<28/20000> Tnx D: 1ms 
+<29/20000> Tnx S: 0ms 
+<30/20000> Tnx N: 0ms 
+Delivery wid:2 carrier:6sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<31/20000> Tnx D: 0ms 
+<32/20000> Tnx S: 0ms 
+<33/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<34/20000> Tnx I: 7ms 
+<35/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<36/20000> Tnx O: 2ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<37/20000> Tnx T: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<38/20000> Tnx P: 0ms 
+<39/20000> Tnx N: 1ms 
+<40/20000> Tnx N: 0ms 
+<41/20000> Tnx N: 1ms 
+Delivery wid:5 carrier:10sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<42/20000> Tnx D: 0ms 
+<43/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<44/20000> Tnx P: 1ms 
+<45/20000> Tnx N: 0ms 
+Delivery wid:5 carrier:3sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<46/20000> Tnx D: 1ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<47/20000> Tnx T: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<48/20000> Tnx P: 0ms 
+<49/20000> Tnx N: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<50/20000> Tnx O: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<51/20000> Tnx R: 101ms 
+<52/20000> Tnx S: 0ms 
+<53/20000> Tnx N: 0ms 
+<54/20000> Tnx N: 0ms 
+<55/20000> Tnx S: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<56/20000> Tnx O: 1ms 
+<57/20000> Tnx N: 1ms 
+<58/20000> Tnx N: 0ms 
+<59/20000> Tnx N: 0ms 
+Delivery wid:3 carrier:10sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<60/20000> Tnx D: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<61/20000> Tnx P: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<62/20000> Tnx T: 1ms 
+Delivery wid:8 carrier:7sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<63/20000> Tnx D: 1ms 
+<64/20000> Tnx N: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<65/20000> Tnx T: 1ms 
+<66/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<67/20000> Tnx P: 1ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<68/20000> Tnx T: 1ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<69/20000> Tnx T: 1ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<70/20000> Tnx T: 1ms 
+<71/20000> Tnx N: 0ms 
+<72/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<73/20000> Tnx O: 1ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<74/20000> Tnx T: 0ms 
+<75/20000> Tnx N: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<76/20000> Tnx P: 2ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<77/20000> Tnx O: 3ms 
+<78/20000> Tnx N: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<79/20000> Tnx P: 1ms 
+<80/20000> Tnx N: 0ms 
+<81/20000> Tnx N: 0ms 
+<82/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<83/20000> Tnx O: 3ms 
+<84/20000> Tnx N: 0ms 
+<85/20000> Tnx N: 0ms 
+Delivery wid:6 carrier:5sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<86/20000> Tnx D: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<87/20000> Tnx P: 1ms 
+<88/20000> Tnx S: 0ms 
+Delivery wid:1 carrier:4sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<89/20000> Tnx D: 1ms 
+<90/20000> Tnx N: 1ms 
+Delivery wid:2 carrier:5sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<91/20000> Tnx D: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<92/20000> Tnx P: 1ms 
+Delivery wid:8 carrier:10sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<93/20000> Tnx D: 1ms 
+Delivery wid:9 carrier:5sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<94/20000> Tnx D: 1ms 
+<95/20000> Tnx N: 0ms 
+<96/20000> Tnx N: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<97/20000> Tnx T: 1ms 
+<98/20000> Tnx N: 0ms 
+<99/20000> Tnx N: 0ms 
+Delivery wid:6 carrier:1sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<100/20000> Tnx D: 1ms 
+<101/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<102/20000> Tnx P: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<103/20000> Tnx P: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<104/20000> Tnx T: 1ms 
+<105/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<106/20000> Tnx I: 6ms 
+<107/20000> Tnx N: 0ms 
+Delivery wid:1 carrier:7sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<108/20000> Tnx D: 1ms 
+Delivery wid:7 carrier:7sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<109/20000> Tnx D: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<110/20000> Tnx P: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<111/20000> Tnx P: 0ms 
+<112/20000> Tnx N: 0ms 
+<113/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<114/20000> Tnx P: 0ms 
+<115/20000> Tnx S: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<116/20000> Tnx P: 0ms 
+<117/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<118/20000> Tnx P: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<119/20000> Tnx O: 2ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<120/20000> Tnx P: 0ms 
+Delivery wid:3 carrier:2sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<121/20000> Tnx D: 1ms 
+<122/20000> Tnx N: 0ms 
+Delivery wid:7 carrier:5sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<123/20000> Tnx D: 1ms 
+<124/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<125/20000> Tnx P: 0ms 
+Delivery wid:9 carrier:2sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<126/20000> Tnx D: 1ms 
+<127/20000> Tnx N: 0ms 
+Delivery wid:7 carrier:4sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<128/20000> Tnx D: 1ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<129/20000> Tnx T: 1ms 
+<130/20000> Tnx N: 0ms 
+<131/20000> Tnx N: 0ms 
+<132/20000> Tnx N: 0ms 
+<133/20000> Tnx N: 0ms 
+<134/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<135/20000> Tnx O: 1ms 
+<136/20000> Tnx N: 0ms 
+<137/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<138/20000> Tnx P: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<139/20000> Tnx T: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<140/20000> Tnx P: 1ms 
+Delivery wid:3 carrier:10sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<141/20000> Tnx D: 0ms 
+<142/20000> Tnx N: 0ms 
+<143/20000> Tnx N: 1ms 
+<144/20000> Tnx N: 0ms 
+Delivery wid:6 carrier:5sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<145/20000> Tnx D: 0ms 
+<146/20000> Tnx N: 1ms 
+<147/20000> Tnx N: 0ms 
+<148/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<149/20000> Tnx P: 1ms 
+<150/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<151/20000> Tnx P: 0ms 
+<152/20000> Tnx N: 0ms 
+<153/20000> Tnx N: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<154/20000> Tnx P: 0ms 
+Delivery wid:6 carrier:8sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<155/20000> Tnx D: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<156/20000> Tnx P: 0ms 
+<157/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<158/20000> Tnx P: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<159/20000> Tnx P: 0ms 
+<160/20000> Tnx N: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<161/20000> Tnx T: 1ms 
+<162/20000> Tnx N: 0ms 
+<163/20000> Tnx S: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<164/20000> Tnx P: 1ms 
+Delivery wid:10 carrier:1sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<165/20000> Tnx D: 0ms 
+<166/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<167/20000> Tnx P: 1ms 
+Delivery wid:9 carrier:7sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<168/20000> Tnx D: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<169/20000> Tnx O: 2ms 
+<170/20000> Tnx S: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<171/20000> Tnx P: 0ms 
+Delivery wid:7 carrier:3sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<172/20000> Tnx D: 1ms 
+<173/20000> Tnx N: 0ms 
+<174/20000> Tnx N: 0ms 
+<175/20000> Tnx N: 0ms 
+<176/20000> Tnx N: 0ms 
+<177/20000> Tnx N: 0ms 
+<178/20000> Tnx S: 0ms 
+<179/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<180/20000> Tnx P: 0ms 
+<181/20000> Tnx S: 0ms 
+<182/20000> Tnx N: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<183/20000> Tnx T: 1ms 
+<184/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<185/20000> Tnx P: 1ms 
+<186/20000> Tnx N: 0ms 
+<187/20000> Tnx S: 0ms 
+Delivery wid:6 carrier:3sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<188/20000> Tnx D: 1ms 
+Delivery wid:10 carrier:9sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<189/20000> Tnx D: 0ms 
+<190/20000> Tnx N: 0ms 
+Delivery wid:7 carrier:1sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<191/20000> Tnx D: 1ms 
+<192/20000> Tnx N: 0ms 
+<193/20000> Tnx N: 0ms 
+<194/20000> Tnx N: 0ms 
+<195/20000> Tnx N: 0ms 
+<196/20000> Tnx N: 0ms 
+<197/20000> Tnx S: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<198/20000> Tnx T: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_WRITE_TOO_OLD - WriteTooOld flag converted to WriteTooOldError): "sql txn" meta={id=77d2a9b8 key=/Table/56/1/1/1/1286/0 pri=0.00978685 epo=0 ts=1635609429.951573448,1 min=1635609427.263068589,0 seq=1} lock=true stat=PENDING rts=1635609427.263068589,0 wto=false gul=1635609427.763068589,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_write_too_old]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<199/20000> Tnx T: 1ms 
+<200/20000> Tnx N: 0ms 
+============Statistics============
+Total 200 transactions, avg latency 16.975000ms 
+Txn P: avg latency 1ms 
+Txn R: avg latency 998ms 
+Txn S: avg latency 0ms 
+Txn D: avg latency 13ms 
+Txn T: avg latency 30ms 
+Txn I: avg latency 73ms 
+Txn N: avg latency 0ms 
+Txn O: avg latency 4ms 
+
