@@ -246,13 +246,13 @@ public class CockroachDB {
                     +"group by ol_max.ol_w_id, ol_max.ol_d_id, ol_max.ol_o_id ";
 
         // get popular items
-        String get_popular_items = "select ol.ol_o_id, o.o_entry_d, CONCAT(c_first, c_middle, c_last) as c_name, sum(ol_quantity) as quantity, i.i_name, i.i_id "
+        String get_popular_items = "select ol.ol_o_id, o.o_entry_d, CONCAT(c_first, ' ', c_middle, ' ', c_last) as c_name, sum(ol_quantity) as quantity, i.i_name, i.i_id "
                     + "from order_line_tab ol "
                     + "join ("
                         + String.format(get_order_customer, wid, did, l)
                     + ") o on ol.ol_w_id = o.o_w_id and ol.ol_d_id = o.o_d_id and ol.ol_o_id = o.o_id "
                     + "join item_tab i ON i.i_id = ol.ol_i_id "
-                    + "group by ol.ol_o_id, o.o_entry_d, CONCAT(o.c_first, o.c_middle, o.c_last), i.i_id, i.i_name "
+                    + "group by ol.ol_o_id, o.o_entry_d, CONCAT(o.c_first, ' ', o.c_middle, ' ', o.c_last), i.i_id, i.i_name "
                     + "having (ol.ol_o_id, sum(ol.ol_quantity)) in ("
                         + get_ol_quantity_max
                     + ")";
@@ -264,11 +264,13 @@ public class CockroachDB {
             Map<Integer, ArrayList<String>> orders = new HashMap<Integer, ArrayList<String>>();
             Map<Integer, Set<Integer>> items = new HashMap<Integer, Set<Integer>>();
             Map<Integer, String> order_descs = new HashMap<Integer, String>();
+            Map<Integer, String> item_descs = new HashMap<Integer, String>();
 
             while(rs_popular_items.next()){
                 int oid = rs_popular_items.getInt("ol_o_id");
                 int iid = rs_popular_items.getInt("i_id");
-                String popular_item_desc = String.format("Popular I_NAME: %s, quantity: %d\n", rs_popular_items.getString("i_name"), rs_popular_items.getInt("quantity"));
+                String iname = rs_popular_items.getString("i_name");
+                String popular_item_desc = String.format("Popular I_NAME: %s, quantity: %d\n", iname, rs_popular_items.getInt("quantity"));
                 String order_customer_desc = String.format("OID: %d, O_ENTRY_D: %s, Customer Name: %s\n", oid, rs_popular_items.getString("o_entry_d"), rs_popular_items.getString("c_name"));
                 // get popular items for each order
                 if (!orders.containsKey(oid)){
@@ -287,6 +289,7 @@ public class CockroachDB {
                     Set<Integer> oids = new HashSet<Integer>();
                     oids.add(oid);
                     items.put(iid, oids);
+                    item_descs.put(iid,iname);
                 } else {
                     Set<Integer> oids = items.get(iid);
                     oids.add(oid);
@@ -308,7 +311,7 @@ public class CockroachDB {
             }
 
             for(int iid : items.keySet()){
-                System.out.printf("Percentage of Orders having Popular Items: %d\n", items.get(iid).size() / orders.size());
+                System.out.printf("Popular I_NAME: %s, Percentage of Orders having Popular Items: %f\n", item_descs.get(iid), (float) items.get(iid).size() * 1 / orders.size());
             }
 
             rs_popular_items.close();
