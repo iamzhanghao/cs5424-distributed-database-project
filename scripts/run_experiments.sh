@@ -12,11 +12,12 @@ mvn clean package
 
 for i in {0..4}
 do
-  host=cs4224c@xcnd$(($i+30)).comp.nus.edu.sg
+  ssh_host=cs4224c@xcnd$(($i+30)).comp.nus.edu.sg
+  java_host=xcnd$(($i+30)).comp.nus.edu.sg
   for j in {1..8}
   do
       client=$((i*8 + j))
-      ssh ${host} -n "
+      ssh ${ssh_host} -n "
         cd cs5424-distributed-database-project/;
         java -jar target/${db}.jar ${host} ${port} ${schema} ${client} &
       "
