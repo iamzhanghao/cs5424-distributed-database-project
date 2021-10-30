@@ -246,7 +246,7 @@ public class CockroachDB {
                     +"group by ol_max.ol_w_id, ol_max.ol_d_id, ol_max.ol_o_id ";
 
         // get popular items
-        String get_popular_items = "select o_id, o_entry_d, CONCAT(c_first, c_middle, c_last) as c_name, sum(ol_quantity) as quantity, i_name, i_id "
+        String get_popular_items = "select ol.ol_o_id, o.o_entry_d, CONCAT(c_first, c_middle, c_last) as c_name, sum(ol_quantity) as quantity, i.i_name, i.i_id "
                     + "from order_line_tab ol "
                     + "join ("
                         + String.format(get_order_customer, wid, did, l)
