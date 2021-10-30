@@ -174,7 +174,7 @@ public class CockroachDB {
                 all_local = 1;
             }
 
-            PreparedStatement createOrder = conn.prepareStatement("UPSERT INTO order_tab (O_W_ID, O_D_ID, O_ID, O_C_ID," +
+            PreparedStatement createOrder = conn.prepareStatement("INSERT INTO order_tab (O_W_ID, O_D_ID, O_ID, O_C_ID," +
                     " O_CARRIER_ID, O_OL_CNT, O_ALL_LOCAL, O_ENTRY_D) VALUES (?,?,?,?,?,?,?,?)");
             createOrder.setInt(1, wid);
             createOrder.setInt(2, did);
