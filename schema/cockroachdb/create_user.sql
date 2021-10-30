@@ -1,0 +1,3 @@
+CREATE USER cs5424 WITH PASSWORD 'cockroach';
+
+GRANT admin TO cs5424;

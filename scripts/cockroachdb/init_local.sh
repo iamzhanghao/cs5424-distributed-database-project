@@ -19,44 +19,42 @@ openssl pkcs8 -topk8 -inform PEM -outform DER -in certs/client.root.key -out cer
 
 cockroach start \
 --certs-dir=certs \
---store=node1 \
---listen-addr=localhost:26257 \
---http-addr=localhost:8080 \
---join=localhost:26257,localhost:26258,localhost:26259,localhost:26260,localhost:26261 \
+--store=cockroach_store/node1 \
+--listen-addr=localhost:26267 \
+--http-addr=localhost:8090 \
+--join=localhost:26267,localhost:26268,localhost:26269,localhost:26260,localhost:26261 \
 --background
 
 cockroach start \
 --certs-dir=certs \
---store=node2 \
---listen-addr=localhost:26258 \
---http-addr=localhost:8081 \
---join=localhost:26257,localhost:26258,localhost:26259,localhost:26260,localhost:26261 \
+--store=cockroach_store/node2 \
+--listen-addr=localhost:26268 \
+--http-addr=localhost:8091 \
+--join=localhost:26267,localhost:26268,localhost:26269,localhost:26260,localhost:26261 \
 --background
 
 cockroach start \
 --certs-dir=certs \
---store=node3 \
---listen-addr=localhost:26259 \
---http-addr=localhost:8082 \
---join=localhost:26257,localhost:26258,localhost:26259,localhost:26260,localhost:26261 \
+--store=cockroach_store/node3 \
+--listen-addr=localhost:26269 \
+--http-addr=localhost:8092 \
+--join=localhost:26267,localhost:26268,localhost:26269,localhost:26260,localhost:26261 \
 --background
 
 cockroach start \
 --certs-dir=certs \
---store=node4 \
+--store=cockroach_store/node4 \
 --listen-addr=localhost:26260 \
---http-addr=localhost:8083 \
---join=localhost:26257,localhost:26258,localhost:26259,localhost:26260,localhost:26261 \
+--http-addr=localhost:8093 \
+--join=localhost:26267,localhost:26268,localhost:26269,localhost:26260,localhost:26261 \
 --background
 
 cockroach start \
 --certs-dir=certs \
---store=node5 \
+--store=cockroach_store/node5 \
 --listen-addr=localhost:26261 \
---http-addr=localhost:8084 \
---join=localhost:26257,localhost:26258,localhost:26259,localhost:26260,localhost:26261 \
+--http-addr=localhost:8094 \
+--join=localhost:26267,localhost:26268,localhost:26269,localhost:26260,localhost:26261 \
 --background
-
-cockroach init --certs-dir=certs --host=localhost:26257
 
 grep 'node starting' node1/logs/cockroach.log -A 11
