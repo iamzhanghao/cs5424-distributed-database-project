@@ -6,7 +6,7 @@ schema=$2
 db=$3
 port=$4
 
-sh scripts/stop_experiments.sh
+nohup sh scripts/stop_experiments.sh &
 
 mvn clean package
 
