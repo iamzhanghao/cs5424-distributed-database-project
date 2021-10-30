@@ -1,5 +1,8 @@
 package clients.utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -49,6 +52,25 @@ public class TransactionStatistics {
             System.out.printf("Txn %c: avg latency %dms \n", stat.txnType, stat.latency);
         }
         System.out.println();
+    }
+
+    public static void writeStatisticsToCsv(ArrayList<TransactionStatistics> stats) {
+        PrintWriter pw = null;
+        try {
+            pw = new PrintWriter(new File("NewData.csv"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        StringBuilder builder = new StringBuilder();
+        String columnNamesList = "Id,Name";
+        // No need give the headers Like: id, Name on builder.append
+        builder.append(columnNamesList +"\n");
+        builder.append("1"+",");
+        builder.append("Chola");
+        builder.append('\n');
+        pw.write(builder.toString());
+        pw.close();
+        System.out.println("done!");
     }
 
 }
