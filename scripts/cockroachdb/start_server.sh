@@ -13,6 +13,7 @@ do
 echo ${s}
 
 ssh cs4224c@${s}.comp.nus.edu.sg -n "
+  source .bash_profile;
   killall -9 cockroach;
   cd cs5424-distributed-database-project/;
   pwd;
@@ -20,7 +21,7 @@ ssh cs4224c@${s}.comp.nus.edu.sg -n "
   echo ${s}.comp.nus.edu.sg;
 
   cockroach start --insecure \
-  --store=cockroach_store/node1 \
+  --store=cockroach_store/${s} \
   --listen-addr=${s}.comp.nus.edu.sg:26267 \
   --http-addr=localhost:8090 \
   --join=xcnd30.comp.nus.edu.sg:26267,xcnd31.comp.nus.edu.sg:26267,xcnd32.comp.nus.edu.sg:26267,xcnd33.comp.nus.edu.sg:26267,xcnd34.comp.nus.edu.sg:26267 \
