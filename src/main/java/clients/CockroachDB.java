@@ -231,7 +231,7 @@ public class CockroachDB {
                     + "from order_tab, customer_tab "
                     + "where o_w_id = c_w_id and o_d_id = c_d_id and o_c_id = c_id "
                     + "and o_w_id = %d and o_d_id = %d "
-                    + "order by o_entry_d  desc limit %d ";
+                    + "order by o_id  desc limit %d ";
 
         // get maximum ol_quantity
         String get_ol_quantity_sum = "select ol_sum.ol_w_id, ol_sum.ol_d_id, ol_sum.ol_o_id, sum(ol_sum.ol_quantity) as sum_quantity "
@@ -255,7 +255,7 @@ public class CockroachDB {
                     + "group by ol.ol_o_id, o.o_entry_d, CONCAT(o.c_first, o.c_middle, o.c_last), i.i_id, i.i_name "
                     + "having (ol.ol_o_id, sum(ol.ol_quantity)) in ("
                         + get_ol_quantity_max
-                    + ") order by ol.ol_o_id, i.i_id, quantity desc";
+                    + ")";
 
         try{
             Statement st = conn.createStatement();
@@ -308,7 +308,7 @@ public class CockroachDB {
             }
 
             for(int iid : items.keySet()){
-                System.out.printf("Percentage of Orders having Popular Items: %f\n", items.get(iid).size() * 1 / orders.size());
+                System.out.printf("Percentage of Orders having Popular Items: %d\n", items.get(iid).size() / orders.size());
             }
 
             rs_popular_items.close();
