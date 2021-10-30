@@ -9,7 +9,11 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class CockroachDB {
     public static void main(String[] args) throws Exception {
@@ -416,7 +420,54 @@ public class CockroachDB {
     }
 
     private static void orderStatusTransaction(Connection conn, int cwid, int cdid, int cid) {
+        String get_customer_last_order = "SELECT c_first, c_middle, c_last, c_balance, o_w_id, o_d_id, o_c_id, o_id, o_entry_d, o_carrier_id "
+            + "FROM customer_tab, order_tab WHERE c_id = o_c_id AND c_d_id = o_d_id AND c_w_id = o_w_id "
+            + "AND c_w_id = %d AND c_d_id = %d AND c_id = %d order by o_id desc LIMIT 1 ";
+        String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d from order_line_tab "
+            + "where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
 
+        try {
+            Statement st = conn.createStatement();
+
+            //Customer Last Order
+            ResultSet rs_customer_last_order = st.executeQuery(String.format(get_customer_last_order, cwid, cdid, cid));
+            
+            if (rs_customer_last_order.next()){
+                int last_order_id = rs_customer_last_order.getInt("o_id");
+
+                System.out.printf("Customer's name: %s %s %s, balance: %f\n",
+                rs_customer_last_order.getString("c_first"),
+                rs_customer_last_order.getString("c_middle"),
+                rs_customer_last_order.getString("c_last"),
+                rs_customer_last_order.getBigDecimal("c_balance").doubleValue());  
+    
+                System.out.printf("last order id: %d, entry datetime: %s, carrier id: %d\n",
+                last_order_id,
+                rs_customer_last_order.getString("o_entry_d"),
+                rs_customer_last_order.getInt("o_carrier_id"));
+                
+                //Order items
+                ResultSet rs_order_items = st.executeQuery(String.format(get_order_items, cwid, cdid, last_order_id));
+                
+                while(rs_order_items.next()){
+                    System.out.printf("item id: %d, warehouse id: %d, quantity: %d, price: %d, delivery datetime: %s\n", 
+                    rs_order_items.getInt("ol_i_id"), 
+                    rs_order_items.getInt("ol_supply_w_id"), 
+                    rs_order_items.getInt("ol_quantity"), 
+                    rs_order_items.getInt("ol_amount"), 
+                    rs_order_items.getString("ol_delivery_d"));
+                    System.out.println();
+                }
+                rs_order_items.close();
+                
+            }
+            rs_customer_last_order.close();
+            
+
+        } catch (SQLException e) {
+            System.out.printf("sql state = [%s]cause = [%s]message = [%s]", e.getSQLState(), e.getCause(),
+                    e.getMessage());
+        }
     }
 
     private static void stockLevelTransaction(Connection conn, int wid, int did, int t, int l) {
@@ -424,7 +475,101 @@ public class CockroachDB {
     }
 
     private static void popularItemTransaction(Connection conn, int wid, int did, int l) {
+        
+        // get order join with customer
+        String get_order_customer = "select o_id, o_d_id, o_w_id, o_entry_d, o_c_id, c_first, c_middle, c_last "
+                    + "from order_tab, customer_tab "
+                    + "where o_w_id = c_w_id and o_d_id = c_d_id and o_c_id = c_id "
+                    + "and o_w_id = %d and o_d_id = %d "
+                    + "order by o_id  desc limit %d ";
 
+        // get maximum ol_quantity
+        String get_ol_quantity_sum = "select ol_sum.ol_w_id, ol_sum.ol_d_id, ol_sum.ol_o_id, sum(ol_sum.ol_quantity) as sum_quantity "
+                    +"from order_line_tab ol_sum "
+                    +"where ol_sum.ol_w_id = %d and ol_sum.ol_d_id = %d "
+                    +"group by ol_sum.ol_w_id, ol_sum.ol_d_id, ol_sum.ol_o_id, ol_sum.ol_i_id";
+
+        String get_ol_quantity_max = "select ol_max.ol_o_id, max(ol_max.sum_quantity) "
+                    +"from ( "
+                        + String.format(get_ol_quantity_sum, wid, did)
+                    +" ) ol_max "
+                    +"group by ol_max.ol_w_id, ol_max.ol_d_id, ol_max.ol_o_id ";
+
+        // get popular items
+        String get_popular_items = "select ol.ol_o_id, o.o_entry_d, CONCAT(c_first, ' ', c_middle, ' ', c_last) as c_name, sum(ol_quantity) as quantity, i.i_name, i.i_id "
+                    + "from order_line_tab ol "
+                    + "join ("
+                        + String.format(get_order_customer, wid, did, l)
+                    + ") o on ol.ol_w_id = o.o_w_id and ol.ol_d_id = o.o_d_id and ol.ol_o_id = o.o_id "
+                    + "join item_tab i ON i.i_id = ol.ol_i_id "
+                    + "group by ol.ol_o_id, o.o_entry_d, CONCAT(o.c_first, ' ', o.c_middle, ' ', o.c_last), i.i_id, i.i_name "
+                    + "having (ol.ol_o_id, sum(ol.ol_quantity)) in ("
+                        + get_ol_quantity_max
+                    + ")";
+
+        try{
+            Statement st = conn.createStatement();
+            ResultSet rs_popular_items = st.executeQuery(String.format(get_popular_items, wid, did, l));
+
+            Map<Integer, ArrayList<String>> orders = new HashMap<Integer, ArrayList<String>>();
+            Map<Integer, Set<Integer>> items = new HashMap<Integer, Set<Integer>>();
+            Map<Integer, String> order_descs = new HashMap<Integer, String>();
+            Map<Integer, String> item_descs = new HashMap<Integer, String>();
+
+            while(rs_popular_items.next()){
+                int oid = rs_popular_items.getInt("ol_o_id");
+                int iid = rs_popular_items.getInt("i_id");
+                String iname = rs_popular_items.getString("i_name");
+                String popular_item_desc = String.format("Popular I_NAME: %s, quantity: %d\n", iname, rs_popular_items.getInt("quantity"));
+                String order_customer_desc = String.format("OID: %d, O_ENTRY_D: %s, Customer Name: %s\n", oid, rs_popular_items.getString("o_entry_d"), rs_popular_items.getString("c_name"));
+                // get popular items for each order
+                if (!orders.containsKey(oid)){
+                    ArrayList<String> popular_items = new ArrayList<String>();
+                    popular_items.add(popular_item_desc);
+                    orders.put(oid, popular_items);
+                    order_descs.put(oid, order_customer_desc);
+                } else {
+                    ArrayList<String> popular_items = orders.get(oid);
+                    popular_items.add(popular_item_desc);
+                    orders.put(oid, popular_items);
+                }
+                
+                // get order count for each item
+                if (!items.containsKey(iid)) {
+                    Set<Integer> oids = new HashSet<Integer>();
+                    oids.add(oid);
+                    items.put(iid, oids);
+                    item_descs.put(iid,iname);
+                } else {
+                    Set<Integer> oids = items.get(iid);
+                    oids.add(oid);
+                    items.put(iid, oids);
+                }
+
+            }
+
+            // Output results
+            System.out.printf("WID: %d, DID: %d, Number of last orders: %d\n", wid, did, l);
+            System.out.println();
+
+            for(int oid : orders.keySet()){
+                System.out.printf(order_descs.get(oid));
+                for(String desc : orders.get(oid)){
+                    System.out.printf(desc);
+                }
+                System.out.println();
+            }
+
+            for(int iid : items.keySet()){
+                System.out.printf("Popular I_NAME: %s, Percentage of Orders having Popular Items: %f\n", item_descs.get(iid), (float) items.get(iid).size() * 1 / orders.size());
+            }
+
+            rs_popular_items.close();
+
+        }catch(SQLException e){
+            System.out.printf("sql state = [%s]cause = [%s]message = [%s]", e.getSQLState(), e.getCause(),
+            e.getMessage());
+        }
     }
 
     private static void topBalanceTransaction(Connection conn) {
@@ -532,4 +677,5 @@ public class CockroachDB {
         }
 
     }
+
 }
