@@ -1,19 +1,13 @@
 package clients;
 
 import clients.utils.TransactionStatistics;
-import jnr.ffi.annotations.In;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import java.io.FileInputStream;
 import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 
 public class CockroachDB {
@@ -36,11 +30,11 @@ public class CockroachDB {
 
         if (Objects.equals(schema, "A")) {
             schema_name = "schema_a";
-            dataDir = "project_files/xact_files_A/"+client+".txt";
-        }else if(Objects.equals(schema, "B")){
+            dataDir = "project_files/xact_files_A/" + client + ".txt";
+        } else if (Objects.equals(schema, "B")) {
             schema_name = "schema_a";
-            dataDir = "project_files/xact_files_B/"+client+".txt";
-        }else{
+            dataDir = "project_files/xact_files_B/" + client + ".txt";
+        } else {
             System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client>\n e.g. ./CockroachDB localhost 26267 A 1");
             return;
         }
@@ -71,7 +65,7 @@ public class CockroachDB {
 
         ArrayList<TransactionStatistics> latencies = new ArrayList<>();
         int txnCount = 0;
-        while (scanner.hasNextLine() && txnCount<TXN_LIMIT) {
+        while (scanner.hasNextLine() && txnCount < TXN_LIMIT) {
             txnCount++;
             String line = scanner.nextLine();
             String[] splits = line.split(",");
@@ -158,22 +152,21 @@ public class CockroachDB {
     private static void newOrderTransaction(Connection conn, int cid, int wid, int did, int number_of_items,
                                             ArrayList<Integer> items, ArrayList<Integer> supplier_warehouses, ArrayList<Integer> quantities) {
         try {
-
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM district_tab WHERE D_W_ID = "+wid+" AND D_ID = "+did);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM district_tab WHERE D_W_ID = " + wid + " AND D_ID = " + did);
             Integer next_order_id = 0;
             while (rs.next()) {
                 next_order_id = rs.getInt("D_NEXT_O_ID");
                 break;
             }
 
-            next_order_id+=1;
+            next_order_id += 1;
 
             PreparedStatement updateDistrict = conn.prepareStatement(
-                "UPDATE district_tab SET D_NEXT_O_ID = ? WHERE D_W_ID = ? AND D_ID = ?");
+                    "UPDATE district_tab SET D_NEXT_O_ID = ? WHERE D_W_ID = ? AND D_ID = ?");
             updateDistrict.setInt(1, next_order_id);
-            updateDistrict.setInt(2,wid);
-            updateDistrict.setInt(3,did);
+            updateDistrict.setInt(2, wid);
+            updateDistrict.setInt(3, did);
             updateDistrict.executeUpdate();
 
             int all_local = 0;
@@ -202,7 +195,7 @@ public class CockroachDB {
             for (int idx = 0; idx < items.size(); idx++) {
                 int current_item = items.get(idx);
 
-                rs = stmt.executeQuery("SELECT i_price, i_name FROM item_tab WHERE i_id = "+current_item);
+                rs = stmt.executeQuery("SELECT i_price, i_name FROM item_tab WHERE i_id = " + current_item);
                 float price = 0;
                 String name = "";
                 while (rs.next()) {
@@ -216,13 +209,13 @@ public class CockroachDB {
 
                 String strDid = "";
                 if (did == 10) {
-                    strDid =  String.valueOf(did);
+                    strDid = String.valueOf(did);
                 } else {
-                    strDid = "0"+did;
+                    strDid = "0" + did;
                 }
 
                 PreparedStatement itemStock = conn.prepareStatement("SELECT s_quantity,s_ytd,s_order_cnt," +
-                        "s_remote_cnt, s_dist_"+strDid+" FROM stock_tab WHERE s_w_id=? AND s_i_id=?;");
+                        "s_remote_cnt, s_dist_" + strDid + " FROM stock_tab WHERE s_w_id=? AND s_i_id=?;");
 
                 itemStock.setInt(1, wid);
                 itemStock.setInt(2, current_item);
@@ -241,8 +234,8 @@ public class CockroachDB {
                     break;
                 }
                 int adjusted_quantity = s_quantity - quantities.get(idx);
-                if (adjusted_quantity<10) {
-                    adjusted_quantity+=100;
+                if (adjusted_quantity < 10) {
+                    adjusted_quantity += 100;
                 }
                 if (supplier_warehouses.get(idx) != wid) {
                     s_remote_cnt += 1;
@@ -251,8 +244,8 @@ public class CockroachDB {
                 PreparedStatement updateStock = conn.prepareStatement("UPDATE stock_tab SET " +
                         "s_quantity=?, s_ytd=?, s_order_cnt=?, s_remote_cnt=? WHERE s_w_id=? AND s_i_id=?;");
                 updateStock.setInt(1, adjusted_quantity);
-                updateStock.setFloat(2, s_ytd+quantities.get(idx));
-                updateStock.setInt(3, s_order_cnt+1);
+                updateStock.setFloat(2, s_ytd + quantities.get(idx));
+                updateStock.setInt(3, s_order_cnt + 1);
                 updateStock.setInt(4, s_remote_cnt);
                 updateStock.setInt(5, wid);
                 updateStock.setInt(6, current_item);
@@ -271,18 +264,19 @@ public class CockroachDB {
                 insertOrderLine.setInt(3, next_order_id);
                 insertOrderLine.setInt(4, idx);
                 insertOrderLine.setInt(5, current_item);
-                insertOrderLine.setTimestamp(6,null);
+                insertOrderLine.setTimestamp(6, null);
                 insertOrderLine.setFloat(7, item_amount);
                 insertOrderLine.setInt(8, supplier_warehouses.get(idx));
                 insertOrderLine.setFloat(9, quantities.get(idx));
-                insertOrderLine.setString(10, "S_DIST_"+ did);
+                insertOrderLine.setString(10, "S_DIST_" + did);
                 insertOrderLine.execute();
             }
 
             double discount = 0;
             String last_name = "";
             String credit = "";
-            rs = stmt.executeQuery("SELECT c_last, c_credit, c_discount FROM customer_tab WHERE c_id = "+cid+" AND c_d_id = "+did);
+            rs = stmt.executeQuery("SELECT c_last, c_credit, c_discount FROM customer_tab " +
+                    "WHERE c_id = " + cid + " AND c_d_id = " + did + " AND c_w_id = " + wid);
             while (rs.next()) {
                 discount = rs.getInt("c_discount");
                 last_name = rs.getString("c_last");
@@ -291,32 +285,32 @@ public class CockroachDB {
             }
 
             double warehouse_tax_rate = 0;
-            rs = stmt.executeQuery("SELECT w_tax FROM warehouse_tab WHERE w_id = "+wid);
+            rs = stmt.executeQuery("SELECT w_tax FROM warehouse_tab WHERE w_id = " + wid);
             while (rs.next()) {
                 warehouse_tax_rate = rs.getInt("w_tax");
                 break;
             }
 
             double district_tax_rate = 0;
-            rs = stmt.executeQuery("SELECT d_tax FROM district_tab WHERE d_id = "+did+" AND d_w_id = "+wid);
+            rs = stmt.executeQuery("SELECT d_tax FROM district_tab WHERE d_id = " + did + " AND d_w_id = " + wid);
             while (rs.next()) {
                 district_tax_rate = rs.getInt("d_tax");
                 break;
             }
             rs.close();
 
-            total_amount = total_amount*(1+warehouse_tax_rate+district_tax_rate)*(1-discount);
+            total_amount = total_amount * (1 + warehouse_tax_rate + district_tax_rate) * (1 - discount);
             conn.commit();
 
             System.out.printf("============================ New Order Transactions ============================ \n");
-            System.out.printf("WarehouseID %d, DistrictID: %d, CustomerID: %d \n" , wid, did, cid);
-            System.out.printf("LastName %s, Credit: %s, Discount: %s \n" , last_name, credit, discount);
-            System.out.printf("WarehouseTaxRate %s, DistrictTaxRate: %s \n" , warehouse_tax_rate, district_tax_rate);
-            System.out.printf("OrderID %s, OrderEntryDate: %s, NumberOfItems \n" , next_order_id, "", number_of_items);
+            System.out.printf("WarehouseID %d, DistrictID: %d, CustomerID: %d \n", wid, did, cid);
+            System.out.printf("LastName %s, Credit: %s, Discount: %s \n", last_name, credit, discount);
+            System.out.printf("WarehouseTaxRate %s, DistrictTaxRate: %s \n", warehouse_tax_rate, district_tax_rate);
+            System.out.printf("OrderID %s, OrderEntryDate: %s, NumberOfItems \n", next_order_id, "", number_of_items);
             System.out.printf("TotalAmount %s \n", total_amount);
             for (int idx = 0; idx < items.size(); idx++) {
                 System.out.printf(" ItemID %s, SupplierWarehouse %s, Quantity %s \n", items.get(idx), supplier_warehouses.get(idx), quantities.get(idx));
-                System.out.printf(" ItemName %s, ItemAmount %s, StockQuantity %s \n", itemNames.get(idx), itemPrices.get(idx)*quantities.get(idx), itemStocks.get(idx));
+                System.out.printf(" ItemName %s, ItemAmount %s, StockQuantity %s \n", itemNames.get(idx), itemPrices.get(idx) * quantities.get(idx), itemStocks.get(idx));
             }
             System.out.printf("=============================================================================== \n");
             System.out.println();
@@ -345,13 +339,13 @@ public class CockroachDB {
 
             PreparedStatement updateCustomer = conn.prepareStatement(
                     "UPDATE customer_tab " +
-                    "SET C_BALANCE= C_BALANCE - ?, C_YTD_PAYMENT= C_YTD_PAYMENT + ?, C_PAYMENT_CNT= C_PAYMENT_CNT + 1 " +
-                    "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
-            updateCustomer.setBigDecimal(1,payment);
-            updateCustomer.setBigDecimal(2,payment);
-            updateCustomer.setInt(3,cwid);
-            updateCustomer.setInt(4,cdid);
-            updateCustomer.setInt(5,cid);
+                            "SET C_BALANCE= C_BALANCE - ?, C_YTD_PAYMENT= C_YTD_PAYMENT + ?, C_PAYMENT_CNT= C_PAYMENT_CNT + 1 " +
+                            "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
+            updateCustomer.setBigDecimal(1, payment);
+            updateCustomer.setBigDecimal(2, payment);
+            updateCustomer.setInt(3, cwid);
+            updateCustomer.setInt(4, cdid);
+            updateCustomer.setInt(5, cid);
             updateCustomer.executeUpdate();
 
             conn.commit();
@@ -447,48 +441,48 @@ public class CockroachDB {
 
     private static void orderStatusTransaction(Connection conn, int cwid, int cdid, int cid) {
         String get_customer_last_order = "SELECT c_first, c_middle, c_last, c_balance, o_w_id, o_d_id, o_c_id, o_id, o_entry_d, o_carrier_id "
-            + "FROM customer_tab, order_tab WHERE c_id = o_c_id AND c_d_id = o_d_id AND c_w_id = o_w_id "
-            + "AND c_w_id = %d AND c_d_id = %d AND c_id = %d order by o_id desc LIMIT 1 ";
+                + "FROM customer_tab, order_tab WHERE c_id = o_c_id AND c_d_id = o_d_id AND c_w_id = o_w_id "
+                + "AND c_w_id = %d AND c_d_id = %d AND c_id = %d order by o_id desc LIMIT 1 ";
         String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d from order_line_tab "
-            + "where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
+                + "where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
 
         try {
             Statement st = conn.createStatement();
 
             //Customer Last Order
             ResultSet rs_customer_last_order = st.executeQuery(String.format(get_customer_last_order, cwid, cdid, cid));
-            
-            if (rs_customer_last_order.next()){
+
+            if (rs_customer_last_order.next()) {
                 int last_order_id = rs_customer_last_order.getInt("o_id");
 
                 System.out.printf("Customer's name: %s %s %s, balance: %f\n",
-                rs_customer_last_order.getString("c_first"),
-                rs_customer_last_order.getString("c_middle"),
-                rs_customer_last_order.getString("c_last"),
-                rs_customer_last_order.getBigDecimal("c_balance").doubleValue());  
-    
+                        rs_customer_last_order.getString("c_first"),
+                        rs_customer_last_order.getString("c_middle"),
+                        rs_customer_last_order.getString("c_last"),
+                        rs_customer_last_order.getBigDecimal("c_balance").doubleValue());
+
                 System.out.printf("last order id: %d, entry datetime: %s, carrier id: %d\n",
-                last_order_id,
-                rs_customer_last_order.getString("o_entry_d"),
-                rs_customer_last_order.getInt("o_carrier_id"));
-                
+                        last_order_id,
+                        rs_customer_last_order.getString("o_entry_d"),
+                        rs_customer_last_order.getInt("o_carrier_id"));
+
                 //Order items
                 ResultSet rs_order_items = st.executeQuery(String.format(get_order_items, cwid, cdid, last_order_id));
-                
-                while(rs_order_items.next()){
-                    System.out.printf("item id: %d, warehouse id: %d, quantity: %d, price: %d, delivery datetime: %s\n", 
-                    rs_order_items.getInt("ol_i_id"), 
-                    rs_order_items.getInt("ol_supply_w_id"), 
-                    rs_order_items.getInt("ol_quantity"), 
-                    rs_order_items.getInt("ol_amount"), 
-                    rs_order_items.getString("ol_delivery_d"));
+
+                while (rs_order_items.next()) {
+                    System.out.printf("item id: %d, warehouse id: %d, quantity: %d, price: %d, delivery datetime: %s\n",
+                            rs_order_items.getInt("ol_i_id"),
+                            rs_order_items.getInt("ol_supply_w_id"),
+                            rs_order_items.getInt("ol_quantity"),
+                            rs_order_items.getInt("ol_amount"),
+                            rs_order_items.getString("ol_delivery_d"));
                     System.out.println();
                 }
                 rs_order_items.close();
-                
+
             }
             rs_customer_last_order.close();
-            
+
 
         } catch (SQLException e) {
             System.out.printf("sql state = [%s]cause = [%s]message = [%s]", e.getSQLState(), e.getCause(),
@@ -499,13 +493,13 @@ public class CockroachDB {
     private static void stockLevelTransaction(Connection conn, int wid, int did, int threshold, int l) {
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT d_next_o_id FROM district_tab WHERE d_w_id="+wid+" AND d_id="+did+";");
+            ResultSet rs = stmt.executeQuery("SELECT d_next_o_id FROM district_tab WHERE d_w_id=" + wid + " AND d_id=" + did + ";");
             Integer latest_order_id = 0;
             while (rs.next()) {
                 latest_order_id = rs.getInt("d_next_o_id");
             }
 
-            Integer earliest_order_id = latest_order_id-l;
+            Integer earliest_order_id = latest_order_id - l;
             PreparedStatement getOrderLine = conn.prepareStatement("SELECT ol_i_id FROM order_line_tab " +
                     "WHERE ol_d_id=? AND ol_w_id=? AND ol_o_id>? AND ol_o_id<?;");
             getOrderLine.setInt(1, did);
@@ -517,11 +511,11 @@ public class CockroachDB {
             int low_stock_count = 0;
             while (rs.next()) {
                 int item = rs.getInt("ol_i_id");
-                rs = stmt.executeQuery("SELECT s_quantity FROM stock_tab WHERE s_w_id="+wid+" AND s_i_id="+item);
+                rs = stmt.executeQuery("SELECT s_quantity FROM stock_tab WHERE s_w_id=" + wid + " AND s_i_id=" + item);
                 rs.next();
                 double quantity = rs.getInt("s_quantity");
                 if (quantity < threshold) {
-                    low_stock_count+=1;
+                    low_stock_count += 1;
                 }
             }
 
@@ -536,39 +530,39 @@ public class CockroachDB {
     }
 
     private static void popularItemTransaction(Connection conn, int wid, int did, int l) {
-        
+
         // get order join with customer
         String get_order_customer = "select o_id, o_d_id, o_w_id, o_entry_d, o_c_id, c_first, c_middle, c_last "
-                    + "from order_tab, customer_tab "
-                    + "where o_w_id = c_w_id and o_d_id = c_d_id and o_c_id = c_id "
-                    + "and o_w_id = %d and o_d_id = %d "
-                    + "order by o_id  desc limit %d ";
+                + "from order_tab, customer_tab "
+                + "where o_w_id = c_w_id and o_d_id = c_d_id and o_c_id = c_id "
+                + "and o_w_id = %d and o_d_id = %d "
+                + "order by o_id  desc limit %d ";
 
         // get maximum ol_quantity
         String get_ol_quantity_sum = "select ol_sum.ol_w_id, ol_sum.ol_d_id, ol_sum.ol_o_id, sum(ol_sum.ol_quantity) as sum_quantity "
-                    +"from order_line_tab ol_sum "
-                    +"where ol_sum.ol_w_id = %d and ol_sum.ol_d_id = %d "
-                    +"group by ol_sum.ol_w_id, ol_sum.ol_d_id, ol_sum.ol_o_id, ol_sum.ol_i_id";
+                + "from order_line_tab ol_sum "
+                + "where ol_sum.ol_w_id = %d and ol_sum.ol_d_id = %d "
+                + "group by ol_sum.ol_w_id, ol_sum.ol_d_id, ol_sum.ol_o_id, ol_sum.ol_i_id";
 
         String get_ol_quantity_max = "select ol_max.ol_o_id, max(ol_max.sum_quantity) "
-                    +"from ( "
-                        + String.format(get_ol_quantity_sum, wid, did)
-                    +" ) ol_max "
-                    +"group by ol_max.ol_w_id, ol_max.ol_d_id, ol_max.ol_o_id ";
+                + "from ( "
+                + String.format(get_ol_quantity_sum, wid, did)
+                + " ) ol_max "
+                + "group by ol_max.ol_w_id, ol_max.ol_d_id, ol_max.ol_o_id ";
 
         // get popular items
         String get_popular_items = "select ol.ol_o_id, o.o_entry_d, CONCAT(c_first, ' ', c_middle, ' ', c_last) as c_name, sum(ol_quantity) as quantity, i.i_name, i.i_id "
-                    + "from order_line_tab ol "
-                    + "join ("
-                        + String.format(get_order_customer, wid, did, l)
-                    + ") o on ol.ol_w_id = o.o_w_id and ol.ol_d_id = o.o_d_id and ol.ol_o_id = o.o_id "
-                    + "join item_tab i ON i.i_id = ol.ol_i_id "
-                    + "group by ol.ol_o_id, o.o_entry_d, CONCAT(o.c_first, ' ', o.c_middle, ' ', o.c_last), i.i_id, i.i_name "
-                    + "having (ol.ol_o_id, sum(ol.ol_quantity)) in ("
-                        + get_ol_quantity_max
-                    + ")";
+                + "from order_line_tab ol "
+                + "join ("
+                + String.format(get_order_customer, wid, did, l)
+                + ") o on ol.ol_w_id = o.o_w_id and ol.ol_d_id = o.o_d_id and ol.ol_o_id = o.o_id "
+                + "join item_tab i ON i.i_id = ol.ol_i_id "
+                + "group by ol.ol_o_id, o.o_entry_d, CONCAT(o.c_first, ' ', o.c_middle, ' ', o.c_last), i.i_id, i.i_name "
+                + "having (ol.ol_o_id, sum(ol.ol_quantity)) in ("
+                + get_ol_quantity_max
+                + ")";
 
-        try{
+        try {
             Statement st = conn.createStatement();
             ResultSet rs_popular_items = st.executeQuery(String.format(get_popular_items, wid, did, l));
 
@@ -577,14 +571,14 @@ public class CockroachDB {
             Map<Integer, String> order_descs = new HashMap<Integer, String>();
             Map<Integer, String> item_descs = new HashMap<Integer, String>();
 
-            while(rs_popular_items.next()){
+            while (rs_popular_items.next()) {
                 int oid = rs_popular_items.getInt("ol_o_id");
                 int iid = rs_popular_items.getInt("i_id");
                 String iname = rs_popular_items.getString("i_name");
                 String popular_item_desc = String.format("Popular I_NAME: %s, quantity: %d\n", iname, rs_popular_items.getInt("quantity"));
                 String order_customer_desc = String.format("OID: %d, O_ENTRY_D: %s, Customer Name: %s\n", oid, rs_popular_items.getString("o_entry_d"), rs_popular_items.getString("c_name"));
                 // get popular items for each order
-                if (!orders.containsKey(oid)){
+                if (!orders.containsKey(oid)) {
                     ArrayList<String> popular_items = new ArrayList<String>();
                     popular_items.add(popular_item_desc);
                     orders.put(oid, popular_items);
@@ -594,13 +588,13 @@ public class CockroachDB {
                     popular_items.add(popular_item_desc);
                     orders.put(oid, popular_items);
                 }
-                
+
                 // get order count for each item
                 if (!items.containsKey(iid)) {
                     Set<Integer> oids = new HashSet<Integer>();
                     oids.add(oid);
                     items.put(iid, oids);
-                    item_descs.put(iid,iname);
+                    item_descs.put(iid, iname);
                 } else {
                     Set<Integer> oids = items.get(iid);
                     oids.add(oid);
@@ -613,23 +607,23 @@ public class CockroachDB {
             System.out.printf("WID: %d, DID: %d, Number of last orders: %d\n", wid, did, l);
             System.out.println();
 
-            for(int oid : orders.keySet()){
+            for (int oid : orders.keySet()) {
                 System.out.printf(order_descs.get(oid));
-                for(String desc : orders.get(oid)){
+                for (String desc : orders.get(oid)) {
                     System.out.printf(desc);
                 }
                 System.out.println();
             }
 
-            for(int iid : items.keySet()){
+            for (int iid : items.keySet()) {
                 System.out.printf("Popular I_NAME: %s, Percentage of Orders having Popular Items: %f\n", item_descs.get(iid), (float) items.get(iid).size() * 1 / orders.size());
             }
 
             rs_popular_items.close();
 
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.printf("sql state = [%s]cause = [%s]message = [%s]", e.getSQLState(), e.getCause(),
-            e.getMessage());
+                    e.getMessage());
         }
     }
 
@@ -672,7 +666,7 @@ public class CockroachDB {
                             "  c_balance DESC"
             );
 
-            while(rs.next()) {
+            while (rs.next()) {
                 String firstName = rs.getString("c_first");
                 String middleName = rs.getString("c_middle");
                 String lastName = rs.getString("c_last");
@@ -681,7 +675,7 @@ public class CockroachDB {
                 String districtName = rs.getString("d_name");
 
                 System.out.printf("Customer Name: %-36s\tBalance: %-12.2f\tWarehouse Name: %-10s\tDistrict Name: %-10s\n",
-                        firstName+' '+middleName+' '+ lastName, balance, warehouseName, districtName);
+                        firstName + ' ' + middleName + ' ' + lastName, balance, warehouseName, districtName);
             }
         } catch (SQLException e) {
             System.out.printf("sql state = [%s]cause = [%s]message = [%s]",
