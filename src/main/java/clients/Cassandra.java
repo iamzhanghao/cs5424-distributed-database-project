@@ -513,7 +513,7 @@ public class Cassandra {
         // customer last order
         Row customer  = session.execute(String.format(get_customer, cwid, cdid, cid)).one();
         Row last_order = session.execute(String.format(get_last_order, cwid, cdid, cid)).one();
-        Integer last_order_id = last_order.getInt("o_id");
+        int last_order_id = last_order.getInt("o_id");
 
         System.out.printf("Customer name: %s %s %s, Balance: %f\n",
             customer.getString("c_first"),
@@ -632,7 +632,7 @@ public class Cassandra {
         }
 
         for(Row order : orders){
-            Integer o_id = order.getInt("o_id");
+            int o_id = order.getInt("o_id");
             Row customer = customer_map.get(order.getInt("o_c_id"));
             System.out.printf(String.format("OID: %d, O_ENTRY_D: %s, Customer Name: %s\n", 
                 o_id, 
