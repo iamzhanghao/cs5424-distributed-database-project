@@ -12,10 +12,7 @@ import com.datastax.oss.driver.api.core.cql.Row;
 import java.io.FileInputStream;
 import java.math.BigDecimal;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Cassandra {
 
