@@ -38,7 +38,7 @@ public class Cassandra {
             schema_name = "schema_a";
             dataDir = "project_files/xact_files_A/" + client + ".txt";
         } else if (Objects.equals(schema, "B")) {
-            schema_name = "schema_a";
+            schema_name = "schema_b";
             dataDir = "project_files/xact_files_B/" + client + ".txt";
         } else {
             System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n e.g. ./Cassandra localhost 9042 A 1");
