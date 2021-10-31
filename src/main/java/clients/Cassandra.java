@@ -533,7 +533,7 @@ public class Cassandra {
             item.getInt("ol_supply_w_id"), 
             item.getBigDecimal("ol_quantity").doubleValue(), 
             item.getBigDecimal("ol_amount").doubleValue(), 
-            item.getInstant("ol_delivery_d").toString());
+            item.getInstant("ol_delivery_d") != null ? item.getInstant("ol_delivery_d").toString() : "");
         }
 
 
