@@ -13,7 +13,7 @@ import java.util.*;
 public class CockroachDB {
 
     // Limit number of transactions executed, during actual experiment change to 20000
-    private static final int TXN_LIMIT = 200;
+    private static final int TXN_LIMIT = 20000000;
     private static final int MAX_RETRY_COUNT = 1000;
 
     public static void main(String[] args) throws Exception {
@@ -92,12 +92,14 @@ public class CockroachDB {
         while(true){
             try{
                 getDbState(conn);
-            }catch (Exception e){}
-            System.out.println("RETRY DB STATE in 2 seconds");
+            }catch (Exception e){
+                System.out.println("RETRY DB STATE in 2 seconds");
+            }
             Thread.sleep(2000);
             break;
         }
         conn.close();
+        System.out.println();
         System.err.println(message);
     }
 
