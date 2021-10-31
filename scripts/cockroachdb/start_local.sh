@@ -15,7 +15,7 @@ cockroach start \
 --store=cockroach_store/node1 \
 --listen-addr=localhost:26267 \
 --http-addr=localhost:8090 \
---join=localhost:26267,localhost:26268,localhost:26269,localhost:26260,localhost:26261 \
+--join=localhost:26267,localhost:26268,localhost:26269,localhost:26270,localhost:26271 \
 --background
 
 cockroach start \
@@ -23,7 +23,7 @@ cockroach start \
 --store=cockroach_store/node2 \
 --listen-addr=localhost:26268 \
 --http-addr=localhost:8091 \
---join=localhost:26267,localhost:26268,localhost:26269,localhost:26260,localhost:26261 \
+--join=localhost:26267,localhost:26268,localhost:26269,localhost:26270,localhost:26271 \
 --background
 
 cockroach start \
@@ -31,23 +31,23 @@ cockroach start \
 --store=cockroach_store/node3 \
 --listen-addr=localhost:26269 \
 --http-addr=localhost:8092 \
---join=localhost:26267,localhost:26268,localhost:26269,localhost:26260,localhost:26261 \
+--join=localhost:26267,localhost:26268,localhost:26269,localhost:26270,localhost:26271 \
 --background
 
 cockroach start \
 --insecure \
 --store=cockroach_store/node4 \
---listen-addr=localhost:26260 \
+--listen-addr=localhost:26270 \
 --http-addr=localhost:8093 \
---join=localhost:26267,localhost:26268,localhost:26269,localhost:26260,localhost:26261 \
+--join=localhost:26267,localhost:26268,localhost:26269,localhost:26270,localhost:26271 \
 --background
 
 cockroach start \
 --insecure \
 --store=cockroach_store/node5 \
---listen-addr=localhost:26261 \
+--listen-addr=localhost:26271 \
 --http-addr=localhost:8094 \
---join=localhost:26267,localhost:26268,localhost:26269,localhost:26260,localhost:26261 \
+--join=localhost:26267,localhost:26268,localhost:26269,localhost:26270,localhost:26271 \
 --background
 
 grep 'node starting' node1/logs/cockroach.log -A 11

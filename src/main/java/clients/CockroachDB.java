@@ -12,7 +12,7 @@ import java.util.*;
 
 public class CockroachDB {
 
-    // Limit number of txns executed
+    // Limit number of transactions executed, during actual experiment change to 20000
     private static final int TXN_LIMIT = 200;
     private static final int MAX_RETRY_COUNT = 1000;
 
