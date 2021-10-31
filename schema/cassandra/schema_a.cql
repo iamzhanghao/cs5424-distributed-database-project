@@ -67,7 +67,7 @@ COPY customer_tab (c_w_id, c_d_id, c_id, c_first, c_middle, c_last, c_street_1, 
 CREATE TABLE order_tab (
     o_w_id       INT,
     o_d_id       INT,
-    o_id         DECIMAL,
+    o_id         INT,
     o_c_id       INT,
     o_carrier_id INT,
     o_ol_cnt     DECIMAL,
