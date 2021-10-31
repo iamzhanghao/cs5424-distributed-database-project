@@ -73,7 +73,7 @@ CREATE TABLE order_tab (
                            o_ol_cnt     DECIMAL,
                            o_all_local  DECIMAL,
                            o_entry_d    TIMESTAMP,
-                           PRIMARY KEY (o_w_id, o_d_id, o_c_id)
+                           PRIMARY KEY (o_w_id, o_d_id, o_id)
 );
 
 COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
