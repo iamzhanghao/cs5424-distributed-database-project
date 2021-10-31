@@ -75,14 +75,14 @@ public class CockroachDB {
             int retryCount = invokeTransaction(conn, splits, scanner);
 
             float latency = System.nanoTime() - start;
-            latencies.add(new TransactionStatistics(txnType, (float) latency / 1000000));
-            System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, (float) latency / 1000000, retryCount);
+            latencies.add(new TransactionStatistics(txnType, (float) latency / 1000000, (float)retryCount));
+            System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, retryCount);
         }
         TransactionStatistics.printStatistics(latencies);
     }
 
-    private static int invokeTransaction(Connection conn, String[] splits, Scanner scanner)  {
-        int retryCount =0;
+    private static int invokeTransaction(Connection conn, String[] splits, Scanner scanner) {
+        int retryCount = 0;
         switch (splits[0].toCharArray()[0]) {
             case 'N':
                 int cid = Integer.parseInt(splits[1]);
@@ -109,10 +109,11 @@ public class CockroachDB {
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
-                    try{
+                    try {
                         conn.rollback();
                         Thread.sleep(100);
-                    }catch (Exception e){}
+                    } catch (Exception e) {
+                    }
                 }
                 break;
 
@@ -131,10 +132,11 @@ public class CockroachDB {
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
-                    try{
+                    try {
                         conn.rollback();
                         Thread.sleep(100);
-                    }catch (Exception e){}
+                    } catch (Exception e) {
+                    }
                 }
                 break;
 
@@ -151,10 +153,11 @@ public class CockroachDB {
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
-                    try{
+                    try {
                         conn.rollback();
                         Thread.sleep(100);
-                    }catch (Exception e){}
+                    } catch (Exception e) {
+                    }
                 }
                 break;
 
@@ -172,10 +175,11 @@ public class CockroachDB {
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
-                    try{
+                    try {
                         conn.rollback();
                         Thread.sleep(100);
-                    }catch (Exception e){}
+                    } catch (Exception e) {
+                    }
                 }
                 break;
 
@@ -194,10 +198,11 @@ public class CockroachDB {
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
-                    try{
+                    try {
                         conn.rollback();
                         Thread.sleep(100);
-                    }catch (Exception e){}
+                    } catch (Exception e) {
+                    }
                 }
                 break;
 
@@ -215,10 +220,11 @@ public class CockroachDB {
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
-                    try{
+                    try {
                         conn.rollback();
                         Thread.sleep(100);
-                    }catch (Exception e){}
+                    } catch (Exception e) {
+                    }
                 }
                 break;
 
@@ -233,10 +239,11 @@ public class CockroachDB {
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
-                    try{
+                    try {
                         conn.rollback();
                         Thread.sleep(100);
-                    }catch (Exception e){}
+                    } catch (Exception e) {
+                    }
                 }
                 break;
 
@@ -254,10 +261,11 @@ public class CockroachDB {
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
-                    try{
+                    try {
                         conn.rollback();
                         Thread.sleep(100);
-                    }catch (Exception e){}
+                    } catch (Exception e) {
+                    }
                 }
                 break;
         }
