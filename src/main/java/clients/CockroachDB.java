@@ -7,19 +7,20 @@ import java.io.FileInputStream;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
 public class CockroachDB {
 
     // Limit number of transactions executed, during actual experiment change to 20000
-    private static final int TXN_LIMIT = 100;
+    private static final int TXN_LIMIT = 2000000000;
     private static final int MAX_RETRY_COUNT = 1000;
 
     public static void main(String[] args) throws Exception {
         if (args.length != 5) {
             System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client> <csv_path>\n " +
-                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local-1.csv");
+                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local.csv");
         }
 
         String host = args[0];
@@ -39,7 +40,7 @@ public class CockroachDB {
             dataDir = "project_files/xact_files_B/" + client + ".txt";
         } else {
             System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client>\n " +
-                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local-1.csv");
+                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local.csv");
             return;
         }
 
@@ -68,14 +69,14 @@ public class CockroachDB {
         System.out.println("Ready to read Xact file " + dataDir);
 
         // Client 1 always write CSV header
-        if(client.equals("1")){
+        if (client.equals("1")) {
             TransactionStatistics.writeCsvHeader(csvPath);
         }
 
         ArrayList<TransactionStatistics> latencies = new ArrayList<>();
         int txnCount = 0;
         long clientStartTime = System.currentTimeMillis();
-        while (scanner.hasNextLine() && txnCount < TXN_LIMIT) {
+        while (scanner.hasNextLine() && (txnCount < TXN_LIMIT)) {
             long start = System.nanoTime();
             txnCount++;
             String line = scanner.nextLine();
@@ -86,8 +87,11 @@ public class CockroachDB {
             latencies.add(new TransactionStatistics(txnType, (float) latency / 1000000, (float) retryCount));
             System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, retryCount);
         }
+        getDbState(conn);
+        conn.close();
         float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
-        TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
+        String message = TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
+        System.err.println(message);
     }
 
     private static int invokeTransaction(Connection conn, String[] splits, Scanner scanner) {
@@ -815,6 +819,101 @@ public class CockroachDB {
             System.out.println();
         }
         rs.close();
+    }
+
+    private static void getDbState(Connection conn) throws SQLException {
+        System.out.println("======================DB State ============================");
+        StringBuilder res = new StringBuilder();
+
+        Statement warehouseSum = conn.createStatement();
+        ResultSet warehouseResultSet = warehouseSum.executeQuery("SELECT sum(W_YTD) from warehouse_tab;");
+        while (warehouseResultSet.next()) {
+            BigDecimal w_ytd = warehouseResultSet.getBigDecimal(1);
+            System.out.printf("W_YTD: %f\n", w_ytd);
+            res.append(w_ytd.doubleValue() + "\n");
+        }
+        warehouseResultSet.close();
+
+        Statement districtSum = conn.createStatement();
+        ResultSet districtResultSet = districtSum.executeQuery("SELECT sum(D_YTD), sum(D_NEXT_O_ID) from district_tab;");
+        while (districtResultSet.next()) {
+            BigDecimal d_ytd = districtResultSet.getBigDecimal(1);
+            BigDecimal d_next_o_ytd = districtResultSet.getBigDecimal(2);
+
+            System.out.printf("D_YTD: %f\n", d_ytd);
+            res.append(d_ytd.doubleValue() + "\n");
+            System.out.printf("D_NEXT_O_ID: %f\n", d_next_o_ytd);
+            res.append(d_next_o_ytd.doubleValue() + "\n");
+        }
+        districtResultSet.close();
+
+        Statement customerSum = conn.createStatement();
+        ResultSet customerResultSet = customerSum.executeQuery("select sum(C_BALANCE), sum(C_YTD_PAYMENT), sum(C_PAYMENT_CNT), sum(C_DELIVERY_CNT) from Customer_tab;");
+        while (customerResultSet.next()) {
+            BigDecimal c_balance = customerResultSet.getBigDecimal(1);
+            System.out.printf("C_BALANCE: %f\n", c_balance);
+            res.append(c_balance.doubleValue() + "\n");
+            BigDecimal c_tyd_payment = customerResultSet.getBigDecimal(2);
+            System.out.printf("C_YTD_PAYMENT: %f\n", c_tyd_payment);
+            res.append(c_tyd_payment.doubleValue() + "\n");
+            BigDecimal c_payment_count = customerResultSet.getBigDecimal(3);
+            System.out.printf("C_PAYMENT_CNT: %f\n", c_payment_count);
+            res.append(c_payment_count.doubleValue() + "\n");
+            BigDecimal c_delivery_cnt = customerResultSet.getBigDecimal(4);
+            System.out.printf("C_DELIVERY_CNT: %f\n", c_delivery_cnt);
+            res.append(c_delivery_cnt.doubleValue() + "\n");
+        }
+        customerResultSet.close();
+
+        Statement orderSum = conn.createStatement();
+        ResultSet orderResultSet = orderSum.executeQuery("select max(O_ID), sum(O_OL_CNT) from Order_tab;");
+        while (orderResultSet.next()) {
+            BigDecimal o_id = orderResultSet.getBigDecimal(1);
+            BigDecimal o_ol_cnt = orderResultSet.getBigDecimal(2);
+
+            System.out.printf("O_ID: %f\n", o_id);
+            res.append(o_id.doubleValue() + "\n");
+            System.out.printf("O_OL_CNT: %f\n", o_ol_cnt);
+            res.append(o_ol_cnt.doubleValue() + "\n");
+        }
+        orderResultSet.close();
+
+        Statement orderLineSum = conn.createStatement();
+        ResultSet orderLineResultSet = orderLineSum.executeQuery("select sum(OL_AMOUNT), sum(OL_QUANTITY) from Order_Line_tab;");
+        while (orderLineResultSet.next()) {
+            BigDecimal ol_amount = orderLineResultSet.getBigDecimal(1);
+            BigDecimal ol_quantity = orderLineResultSet.getBigDecimal(2);
+
+            System.out.printf("OL_AMOUNT: %f\n", ol_amount);
+            res.append(ol_amount.doubleValue() + "\n");
+            System.out.printf("OL_QUANTITY: %f\n", ol_quantity);
+            res.append(ol_quantity.doubleValue() + "\n");
+        }
+        orderLineResultSet.close();
+
+        Statement stockSum = conn.createStatement();
+        ResultSet stockResultSet = stockSum.executeQuery("select sum(S_QUANTITY), sum(S_YTD), sum(S_ORDER_CNT), sum(S_REMOTE_CNT) from Stock_tab;");
+        while (stockResultSet.next()) {
+            BigDecimal s_quantity = stockResultSet.getBigDecimal(1);
+            System.out.printf("S_QUANTITY: %f\n", s_quantity);
+            res.append(s_quantity.doubleValue() + "\n");
+            BigDecimal s_ytd = stockResultSet.getBigDecimal(2);
+            System.out.printf("S_YTD: %f\n", s_ytd);
+            res.append(s_ytd.doubleValue() + "\n");
+            BigDecimal s_order_cnt = stockResultSet.getBigDecimal(3);
+            System.out.printf("S_ORDER_CNT: %f\n", s_order_cnt);
+            res.append(s_order_cnt.doubleValue() + "\n");
+            BigDecimal s_remote_cnt = stockResultSet.getBigDecimal(4);
+            System.out.printf("S_REMOTE_CNT: %f\n", s_remote_cnt);
+            res.append(s_remote_cnt.doubleValue() + "\n");
+        }
+        stockResultSet.close();
+
+
+        System.out.println("======================DB State Plain=======================");
+        System.out.println(res);
+        System.out.println("Current Time at server: " + new SimpleDateFormat("YYYY-mm-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+        System.out.println();
     }
 
 }

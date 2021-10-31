@@ -53,7 +53,7 @@ public class TransactionStatistics {
         return latencies[index - 1];
     }
 
-    public static void getStatistics(ArrayList<TransactionStatistics> stats, float clientTotalTime, String clientId, String csvFilePath) {
+    public static String getStatistics(ArrayList<TransactionStatistics> stats, float clientTotalTime, String clientId, String csvFilePath) {
         System.out.println("========================Statistics========================");
         double statValues[] = new double[stats.size()];
         for (int i = 0; i < stats.size(); i++) {
@@ -72,9 +72,6 @@ public class TransactionStatistics {
         else
             median = statValues[statValues.length / 2];
 
-        System.out.println(statValues[0]);
-        System.out.println(statValues[99]);
-
         System.out.printf("Total %d transactions, execution time %.2fs, avg latency %.2fms, throughput %.2f query/s,\n" +
                         "median latency %.2fms, 95th percentile latency %.2fms, 95th percentile latency %.2fms  \n",
                 numberOfTransactions, totalExcutionTimeSeconds, doubleStats.getAverage(), throughput,
@@ -84,6 +81,9 @@ public class TransactionStatistics {
         System.out.println("==========================================================");
         writeStatisticsToCsv(clientId, numberOfTransactions, totalExcutionTimeSeconds, doubleStats.getAverage(), throughput,
                 median, percentile(statValues, 95), percentile(statValues, 99), csvFilePath);
+        return String.format("Statistics: %d,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f",
+                numberOfTransactions, totalExcutionTimeSeconds, doubleStats.getAverage(), throughput, median,
+                percentile(statValues, 95), percentile(statValues, 99));
     }
 
     public static void writeCsvHeader(String csvFilePath){
