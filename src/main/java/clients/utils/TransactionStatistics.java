@@ -9,10 +9,10 @@ import java.util.HashMap;
 public class TransactionStatistics {
 
     public char txnType;
-    public Long latency;
+    public float latency;
 
 
-    public TransactionStatistics(char type, Long latency) {
+    public TransactionStatistics(char type, float latency) {
         this.txnType = type;
         this.latency = latency;
     }
@@ -20,7 +20,7 @@ public class TransactionStatistics {
     private static ArrayList<TransactionStatistics> getMeanLatencies(ArrayList<TransactionStatistics> latencies) {
         ArrayList<TransactionStatistics> result = new ArrayList<>();
         HashMap<Character, Integer> count = new HashMap<>();
-        HashMap<Character, Long> latencySum = new HashMap<>();
+        HashMap<Character, Float> latencySum = new HashMap<>();
         for (TransactionStatistics stat : latencies) {
             if (!count.containsKey(stat.txnType) && !latencySum.containsKey(stat.txnType)) {
                 count.put(stat.txnType, 1);
@@ -47,9 +47,9 @@ public class TransactionStatistics {
             count += 1;
             totalLatency += stat.latency;
         }
-        System.out.printf("Total %d transactions, avg latency %fms \n", count, (float)totalLatency / (float)count);
+        System.out.printf("Total %d transactions, avg latency %.2fms \n", count, (float)totalLatency / (float)count);
         for (TransactionStatistics stat : meanStats) {
-            System.out.printf("Txn %c: avg latency %dms \n", stat.txnType, stat.latency);
+            System.out.printf("Txn %c: avg latency %.2fms \n", stat.txnType, stat.latency);
         }
         System.out.println();
     }

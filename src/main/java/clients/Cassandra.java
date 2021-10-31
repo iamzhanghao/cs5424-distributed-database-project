@@ -38,7 +38,7 @@ public class Cassandra {
             schema_name = "schema_a";
             dataDir = "project_files/xact_files_A/" + client + ".txt";
         } else if (Objects.equals(schema, "B")) {
-            schema_name = "schema_a";
+            schema_name = "schema_b";
             dataDir = "project_files/xact_files_B/" + client + ".txt";
         } else {
             System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n e.g. ./Cassandra localhost 9042 A 1");
@@ -66,16 +66,16 @@ public class Cassandra {
             String line = scanner.nextLine();
             String[] splits = line.split(",");
             char txnType = splits[0].toCharArray()[0];
-            long latency = invokeTransaction(session, splits, scanner);
-            latencies.add(new TransactionStatistics(txnType, latency));
-            System.out.printf("<%d/20000> Tnx %c: %dms \n", txnCount, txnType, latency);
+            float latency = invokeTransaction(session, splits, scanner);
+            latencies.add(new TransactionStatistics(txnType, (float)latency/1000000));
+            System.out.printf("<%d/20000> Tnx %c: %.2fms \n", txnCount, txnType, (float)latency/1000000);
         }
         session.close();
         TransactionStatistics.printStatistics(latencies);
     }
 
     private static long invokeTransaction(CqlSession session, String[] splits, Scanner scanner) {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         switch (splits[0].toCharArray()[0]) {
             case 'N':
                 int cid = Integer.parseInt(splits[1]);
@@ -143,7 +143,7 @@ public class Cassandra {
                 break;
         }
 
-        return System.currentTimeMillis() - start;
+        return System.nanoTime() - start;
     }
 
     private static void newOrderTransaction(CqlSession session, int cid, int wid, int did, int number_of_items,
