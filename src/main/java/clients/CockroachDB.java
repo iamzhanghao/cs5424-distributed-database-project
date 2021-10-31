@@ -87,10 +87,17 @@ public class CockroachDB {
             latencies.add(new TransactionStatistics(txnType, (float) latency / 1000000, (float) retryCount));
             System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, retryCount);
         }
-        getDbState(conn);
-        conn.close();
         float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
         String message = TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
+        while(true){
+            try{
+                getDbState(conn);
+            }catch (Exception e){}
+            System.out.println("RETRY DB STATE in 2 seconds");
+            Thread.sleep(2000);
+            break;
+        }
+        conn.close();
         System.err.println(message);
     }
 
