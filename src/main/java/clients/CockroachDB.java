@@ -7,14 +7,13 @@ import java.io.FileInputStream;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
 public class CockroachDB {
 
     // Limit number of transactions executed, during actual experiment change to 20000
-    private static final int TXN_LIMIT = 2000000000;
+    private static final int TXN_LIMIT = 200;
     private static final int MAX_RETRY_COUNT = 1000;
 
     public static void main(String[] args) throws Exception {
@@ -45,6 +44,7 @@ public class CockroachDB {
         }
 
         System.out.printf("Running on host: %s:%d", host, port);
+        TransactionStatistics.printServerTime();
         System.out.println();
 
         PGSimpleDataSource ds = new PGSimpleDataSource();
@@ -912,7 +912,7 @@ public class CockroachDB {
 
         System.out.println("======================DB State Plain=======================");
         System.out.println(res);
-        System.out.println("Current Time at server: " + new SimpleDateFormat("YYYY-mm-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+        TransactionStatistics.printServerTime();
         System.out.println();
     }
 

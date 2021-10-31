@@ -5,10 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.rmi.server.ExportException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.DoubleSummaryStatistics;
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class TransactionStatistics {
 
@@ -100,7 +98,7 @@ public class TransactionStatistics {
         }
     }
 
-    public static void writeStatisticsToCsv(String clientId, int numberOfTransactions, float totalExcutionTimeSeconds,
+    private static void writeStatisticsToCsv(String clientId, int numberOfTransactions, float totalExcutionTimeSeconds,
                                             double mean, double throughput, double median, double percentile95,
                                             double percentile99, String csvFilePath) {
         PrintWriter pw = null;
@@ -125,4 +123,7 @@ public class TransactionStatistics {
 
     }
 
+    public static void printServerTime() {
+        System.out.println("Current Time at server: " + new SimpleDateFormat("YYYY-mm-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+    }
 }
