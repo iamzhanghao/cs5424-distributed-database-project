@@ -506,7 +506,7 @@ public class Cassandra {
             + "where c_w_id = %d and c_d_id = %d and c_id = %d ";
         String get_last_order = "SELECT o_w_id, o_d_id, o_c_id, o_id, o_entry_d, o_carrier_id "
             + "FROM order_tab "
-            + "WHERE o_w_id = %d AND o_d_id = %d AND o_c_id = %d order by o_id desc LIMIT 1 ";
+            + "WHERE o_w_id = %d AND o_d_id = %d AND o_c_id = %d order by o_id desc LIMIT 1 ALLOW FILTERING";
         String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d "
             + "from order_line_tab where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
 
