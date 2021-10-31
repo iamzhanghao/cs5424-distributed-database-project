@@ -66,9 +66,9 @@ public class Cassandra {
             String line = scanner.nextLine();
             String[] splits = line.split(",");
             char txnType = splits[0].toCharArray()[0];
-            long latency = invokeTransaction(session, splits, scanner);
-            latencies.add(new TransactionStatistics(txnType, latency));
-            System.out.printf("<%d/20000> Tnx %c: %fms \n", txnCount, txnType, (float)latency/1000);
+            float latency = invokeTransaction(session, splits, scanner);
+            latencies.add(new TransactionStatistics(txnType, (float)latency/1000000));
+            System.out.printf("<%d/20000> Tnx %c: %.2fms \n", txnCount, txnType, (float)latency/1000000);
         }
         session.close();
         TransactionStatistics.printStatistics(latencies);
