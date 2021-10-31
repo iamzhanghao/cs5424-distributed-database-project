@@ -1,23 +1,18 @@
 package clients;
 
+import clients.utils.CustomerBalance;
+import clients.utils.CustomerBalanceComparator;
 import clients.utils.TransactionStatistics;
 import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.cql.BoundStatement;
 import com.datastax.oss.driver.api.core.cql.PreparedStatement;
 import com.datastax.oss.driver.api.core.cql.ResultSet;
 import com.datastax.oss.driver.api.core.cql.Row;
-import com.datastax.oss.protocol.internal.request.Prepare;
-import com.datastax.oss.protocol.internal.response.result.Prepared;
 
 import java.io.FileInputStream;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.net.InetSocketAddress;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Cassandra {
 
@@ -71,8 +66,8 @@ public class Cassandra {
             char txnType = splits[0].toCharArray()[0];
             float latency = invokeTransaction(session, splits, scanner);
             // TODO: Add retry count
-            latencies.add(new TransactionStatistics(txnType, (float) latency / 1000000, 0));
-            System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, (float) latency / 1000000, 0);
+            latencies.add(new TransactionStatistics(txnType, latency / 1000000, 0));
+            System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, 0);
         }
         session.close();
         TransactionStatistics.printStatistics(latencies);
@@ -344,7 +339,6 @@ public class Cassandra {
         System.out.println("Delivery Txn");
         for(int did  = 1; did <= 10; did ++) {
             // get the yet-to-deliver order with its client id
-            // TODO: supprt null value condition
             PreparedStatement getOrderAndCustomerId = session.prepare(
                     "SELECT\n" +
                             "\to_id,\n" +
@@ -364,13 +358,13 @@ public class Cassandra {
                     .setInt(1, did);
             ResultSet rs = session.execute(getOrderAndCustomerIdBound);
 
-            // proceed when  a yet-to-deliver order exists
+            // proceed when a yet-to-deliver order exists
             if(rs.iterator().hasNext()) {
                 Row row = rs.one();
                 int orderID = row.getInt("o_id");
                 int customerID = row.getInt("o_c_id");
 
-                System.out.printf("%d %d\n", orderID, customerID);
+//                System.out.printf("%d %d\n", orderID, customerID);
 
                 // assign the carrier id to the order
                 PreparedStatement updateOrder = session.prepare(
@@ -390,11 +384,11 @@ public class Cassandra {
                         .setInt(3, orderID);
                 session.execute(updateOrderBound);
 
-                // assign the current timestamp to each other line
-                // get the count of order lines
+                // assign the current timestamp to each order line
+                // get the count and amount sum of order lines
                 PreparedStatement getOrderLineCount = session.prepare(
                         "SELECT\n" +
-                                "\tcount(1)\n" +
+                                "\tcount(1), sum(ol_amount) as sum\n" +
                                 "FROM\n" +
                                 "\torder_line_tab\n" +
                                 "WHERE\n" +
@@ -407,7 +401,9 @@ public class Cassandra {
                         .setInt(1, did)
                         .setInt(2, orderID);
                 rs = session.execute(getOrderLineCountBound);
-                long orderLineCount = rs.one().getLong("count");
+                row = rs.one();
+                long orderLineCount = row.getLong("count");
+                BigDecimal orderLineSum = row.getBigDecimal("sum");
 
                 // update per order line
                 PreparedStatement updateOrderLine = session.prepare(
@@ -429,24 +425,24 @@ public class Cassandra {
                             .setInt(3, line);
                     session.execute(updateOrderLineBound);
                 }
-                // get the amount sum of all order lines
-                PreparedStatement getOrderLineSum = session.prepare(
-                    "SELECT\n" +
-                            "\tSUM(ol_amount) AS sum\n" +
-                            "FROM\n" +
-                            "\torder_line_tab\n" +
-                            "WHERE\n" +
-                            "\tol_o_id = ?\n" +
-                            "\tAND ol_w_id = ?\n" +
-                            "\tAND ol_d_id = ?"
-                );
-                BoundStatement getOrderLineSumBound = getOrderLineSum.bind()
-                        .setInt(0, orderID)
-                        .setInt(1, wid)
-                        .setInt(2, did);
-                rs = session.execute(getOrderLineSumBound);
-                BigDecimal orderLineSum = rs.one().getBigDecimal("sum");
-                System.out.printf("Order Amount sum: %f", orderLineSum);
+//                // get the amount sum of all order lines
+//                PreparedStatement getOrderLineSum = session.prepare(
+//                    "SELECT\n" +
+//                            "\tSUM(ol_amount) AS sum\n" +
+//                            "FROM\n" +
+//                            "\torder_line_tab\n" +
+//                            "WHERE\n" +
+//                            "\tol_o_id = ?\n" +
+//                            "\tAND ol_w_id = ?\n" +
+//                            "\tAND ol_d_id = ?"
+//                );
+//                BoundStatement getOrderLineSumBound = getOrderLineSum.bind()
+//                        .setInt(0, orderID)
+//                        .setInt(1, wid)
+//                        .setInt(2, did);
+//                rs = session.execute(getOrderLineSumBound);
+//                BigDecimal orderLineSum = rs.one().getBigDecimal("sum");
+//                System.out.printf("Order Amount sum: %f", orderLineSum);
 
                 // update the customer's balance and delivery info
                 // get the present customer balance and delivery count
@@ -469,19 +465,19 @@ public class Cassandra {
                 row = rs.one();
                 BigDecimal balance = row.getBigDecimal("c_balance");
                 int count = row.getInt("c_delivery_cnt");
-                System.out.printf("balance%f count%d", balance, count);
+//                System.out.printf("balance%f count%d", balance, count);
 
                 // update the present customer balance and delivery count
                 PreparedStatement updateCustomerInfo = session.prepare(
-                    "UPDATE\n" +
-                            "\tcustomer_tab\n" +
-                            "SET\n" +
-                            "\tc_balance = ?,\n" +
-                            "\tc_delivery_cnt = ?\n" +
-                            "WHERE\n" +
-                            "\tc_id = ?\n" +
-                            "\tAND c_w_id = ?\n" +
-                            "\tAND c_d_id = ?"
+                        "UPDATE\n" +
+                                "\tcustomer_tab\n" +
+                                "SET\n" +
+                                "\tc_balance = ?,\n" +
+                                "\tc_delivery_cnt = ?\n" +
+                                "WHERE\n" +
+                                "\tc_id = ?\n" +
+                                "\tAND c_w_id = ?\n" +
+                                "\tAND c_d_id = ?"
                 );
                 BoundStatement updateCustomerInfoBound = updateCustomerInfo.bind()
                         .setBigDecimal(0, balance.add(orderLineSum))
@@ -541,6 +537,85 @@ public class Cassandra {
 
     private static void topBalanceTransaction(CqlSession session) {
         System.out.println("Top Balance Txn");
+
+        CustomerBalanceComparator comparator = new CustomerBalanceComparator();
+        PriorityQueue<CustomerBalance> customersWithBalance = new PriorityQueue<>(10, comparator);
+
+        // get the 10 customers with biggest
+        for(int wid = 1; wid <= 10; wid ++) {
+            PreparedStatement getCustomerBalanceInfo = session.prepare(
+                    "SELECT\n" +
+                            "\tc_w_id,\n" +
+                            "\tc_d_id,\n" +
+                            "\tc_first,\n" +
+                            "\tc_middle,\n" +
+                            "\tc_last,\n" +
+                            "\tc_balance\n" +
+                            "FROM\n" +
+                            "\tcustomer_tab_by_balance\n" +
+                            "WHERE\n" +
+                            "\tc_w_id = ?\n" +
+                            "ORDER BY\n" +
+                            "\tc_balance DESC\n" +
+                            "LIMIT 10"
+            );
+            BoundStatement getCustomerBalanceInfoBound = getCustomerBalanceInfo.bind()
+                    .setInt(0, wid);
+
+            ResultSet rs = session.execute(getCustomerBalanceInfoBound);
+
+            while(rs.iterator().hasNext()) {
+                Row row = rs.one();
+                CustomerBalance customer = new CustomerBalance(
+                        row.getInt("c_w_id"),
+                        row.getInt("c_d_id"),
+                        row.getString("c_first"),
+                        row.getString("c_middle"),
+                        row.getString("c_last"),
+                        row.getBigDecimal("c_balance")
+                );
+                customersWithBalance.add(customer);
+            }
+        }
+
+        // compose results based on the top 10 balanced customers
+        for(int i = 0; i < 10; i ++) {
+            CustomerBalance customer = customersWithBalance.poll();
+
+            //get warehouse name
+            PreparedStatement getWarehouseName = session.prepare(
+                    "SELECT\n" +
+                            "\tw_name\n" +
+                            "FROM\n" +
+                            "\twarehouse_tab\n" +
+                            "WHERE\n" +
+                            "\tw_id = ?"
+            );
+            BoundStatement getWarehouseNameBound = getWarehouseName.bind()
+                    .setInt(0, customer.wid);
+            ResultSet rs = session.execute(getWarehouseNameBound);
+            String warehouseName = rs.one().getString("w_name");
+
+            // get district name
+            PreparedStatement getDistrictName = session.prepare(
+                    "SELECT\n" +
+                            "\td_name\n" +
+                            "FROM\n" +
+                            "\tdistrict_tab\n" +
+                            "WHERE\n" +
+                            "\td_id = ?\n" +
+                            "\tAND d_w_id = ?"
+            );
+            BoundStatement getDistrictNameBound = getDistrictName.bind()
+                    .setInt(0, customer.did)
+                    .setInt(1, customer.wid);
+            rs = session.execute(getDistrictNameBound);
+            String districtName = rs.one().getString("d_name");
+
+            System.out.printf("Customer Name: %-36s\tBalance: %-12.2f\tWarehouse Name: %-10s\tDistrict Name: %-10s\n",
+                    customer.name_first + ' ' + customer.name_middle + ' ' + customer.name_last,
+                    customer.balance, warehouseName, districtName);
+        }
     }
 
     private static void relatedCustomerTransaction(CqlSession session, int cwid, int cdid, int cid) {
