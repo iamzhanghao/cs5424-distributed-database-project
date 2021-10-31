@@ -8,9 +8,6 @@
 # Test binary, built with `go test -c`
 *.test
 
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
-
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
@@ -30,3 +27,9 @@ certs
 
 project_files
 target
+
+cs5424-distributed-database-project.iml
+
+project_files/xact_files_A/test
+
+query.sql

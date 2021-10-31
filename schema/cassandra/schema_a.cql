@@ -73,7 +73,7 @@ CREATE TABLE order_tab (
     o_ol_cnt     DECIMAL,
     o_all_local  DECIMAL,
     o_entry_d    TIMESTAMP,
-    PRIMARY KEY (o_w_id, o_d_id, o_c_id)
+    PRIMARY KEY (o_w_id, o_d_id, o_id)
 );
 
 COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
@@ -131,3 +131,46 @@ CREATE TABLE stock_tab (
 
 COPY stock_tab (s_w_id, s_i_id, s_quantity, s_ytd, s_order_cnt, s_remote_cnt, s_dist_01, s_dist_02, s_dist_03, s_dist_04, s_dist_05, s_dist_06, s_dist_07, s_dist_08, s_dist_09, s_dist_10, d_data)
     FROM 'project_files/data_files/stock.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+
+CREATE TABLE order_tab_not_null (
+o_w_id       INT,
+o_d_id       INT,
+o_id         INT,
+o_c_id       INT,
+o_carrier_id VARCHAR,
+o_ol_cnt     DECIMAL,
+o_all_local  DECIMAL,
+o_entry_d    TIMESTAMP,
+PRIMARY KEY (o_w_id, o_id, o_d_id)
+);
+
+COPY order_tab_not_null (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
+FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND NULL='' AND HEADER=FALSE;
+
+CREATE TABLE customer_tab_by_balance (
+c_w_id         INT,
+c_d_id         INT,
+c_id           INT,
+c_first        VARCHAR,
+c_middle       VARCHAR,
+c_last         VARCHAR,
+c_street_1     VARCHAR,
+c_street_2     VARCHAR,
+c_city         VARCHAR,
+c_state        VARCHAR,
+c_zip          VARCHAR,
+c_phone        VARCHAR,
+c_since        TIMESTAMP,
+c_credit       VARCHAR,
+c_credit_lim   DECIMAL,
+c_discount     DECIMAL,
+c_balance      DECIMAL,
+c_ytd_payment  FLOAT,
+c_payment_cnt  INT,
+c_delivery_cnt INT,
+c_data         VARCHAR,
+PRIMARY KEY (c_w_id, c_balance, c_d_id, c_id)
+);
+
+COPY customer_tab_by_balance (c_w_id, c_d_id, c_id, c_first, c_middle, c_last, c_street_1, c_street_2, c_city, c_state, c_zip, c_phone, c_since, c_credit, c_credit_lim, c_discount, c_balance, c_ytd_payment, c_payment_cnt, c_delivery_cnt, c_data)
+FROM 'project_files/data_files/customer.csv' WITH DELIMITER=',' AND HEADER=FALSE;

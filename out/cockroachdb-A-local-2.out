@@ -1,0 +1,2427 @@
+Running on host: localhost:26269
+Ready to read Xact file project_files/xact_files_A/2.txt
+Delivery wid:2 carrier:7oid:2335 cid:1664
+oid:2335 cid:2179
+oid:2335 cid:1606
+oid:2335 cid:2100
+oid:2335 cid:920
+oid:2335 cid:2823
+oid:2335 cid:1704
+oid:2335 cid:2417
+oid:2335 cid:22
+oid:2335 cid:1869
+<1/20000> Tnx D: 627.26ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 2, CustomerID: 63 
+LastName BARANTIABLE, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5222, OrderEntryDate: , NumberOfItems 
+TotalAmount 4325.7500286102295 
+ ItemID 89050, SupplierWarehouse 1, Quantity 7 
+ ItemName tcfpjicrpaxgwsxfc, ItemAmount 196.21, StockQuantity 68 
+ ItemID 63935, SupplierWarehouse 1, Quantity 3 
+ ItemName terkphtvneuctamiorfr, ItemAmount 177.09, StockQuantity 79 
+ ItemID 88542, SupplierWarehouse 1, Quantity 10 
+ ItemName cxdqsqanycwviyhniltbuu, ItemAmount 206.6, StockQuantity 83 
+ ItemID 27362, SupplierWarehouse 1, Quantity 1 
+ ItemName ezvcbycgyhcgeltgi, ItemAmount 59.07, StockQuantity 19 
+ ItemID 2108, SupplierWarehouse 1, Quantity 7 
+ ItemName raanmkllkfthkhisiw, ItemAmount 15.050001, StockQuantity 77 
+ ItemID 45797, SupplierWarehouse 1, Quantity 6 
+ ItemName qsnclfivpstgr, ItemAmount 181.92, StockQuantity 60 
+ ItemID 5187, SupplierWarehouse 1, Quantity 1 
+ ItemName tukwhrebexdbldnonpz, ItemAmount 91.53, StockQuantity 101 
+ ItemID 6198, SupplierWarehouse 1, Quantity 9 
+ ItemName konpvvyqxkskaovrgn, ItemAmount 419.49, StockQuantity 13 
+ ItemID 6215, SupplierWarehouse 1, Quantity 7 
+ ItemName werxhifoplslkxuqhsqyq, ItemAmount 143.78, StockQuantity 83 
+ ItemID 7042, SupplierWarehouse 1, Quantity 8 
+ ItemName txzgfqbubheraiozjjvf, ItemAmount 499.6, StockQuantity 25 
+ ItemID 23267, SupplierWarehouse 1, Quantity 6 
+ ItemName tgtcwcbkkwgvgryva, ItemAmount 236.09999, StockQuantity 56 
+ ItemID 32487, SupplierWarehouse 1, Quantity 9 
+ ItemName sjrarklfmhelqnnny, ItemAmount 227.79, StockQuantity 98 
+ ItemID 36118, SupplierWarehouse 1, Quantity 7 
+ ItemName cevawuvsyjxgkk, ItemAmount 606.76, StockQuantity 75 
+ ItemID 64870, SupplierWarehouse 1, Quantity 3 
+ ItemName ozqdcnljrcicmpopvxij, ItemAmount 167.45999, StockQuantity 16 
+ ItemID 68327, SupplierWarehouse 1, Quantity 6 
+ ItemName uryxsdmzzpccwjalindlbp, ItemAmount 558.30005, StockQuantity 78 
+ ItemID 89828, SupplierWarehouse 1, Quantity 5 
+ ItemName tgznlafqzjnppyo, ItemAmount 313.9, StockQuantity 56 
+ ItemID 97337, SupplierWarehouse 1, Quantity 2 
+ ItemName ehplswtrmosyfubqlfubc, ItemAmount 66.54, StockQuantity 80 
+ ItemID 97633, SupplierWarehouse 1, Quantity 8 
+ ItemName jrwjkabcubjyuovqfhhp, ItemAmount 158.56, StockQuantity 25 
+=============================================================================== 
+
+<2/20000> Tnx N: 434.42ms, retry: 0 times 
+<3/20000> Tnx P: 27.44ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 275 
+LastName ABLECALLYPRES, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5302, OrderEntryDate: , NumberOfItems 
+TotalAmount 2358.0100708007812 
+ ItemID 12775, SupplierWarehouse 1, Quantity 5 
+ ItemName jirwgyhfcheufwszvdmsohd, ItemAmount 422.2, StockQuantity 32 
+ ItemID 56039, SupplierWarehouse 1, Quantity 9 
+ ItemName ovqotpqjjzywzjdwxpgb, ItemAmount 62.28, StockQuantity 50 
+ ItemID 69031, SupplierWarehouse 1, Quantity 8 
+ ItemName ieyokarqdsdznhtdwtopxun, ItemAmount 323.92, StockQuantity 42 
+ ItemID 81503, SupplierWarehouse 1, Quantity 10 
+ ItemName cwpqdiovkkiydwwxpinsmb, ItemAmount 916.60004, StockQuantity 54 
+ ItemID 92671, SupplierWarehouse 1, Quantity 7 
+ ItemName uxcmxonmnuijhzcgqm, ItemAmount 626.01, StockQuantity 50 
+ ItemID 97671, SupplierWarehouse 4, Quantity 2 
+ ItemName ktukszerqkwjyakmia, ItemAmount 7.0, StockQuantity 68 
+=============================================================================== 
+
+<4/20000> Tnx N: 167.15ms, retry: 0 times 
+Delivery wid:2 carrier:10oid:2336 cid:1111
+oid:2336 cid:1334
+oid:2336 cid:1481
+oid:2336 cid:47
+oid:2336 cid:2635
+oid:2336 cid:126
+oid:2336 cid:574
+oid:2336 cid:419
+oid:2336 cid:870
+oid:2336 cid:2997
+<5/20000> Tnx D: 656.90ms, retry: 0 times 
+WID: 10, DID: 8, Number of last orders: 13
+
+OID: 2988, O_ENTRY_D: 2021-08-27 09:50:40.192, Customer Name: jknfnocs OE ATIONATIONATION
+Popular I_NAME: zqjvywifootmxj, quantity: 5
+Popular I_NAME: srcgpcanmspbyjpvwgoi, quantity: 5
+Popular I_NAME: yljmjxkoxkmyzar, quantity: 5
+Popular I_NAME: wteltjhgxzmqdfypbmor, quantity: 5
+Popular I_NAME: msswbfrtafqjvjaqnek, quantity: 5
+Popular I_NAME: sbvgdxtxmuzwmksedcbkq, quantity: 5
+Popular I_NAME: bfeykqaoyqtxpclg, quantity: 5
+Popular I_NAME: gnaowywekgokxcfyjzwm, quantity: 5
+Popular I_NAME: tmilcsqaanbgz, quantity: 5
+Popular I_NAME: pnmsvsjyjjrsmd, quantity: 5
+Popular I_NAME: vyftsasksgsrodeoi, quantity: 5
+Popular I_NAME: itaxuoqbpctzfticfd, quantity: 5
+Popular I_NAME: ooeayuusdalkf, quantity: 5
+Popular I_NAME: pbdgwkuswaryjkw, quantity: 5
+Popular I_NAME: xzpnvylqbxklzwwtpl, quantity: 5
+Popular I_NAME: rhaltyonvoymvuw, quantity: 5
+Popular I_NAME: zhltmjnlrhhlzbdhhte, quantity: 5
+Popular I_NAME: liifiitbnvsmfdupdel, quantity: 5
+Popular I_NAME: nqzjpruwocbsforegy, quantity: 5
+
+OID: 2989, O_ENTRY_D: 2021-08-27 09:50:40.192, Customer Name: chjovpssrwz OE EINGCALLYATION
+Popular I_NAME: xtvrzboztsdpypcecpehftr, quantity: 5
+Popular I_NAME: uplwxhxeemlzaiuv, quantity: 5
+Popular I_NAME: rdciybmwvsovryfsk, quantity: 5
+Popular I_NAME: yhjhxlczkqzfezhs, quantity: 5
+Popular I_NAME: mqhsigwcbsvngffuxe, quantity: 5
+Popular I_NAME: zoszidawaexjeulv, quantity: 5
+Popular I_NAME: rttnazilqbvxdbcjg, quantity: 5
+
+OID: 2990, O_ENTRY_D: 2021-08-27 09:50:40.192, Customer Name: xnyaacbwwqo OE ABLEABLEBAR
+Popular I_NAME: qgczauccojtbpdbzz, quantity: 5
+Popular I_NAME: ntrcvhlabekzxosil, quantity: 5
+Popular I_NAME: ecnagfyivdxdtk, quantity: 5
+Popular I_NAME: rkhbaeddsgccwdzoadzdpt, quantity: 5
+Popular I_NAME: icoylqogcymuwdad, quantity: 5
+Popular I_NAME: dqmggbnyijhqajvkc, quantity: 5
+Popular I_NAME: lbiqxjxntnhckdl, quantity: 5
+Popular I_NAME: oqmwcxaomaztozvlzw, quantity: 5
+Popular I_NAME: tzdtoljnrghnqwm, quantity: 5
+Popular I_NAME: gckxjbtrbeqszeexqxpvouv, quantity: 5
+Popular I_NAME: hzmftgsduqxfcqzpowfovjy, quantity: 5
+Popular I_NAME: vnpxhsftftjdvlpfhdvdhn, quantity: 5
+Popular I_NAME: yjonamengbmngkor, quantity: 5
+Popular I_NAME: hdnanvmfcvzczvtb, quantity: 5
+
+OID: 2991, O_ENTRY_D: 2021-08-27 09:50:40.192, Customer Name: mbykvlvlobyxq OE ANTIOUGHTPRI
+Popular I_NAME: vhyiacvuorqvspifruohi, quantity: 5
+Popular I_NAME: ylhuowrgwiory, quantity: 5
+Popular I_NAME: ixfrkidovxamtx, quantity: 5
+Popular I_NAME: lugsgyransgbi, quantity: 5
+Popular I_NAME: cpiwhdftypffmvhtkbd, quantity: 5
+Popular I_NAME: bcjjfjdikiwheiidgrbydx, quantity: 5
+Popular I_NAME: tnvvlughmgbkisdcga, quantity: 5
+Popular I_NAME: bqziaauzfrwgcfynceyp, quantity: 5
+Popular I_NAME: qyeekpemxhvfezkaxtkyg, quantity: 5
+Popular I_NAME: oxlbmomqlwcuboykcgde, quantity: 5
+
+OID: 2992, O_ENTRY_D: 2021-08-27 09:50:40.192, Customer Name: wjugtmzdegienjf OE ANTIESEATION
+Popular I_NAME: qlnvonjqguaqjjjtbs, quantity: 5
+Popular I_NAME: vhasbwqbcilapdb, quantity: 5
+Popular I_NAME: gxvwjqrfeffvuvrfqidnmi, quantity: 5
+Popular I_NAME: xqltwiyxehsyb, quantity: 5
+Popular I_NAME: ulmvqkqggbcfsjtcqobkcjy, quantity: 5
+Popular I_NAME: hiyrqfoeehumtpjpo, quantity: 5
+Popular I_NAME: guwpmfvhgwkryxkab, quantity: 5
+Popular I_NAME: avalqqjxvjehmcefn, quantity: 5
+Popular I_NAME: rjhcezqviglgbltof, quantity: 5
+Popular I_NAME: jerxzwninvdoskbczneg, quantity: 5
+Popular I_NAME: aeaflnllsigqgzmy, quantity: 5
+Popular I_NAME: dxkwxkiobfktqvuyuavh, quantity: 5
+Popular I_NAME: fuhbelkxvwhvuha, quantity: 5
+Popular I_NAME: pxhxwqfkommbk, quantity: 5
+Popular I_NAME: qakvnpxggayabxo, quantity: 5
+Popular I_NAME: otupfuhkalxubwxyndeoxdh, quantity: 5
+
+OID: 2993, O_ENTRY_D: 2021-08-27 09:50:40.192, Customer Name: tvnwatptslxcedd OE ATIONESEPRES
+Popular I_NAME: sanrtrrphxvumbl, quantity: 5
+Popular I_NAME: hgrbjeerbkagksf, quantity: 5
+Popular I_NAME: gjuwjxvcuwrbf, quantity: 5
+Popular I_NAME: azygoezssxjpputfewdw, quantity: 5
+Popular I_NAME: rpbuzkzhtxaenjmkxr, quantity: 5
+Popular I_NAME: ktnmfzjfqjcvzpycjvmes, quantity: 5
+Popular I_NAME: hoxjqciitrbci, quantity: 5
+Popular I_NAME: lgzayaivwtaouyrv, quantity: 5
+Popular I_NAME: ggovqxntangvg, quantity: 5
+Popular I_NAME: cqrmdkfyxubdrrbomz, quantity: 5
+Popular I_NAME: dmrsdoavhklicduwvx, quantity: 5
+Popular I_NAME: ivzfzlbucggcikrylpkzwu, quantity: 5
+Popular I_NAME: cmxcitruxijfyxgineikh, quantity: 5
+Popular I_NAME: kqxfzlyvyagcwips, quantity: 5
+Popular I_NAME: zzpzcmrlesqxegghxzvsueb, quantity: 5
+
+OID: 2994, O_ENTRY_D: 2021-08-27 09:50:40.193, Customer Name: cfdyvduuci OE EINGABLEPRI
+Popular I_NAME: bsglybkoghzazp, quantity: 5
+Popular I_NAME: gjarrzwyockneib, quantity: 5
+Popular I_NAME: kbmulmgfmywbypard, quantity: 5
+Popular I_NAME: rxrabkidynfzwcwb, quantity: 5
+Popular I_NAME: dyctynadfuubyfyogxdenvy, quantity: 5
+Popular I_NAME: qaqemwfiuiyonz, quantity: 5
+Popular I_NAME: cvkdksesxordudktcefse, quantity: 5
+
+OID: 2995, O_ENTRY_D: 2021-08-27 09:50:40.193, Customer Name: hwrsbkvy OE PRESPRESPRES
+Popular I_NAME: vxztisdjimkjw, quantity: 5
+Popular I_NAME: qxiyxmjxmdlpan, quantity: 5
+Popular I_NAME: bzyalxfeotlnoi, quantity: 5
+Popular I_NAME: xrudvdboozdscmojz, quantity: 5
+Popular I_NAME: qcuoziqsgjfmxiudpzmt, quantity: 5
+
+OID: 2996, O_ENTRY_D: 2021-08-27 09:50:40.193, Customer Name: ylazbblzamrohg OE PRESCALLYPRES
+Popular I_NAME: pxvgzkqwrmjgfi, quantity: 5
+Popular I_NAME: hjnfdfwwwzxzhqwi, quantity: 5
+Popular I_NAME: wafqezkssizqdlrdkzz, quantity: 5
+Popular I_NAME: rnsxxfekigwou, quantity: 5
+Popular I_NAME: ucpefflkmrbmfzqtb, quantity: 5
+Popular I_NAME: kbpltghnkrwcwrydtcwdlhc, quantity: 5
+Popular I_NAME: zsizwtbtieopwiebicnch, quantity: 5
+Popular I_NAME: tdlnqczrbmkdurqocrgw, quantity: 5
+Popular I_NAME: fwvqpkipjpvtfskmfx, quantity: 5
+Popular I_NAME: rgocmvxzwlrxqzarhxbzenr, quantity: 5
+Popular I_NAME: lviempdrqqakcwwvvpdiu, quantity: 5
+Popular I_NAME: gmtshsngattxmkhaeo, quantity: 5
+Popular I_NAME: hwrqzpeqwafvkrzsb, quantity: 5
+Popular I_NAME: cjvmefoqxfnopsyuhjnhh, quantity: 5
+Popular I_NAME: uhutljwjwiufve, quantity: 5
+
+OID: 2997, O_ENTRY_D: 2021-08-27 09:50:40.193, Customer Name: gfqbdgb OE ESEESEOUGHT
+Popular I_NAME: xvyuasdbxbveqvpqfzefbeg, quantity: 5
+Popular I_NAME: gqaeebcywfmzfscvpbzbbd, quantity: 5
+Popular I_NAME: xaklisgjofgeapbhi, quantity: 5
+Popular I_NAME: leexsnsarkhdekaexzpvw, quantity: 5
+Popular I_NAME: uyelvltchbkrr, quantity: 5
+Popular I_NAME: gwtywayaulmujvwfkmree, quantity: 5
+Popular I_NAME: wryprnsdeemxfozbsayk, quantity: 5
+Popular I_NAME: ddptxptomtrcl, quantity: 5
+Popular I_NAME: topnpwlzsjizys, quantity: 5
+Popular I_NAME: fimbmwvlcpjbpqpzpnbrv, quantity: 5
+Popular I_NAME: oryrqcftmimstimjxe, quantity: 5
+Popular I_NAME: mplpwmhhwnbeugdrgr, quantity: 5
+
+OID: 2998, O_ENTRY_D: 2021-08-27 09:50:40.193, Customer Name: bgldrdfgxfaayg OE PRICALLYPRES
+Popular I_NAME: xwrmnwvebfuyfnfbxogrfyg, quantity: 5
+Popular I_NAME: iqiziwlbriknimycmfyusv, quantity: 5
+Popular I_NAME: tcracluhuymdarbyugbvva, quantity: 5
+Popular I_NAME: ozifwlzdizmhljzvkdwybdo, quantity: 5
+Popular I_NAME: hehqfhzdancxgmirhggyvr, quantity: 5
+Popular I_NAME: aevmprzxinyxftwloxzs, quantity: 5
+Popular I_NAME: mifftbaonjeipji, quantity: 5
+Popular I_NAME: nkepozoidhlezao, quantity: 5
+Popular I_NAME: hqgqzfpjruffhyety, quantity: 5
+Popular I_NAME: sqbwvfdrrjtujsv, quantity: 5
+Popular I_NAME: nzvbqjyyikanxtitw, quantity: 5
+Popular I_NAME: azpintjshzukiw, quantity: 5
+Popular I_NAME: uaypfigkuajyiobrehbkgah, quantity: 5
+Popular I_NAME: mcfbsboffthlzeommsx, quantity: 5
+Popular I_NAME: eosxszugzxthhytntzqz, quantity: 5
+Popular I_NAME: pgdznhaiwtyhdprmayp, quantity: 5
+Popular I_NAME: zhjgithaanlrjgvihvys, quantity: 5
+Popular I_NAME: vcwraavhmmseqegvi, quantity: 5
+
+OID: 2999, O_ENTRY_D: 2021-08-27 09:50:40.193, Customer Name: qmurmbadkf OE PRIPRIANTI
+Popular I_NAME: xdqyeetgiocdmzclh, quantity: 5
+Popular I_NAME: awewauixzzewzparg, quantity: 5
+Popular I_NAME: nurddoovapmsnde, quantity: 5
+Popular I_NAME: detqzkrjwgrolhkz, quantity: 5
+Popular I_NAME: ttimlnccaeladdqd, quantity: 5
+Popular I_NAME: keghwbrhukodmgwciscv, quantity: 5
+Popular I_NAME: yprmspvdmahlxmuoohzt, quantity: 5
+Popular I_NAME: yjdurulwhoilrtbbacxogrm, quantity: 5
+Popular I_NAME: cijzgvpwrlaylxojqrhowfp, quantity: 5
+Popular I_NAME: xmyodttbhovfw, quantity: 5
+Popular I_NAME: kjsqjprieclvwkfdkza, quantity: 5
+Popular I_NAME: enfllaffayiujacvrm, quantity: 5
+Popular I_NAME: ycufyovhfumyyolzjqpl, quantity: 5
+Popular I_NAME: ejvbjnvnywugwfsjiimacu, quantity: 5
+Popular I_NAME: pafvwhzmkevqyk, quantity: 5
+Popular I_NAME: rpovhjwyiqgchetodghht, quantity: 5
+Popular I_NAME: undsqdjpyoxyjjvqfltnk, quantity: 5
+Popular I_NAME: msdvybhtrzqfrpxknjumg, quantity: 5
+
+OID: 3000, O_ENTRY_D: 2021-08-27 09:50:40.193, Customer Name: dkszbkavo OE OUGHTABLEPRI
+Popular I_NAME: hyenjngnreozbmg, quantity: 5
+Popular I_NAME: ondsrjhxqmbbzqdfersl, quantity: 5
+Popular I_NAME: flzuvsvxujdscjh, quantity: 5
+Popular I_NAME: lwqicpmfzuncqgyzn, quantity: 5
+Popular I_NAME: rfsxtkpzgwfnaktqkv, quantity: 5
+Popular I_NAME: yhyjsgmdmyyptuu, quantity: 5
+Popular I_NAME: iocchaewgoxlleuekb, quantity: 5
+Popular I_NAME: jlhozkvxmnpzfseufkz, quantity: 5
+
+Popular I_NAME: itaxuoqbpctzfticfd, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: srcgpcanmspbyjpvwgoi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rdciybmwvsovryfsk, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: uhutljwjwiufve, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yljmjxkoxkmyzar, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qaqemwfiuiyonz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yjonamengbmngkor, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: cmxcitruxijfyxgineikh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xwrmnwvebfuyfnfbxogrfyg, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: dyctynadfuubyfyogxdenvy, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: gqaeebcywfmzfscvpbzbbd, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rttnazilqbvxdbcjg, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: vxztisdjimkjw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: kbpltghnkrwcwrydtcwdlhc, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hzmftgsduqxfcqzpowfovjy, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ggovqxntangvg, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: pxhxwqfkommbk, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: zzpzcmrlesqxegghxzvsueb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: detqzkrjwgrolhkz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: lugsgyransgbi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: zqjvywifootmxj, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: msswbfrtafqjvjaqnek, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: dmrsdoavhklicduwvx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: cjvmefoqxfnopsyuhjnhh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xvyuasdbxbveqvpqfzefbeg, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: pbdgwkuswaryjkw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: uplwxhxeemlzaiuv, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ttimlnccaeladdqd, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ivzfzlbucggcikrylpkzwu, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yjdurulwhoilrtbbacxogrm, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: avalqqjxvjehmcefn, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ddptxptomtrcl, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: tnvvlughmgbkisdcga, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: msdvybhtrzqfrpxknjumg, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: oryrqcftmimstimjxe, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: pxvgzkqwrmjgfi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ylhuowrgwiory, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: lviempdrqqakcwwvvpdiu, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rxrabkidynfzwcwb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: pnmsvsjyjjrsmd, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rfsxtkpzgwfnaktqkv, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: zsizwtbtieopwiebicnch, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: sqbwvfdrrjtujsv, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: bzyalxfeotlnoi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: sbvgdxtxmuzwmksedcbkq, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rhaltyonvoymvuw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: vhasbwqbcilapdb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: tmilcsqaanbgz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ktnmfzjfqjcvzpycjvmes, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hwrqzpeqwafvkrzsb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: zoszidawaexjeulv, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: flzuvsvxujdscjh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xtvrzboztsdpypcecpehftr, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xrudvdboozdscmojz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: topnpwlzsjizys, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yprmspvdmahlxmuoohzt, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qakvnpxggayabxo, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: tzdtoljnrghnqwm, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xaklisgjofgeapbhi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: aevmprzxinyxftwloxzs, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ulmvqkqggbcfsjtcqobkcjy, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: mifftbaonjeipji, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hdnanvmfcvzczvtb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ycufyovhfumyyolzjqpl, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qcuoziqsgjfmxiudpzmt, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ooeayuusdalkf, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xqltwiyxehsyb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: uaypfigkuajyiobrehbkgah, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: eosxszugzxthhytntzqz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: nqzjpruwocbsforegy, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xmyodttbhovfw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: nzvbqjyyikanxtitw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: aeaflnllsigqgzmy, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: dqmggbnyijhqajvkc, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rjhcezqviglgbltof, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: iocchaewgoxlleuekb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qgczauccojtbpdbzz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: bfeykqaoyqtxpclg, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: oqmwcxaomaztozvlzw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: kbmulmgfmywbypard, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rkhbaeddsgccwdzoadzdpt, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hiyrqfoeehumtpjpo, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: keghwbrhukodmgwciscv, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: uyelvltchbkrr, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: tcracluhuymdarbyugbvva, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ucpefflkmrbmfzqtb, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ondsrjhxqmbbzqdfersl, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: jerxzwninvdoskbczneg, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ejvbjnvnywugwfsjiimacu, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rpbuzkzhtxaenjmkxr, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: oxlbmomqlwcuboykcgde, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: fuhbelkxvwhvuha, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: gjuwjxvcuwrbf, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: leexsnsarkhdekaexzpvw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: gxvwjqrfeffvuvrfqidnmi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: vhyiacvuorqvspifruohi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ecnagfyivdxdtk, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hjnfdfwwwzxzhqwi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: fwvqpkipjpvtfskmfx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: liifiitbnvsmfdupdel, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rnsxxfekigwou, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: vnpxhsftftjdvlpfhdvdhn, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: cpiwhdftypffmvhtkbd, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yhjhxlczkqzfezhs, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: sanrtrrphxvumbl, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: nkepozoidhlezao, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: lwqicpmfzuncqgyzn, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hqgqzfpjruffhyety, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: bcjjfjdikiwheiidgrbydx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: jlhozkvxmnpzfseufkz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: lgzayaivwtaouyrv, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: pafvwhzmkevqyk, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qyeekpemxhvfezkaxtkyg, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hehqfhzdancxgmirhggyvr, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: undsqdjpyoxyjjvqfltnk, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: zhjgithaanlrjgvihvys, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: wteltjhgxzmqdfypbmor, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: yhyjsgmdmyyptuu, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: cqrmdkfyxubdrrbomz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: otupfuhkalxubwxyndeoxdh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: iqiziwlbriknimycmfyusv, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xdqyeetgiocdmzclh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: xzpnvylqbxklzwwtpl, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: guwpmfvhgwkryxkab, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: azpintjshzukiw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: cvkdksesxordudktcefse, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hoxjqciitrbci, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hgrbjeerbkagksf, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: vcwraavhmmseqegvi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: gnaowywekgokxcfyjzwm, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: zhltmjnlrhhlzbdhhte, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ixfrkidovxamtx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: dxkwxkiobfktqvuyuavh, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qxiyxmjxmdlpan, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: gwtywayaulmujvwfkmree, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: bqziaauzfrwgcfynceyp, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: wafqezkssizqdlrdkzz, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: qlnvonjqguaqjjjtbs, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: mqhsigwcbsvngffuxe, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: nurddoovapmsnde, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: hyenjngnreozbmg, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: azygoezssxjpputfewdw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: wryprnsdeemxfozbsayk, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: mplpwmhhwnbeugdrgr, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: lbiqxjxntnhckdl, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ntrcvhlabekzxosil, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: vyftsasksgsrodeoi, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: icoylqogcymuwdad, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: enfllaffayiujacvrm, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: gmtshsngattxmkhaeo, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rgocmvxzwlrxqzarhxbzenr, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: fimbmwvlcpjbpqpzpnbrv, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: cijzgvpwrlaylxojqrhowfp, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: gckxjbtrbeqszeexqxpvouv, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: awewauixzzewzparg, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: kqxfzlyvyagcwips, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: bsglybkoghzazp, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: gjarrzwyockneib, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: rpovhjwyiqgchetodghht, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: ozifwlzdizmhljzvkdwybdo, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: mcfbsboffthlzeommsx, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: pgdznhaiwtyhdprmayp, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: tdlnqczrbmkdurqocrgw, Percentage of Orders having Popular Items: 0.076923
+Popular I_NAME: kjsqjprieclvwkfdkza, Percentage of Orders having Popular Items: 0.076923
+<6/20000> Tnx I: 405.61ms, retry: 0 times 
+Delivery wid:8 carrier:2oid:2372 cid:1834
+oid:2372 cid:2955
+oid:2372 cid:200
+oid:2372 cid:1244
+oid:2372 cid:2539
+oid:2372 cid:2263
+oid:2372 cid:1603
+oid:2372 cid:2240
+oid:2372 cid:2151
+oid:2372 cid:2271
+<7/20000> Tnx D: 747.19ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 402 
+LastName PRESBAROUGHT, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5306, OrderEntryDate: , NumberOfItems 
+TotalAmount 2607.62992477417 
+ ItemID 47527, SupplierWarehouse 1, Quantity 1 
+ ItemName vzctbqscsakqevchjamucg, ItemAmount 63.82, StockQuantity 99 
+ ItemID 1531, SupplierWarehouse 1, Quantity 1 
+ ItemName cgznsqknzzuzlgqxpftd, ItemAmount 24.45, StockQuantity 46 
+ ItemID 8502, SupplierWarehouse 1, Quantity 5 
+ ItemName fjrnkvwagitfy, ItemAmount 16.25, StockQuantity 38 
+ ItemID 55718, SupplierWarehouse 1, Quantity 3 
+ ItemName aahdkbfbaaxlxmnlpqmdtn, ItemAmount 37.050003, StockQuantity 37 
+ ItemID 65250, SupplierWarehouse 1, Quantity 8 
+ ItemName oayuprnkqkfxwixk, ItemAmount 639.6, StockQuantity 104 
+ ItemID 71367, SupplierWarehouse 1, Quantity 6 
+ ItemName fcvvpoexocuimq, ItemAmount 360.12, StockQuantity 88 
+ ItemID 73575, SupplierWarehouse 1, Quantity 10 
+ ItemName npmunuostkcjf, ItemAmount 992.69995, StockQuantity 17 
+ ItemID 79247, SupplierWarehouse 1, Quantity 6 
+ ItemName poncbvnilynsczwkbls, ItemAmount 116.16, StockQuantity 83 
+ ItemID 89807, SupplierWarehouse 1, Quantity 4 
+ ItemName ikqchellwrqwzzuzqscz, ItemAmount 59.92, StockQuantity 109 
+ ItemID 97957, SupplierWarehouse 1, Quantity 4 
+ ItemName gjhtvwjmpblefiyfhtqzsb, ItemAmount 297.56, StockQuantity 42 
+=============================================================================== 
+
+<8/20000> Tnx N: 130.33ms, retry: 0 times 
+Delivery wid:5 carrier:6oid:2289 cid:1922
+oid:2289 cid:2341
+oid:2289 cid:2283
+oid:2289 cid:567
+oid:2289 cid:2313
+oid:2289 cid:1912
+oid:2289 cid:1049
+oid:2289 cid:441
+oid:2289 cid:2559
+oid:2289 cid:1646
+<9/20000> Tnx D: 668.96ms, retry: 0 times 
+<10/20000> Tnx P: 48.68ms, retry: 0 times 
+Delivery wid:2 carrier:1oid:2337 cid:423
+oid:2337 cid:1387
+oid:2337 cid:862
+oid:2337 cid:864
+oid:2337 cid:2245
+oid:2337 cid:2749
+oid:2337 cid:1212
+oid:2337 cid:2964
+oid:2337 cid:65
+oid:2337 cid:522
+<11/20000> Tnx D: 832.57ms, retry: 0 times 
+Delivery wid:4 carrier:3oid:2390 cid:255
+oid:2390 cid:2172
+oid:2390 cid:898
+oid:2390 cid:2735
+oid:2390 cid:1676
+oid:2390 cid:959
+oid:2390 cid:1873
+oid:2390 cid:854
+oid:2390 cid:1909
+oid:2390 cid:2455
+<12/20000> Tnx D: 833.22ms, retry: 0 times 
+<13/20000> Tnx P: 53.32ms, retry: 0 times 
+Customers with top balances
+Customer Name: pmyywockcaic OE ESEPRIANTI          	Balance: 138504.11   	Warehouse Name: skktees   	District Name: sysrnovgj 
+Customer Name: eggykzklcr OE PRICALLYANTI          	Balance: 138347.84   	Warehouse Name: qccrxfrr  	District Name: uvtdnx    
+Customer Name: dobxzbnr OE ANTIPRIANTI             	Balance: 138312.38   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: aqwddjfajsxpi OE PRIPRIABLE         	Balance: 135514.96   	Warehouse Name: amzkoudtw 	District Name: soclwubn  
+Customer Name: zuxqonjpzoxg OE ANTIESEABLE         	Balance: 135096.84   	Warehouse Name: sxvnjhpd  	District Name: myuchl    
+Customer Name: xhjxbplm OE ATIONANTIBAR            	Balance: 134546.58   	Warehouse Name: wdjmcbosy 	District Name: iblmyve   
+Customer Name: tcihhhovfzp OE ESEANTIPRI           	Balance: 134270.05   	Warehouse Name: cfljbep   	District Name: xkvjsine  
+Customer Name: ncunvqorcfzos OE CALLYBAROUGHT      	Balance: 133901.55   	Warehouse Name: pzkhk     	District Name: mzrfal    
+Customer Name: oxfoakim OE PRIPRESOUGHT            	Balance: 133755.90   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: qmcaarv OE PRESOUGHTABLE            	Balance: 132438.58   	Warehouse Name: bwaxabqr  	District Name: mrkfbxb   
+<14/20000> Tnx T: 1206.05ms, retry: 0 times 
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635690238.219022000,0 too old; wrote at 1635690238.753581000,1: "sql txn" meta={id=5c299d87 pri=0.00105104 epo=0 ts=1635690239.299502000,2 min=1635690238.219022000,0 seq=1} lock=true stat=PENDING rts=1635690238.219022000,0 wto=false gul=1635690238.719022000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]
+ROLLBACK AND RETRY
+<15/20000> Tnx P: 502.73ms, retry: 1 times 
+Delivery wid:4 carrier:1oid:2391 cid:2635
+oid:2391 cid:2623
+oid:2391 cid:1433
+oid:2391 cid:2801
+oid:2391 cid:1176
+oid:2391 cid:1067
+oid:2391 cid:1889
+oid:2391 cid:1434
+oid:2391 cid:213
+oid:2391 cid:343
+<16/20000> Tnx D: 862.83ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 1251 
+LastName ATIONATIONBAR, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5325, OrderEntryDate: , NumberOfItems 
+TotalAmount 5095.139923095703 
+ ItemID 96231, SupplierWarehouse 1, Quantity 5 
+ ItemName ibihckwlaextfjglwfyqndp, ItemAmount 380.80002, StockQuantity 52 
+ ItemID 40605, SupplierWarehouse 1, Quantity 6 
+ ItemName svfbzqjnrxurjlfwatqby, ItemAmount 447.0, StockQuantity 102 
+ ItemID 32228, SupplierWarehouse 1, Quantity 8 
+ ItemName gqbktgcuxlanbwbwhrfixfk, ItemAmount 402.8, StockQuantity 34 
+ ItemID 73125, SupplierWarehouse 1, Quantity 9 
+ ItemName eckjwlijxuyfrcr, ItemAmount 485.1, StockQuantity 12 
+ ItemID 10039, SupplierWarehouse 1, Quantity 9 
+ ItemName yxojvwjkahgqyhafqxvf, ItemAmount 445.94998, StockQuantity 80 
+ ItemID 16035, SupplierWarehouse 1, Quantity 2 
+ ItemName yeydnnmoeraadsumwhkup, ItemAmount 112.34, StockQuantity 100 
+ ItemID 48531, SupplierWarehouse 1, Quantity 8 
+ ItemName jfnqfivgbvxrtyzov, ItemAmount 649.12, StockQuantity 74 
+ ItemID 50375, SupplierWarehouse 1, Quantity 6 
+ ItemName tmjqefuqifdjawsfrfs, ItemAmount 159.66, StockQuantity 27 
+ ItemID 56935, SupplierWarehouse 1, Quantity 7 
+ ItemName quszojbbbmpjwx, ItemAmount 416.08, StockQuantity 49 
+ ItemID 61511, SupplierWarehouse 1, Quantity 5 
+ ItemName vmhwvtfridhgyuolkplal, ItemAmount 361.55, StockQuantity 66 
+ ItemID 78799, SupplierWarehouse 1, Quantity 9 
+ ItemName hrrjqcnkbnwndkedylpxr, ItemAmount 250.2, StockQuantity 58 
+ ItemID 89540, SupplierWarehouse 1, Quantity 3 
+ ItemName quemhcfadinjuovdkgw, ItemAmount 125.759995, StockQuantity 47 
+ ItemID 97496, SupplierWarehouse 1, Quantity 9 
+ ItemName qokqjmchnedfsmrjhefitrg, ItemAmount 858.77997, StockQuantity 67 
+=============================================================================== 
+
+<17/20000> Tnx N: 270.52ms, retry: 0 times 
+Delivery wid:6 carrier:4oid:2338 cid:458
+oid:2338 cid:2603
+oid:2338 cid:1372
+oid:2338 cid:1611
+oid:2338 cid:1486
+oid:2338 cid:21
+oid:2338 cid:430
+oid:2338 cid:1935
+oid:2338 cid:1358
+oid:2338 cid:1302
+<18/20000> Tnx D: 784.91ms, retry: 0 times 
+<19/20000> Tnx P: 51.96ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 2305 
+LastName ANTIPRIESE, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5330, OrderEntryDate: , NumberOfItems 
+TotalAmount 2449.7000637054443 
+ ItemID 23491, SupplierWarehouse 1, Quantity 9 
+ ItemName ancefvdtpodkgmen, ItemAmount 874.35004, StockQuantity 100 
+ ItemID 31775, SupplierWarehouse 1, Quantity 5 
+ ItemName chkuunwbyysmgdjesrn, ItemAmount 238.09999, StockQuantity 71 
+ ItemID 33598, SupplierWarehouse 1, Quantity 3 
+ ItemName hpogrbrdndkjpvzoyaihgo, ItemAmount 61.29, StockQuantity 93 
+ ItemID 56513, SupplierWarehouse 1, Quantity 10 
+ ItemName gyrlenwjorqxda, ItemAmount 783.9, StockQuantity 52 
+ ItemID 62687, SupplierWarehouse 1, Quantity 6 
+ ItemName tydcbshmbqprggj, ItemAmount 290.16, StockQuantity 84 
+ ItemID 64227, SupplierWarehouse 1, Quantity 3 
+ ItemName cwnyrlfgmzldirjjlye, ItemAmount 19.08, StockQuantity 88 
+ ItemID 81538, SupplierWarehouse 1, Quantity 2 
+ ItemName boitdywnojnbgqbma, ItemAmount 182.82, StockQuantity 64 
+=============================================================================== 
+
+<20/20000> Tnx N: 234.65ms, retry: 0 times 
+Delivery wid:7 carrier:3oid:2367 cid:2123
+oid:2367 cid:1335
+oid:2367 cid:2178
+oid:2367 cid:1804
+oid:2367 cid:1969
+oid:2367 cid:2803
+oid:2367 cid:2244
+oid:2367 cid:2909
+oid:2367 cid:1429
+oid:2367 cid:1188
+<21/20000> Tnx D: 836.26ms, retry: 0 times 
+<22/20000> Tnx P: 45.32ms, retry: 0 times 
+Delivery wid:6 carrier:3oid:2339 cid:2178
+oid:2339 cid:2251
+oid:2339 cid:2029
+oid:2339 cid:2880
+oid:2339 cid:2510
+oid:2339 cid:1345
+oid:2339 cid:1681
+oid:2339 cid:979
+oid:2339 cid:1518
+oid:2339 cid:1179
+<23/20000> Tnx D: 816.20ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 2, CustomerID: 962 
+LastName EINGANTIOUGHT, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5244, OrderEntryDate: , NumberOfItems 
+TotalAmount 2121.5599822998047 
+ ItemID 5158, SupplierWarehouse 1, Quantity 2 
+ ItemName qdyxtmyrmyklqra, ItemAmount 195.1, StockQuantity 76 
+ ItemID 11974, SupplierWarehouse 1, Quantity 10 
+ ItemName qzleqzqypkzejof, ItemAmount 205.0, StockQuantity 96 
+ ItemID 40647, SupplierWarehouse 1, Quantity 8 
+ ItemName lenmrhzkcnfpovywezlpzoz, ItemAmount 658.64, StockQuantity 95 
+ ItemID 40671, SupplierWarehouse 1, Quantity 8 
+ ItemName ajyctxzfpzzvvyscdmvgnf, ItemAmount 429.36, StockQuantity 71 
+ ItemID 73447, SupplierWarehouse 1, Quantity 3 
+ ItemName oimxlrrgrfycwxafgfhwz, ItemAmount 260.84998, StockQuantity 23 
+ ItemID 76163, SupplierWarehouse 1, Quantity 4 
+ ItemName suxhzfcdewyscv, ItemAmount 293.44, StockQuantity 12 
+ ItemID 97863, SupplierWarehouse 1, Quantity 1 
+ ItemName gmuwbsaeaxzsm, ItemAmount 79.17, StockQuantity 14 
+=============================================================================== 
+
+<24/20000> Tnx N: 695.55ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 15 
+LastName BAROUGHTPRES, Credit: BC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5333, OrderEntryDate: , NumberOfItems 
+TotalAmount 4431.189950942993 
+ ItemID 28375, SupplierWarehouse 1, Quantity 3 
+ ItemName bgombqhwfvbvlbqbc, ItemAmount 38.760002, StockQuantity 89 
+ ItemID 87767, SupplierWarehouse 1, Quantity 8 
+ ItemName jvduockitxqlisie, ItemAmount 340.72, StockQuantity 13 
+ ItemID 81127, SupplierWarehouse 1, Quantity 4 
+ ItemName etchykjnuvwweayft, ItemAmount 212.12, StockQuantity 94 
+ ItemID 98015, SupplierWarehouse 1, Quantity 6 
+ ItemName putlysrphmqmqxu, ItemAmount 493.14, StockQuantity 67 
+ ItemID 36037, SupplierWarehouse 1, Quantity 9 
+ ItemName nwmrgsbpmwonykwuj, ItemAmount 521.45996, StockQuantity 12 
+ ItemID 97511, SupplierWarehouse 1, Quantity 4 
+ ItemName kteylylymtrquboaohr, ItemAmount 242.4, StockQuantity 63 
+ ItemID 13927, SupplierWarehouse 1, Quantity 1 
+ ItemName qfakmljdwfuzdwsflorn, ItemAmount 51.71, StockQuantity 18 
+ ItemID 24293, SupplierWarehouse 1, Quantity 7 
+ ItemName drjehdwbmzmixr, ItemAmount 602.91, StockQuantity 11 
+ ItemID 6102, SupplierWarehouse 1, Quantity 4 
+ ItemName eoxhbwtegdqjgyj, ItemAmount 101.8, StockQuantity 37 
+ ItemID 6165, SupplierWarehouse 1, Quantity 10 
+ ItemName zhrvqqvanikqrf, ItemAmount 434.90002, StockQuantity 94 
+ ItemID 6954, SupplierWarehouse 1, Quantity 1 
+ ItemName yjfigsdgxktoievrty, ItemAmount 75.2, StockQuantity 76 
+ ItemID 20835, SupplierWarehouse 1, Quantity 1 
+ ItemName hwgbiigiguiexfhyeft, ItemAmount 98.06, StockQuantity 61 
+ ItemID 40513, SupplierWarehouse 1, Quantity 3 
+ ItemName hbvdbbhqwtvmikdw, ItemAmount 4.17, StockQuantity 11 
+ ItemID 46439, SupplierWarehouse 1, Quantity 4 
+ ItemName icjgphtzbxwmuwncrygbya, ItemAmount 211.2, StockQuantity 104 
+ ItemID 49367, SupplierWarehouse 1, Quantity 4 
+ ItemName pqciavblctostnypv, ItemAmount 257.68, StockQuantity 77 
+ ItemID 53887, SupplierWarehouse 1, Quantity 2 
+ ItemName oogfqzleoxqhwmmfermmzav, ItemAmount 16.86, StockQuantity 20 
+ ItemID 57815, SupplierWarehouse 1, Quantity 6 
+ ItemName pdrzapvbppdpszp, ItemAmount 34.32, StockQuantity 86 
+ ItemID 73399, SupplierWarehouse 1, Quantity 7 
+ ItemName ututcmksjljqozn, ItemAmount 430.5, StockQuantity 38 
+ ItemID 79487, SupplierWarehouse 1, Quantity 8 
+ ItemName ebviraaynzuhqm, ItemAmount 263.28, StockQuantity 27 
+=============================================================================== 
+
+<25/20000> Tnx N: 477.08ms, retry: 0 times 
+Customer's name: huqmxyghqzuh OE PRESCALLYABLE, balance: 43969.280000
+last order id: 2114, entry datetime: 2021-08-27 09:50:34.886, carrier id: 5
+item id: 4679, warehouse id: 3, quantity: 5, price: 5883, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 28091, warehouse id: 3, quantity: 5, price: 3493, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 30044, warehouse id: 3, quantity: 5, price: 6857, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 33445, warehouse id: 3, quantity: 5, price: 2645, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 44625, warehouse id: 3, quantity: 5, price: 9397, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 48302, warehouse id: 3, quantity: 5, price: 2477, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 53741, warehouse id: 3, quantity: 5, price: 2452, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 56843, warehouse id: 3, quantity: 5, price: 2103, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 64595, warehouse id: 3, quantity: 5, price: 1938, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 67895, warehouse id: 3, quantity: 5, price: 676, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 87068, warehouse id: 3, quantity: 5, price: 269, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 88270, warehouse id: 3, quantity: 5, price: 3023, delivery datetime: 2021-10-31 20:14:44.954657
+
+item id: 97474, warehouse id: 3, quantity: 5, price: 2759, delivery datetime: 2021-10-31 20:14:44.954657
+
+<26/20000> Tnx O: 252.95ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 835 
+LastName ATIONPRIPRES, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5335, OrderEntryDate: , NumberOfItems 
+TotalAmount 2712.4600563049316 
+ ItemID 46559, SupplierWarehouse 1, Quantity 6 
+ ItemName sxrfxwfugbwgqckujusb, ItemAmount 378.54, StockQuantity 22 
+ ItemID 28389, SupplierWarehouse 1, Quantity 6 
+ ItemName vgtywxflwirtfhfoubebv, ItemAmount 437.88, StockQuantity 47 
+ ItemID 40360, SupplierWarehouse 1, Quantity 6 
+ ItemName vnbbumzkwppewepi, ItemAmount 97.5, StockQuantity 68 
+ ItemID 97923, SupplierWarehouse 1, Quantity 4 
+ ItemName glbzymzlsfaza, ItemAmount 385.08, StockQuantity 34 
+ ItemID 6118, SupplierWarehouse 1, Quantity 2 
+ ItemName puswvyhuozeqe, ItemAmount 156.8, StockQuantity 32 
+ ItemID 15591, SupplierWarehouse 1, Quantity 8 
+ ItemName epvaqyquonjnddzvafuol, ItemAmount 298.0, StockQuantity 85 
+ ItemID 46679, SupplierWarehouse 1, Quantity 3 
+ ItemName astozcwvaasvxybbrztkn, ItemAmount 33.9, StockQuantity 72 
+ ItemID 65125, SupplierWarehouse 1, Quantity 4 
+ ItemName zgcwuvwxbncfzjakwavsrnn, ItemAmount 29.08, StockQuantity 95 
+ ItemID 67111, SupplierWarehouse 1, Quantity 8 
+ ItemName ekwhokojnmyvbhhzqpaaelv, ItemAmount 40.48, StockQuantity 68 
+ ItemID 71395, SupplierWarehouse 1, Quantity 6 
+ ItemName hdkgeunasgqtochgs, ItemAmount 583.80005, StockQuantity 100 
+ ItemID 75943, SupplierWarehouse 1, Quantity 1 
+ ItemName triuupwthigvnqv, ItemAmount 18.81, StockQuantity 31 
+ ItemID 80087, SupplierWarehouse 1, Quantity 6 
+ ItemName bzqufedwcsglhicocydv, ItemAmount 111.54, StockQuantity 66 
+ ItemID 97758, SupplierWarehouse 5, Quantity 7 
+ ItemName pynxcvmxjnzmnathklvrr, ItemAmount 141.05, StockQuantity 69 
+=============================================================================== 
+
+<27/20000> Tnx N: 329.79ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 2291 
+LastName ANTIANTIATION, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5336, OrderEntryDate: , NumberOfItems 
+TotalAmount 3308.9700660705566 
+ ItemID 20675, SupplierWarehouse 1, Quantity 10 
+ ItemName qaequwnyjjvjbeishizpieb, ItemAmount 348.80002, StockQuantity 33 
+ ItemID 29027, SupplierWarehouse 1, Quantity 4 
+ ItemName dvycowoavtoyzvmlwwltaf, ItemAmount 59.52, StockQuantity 36 
+ ItemID 31719, SupplierWarehouse 1, Quantity 2 
+ ItemName olgftdtafsrddh, ItemAmount 121.12, StockQuantity 40 
+ ItemID 39905, SupplierWarehouse 1, Quantity 7 
+ ItemName kesoymeadcfajh, ItemAmount 694.68, StockQuantity 41 
+ ItemID 48311, SupplierWarehouse 1, Quantity 10 
+ ItemName gapinexuiuwguexkvvir, ItemAmount 578.10004, StockQuantity 66 
+ ItemID 65099, SupplierWarehouse 1, Quantity 3 
+ ItemName ibjeswwmbjqtexqriqzcxcs, ItemAmount 170.61, StockQuantity 78 
+ ItemID 65207, SupplierWarehouse 1, Quantity 9 
+ ItemName qhuygssbwfvxxkq, ItemAmount 652.14, StockQuantity 104 
+ ItemID 95451, SupplierWarehouse 1, Quantity 9 
+ ItemName xnqbdkqwurmaopiheoi, ItemAmount 684.0, StockQuantity 73 
+=============================================================================== 
+
+<28/20000> Tnx N: 307.61ms, retry: 0 times 
+WID: 9, DID: 7, Number of last orders: 11
+
+OID: 2992, O_ENTRY_D: 2021-08-27 09:50:39.429, Customer Name: uhvoykmkmvymq OE CALLYOUGHTCALLY
+Popular I_NAME: arkqptyfoxmqtcbfldbp, quantity: 5
+Popular I_NAME: jvrinzbevutissuwondfv, quantity: 5
+Popular I_NAME: bveetvrlzweivvbixt, quantity: 5
+Popular I_NAME: ugswffezslqojbpdko, quantity: 5
+Popular I_NAME: zlbcsceotjuual, quantity: 5
+Popular I_NAME: xrvgjynzttwfm, quantity: 5
+Popular I_NAME: auqlwylecmscnwh, quantity: 5
+Popular I_NAME: ukpwlqxjesqffgiaby, quantity: 5
+Popular I_NAME: ojtvrhkajikannktfp, quantity: 5
+Popular I_NAME: qkezoajdxweqgudr, quantity: 5
+Popular I_NAME: zvcgvxbbpatjrktblhlnuvl, quantity: 5
+Popular I_NAME: nyxuqimkoaxroc, quantity: 5
+Popular I_NAME: twazgqqfeavjhdbxmxtm, quantity: 5
+Popular I_NAME: udteuyqjnppnxca, quantity: 5
+
+OID: 2993, O_ENTRY_D: 2021-08-27 09:50:39.429, Customer Name: jafyuofb OE CALLYEINGANTI
+Popular I_NAME: kstlosyticpquzoof, quantity: 5
+Popular I_NAME: cvmxqgbxtjjxwfedkbyjcf, quantity: 5
+Popular I_NAME: ewssdxhkspqtgtfzggwup, quantity: 5
+Popular I_NAME: lsenmgpjjleulgkjgb, quantity: 5
+Popular I_NAME: kketlwtrokzjnct, quantity: 5
+
+OID: 2994, O_ENTRY_D: 2021-08-27 09:50:39.429, Customer Name: jdzcqwrwwps OE PRESBARATION
+Popular I_NAME: xintmdzvydppxpmz, quantity: 5
+Popular I_NAME: mwwbnselyagppd, quantity: 5
+Popular I_NAME: oejwyefiaehipz, quantity: 5
+Popular I_NAME: wppfupybradpp, quantity: 5
+Popular I_NAME: vsedfgzldkctnmchnond, quantity: 5
+Popular I_NAME: lttykcnuzltuhgpefto, quantity: 5
+Popular I_NAME: ulgnnrdeeobdohy, quantity: 5
+Popular I_NAME: vfdbvjwyivrgdq, quantity: 5
+
+OID: 2995, O_ENTRY_D: 2021-08-27 09:50:39.429, Customer Name: xopdsvwxp OE ABLEABLEBAR
+Popular I_NAME: ghubrzfekkdurceqx, quantity: 5
+Popular I_NAME: uwusvfkjcpatqqhqlmwt, quantity: 5
+Popular I_NAME: ohdpcuxjnxchxdygkn, quantity: 5
+Popular I_NAME: uzdlbgyqsnzzqmwbpwluu, quantity: 5
+Popular I_NAME: wnkknqhkeyvfwgfjkc, quantity: 5
+
+OID: 2996, O_ENTRY_D: 2021-08-27 09:50:39.429, Customer Name: iireebkmpxipilf OE EINGOUGHTPRES
+Popular I_NAME: tlmetpredsotqjghq, quantity: 5
+Popular I_NAME: olaymdddsvnbciiwhu, quantity: 5
+Popular I_NAME: rbmcvzxfnleklfdqsqqkzt, quantity: 5
+Popular I_NAME: taaqxpevqthehdy, quantity: 5
+Popular I_NAME: imchpvapxrxiqovlaieuky, quantity: 5
+Popular I_NAME: bcbnivdnxkvuhlkzlbdcsm, quantity: 5
+Popular I_NAME: lzsiljbnslysdtwxaf, quantity: 5
+Popular I_NAME: rmgeziqdkddyxejwjino, quantity: 5
+Popular I_NAME: zqxnwprrhpzxcha, quantity: 5
+Popular I_NAME: zbfionslhikqfhdumnnb, quantity: 5
+Popular I_NAME: trnzhbrtwngsa, quantity: 5
+Popular I_NAME: cpttakjmzjnge, quantity: 5
+
+OID: 2997, O_ENTRY_D: 2021-08-27 09:50:39.429, Customer Name: uboroaehzjhwjjl OE ATIONPRESPRI
+Popular I_NAME: dfbwemjrtupxi, quantity: 5
+Popular I_NAME: jditpmaqlsrlsu, quantity: 5
+Popular I_NAME: eampetgjzxfbpjkixiebnue, quantity: 5
+Popular I_NAME: beipvvwvtmyyjcmsxrqgxy, quantity: 5
+Popular I_NAME: uxohkbajfpuqkuz, quantity: 5
+Popular I_NAME: czhcycukdufnq, quantity: 5
+Popular I_NAME: winzdykegwptzdh, quantity: 5
+Popular I_NAME: cpoqwnlakvrwonkaff, quantity: 5
+Popular I_NAME: zggmjdxvfwlpeasix, quantity: 5
+Popular I_NAME: mhqueitvzkkmqxamu, quantity: 5
+Popular I_NAME: uzsizcggtvsyaqrbdeuhrl, quantity: 5
+Popular I_NAME: ziktejuyxfyary, quantity: 5
+Popular I_NAME: cyezjylnurmwoxit, quantity: 5
+Popular I_NAME: oxyehgtnchfixomajds, quantity: 5
+Popular I_NAME: zccfzlwouoxjyfh, quantity: 5
+Popular I_NAME: abgplnsmiscqid, quantity: 5
+Popular I_NAME: dcuntfqxseceqkcbpxy, quantity: 5
+Popular I_NAME: ysfhyvsshhrxmvzhuaxzrno, quantity: 5
+
+OID: 2998, O_ENTRY_D: 2021-08-27 09:50:39.429, Customer Name: xqacmuq OE ABLEOUGHTEING
+Popular I_NAME: uvhjytygdqqvynwhme, quantity: 5
+Popular I_NAME: rqemshslyskjeptsabfmj, quantity: 5
+Popular I_NAME: jeolfrhfqesjuqdkoddil, quantity: 5
+Popular I_NAME: bxfjgugsjhheny, quantity: 5
+Popular I_NAME: nczzioyywwlka, quantity: 5
+Popular I_NAME: iaepowjoghltr, quantity: 5
+Popular I_NAME: muifwbgngvzkhtsovya, quantity: 5
+Popular I_NAME: vefuqgyumnpiquqnrvhg, quantity: 5
+Popular I_NAME: nrbuxesfcwnuoqmbsreg, quantity: 5
+Popular I_NAME: smlxjxrdcxzjq, quantity: 5
+Popular I_NAME: nrhozmgyhctujdjlyrkaxvl, quantity: 5
+Popular I_NAME: xdezgpukjfvhbwgftilinsv, quantity: 5
+
+OID: 2999, O_ENTRY_D: 2021-08-27 09:50:39.429, Customer Name: rvtcydjdrepc OE EINGESEANTI
+Popular I_NAME: lqmnfabwkxixyv, quantity: 5
+Popular I_NAME: txzgfqbubheraiozjjvf, quantity: 5
+Popular I_NAME: tjoxfoigemtydwvacxxeq, quantity: 5
+Popular I_NAME: iribybmqsajbgejexvsv, quantity: 5
+Popular I_NAME: gjhsnemoidjnmcqcxxnqis, quantity: 5
+Popular I_NAME: vsqpmespurihwyaguettz, quantity: 5
+Popular I_NAME: tawusllgzesyvlpsatpt, quantity: 5
+
+OID: 3000, O_ENTRY_D: 2021-08-27 09:50:39.429, Customer Name: vlbykuqqyeori OE ATIONESEEING
+Popular I_NAME: eimrkolkbagwsznx, quantity: 5
+Popular I_NAME: qabpbxauwmiwmy, quantity: 5
+Popular I_NAME: fnrrarxsvkltvck, quantity: 5
+Popular I_NAME: fwjlwqmlmvgdzywdikh, quantity: 5
+Popular I_NAME: qekmaagzkqoued, quantity: 5
+
+OID: 2990, O_ENTRY_D: 2021-08-27 09:50:39.429, Customer Name: fzrjsewv OE ATIONABLEATION
+Popular I_NAME: qxxbhcbgvqqdktfqcak, quantity: 5
+Popular I_NAME: fqkfyftdmpopccvcfxxdri, quantity: 5
+Popular I_NAME: upqbrnkwkmsfhosodnrjxji, quantity: 5
+Popular I_NAME: jwyizicaopzjw, quantity: 5
+Popular I_NAME: yscfpvoekocow, quantity: 5
+Popular I_NAME: gsixxpldxengjn, quantity: 5
+Popular I_NAME: ujeiizywfrzslpc, quantity: 5
+Popular I_NAME: comhwdvyirtjhveqpbuuore, quantity: 5
+Popular I_NAME: gcyrncbkbtrwmjycl, quantity: 5
+Popular I_NAME: kamoeiguiqbjintzpvlo, quantity: 5
+Popular I_NAME: hcpvdbmxspyyd, quantity: 5
+Popular I_NAME: uymigylwfwumgmzdaopm, quantity: 5
+Popular I_NAME: envgmyogmysocfwueskxr, quantity: 5
+Popular I_NAME: iizagkltcwkwmkhiypx, quantity: 5
+Popular I_NAME: vongcueodgnsameyphms, quantity: 5
+Popular I_NAME: dksynopaljbqtlfjhje, quantity: 5
+Popular I_NAME: ihijylmywfnnudvnsje, quantity: 5
+Popular I_NAME: awesljoxyeanez, quantity: 5
+Popular I_NAME: ctiakhgnfzdoegvbzucwgs, quantity: 5
+
+OID: 2991, O_ENTRY_D: 2021-08-27 09:50:39.429, Customer Name: hkcexqwzo OE CALLYPRIBAR
+Popular I_NAME: cgdqiconasiutateyzxrz, quantity: 5
+Popular I_NAME: ddrtxtnprpqofbwqlvr, quantity: 5
+Popular I_NAME: bgdmubtzajdadlohlmdzp, quantity: 5
+Popular I_NAME: sztoqdbfyaacjxdvpglz, quantity: 5
+Popular I_NAME: yeygrbcoxbgsslnean, quantity: 5
+Popular I_NAME: hknxgibkowugw, quantity: 5
+Popular I_NAME: kzprhziilwdxwnn, quantity: 5
+Popular I_NAME: flyrusnsxiiybufbohhr, quantity: 5
+Popular I_NAME: mzyvjbotxqhfrzjpyqf, quantity: 5
+Popular I_NAME: ndalbebcpbucrk, quantity: 5
+Popular I_NAME: aykkcxpggmjcyn, quantity: 5
+Popular I_NAME: brobwahvyxsdy, quantity: 5
+
+Popular I_NAME: auqlwylecmscnwh, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: gjhsnemoidjnmcqcxxnqis, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: vsedfgzldkctnmchnond, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: uymigylwfwumgmzdaopm, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: hcpvdbmxspyyd, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: envgmyogmysocfwueskxr, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: dcuntfqxseceqkcbpxy, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: eampetgjzxfbpjkixiebnue, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: nrbuxesfcwnuoqmbsreg, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: eimrkolkbagwsznx, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: jvrinzbevutissuwondfv, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: uzdlbgyqsnzzqmwbpwluu, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: dksynopaljbqtlfjhje, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: tjoxfoigemtydwvacxxeq, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: zccfzlwouoxjyfh, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: xdezgpukjfvhbwgftilinsv, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: lsenmgpjjleulgkjgb, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ujeiizywfrzslpc, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ysfhyvsshhrxmvzhuaxzrno, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: vsqpmespurihwyaguettz, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: kstlosyticpquzoof, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: uxohkbajfpuqkuz, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: tlmetpredsotqjghq, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: cpttakjmzjnge, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: olaymdddsvnbciiwhu, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ziktejuyxfyary, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: qabpbxauwmiwmy, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: uwusvfkjcpatqqhqlmwt, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: jditpmaqlsrlsu, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: cgdqiconasiutateyzxrz, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: czhcycukdufnq, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ddrtxtnprpqofbwqlvr, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: tawusllgzesyvlpsatpt, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: upqbrnkwkmsfhosodnrjxji, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: nrhozmgyhctujdjlyrkaxvl, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: nyxuqimkoaxroc, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: abgplnsmiscqid, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: nczzioyywwlka, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: xrvgjynzttwfm, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ugswffezslqojbpdko, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: iaepowjoghltr, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: xintmdzvydppxpmz, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: rbmcvzxfnleklfdqsqqkzt, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: fwjlwqmlmvgdzywdikh, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: cyezjylnurmwoxit, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: bcbnivdnxkvuhlkzlbdcsm, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: jeolfrhfqesjuqdkoddil, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: mhqueitvzkkmqxamu, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: mzyvjbotxqhfrzjpyqf, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ndalbebcpbucrk, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: oxyehgtnchfixomajds, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: rmgeziqdkddyxejwjino, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: fqkfyftdmpopccvcfxxdri, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: jwyizicaopzjw, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: zvcgvxbbpatjrktblhlnuvl, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: bveetvrlzweivvbixt, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: wnkknqhkeyvfwgfjkc, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: qekmaagzkqoued, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: cvmxqgbxtjjxwfedkbyjcf, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: kketlwtrokzjnct, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ojtvrhkajikannktfp, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ulgnnrdeeobdohy, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ctiakhgnfzdoegvbzucwgs, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: winzdykegwptzdh, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ohdpcuxjnxchxdygkn, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: muifwbgngvzkhtsovya, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: brobwahvyxsdy, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: txzgfqbubheraiozjjvf, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: flyrusnsxiiybufbohhr, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: gsixxpldxengjn, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: zlbcsceotjuual, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: imchpvapxrxiqovlaieuky, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: twazgqqfeavjhdbxmxtm, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: rqemshslyskjeptsabfmj, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: iizagkltcwkwmkhiypx, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: vongcueodgnsameyphms, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: uzsizcggtvsyaqrbdeuhrl, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: gcyrncbkbtrwmjycl, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: lttykcnuzltuhgpefto, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: awesljoxyeanez, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: udteuyqjnppnxca, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: qxxbhcbgvqqdktfqcak, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: uvhjytygdqqvynwhme, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: bxfjgugsjhheny, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ewssdxhkspqtgtfzggwup, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: fnrrarxsvkltvck, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: aykkcxpggmjcyn, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: lqmnfabwkxixyv, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: iribybmqsajbgejexvsv, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: cpoqwnlakvrwonkaff, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: comhwdvyirtjhveqpbuuore, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: zggmjdxvfwlpeasix, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: smlxjxrdcxzjq, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: zbfionslhikqfhdumnnb, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: sztoqdbfyaacjxdvpglz, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ihijylmywfnnudvnsje, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: vefuqgyumnpiquqnrvhg, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: taaqxpevqthehdy, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: qkezoajdxweqgudr, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: dfbwemjrtupxi, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: beipvvwvtmyyjcmsxrqgxy, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: oejwyefiaehipz, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: bgdmubtzajdadlohlmdzp, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: zqxnwprrhpzxcha, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: yscfpvoekocow, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ukpwlqxjesqffgiaby, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: kamoeiguiqbjintzpvlo, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: ghubrzfekkdurceqx, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: arkqptyfoxmqtcbfldbp, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: wppfupybradpp, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: vfdbvjwyivrgdq, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: lzsiljbnslysdtwxaf, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: mwwbnselyagppd, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: trnzhbrtwngsa, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: hknxgibkowugw, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: yeygrbcoxbgsslnean, Percentage of Orders having Popular Items: 0.090909
+Popular I_NAME: kzprhziilwdxwnn, Percentage of Orders having Popular Items: 0.090909
+<29/20000> Tnx I: 761.79ms, retry: 0 times 
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635690246.749200000,0 too old; wrote at 1635690247.066431000,1: "sql txn" meta={id=d6a36cb4 pri=0.01821313 epo=0 ts=1635690247.066431000,1 min=1635690246.249200000,0 seq=0} lock=true stat=PENDING rts=1635690246.749200000,0 wto=false gul=1635690246.749200000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]
+ROLLBACK AND RETRY
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 43 
+LastName BARPRESABLE, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5341, OrderEntryDate: , NumberOfItems 
+TotalAmount 4276.259947776794 
+ ItemID 83363, SupplierWarehouse 1, Quantity 9 
+ ItemName ipuucqjoqyggimf, ItemAmount 470.52, StockQuantity 59 
+ ItemID 56755, SupplierWarehouse 1, Quantity 10 
+ ItemName kogqzwwhofhcg, ItemAmount 208.5, StockQuantity 88 
+ ItemID 65199, SupplierWarehouse 1, Quantity 7 
+ ItemName ntxfvjfrcsaisykzmaqgk, ItemAmount 214.06, StockQuantity 32 
+ ItemID 1535, SupplierWarehouse 1, Quantity 2 
+ ItemName ckyciebdsoztddkoivw, ItemAmount 107.04, StockQuantity 47 
+ ItemID 6069, SupplierWarehouse 1, Quantity 6 
+ ItemName chzyuuetbnbuougrtmqsmz, ItemAmount 304.8, StockQuantity 57 
+ ItemID 10982, SupplierWarehouse 1, Quantity 9 
+ ItemName svnkxkqwdyajglawqovuj, ItemAmount 11.97, StockQuantity 108 
+ ItemID 11879, SupplierWarehouse 1, Quantity 6 
+ ItemName wapaogzacpnyjmsclpyqoh, ItemAmount 389.16, StockQuantity 98 
+ ItemID 15415, SupplierWarehouse 1, Quantity 2 
+ ItemName crfpuwwgaflbkcmgrihy, ItemAmount 159.3, StockQuantity 76 
+ ItemID 15827, SupplierWarehouse 1, Quantity 7 
+ ItemName mvrgdsconoailgej, ItemAmount 114.799995, StockQuantity 23 
+ ItemID 15973, SupplierWarehouse 1, Quantity 3 
+ ItemName ponrkniyfrahx, ItemAmount 224.04001, StockQuantity 61 
+ ItemID 48725, SupplierWarehouse 1, Quantity 9 
+ ItemName evomndrtlbbuek, ItemAmount 724.23, StockQuantity 29 
+ ItemID 70359, SupplierWarehouse 1, Quantity 8 
+ ItemName tgnvpggaicricmj, ItemAmount 667.12, StockQuantity 100 
+ ItemID 76775, SupplierWarehouse 1, Quantity 4 
+ ItemName bcujymsulipueqsrqwmxinr, ItemAmount 202.52, StockQuantity 24 
+ ItemID 97686, SupplierWarehouse 1, Quantity 7 
+ ItemName jmlgnkthauwtys, ItemAmount 318.99, StockQuantity 33 
+ ItemID 97893, SupplierWarehouse 1, Quantity 3 
+ ItemName akphmbquckuaizkipmq, ItemAmount 159.20999, StockQuantity 87 
+=============================================================================== 
+
+<30/20000> Tnx N: 995.25ms, retry: 1 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 2, CustomerID: 75 
+LastName BARCALLYPRES, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5255, OrderEntryDate: , NumberOfItems 
+TotalAmount 2812.9299936294556 
+ ItemID 11229, SupplierWarehouse 1, Quantity 6 
+ ItemName chgoojsymfsjhuh, ItemAmount 309.96, StockQuantity 82 
+ ItemID 21222, SupplierWarehouse 1, Quantity 6 
+ ItemName tslsgsqqvgrnj, ItemAmount 59.46, StockQuantity 28 
+ ItemID 23271, SupplierWarehouse 1, Quantity 4 
+ ItemName qilomdaxsisgmkrejumzkei, ItemAmount 354.24, StockQuantity 51 
+ ItemID 30182, SupplierWarehouse 1, Quantity 2 
+ ItemName xpebewlkirivfns, ItemAmount 15.44, StockQuantity 95 
+ ItemID 45511, SupplierWarehouse 1, Quantity 3 
+ ItemName tkdcelonakcvmnxkjxxh, ItemAmount 37.41, StockQuantity 72 
+ ItemID 48346, SupplierWarehouse 1, Quantity 9 
+ ItemName tbapdhjalyjngkio, ItemAmount 650.07, StockQuantity 87 
+ ItemID 48790, SupplierWarehouse 1, Quantity 6 
+ ItemName ercpejdxawqjcqzoumb, ItemAmount 239.45999, StockQuantity 86 
+ ItemID 61919, SupplierWarehouse 1, Quantity 4 
+ ItemName nawqwrqnoeyoaephuv, ItemAmount 386.28, StockQuantity 36 
+ ItemID 65223, SupplierWarehouse 1, Quantity 10 
+ ItemName mhkmpnedphejrjmuoia, ItemAmount 493.1, StockQuantity 83 
+ ItemID 89414, SupplierWarehouse 1, Quantity 3 
+ ItemName glhugcbrmlzaaqohjrnyzev, ItemAmount 267.51, StockQuantity 33 
+=============================================================================== 
+
+<31/20000> Tnx N: 366.10ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 1251 
+LastName ATIONATIONBAR, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5343, OrderEntryDate: , NumberOfItems 
+TotalAmount 1908.4000396728516 
+ ItemID 4164, SupplierWarehouse 1, Quantity 4 
+ ItemName tukzepvjpcxizdqpan, ItemAmount 208.0, StockQuantity 48 
+ ItemID 14041, SupplierWarehouse 1, Quantity 8 
+ ItemName xgcuepnexyfzhsytsvnc, ItemAmount 758.4, StockQuantity 20 
+ ItemID 24175, SupplierWarehouse 1, Quantity 4 
+ ItemName tkzveippsanaqfzoshiw, ItemAmount 283.44, StockQuantity 39 
+ ItemID 48613, SupplierWarehouse 1, Quantity 9 
+ ItemName ytpuhtyrxowfcbtzj, ItemAmount 576.45, StockQuantity 32 
+ ItemID 60773, SupplierWarehouse 1, Quantity 7 
+ ItemName wpwdjqxdwptrjsq, ItemAmount 82.11, StockQuantity 76 
+=============================================================================== 
+
+<32/20000> Tnx N: 575.01ms, retry: 0 times 
+Delivery wid:1 carrier:10oid:2371 cid:520
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: ReadWithinUncertaintyIntervalError: read at time 1635690249.000538000,0 encountered previous write with future timestamp 1635690249.000538000,1 within uncertainty interval `t <= (local=1635690249.001878000,0, global=1635690249.500538000,0)`; observed timestamps: [{2 1635690249.000538000,0} {5 1635690249.001878000,0}]: "sql txn" meta={id=6afeb6cd pri=0.05239379 epo=0 ts=1635690249.000538000,0 min=1635690249.000538000,0 seq=0} lock=false stat=PENDING rts=1635690249.000538000,0 wto=false gul=1635690249.500538000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#readwithinuncertaintyinterval]
+ROLLBACK AND RETRY
+Delivery wid:1 carrier:10oid:2371 cid:520
+oid:2375 cid:618
+oid:2320 cid:2987
+oid:2320 cid:2007
+oid:2320 cid:2540
+oid:2320 cid:1149
+oid:2320 cid:399
+oid:2320 cid:1097
+oid:2320 cid:1590
+oid:2320 cid:896
+<33/20000> Tnx D: 1758.75ms, retry: 1 times 
+Delivery wid:2 carrier:9oid:2341 cid:941
+oid:2341 cid:30
+oid:2341 cid:97
+oid:2341 cid:1553
+oid:2341 cid:2284
+oid:2341 cid:339
+oid:2341 cid:253
+oid:2341 cid:2009
+oid:2341 cid:123
+oid:2341 cid:1290
+<34/20000> Tnx D: 1126.51ms, retry: 0 times 
+Delivery wid:10 carrier:9oid:2269 cid:876
+oid:2269 cid:2190
+oid:2269 cid:2356
+oid:2269 cid:65
+oid:2269 cid:157
+oid:2269 cid:1092
+oid:2269 cid:90
+oid:2269 cid:1262
+oid:2269 cid:589
+oid:2269 cid:2730
+<35/20000> Tnx D: 957.95ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 2683 
+LastName ABLEBARPRES, Credit: BC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5349, OrderEntryDate: , NumberOfItems 
+TotalAmount 1425.55002784729 
+ ItemID 4914, SupplierWarehouse 1, Quantity 9 
+ ItemName xegubekidqbep, ItemAmount 466.38, StockQuantity 65 
+ ItemID 14050, SupplierWarehouse 1, Quantity 8 
+ ItemName umamjxapzykfr, ItemAmount 80.16, StockQuantity 102 
+ ItemID 34023, SupplierWarehouse 1, Quantity 4 
+ ItemName wwlrhjncrcribt, ItemAmount 4.84, StockQuantity 61 
+ ItemID 72795, SupplierWarehouse 1, Quantity 2 
+ ItemName tvngzyosnahtl, ItemAmount 181.48, StockQuantity 40 
+ ItemID 76135, SupplierWarehouse 1, Quantity 4 
+ ItemName ppuypclwsyepljzgswxses, ItemAmount 107.44, StockQuantity 14 
+ ItemID 84582, SupplierWarehouse 1, Quantity 7 
+ ItemName ycbhphjolukmjzc, ItemAmount 16.449999, StockQuantity 18 
+ ItemID 97885, SupplierWarehouse 1, Quantity 2 
+ ItemName jjgbkrpolivmezlnyztg, ItemAmount 14.34, StockQuantity 99 
+ ItemID 98017, SupplierWarehouse 1, Quantity 6 
+ ItemName ulsybpjqrpukoze, ItemAmount 554.46, StockQuantity 68 
+=============================================================================== 
+
+<36/20000> Tnx N: 564.08ms, retry: 0 times 
+<37/20000> Tnx R: 3703.28ms, retry: 0 times 
+============================ Stock Level Transaction ============================ 
+Searching at Warehouse 9, District 3, Threshold 18, Last 16 items 
+Total number of low stock level items is 0 
+================================================================================= 
+<38/20000> Tnx S: 81.66ms, retry: 0 times 
+Delivery wid:7 carrier:9oid:2369 cid:2825
+oid:2369 cid:2556
+oid:2369 cid:586
+oid:2369 cid:2930
+oid:2369 cid:2290
+oid:2369 cid:1017
+oid:2369 cid:1963
+oid:2369 cid:630
+oid:2369 cid:2556
+oid:2369 cid:1140
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_SERIALIZABLE - failed preemptive refresh): "sql txn" meta={id=ae910b6b key=/Table/56/1/7/1/2825/0 pri=0.04059505 epo=3 ts=1635690255.726813000,1 min=1635690253.589317000,0 seq=131} lock=true stat=PENDING rts=1635690254.089317000,0 wto=false gul=1635690254.089317000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_serializable]
+ROLLBACK AND RETRY
+Delivery wid:7 carrier:9oid:2369 cid:2825
+oid:2369 cid:2556
+oid:2369 cid:586
+oid:2369 cid:2930
+oid:2369 cid:2290
+oid:2369 cid:1017
+oid:2369 cid:1963
+oid:2369 cid:630
+oid:2369 cid:2556
+oid:2369 cid:1140
+<39/20000> Tnx D: 2798.94ms, retry: 1 times 
+<40/20000> Tnx P: 75.17ms, retry: 0 times 
+<41/20000> Tnx P: 75.29ms, retry: 0 times 
+Delivery wid:2 carrier:8oid:2345 cid:2437
+oid:2345 cid:80
+oid:2345 cid:2208
+oid:2345 cid:1188
+oid:2345 cid:1902
+oid:2345 cid:503
+oid:2345 cid:715
+oid:2345 cid:235
+oid:2345 cid:668
+oid:2345 cid:396
+<42/20000> Tnx D: 975.39ms, retry: 0 times 
+Delivery wid:3 carrier:9oid:2359 cid:2635
+oid:2359 cid:1694
+oid:2359 cid:1402
+oid:2359 cid:918
+oid:2359 cid:737
+oid:2359 cid:1567
+oid:2359 cid:1843
+oid:2359 cid:632
+oid:2359 cid:1388
+oid:2359 cid:2104
+<43/20000> Tnx D: 888.66ms, retry: 0 times 
+============================ Stock Level Transaction ============================ 
+Searching at Warehouse 1, District 1, Threshold 16, Last 12 items 
+Total number of low stock level items is 0 
+================================================================================= 
+<44/20000> Tnx S: 102.53ms, retry: 0 times 
+Customer's name: uqkyukpssifp OE ABLEBARPRES, balance: -10.000000
+last order id: 1337, entry datetime: 2021-08-27 09:50:40.021, carrier id: 8
+item id: 5384, warehouse id: 10, quantity: 5, price: 103, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 6886, warehouse id: 10, quantity: 5, price: 63, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 6891, warehouse id: 10, quantity: 5, price: 30, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 14400, warehouse id: 10, quantity: 5, price: 75, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 18066, warehouse id: 10, quantity: 5, price: 121, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 32233, warehouse id: 10, quantity: 5, price: 19, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 33037, warehouse id: 10, quantity: 5, price: 198, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 38868, warehouse id: 10, quantity: 5, price: 129, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 47489, warehouse id: 10, quantity: 5, price: 57, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 73876, warehouse id: 10, quantity: 5, price: 125, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 81262, warehouse id: 10, quantity: 5, price: 17, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 81676, warehouse id: 10, quantity: 5, price: 116, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 86560, warehouse id: 10, quantity: 5, price: 108, delivery datetime: 2021-08-27 09:50:40.021
+
+item id: 99790, warehouse id: 10, quantity: 5, price: 35, delivery datetime: 2021-08-27 09:50:40.021
+
+<45/20000> Tnx O: 612.39ms, retry: 0 times 
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635690262.612069000,0 too old; wrote at 1635690263.392836000,1: "sql txn" meta={id=f7d7eb9d pri=0.00236509 epo=0 ts=1635690263.392836000,1 min=1635690262.612069000,0 seq=0} lock=true stat=PENDING rts=1635690262.612069000,0 wto=false gul=1635690263.112069000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]
+ROLLBACK AND RETRY
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 1539 
+LastName ANTIANTIABLE, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5372, OrderEntryDate: , NumberOfItems 
+TotalAmount 2639.4599981307983 
+ ItemID 48868, SupplierWarehouse 1, Quantity 1 
+ ItemName mbkudwcanhazrrvvkiladkw, ItemAmount 49.66, StockQuantity 34 
+ ItemID 89765, SupplierWarehouse 1, Quantity 5 
+ ItemName opxiomzoamyqmgqy, ItemAmount 220.7, StockQuantity 106 
+ ItemID 53079, SupplierWarehouse 1, Quantity 4 
+ ItemName bireigrsvbojmgdhldkycnf, ItemAmount 10.8, StockQuantity 69 
+ ItemID 6141, SupplierWarehouse 1, Quantity 3 
+ ItemName pyfsgcqmmopcarchdmr, ItemAmount 156.48, StockQuantity 45 
+ ItemID 12199, SupplierWarehouse 1, Quantity 2 
+ ItemName oyaiidbuahwepwmtsb, ItemAmount 22.94, StockQuantity 102 
+ ItemID 35805, SupplierWarehouse 1, Quantity 10 
+ ItemName bgdnkpyjehapxhukhv, ItemAmount 871.5, StockQuantity 51 
+ ItemID 48598, SupplierWarehouse 1, Quantity 8 
+ ItemName zkkowokioxbcuvqaupzf, ItemAmount 270.88, StockQuantity 63 
+ ItemID 48853, SupplierWarehouse 1, Quantity 3 
+ ItemName lydfzwllxnnmfipmblq, ItemAmount 223.76999, StockQuantity 40 
+ ItemID 56679, SupplierWarehouse 1, Quantity 6 
+ ItemName rvmtrrdtxlxzltuj, ItemAmount 326.40002, StockQuantity 69 
+ ItemID 61159, SupplierWarehouse 1, Quantity 3 
+ ItemName qkgptfsojiplxtn, ItemAmount 133.70999, StockQuantity 64 
+ ItemID 73242, SupplierWarehouse 1, Quantity 9 
+ ItemName oilqmuplhygwz, ItemAmount 117.0, StockQuantity 25 
+ ItemID 91495, SupplierWarehouse 1, Quantity 9 
+ ItemName qclsiteegninnbit, ItemAmount 235.62, StockQuantity 20 
+=============================================================================== 
+
+<46/20000> Tnx N: 1326.27ms, retry: 1 times 
+Customers with top balances
+Customer Name: pmyywockcaic OE ESEPRIANTI          	Balance: 138504.11   	Warehouse Name: skktees   	District Name: sysrnovgj 
+Customer Name: eggykzklcr OE PRICALLYANTI          	Balance: 138347.84   	Warehouse Name: qccrxfrr  	District Name: uvtdnx    
+Customer Name: dobxzbnr OE ANTIPRIANTI             	Balance: 138312.38   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: aqwddjfajsxpi OE PRIPRIABLE         	Balance: 135514.96   	Warehouse Name: amzkoudtw 	District Name: soclwubn  
+Customer Name: zuxqonjpzoxg OE ANTIESEABLE         	Balance: 135096.84   	Warehouse Name: sxvnjhpd  	District Name: myuchl    
+Customer Name: xhjxbplm OE ATIONANTIBAR            	Balance: 134546.58   	Warehouse Name: wdjmcbosy 	District Name: iblmyve   
+Customer Name: tcihhhovfzp OE ESEANTIPRI           	Balance: 134270.05   	Warehouse Name: cfljbep   	District Name: xkvjsine  
+Customer Name: ncunvqorcfzos OE CALLYBAROUGHT      	Balance: 133901.55   	Warehouse Name: pzkhk     	District Name: mzrfal    
+Customer Name: oxfoakim OE PRIPRESOUGHT            	Balance: 133755.90   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: qmcaarv OE PRESOUGHTABLE            	Balance: 132438.58   	Warehouse Name: bwaxabqr  	District Name: mrkfbxb   
+<47/20000> Tnx T: 1584.93ms, retry: 0 times 
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: ReadWithinUncertaintyIntervalError: read at time 1635690264.720269000,0 encountered previous write with future timestamp 1635690265.102552000,0 within uncertainty interval `t <= (local=1635690265.220269000,0, global=1635690265.220269000,0)`; observed timestamps: [{1 1635690264.721690000,1} {2 1635690264.720269000,0} {3 1635690265.890320000,0} {4 1635690264.721667000,1}]: "sql txn" meta={id=b0eb92c0 pri=0.00159461 epo=0 ts=1635690264.720269000,0 min=1635690264.720269000,0 seq=0} lock=false stat=PENDING rts=1635690264.720269000,0 wto=false gul=1635690265.220269000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#readwithinuncertaintyinterval]
+ROLLBACK AND RETRY
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 281 
+LastName ABLEATIONBAR, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5375, OrderEntryDate: , NumberOfItems 
+TotalAmount 6610.559984207153 
+ ItemID 77414, SupplierWarehouse 1, Quantity 10 
+ ItemName zxfehitqxpmxrdikvkrayz, ItemAmount 658.8, StockQuantity 90 
+ ItemID 87775, SupplierWarehouse 1, Quantity 10 
+ ItemName fecswxxuekbriavhgu, ItemAmount 931.5, StockQuantity 86 
+ ItemID 40383, SupplierWarehouse 1, Quantity 1 
+ ItemName muanhavhtlgwiymqlr, ItemAmount 11.18, StockQuantity 11 
+ ItemID 15915, SupplierWarehouse 1, Quantity 6 
+ ItemName jdczndujgynew, ItemAmount 212.40001, StockQuantity 76 
+ ItemID 36327, SupplierWarehouse 1, Quantity 7 
+ ItemName vyaytljltfbhbgjr, ItemAmount 354.13, StockQuantity 13 
+ ItemID 39049, SupplierWarehouse 1, Quantity 9 
+ ItemName steppkhaniwkz, ItemAmount 572.49, StockQuantity 74 
+ ItemID 89661, SupplierWarehouse 1, Quantity 8 
+ ItemName ldvlwrlhcplteebvexsic, ItemAmount 441.84, StockQuantity 31 
+ ItemID 9851, SupplierWarehouse 1, Quantity 4 
+ ItemName wronjrgejyughmbjgvmrpxz, ItemAmount 54.2, StockQuantity 46 
+ ItemID 5317, SupplierWarehouse 1, Quantity 6 
+ ItemName lmvpgcapjtlbi, ItemAmount 6.8999996, StockQuantity 78 
+ ItemID 5373, SupplierWarehouse 1, Quantity 3 
+ ItemName veldqsxazehlvw, ItemAmount 140.31, StockQuantity 79 
+ ItemID 8229, SupplierWarehouse 1, Quantity 3 
+ ItemName riazltfnugxchmdexx, ItemAmount 117.69, StockQuantity 107 
+ ItemID 13755, SupplierWarehouse 1, Quantity 6 
+ ItemName lzdxlwhswlhkcff, ItemAmount 550.26, StockQuantity 76 
+ ItemID 24270, SupplierWarehouse 6, Quantity 4 
+ ItemName xqevgvhxpsbwfsxvqba, ItemAmount 82.2, StockQuantity 80 
+ ItemID 31869, SupplierWarehouse 1, Quantity 10 
+ ItemName rsdtkzdiswatqedeqpn, ItemAmount 279.3, StockQuantity 44 
+ ItemID 32359, SupplierWarehouse 1, Quantity 6 
+ ItemName frahatqfbfdzjisb, ItemAmount 413.09998, StockQuantity 98 
+ ItemID 56807, SupplierWarehouse 1, Quantity 6 
+ ItemName vzffkgyfsjxwxrcelxynhb, ItemAmount 408.84, StockQuantity 35 
+ ItemID 62615, SupplierWarehouse 1, Quantity 4 
+ ItemName fpkyjtvormplg, ItemAmount 290.48, StockQuantity 35 
+ ItemID 81126, SupplierWarehouse 1, Quantity 6 
+ ItemName qyprwlctguqrj, ItemAmount 580.14, StockQuantity 78 
+ ItemID 89570, SupplierWarehouse 1, Quantity 4 
+ ItemName zzzrdynoejnefprfvmdldh, ItemAmount 153.04, StockQuantity 86 
+ ItemID 93653, SupplierWarehouse 1, Quantity 4 
+ ItemName enwvhqdwhhrqoiokmasc, ItemAmount 351.76, StockQuantity 89 
+=============================================================================== 
+
+<48/20000> Tnx N: 691.58ms, retry: 1 times 
+Delivery wid:6 carrier:3oid:2343 cid:2623
+oid:2343 cid:1385
+oid:2343 cid:2736
+oid:2343 cid:43
+oid:2343 cid:907
+oid:2343 cid:459
+oid:2343 cid:2890
+oid:2343 cid:737
+oid:2343 cid:1183
+oid:2343 cid:555
+<49/20000> Tnx D: 958.10ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 2271 
+LastName ESECALLYOUGHT, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5379, OrderEntryDate: , NumberOfItems 
+TotalAmount 3698.080020904541 
+ ItemID 73447, SupplierWarehouse 1, Quantity 2 
+ ItemName oimxlrrgrfycwxafgfhwz, ItemAmount 173.9, StockQuantity 21 
+ ItemID 81615, SupplierWarehouse 1, Quantity 8 
+ ItemName tpnfrxrvoshbm, ItemAmount 19.44, StockQuantity 36 
+ ItemID 59109, SupplierWarehouse 1, Quantity 4 
+ ItemName ixmdvhhrhlqii, ItemAmount 193.36, StockQuantity 100 
+ ItemID 5958, SupplierWarehouse 1, Quantity 2 
+ ItemName halkqzqcfvnfmydgudwpwd, ItemAmount 91.8, StockQuantity 24 
+ ItemID 11991, SupplierWarehouse 1, Quantity 5 
+ ItemName finhbulwpglen, ItemAmount 477.8, StockQuantity 57 
+ ItemID 15903, SupplierWarehouse 1, Quantity 4 
+ ItemName qbbzlxwbgtnjzeeclnhdydb, ItemAmount 127.84, StockQuantity 46 
+ ItemID 30343, SupplierWarehouse 1, Quantity 6 
+ ItemName absnkndsdpacjcndn, ItemAmount 411.36, StockQuantity 74 
+ ItemID 38631, SupplierWarehouse 1, Quantity 10 
+ ItemName erwgzedkyzkvslxa, ItemAmount 663.9, StockQuantity 87 
+ ItemID 48094, SupplierWarehouse 1, Quantity 3 
+ ItemName zqkbtykvqouovx, ItemAmount 38.37, StockQuantity 29 
+ ItemID 55767, SupplierWarehouse 1, Quantity 2 
+ ItemName iyktiqkumfaqxcowniqy, ItemAmount 30.06, StockQuantity 68 
+ ItemID 56753, SupplierWarehouse 1, Quantity 5 
+ ItemName qskkdirodruiwelutfdoprx, ItemAmount 353.15, StockQuantity 89 
+ ItemID 63975, SupplierWarehouse 1, Quantity 10 
+ ItemName vwfqrsuoinuqfjk, ItemAmount 771.9, StockQuantity 12 
+ ItemID 64103, SupplierWarehouse 1, Quantity 8 
+ ItemName nmqqrnbldzsphncm, ItemAmount 345.2, StockQuantity 29 
+=============================================================================== 
+
+<50/20000> Tnx N: 411.37ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 757 
+LastName CALLYESEANTI, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5380, OrderEntryDate: , NumberOfItems 
+TotalAmount 6686.599868059158 
+ ItemID 98022, SupplierWarehouse 1, Quantity 10 
+ ItemName plhaphteiumgrjkwulvfos, ItemAmount 609.19995, StockQuantity 86 
+ ItemID 36183, SupplierWarehouse 1, Quantity 1 
+ ItemName akrvbdzqcbwgxidq, ItemAmount 9.36, StockQuantity 48 
+ ItemID 81597, SupplierWarehouse 1, Quantity 9 
+ ItemName aonhztirzfijrxel, ItemAmount 298.98, StockQuantity 61 
+ ItemID 24294, SupplierWarehouse 1, Quantity 9 
+ ItemName aaftcndghdnfepo, ItemAmount 885.77997, StockQuantity 36 
+ ItemID 72802, SupplierWarehouse 1, Quantity 7 
+ ItemName pmepacwslzftw, ItemAmount 405.93002, StockQuantity 64 
+ ItemID 89831, SupplierWarehouse 1, Quantity 3 
+ ItemName zemhhmrgmjdjcuqlmpfif, ItemAmount 121.08, StockQuantity 11 
+ ItemID 52943, SupplierWarehouse 1, Quantity 10 
+ ItemName nwqmdkfgxalqusndhn, ItemAmount 258.0, StockQuantity 32 
+ ItemID 85671, SupplierWarehouse 1, Quantity 6 
+ ItemName ogenmwrcapjtvxkjkbmxqs, ItemAmount 541.98, StockQuantity 19 
+ ItemID 20183, SupplierWarehouse 1, Quantity 4 
+ ItemName hymzrkjpbaddvkocpoguwzs, ItemAmount 394.6, StockQuantity 22 
+ ItemID 23895, SupplierWarehouse 1, Quantity 9 
+ ItemName rhozzjfambfbvhedpgco, ItemAmount 583.11, StockQuantity 35 
+ ItemID 22999, SupplierWarehouse 1, Quantity 1 
+ ItemName bbytgoldcfbca, ItemAmount 77.8, StockQuantity 90 
+ ItemID 32447, SupplierWarehouse 1, Quantity 2 
+ ItemName depzwscuvrrqextugmlno, ItemAmount 42.08, StockQuantity 90 
+ ItemID 39590, SupplierWarehouse 1, Quantity 3 
+ ItemName uehhgakffdadn, ItemAmount 8.700001, StockQuantity 28 
+ ItemID 47503, SupplierWarehouse 1, Quantity 1 
+ ItemName vihbitegpovwafglltmkzo, ItemAmount 3.91, StockQuantity 61 
+ ItemID 48739, SupplierWarehouse 1, Quantity 6 
+ ItemName cnqcjollwipgqdfjurvvlak, ItemAmount 318.3, StockQuantity 65 
+ ItemID 59078, SupplierWarehouse 1, Quantity 9 
+ ItemName mnbipgqpjiqxgtroyeqpm, ItemAmount 654.75, StockQuantity 48 
+ ItemID 71335, SupplierWarehouse 1, Quantity 6 
+ ItemName cqqcfcvmogpaxer, ItemAmount 298.74, StockQuantity 19 
+ ItemID 84626, SupplierWarehouse 1, Quantity 10 
+ ItemName ktgrpzoehvoslosbhvei, ItemAmount 238.4, StockQuantity 42 
+ ItemID 87223, SupplierWarehouse 1, Quantity 10 
+ ItemName dufjgfhzxgmvokoywvoz, ItemAmount 935.89996, StockQuantity 65 
+=============================================================================== 
+
+<51/20000> Tnx N: 352.76ms, retry: 0 times 
+<52/20000> Tnx P: 60.40ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 68 
+LastName BARANTICALLY, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5381, OrderEntryDate: , NumberOfItems 
+TotalAmount 1794.5799741744995 
+ ItemID 5925, SupplierWarehouse 1, Quantity 1 
+ ItemName xssdouaviwnxhdiantymxng, ItemAmount 61.82, StockQuantity 84 
+ ItemID 13748, SupplierWarehouse 1, Quantity 9 
+ ItemName fadkaqquaxnpzm, ItemAmount 288.36002, StockQuantity 32 
+ ItemID 40671, SupplierWarehouse 1, Quantity 9 
+ ItemName ajyctxzfpzzvvyscdmvgnf, ItemAmount 483.02997, StockQuantity 59 
+ ItemID 48835, SupplierWarehouse 1, Quantity 7 
+ ItemName eovqdyqhmfyvntplgshs, ItemAmount 352.1, StockQuantity 89 
+ ItemID 56547, SupplierWarehouse 1, Quantity 2 
+ ItemName utpbexvpjkpmscbiunp, ItemAmount 54.22, StockQuantity 84 
+ ItemID 86717, SupplierWarehouse 1, Quantity 1 
+ ItemName kxnywxeckupbutzdibkn, ItemAmount 4.88, StockQuantity 52 
+ ItemID 95974, SupplierWarehouse 1, Quantity 9 
+ ItemName flxzbgkdurzmmqxxfaiiyli, ItemAmount 550.17, StockQuantity 59 
+=============================================================================== 
+
+<53/20000> Tnx N: 198.66ms, retry: 0 times 
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635690269.148793000,0 too old; wrote at 1635690269.148793000,2: "sql txn" meta={id=c40282ab pri=0.03547356 epo=0 ts=1635690269.148793000,2 min=1635690269.148793000,0 seq=0} lock=true stat=PENDING rts=1635690269.148793000,0 wto=false gul=1635690269.648793000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]
+ROLLBACK AND RETRY
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 761 
+LastName CALLYANTIBAR, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5384, OrderEntryDate: , NumberOfItems 
+TotalAmount 2435.930030822754 
+ ItemID 85445, SupplierWarehouse 1, Quantity 5 
+ ItemName hfudnhowrjgbky, ItemAmount 150.55, StockQuantity 45 
+ ItemID 16098, SupplierWarehouse 1, Quantity 10 
+ ItemName eqyehakjzegjmtpnzjnv, ItemAmount 674.4, StockQuantity 12 
+ ItemID 40639, SupplierWarehouse 1, Quantity 6 
+ ItemName vdjwilhipkxbmot, ItemAmount 26.099998, StockQuantity 109 
+ ItemID 43747, SupplierWarehouse 1, Quantity 10 
+ ItemName cchryvijbfeyvkipcqv, ItemAmount 270.8, StockQuantity 15 
+ ItemID 46551, SupplierWarehouse 1, Quantity 3 
+ ItemName htezdmuhblagtelmtsf, ItemAmount 226.68, StockQuantity 104 
+ ItemID 56738, SupplierWarehouse 1, Quantity 2 
+ ItemName mucjpvpekkrvznkpmyjufbk, ItemAmount 102.54, StockQuantity 92 
+ ItemID 61541, SupplierWarehouse 1, Quantity 5 
+ ItemName zqetqsmegmqummqumzk, ItemAmount 106.4, StockQuantity 19 
+ ItemID 80615, SupplierWarehouse 1, Quantity 9 
+ ItemName vpeklrmavbkysihghgu, ItemAmount 836.46, StockQuantity 68 
+ ItemID 98019, SupplierWarehouse 1, Quantity 3 
+ ItemName nzbrktssoeugnycixuar, ItemAmount 42.0, StockQuantity 86 
+=============================================================================== 
+
+<54/20000> Tnx N: 939.50ms, retry: 1 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 2, CustomerID: 2226 
+LastName PRESOUGHTABLE, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5300, OrderEntryDate: , NumberOfItems 
+TotalAmount 2184.1900329589844 
+ ItemID 11899, SupplierWarehouse 1, Quantity 9 
+ ItemName irovtdcktwbugdtiiiylac, ItemAmount 141.93001, StockQuantity 25 
+ ItemID 30884, SupplierWarehouse 1, Quantity 8 
+ ItemName sfhraslhwqslg, ItemAmount 135.2, StockQuantity 26 
+ ItemID 32305, SupplierWarehouse 1, Quantity 10 
+ ItemName ihusjqxyjqypibw, ItemAmount 508.2, StockQuantity 63 
+ ItemID 54746, SupplierWarehouse 1, Quantity 6 
+ ItemName ncrnddvvqulxphdequtxcaq, ItemAmount 266.04, StockQuantity 20 
+ ItemID 80987, SupplierWarehouse 1, Quantity 9 
+ ItemName ydxloruyiflgafafn, ItemAmount 373.86002, StockQuantity 65 
+ ItemID 89439, SupplierWarehouse 1, Quantity 6 
+ ItemName zchcuygzsenuvwajpv, ItemAmount 138.29999, StockQuantity 31 
+ ItemID 98007, SupplierWarehouse 1, Quantity 7 
+ ItemName lfnwlyoreqvqyuvfetem, ItemAmount 178.5, StockQuantity 66 
+ ItemID 98021, SupplierWarehouse 1, Quantity 8 
+ ItemName niqgiqsmjjmkismdtbic, ItemAmount 442.16, StockQuantity 81 
+=============================================================================== 
+
+<55/20000> Tnx N: 298.06ms, retry: 0 times 
+Customer's name: gnnnapibirhhwlq OE ESEEINGESE, balance: -10.000000
+last order id: 290, entry datetime: 2021-08-27 09:50:33.148, carrier id: 10
+item id: 10329, warehouse id: 1, quantity: 5, price: 164, delivery datetime: 2021-08-27 09:50:33.148
+
+item id: 23796, warehouse id: 1, quantity: 5, price: 181, delivery datetime: 2021-08-27 09:50:33.148
+
+item id: 38830, warehouse id: 1, quantity: 5, price: 45, delivery datetime: 2021-08-27 09:50:33.148
+
+item id: 53599, warehouse id: 1, quantity: 5, price: 52, delivery datetime: 2021-08-27 09:50:33.148
+
+item id: 54306, warehouse id: 1, quantity: 5, price: 51, delivery datetime: 2021-08-27 09:50:33.148
+
+item id: 69136, warehouse id: 1, quantity: 5, price: 144, delivery datetime: 2021-08-27 09:50:33.148
+
+item id: 70899, warehouse id: 1, quantity: 5, price: 136, delivery datetime: 2021-08-27 09:50:33.148
+
+item id: 75750, warehouse id: 1, quantity: 5, price: 1, delivery datetime: 2021-08-27 09:50:33.148
+
+item id: 77866, warehouse id: 1, quantity: 5, price: 145, delivery datetime: 2021-08-27 09:50:33.148
+
+item id: 81374, warehouse id: 1, quantity: 5, price: 168, delivery datetime: 2021-08-27 09:50:33.148
+
+item id: 81911, warehouse id: 1, quantity: 5, price: 133, delivery datetime: 2021-08-27 09:50:33.148
+
+item id: 88969, warehouse id: 1, quantity: 5, price: 194, delivery datetime: 2021-08-27 09:50:33.148
+
+<56/20000> Tnx O: 332.90ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 2, CustomerID: 67 
+LastName BARANTIANTI, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5302, OrderEntryDate: , NumberOfItems 
+TotalAmount 4073.390048980713 
+ ItemID 30439, SupplierWarehouse 1, Quantity 3 
+ ItemName otubyhcztoyxernmrxaehdc, ItemAmount 36.12, StockQuantity 19 
+ ItemID 47843, SupplierWarehouse 1, Quantity 10 
+ ItemName xmqznroemujjmzcs, ItemAmount 105.0, StockQuantity 101 
+ ItemID 39098, SupplierWarehouse 1, Quantity 10 
+ ItemName sjuttmigatuasulip, ItemAmount 61.300003, StockQuantity 101 
+ ItemID 68455, SupplierWarehouse 1, Quantity 6 
+ ItemName kdxtxrrqqkxyw, ItemAmount 241.92, StockQuantity 104 
+ ItemID 60775, SupplierWarehouse 1, Quantity 3 
+ ItemName hzvwxokefenaxfe, ItemAmount 156.54001, StockQuantity 82 
+ ItemID 70951, SupplierWarehouse 1, Quantity 10 
+ ItemName yaozmewrjqnknewzxydam, ItemAmount 231.90001, StockQuantity 38 
+ ItemID 97374, SupplierWarehouse 1, Quantity 8 
+ ItemName gtgrdpekkrwggqpol, ItemAmount 507.36, StockQuantity 86 
+ ItemID 47847, SupplierWarehouse 1, Quantity 10 
+ ItemName xphuofsordlqv, ItemAmount 188.6, StockQuantity 101 
+ ItemID 13795, SupplierWarehouse 1, Quantity 1 
+ ItemName dzacgnkoohqaw, ItemAmount 34.1, StockQuantity 108 
+ ItemID 23969, SupplierWarehouse 1, Quantity 2 
+ ItemName lfbdqquoirfnjkkkdltz, ItemAmount 34.1, StockQuantity 104 
+ ItemID 24291, SupplierWarehouse 1, Quantity 6 
+ ItemName numasintezcccps, ItemAmount 588.66003, StockQuantity 69 
+ ItemID 32227, SupplierWarehouse 1, Quantity 7 
+ ItemName kqokkynduahxymu, ItemAmount 326.97, StockQuantity 62 
+ ItemID 36442, SupplierWarehouse 1, Quantity 4 
+ ItemName aynfndvjzsqwsrona, ItemAmount 151.24, StockQuantity 45 
+ ItemID 46495, SupplierWarehouse 1, Quantity 6 
+ ItemName rykudixpftiydryjq, ItemAmount 223.62, StockQuantity 72 
+ ItemID 54981, SupplierWarehouse 1, Quantity 5 
+ ItemName azzejmrvxsxzfoswsggw, ItemAmount 107.45, StockQuantity 19 
+ ItemID 56807, SupplierWarehouse 1, Quantity 5 
+ ItemName vzffkgyfsjxwxrcelxynhb, ItemAmount 340.7, StockQuantity 30 
+ ItemID 66791, SupplierWarehouse 1, Quantity 10 
+ ItemName vgxqbpxgsimzotsvbr, ItemAmount 585.0, StockQuantity 64 
+ ItemID 88967, SupplierWarehouse 1, Quantity 7 
+ ItemName swcbynzmwzuvamkzkpbbf, ItemAmount 152.81, StockQuantity 30 
+=============================================================================== 
+
+<57/20000> Tnx N: 511.73ms, retry: 0 times 
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635690271.231655000,0 too old; wrote at 1635690271.231655000,2: "sql txn" meta={id=41a3ddef pri=0.00675069 epo=0 ts=1635690271.231655000,2 min=1635690271.231655000,0 seq=0} lock=true stat=PENDING rts=1635690271.231655000,0 wto=false gul=1635690271.731655000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]
+ROLLBACK AND RETRY
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 2, CustomerID: 199 
+LastName OUGHTEINGATION, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5305, OrderEntryDate: , NumberOfItems 
+TotalAmount 4158.799995422363 
+ ItemID 63475, SupplierWarehouse 1, Quantity 3 
+ ItemName olrwbmozeocoslrgyhuqon, ItemAmount 287.55, StockQuantity 52 
+ ItemID 44903, SupplierWarehouse 1, Quantity 1 
+ ItemName enqdebyzdnqfg, ItemAmount 58.63, StockQuantity 96 
+ ItemID 16101, SupplierWarehouse 1, Quantity 5 
+ ItemName tflbkglxfkkdclw, ItemAmount 376.95, StockQuantity 70 
+ ItemID 89767, SupplierWarehouse 1, Quantity 8 
+ ItemName smtcoogueshglknifryldol, ItemAmount 441.68, StockQuantity 67 
+ ItemID 48578, SupplierWarehouse 1, Quantity 4 
+ ItemName advhvqmrxwwbbno, ItemAmount 101.16, StockQuantity 60 
+ ItemID 1439, SupplierWarehouse 1, Quantity 3 
+ ItemName kmqdbfpsaizmghthazaqogx, ItemAmount 144.56999, StockQuantity 78 
+ ItemID 5191, SupplierWarehouse 1, Quantity 7 
+ ItemName ekvavaoigfauxujacdzhpps, ItemAmount 633.78, StockQuantity 17 
+ ItemID 5767, SupplierWarehouse 1, Quantity 4 
+ ItemName ieqdaligbfbvvyfltnwnywa, ItemAmount 252.36, StockQuantity 23 
+ ItemID 7679, SupplierWarehouse 1, Quantity 3 
+ ItemName dmjfdqbdepzskg, ItemAmount 13.02, StockQuantity 63 
+ ItemID 10054, SupplierWarehouse 1, Quantity 4 
+ ItemName gqocusqxydiszzmsiap, ItemAmount 188.88, StockQuantity 54 
+ ItemID 19847, SupplierWarehouse 1, Quantity 2 
+ ItemName amfjjytrlhfqffcravehsn, ItemAmount 141.9, StockQuantity 49 
+ ItemID 34535, SupplierWarehouse 1, Quantity 2 
+ ItemName fjxroinppxnuhd, ItemAmount 141.8, StockQuantity 54 
+ ItemID 40655, SupplierWarehouse 1, Quantity 9 
+ ItemName wpxdkgkvhjqnlxwlczej, ItemAmount 172.44, StockQuantity 85 
+ ItemID 48822, SupplierWarehouse 1, Quantity 6 
+ ItemName tsmxzlzcjpgiavbfytpce, ItemAmount 160.56, StockQuantity 55 
+ ItemID 56931, SupplierWarehouse 1, Quantity 1 
+ ItemName uedsbknqhoxjhvljwbrplug, ItemAmount 39.08, StockQuantity 90 
+ ItemID 94726, SupplierWarehouse 1, Quantity 4 
+ ItemName igymhpasqetpj, ItemAmount 204.84, StockQuantity 50 
+ ItemID 98006, SupplierWarehouse 1, Quantity 10 
+ ItemName swfpigokrocrvfvwdnoiux, ItemAmount 799.6, StockQuantity 19 
+=============================================================================== 
+
+<58/20000> Tnx N: 779.18ms, retry: 1 times 
+Delivery wid:7 carrier:8oid:2372 cid:2519
+oid:2372 cid:1407
+oid:2372 cid:1779
+oid:2372 cid:1375
+oid:2372 cid:2557
+oid:2372 cid:1163
+oid:2372 cid:772
+oid:2372 cid:1486
+oid:2372 cid:45
+oid:2372 cid:1300
+<59/20000> Tnx D: 765.01ms, retry: 0 times 
+CWID: 9, C_DID: 2, C_ID: 2221
+<60/20000> Tnx R: 5235.56ms, retry: 0 times 
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635690273.325294000,0 too old; wrote at 1635690277.680718000,1: "sql txn" meta={id=01cfea6d pri=0.03049592 epo=2 ts=1635690277.680718000,1 min=1635690272.825294000,0 seq=0} lock=true stat=PENDING rts=1635690273.325294000,0 wto=false gul=1635690273.325294000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]
+ROLLBACK AND RETRY
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 1531 
+LastName ESECALLYABLE, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5403, OrderEntryDate: , NumberOfItems 
+TotalAmount 4352.5900955200195 
+ ItemID 97655, SupplierWarehouse 1, Quantity 8 
+ ItemName rbgqtbswzdfbnxtc, ItemAmount 230.8, StockQuantity 82 
+ ItemID 47311, SupplierWarehouse 1, Quantity 6 
+ ItemName llmqaokcomlfybkd, ItemAmount 375.78, StockQuantity 78 
+ ItemID 3771, SupplierWarehouse 1, Quantity 7 
+ ItemName qtrkylipqppvklsaocu, ItemAmount 73.920006, StockQuantity 86 
+ ItemID 4671, SupplierWarehouse 1, Quantity 10 
+ ItemName elriollkibvqmhqqqxwtvjy, ItemAmount 491.1, StockQuantity 47 
+ ItemID 19175, SupplierWarehouse 1, Quantity 3 
+ ItemName azoizibsvyxdsps, ItemAmount 191.06999, StockQuantity 106 
+ ItemID 32357, SupplierWarehouse 1, Quantity 10 
+ ItemName gihklqsljkcjmagdteue, ItemAmount 692.60004, StockQuantity 71 
+ ItemID 32473, SupplierWarehouse 1, Quantity 4 
+ ItemName efmwiwujguebrsuofpqsm, ItemAmount 301.24, StockQuantity 63 
+ ItemID 34403, SupplierWarehouse 1, Quantity 10 
+ ItemName wangwvkzrfzuansiihydyg, ItemAmount 969.80005, StockQuantity 91 
+ ItemID 50309, SupplierWarehouse 1, Quantity 6 
+ ItemName jwhomyuquocooao, ItemAmount 114.240005, StockQuantity 68 
+ ItemID 65191, SupplierWarehouse 1, Quantity 5 
+ ItemName dpugzjjerghyljxkifw, ItemAmount 167.29999, StockQuantity 102 
+ ItemID 73047, SupplierWarehouse 1, Quantity 1 
+ ItemName wnupzfezxwwixk, ItemAmount 86.47, StockQuantity 67 
+ ItemID 98007, SupplierWarehouse 1, Quantity 10 
+ ItemName lfnwlyoreqvqyuvfetem, ItemAmount 255.0, StockQuantity 56 
+ ItemID 99803, SupplierWarehouse 1, Quantity 7 
+ ItemName lbpandqsicqcmwhrymf, ItemAmount 403.27002, StockQuantity 40 
+=============================================================================== 
+
+<61/20000> Tnx N: 673.77ms, retry: 1 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 2, CustomerID: 1195 
+LastName OUGHTOUGHTESE, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5316, OrderEntryDate: , NumberOfItems 
+TotalAmount 1716.9600505828857 
+ ItemID 57046, SupplierWarehouse 1, Quantity 5 
+ ItemName kqugkramfwqigmoozaif, ItemAmount 291.55002, StockQuantity 93 
+ ItemID 63170, SupplierWarehouse 1, Quantity 3 
+ ItemName mbxdbxaihbmkznzsyrjbt, ItemAmount 93.479996, StockQuantity 35 
+ ItemID 69187, SupplierWarehouse 1, Quantity 2 
+ ItemName coaxqmabjunsfsepcpogr, ItemAmount 167.32, StockQuantity 66 
+ ItemID 79334, SupplierWarehouse 1, Quantity 2 
+ ItemName zdiymojihcvezy, ItemAmount 40.6, StockQuantity 38 
+ ItemID 87751, SupplierWarehouse 1, Quantity 1 
+ ItemName jctdoptunmbivo, ItemAmount 13.01, StockQuantity 39 
+ ItemID 87782, SupplierWarehouse 1, Quantity 10 
+ ItemName iqzdyestvnhkg, ItemAmount 654.10004, StockQuantity 22 
+ ItemID 97487, SupplierWarehouse 1, Quantity 5 
+ ItemName masplsofdrmhhrdl, ItemAmount 456.9, StockQuantity 21 
+=============================================================================== 
+
+<62/20000> Tnx N: 141.00ms, retry: 0 times 
+<63/20000> Tnx R: 3434.15ms, retry: 0 times 
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635690278.985027000,0 too old; wrote at 1635690282.102733000,1: "sql txn" meta={id=678b1b42 pri=0.01042243 epo=1 ts=1635690282.102733000,1 min=1635690278.931020000,0 seq=0} lock=true stat=PENDING rts=1635690278.985027000,0 wto=false gul=1635690279.431020000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]
+ROLLBACK AND RETRY
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 2303 
+LastName PRESOUGHTABLE, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5415, OrderEntryDate: , NumberOfItems 
+TotalAmount 2975.229991912842 
+ ItemID 65125, SupplierWarehouse 1, Quantity 9 
+ ItemName zgcwuvwxbncfzjakwavsrnn, ItemAmount 65.43, StockQuantity 86 
+ ItemID 39030, SupplierWarehouse 1, Quantity 2 
+ ItemName nvlyykynixfogntvjyadj, ItemAmount 117.18, StockQuantity 30 
+ ItemID 807, SupplierWarehouse 1, Quantity 6 
+ ItemName jzpztptlarrmo, ItemAmount 368.04, StockQuantity 19 
+ ItemID 1724, SupplierWarehouse 1, Quantity 5 
+ ItemName myyfvklxmikczljzhpafv, ItemAmount 352.09998, StockQuantity 43 
+ ItemID 2090, SupplierWarehouse 1, Quantity 7 
+ ItemName hwpgrjuizwybcjimsmqjl, ItemAmount 213.5, StockQuantity 54 
+ ItemID 15079, SupplierWarehouse 1, Quantity 4 
+ ItemName pbzdtjfmhiiuojndjqlq, ItemAmount 211.44, StockQuantity 22 
+ ItemID 23903, SupplierWarehouse 1, Quantity 1 
+ ItemName knhwnpgwcmmacozvkbolj, ItemAmount 15.47, StockQuantity 69 
+ ItemID 29263, SupplierWarehouse 1, Quantity 7 
+ ItemName zxcxgmjxvbwtvongep, ItemAmount 612.5, StockQuantity 67 
+ ItemID 32487, SupplierWarehouse 1, Quantity 6 
+ ItemName sjrarklfmhelqnnny, ItemAmount 151.86, StockQuantity 57 
+ ItemID 48871, SupplierWarehouse 1, Quantity 7 
+ ItemName smdherkxclnus, ItemAmount 345.38, StockQuantity 97 
+ ItemID 63750, SupplierWarehouse 1, Quantity 1 
+ ItemName ydqerhwqnxofbyqelltntcz, ItemAmount 4.55, StockQuantity 76 
+ ItemID 64703, SupplierWarehouse 1, Quantity 2 
+ ItemName ygyfkmmgnsyddblinyt, ItemAmount 119.5, StockQuantity 13 
+ ItemID 73443, SupplierWarehouse 1, Quantity 9 
+ ItemName iitxyqbophllbuqxtjxpyzc, ItemAmount 214.92, StockQuantity 79 
+ ItemID 93861, SupplierWarehouse 1, Quantity 4 
+ ItemName fzosnganunadxpjo, ItemAmount 183.36, StockQuantity 20 
+=============================================================================== 
+
+<64/20000> Tnx N: 2038.47ms, retry: 1 times 
+Customers with top balances
+Customer Name: pmyywockcaic OE ESEPRIANTI          	Balance: 138504.11   	Warehouse Name: skktees   	District Name: sysrnovgj 
+Customer Name: eggykzklcr OE PRICALLYANTI          	Balance: 138347.84   	Warehouse Name: qccrxfrr  	District Name: uvtdnx    
+Customer Name: dobxzbnr OE ANTIPRIANTI             	Balance: 138312.38   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: aqwddjfajsxpi OE PRIPRIABLE         	Balance: 135514.96   	Warehouse Name: amzkoudtw 	District Name: soclwubn  
+Customer Name: zuxqonjpzoxg OE ANTIESEABLE         	Balance: 135096.84   	Warehouse Name: sxvnjhpd  	District Name: myuchl    
+Customer Name: xhjxbplm OE ATIONANTIBAR            	Balance: 134546.58   	Warehouse Name: wdjmcbosy 	District Name: iblmyve   
+Customer Name: tcihhhovfzp OE ESEANTIPRI           	Balance: 134270.05   	Warehouse Name: cfljbep   	District Name: xkvjsine  
+Customer Name: ncunvqorcfzos OE CALLYBAROUGHT      	Balance: 133901.55   	Warehouse Name: pzkhk     	District Name: mzrfal    
+Customer Name: oxfoakim OE PRIPRESOUGHT            	Balance: 133755.90   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: qmcaarv OE PRESOUGHTABLE            	Balance: 132438.58   	Warehouse Name: bwaxabqr  	District Name: mrkfbxb   
+<65/20000> Tnx T: 2132.80ms, retry: 0 times 
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_SERIALIZABLE - failed preemptive refresh): "sql txn" meta={id=911b50da key=/Table/53/1/10 pri=0.03423141 epo=0 ts=1635690286.600450000,1 min=1635690284.484366000,0 seq=3} lock=true stat=PENDING rts=1635690284.484366000,0 wto=false gul=1635690284.984366000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_serializable]
+ROLLBACK AND RETRY
+<66/20000> Tnx P: 307.37ms, retry: 1 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 954 
+LastName EINGESEPRI, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5418, OrderEntryDate: , NumberOfItems 
+TotalAmount 1956.789966583252 
+ ItemID 24290, SupplierWarehouse 1, Quantity 5 
+ ItemName fxfjgvtlpnkgqi, ItemAmount 297.55, StockQuantity 31 
+ ItemID 51940, SupplierWarehouse 1, Quantity 3 
+ ItemName fbcyfvrwqnvtggmyxne, ItemAmount 61.71, StockQuantity 12 
+ ItemID 56407, SupplierWarehouse 1, Quantity 10 
+ ItemName gliiptyubniztkmy, ItemAmount 802.39996, StockQuantity 90 
+ ItemID 73318, SupplierWarehouse 1, Quantity 1 
+ ItemName fcdmhspyaglxqiofncgz, ItemAmount 41.74, StockQuantity 25 
+ ItemID 86849, SupplierWarehouse 1, Quantity 9 
+ ItemName hxuztuuguxallnk, ItemAmount 753.39, StockQuantity 26 
+=============================================================================== 
+
+<67/20000> Tnx N: 203.30ms, retry: 0 times 
+Delivery wid:9 carrier:10oid:2313 cid:956
+oid:2313 cid:1185
+oid:2313 cid:2744
+oid:2313 cid:1619
+oid:2313 cid:1852
+oid:2313 cid:1033
+oid:2313 cid:1817
+oid:2313 cid:808
+oid:2313 cid:1462
+oid:2313 cid:267
+<68/20000> Tnx D: 865.80ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 1855 
+LastName ANTIANTIPRI, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5420, OrderEntryDate: , NumberOfItems 
+TotalAmount 5429.980056762695 
+ ItemID 97159, SupplierWarehouse 1, Quantity 7 
+ ItemName hswlyzjgbxpulee, ItemAmount 561.33, StockQuantity 20 
+ ItemID 38291, SupplierWarehouse 1, Quantity 10 
+ ItemName ozsvtpdtoyyjrsixbafmy, ItemAmount 915.0, StockQuantity 30 
+ ItemID 65217, SupplierWarehouse 1, Quantity 8 
+ ItemName cjrunxkxvmdwyzac, ItemAmount 402.24, StockQuantity 105 
+ ItemID 97639, SupplierWarehouse 1, Quantity 10 
+ ItemName lrurbiddrequfkiqv, ItemAmount 715.80005, StockQuantity 78 
+ ItemID 14119, SupplierWarehouse 1, Quantity 2 
+ ItemName eafzdedbrokkfsdedim, ItemAmount 66.1, StockQuantity 17 
+ ItemID 26059, SupplierWarehouse 1, Quantity 5 
+ ItemName sexmohvpvccgklvph, ItemAmount 347.0, StockQuantity 74 
+ ItemID 29371, SupplierWarehouse 1, Quantity 7 
+ ItemName hceuqrcsutjfozxbdngag, ItemAmount 422.94, StockQuantity 83 
+ ItemID 31445, SupplierWarehouse 1, Quantity 3 
+ ItemName rfvpkmaorrxlsam, ItemAmount 252.93, StockQuantity 65 
+ ItemID 32477, SupplierWarehouse 1, Quantity 5 
+ ItemName ybaovappryukafjhppnujw, ItemAmount 497.25, StockQuantity 107 
+ ItemID 40679, SupplierWarehouse 1, Quantity 6 
+ ItemName wflubafjiwgupva, ItemAmount 366.0, StockQuantity 41 
+ ItemID 48789, SupplierWarehouse 1, Quantity 3 
+ ItemName uoccnlkzzvnqq, ItemAmount 290.82, StockQuantity 23 
+ ItemID 64039, SupplierWarehouse 1, Quantity 1 
+ ItemName rdiwyemrndlieamjxhohvb, ItemAmount 88.35, StockQuantity 49 
+ ItemID 77023, SupplierWarehouse 1, Quantity 1 
+ ItemName xwseekazvvgvaa, ItemAmount 66.73, StockQuantity 52 
+ ItemID 86743, SupplierWarehouse 1, Quantity 4 
+ ItemName gvjatqriwjlmyunan, ItemAmount 366.12, StockQuantity 23 
+ ItemID 97755, SupplierWarehouse 1, Quantity 1 
+ ItemName fwgmaztrfdrokjhjcmyvlvt, ItemAmount 71.37, StockQuantity 74 
+=============================================================================== 
+
+<69/20000> Tnx N: 238.93ms, retry: 0 times 
+Customers with top balances
+Customer Name: pmyywockcaic OE ESEPRIANTI          	Balance: 138504.11   	Warehouse Name: skktees   	District Name: sysrnovgj 
+Customer Name: eggykzklcr OE PRICALLYANTI          	Balance: 138347.84   	Warehouse Name: qccrxfrr  	District Name: uvtdnx    
+Customer Name: dobxzbnr OE ANTIPRIANTI             	Balance: 138312.38   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: aqwddjfajsxpi OE PRIPRIABLE         	Balance: 135514.96   	Warehouse Name: amzkoudtw 	District Name: soclwubn  
+Customer Name: zuxqonjpzoxg OE ANTIESEABLE         	Balance: 135096.84   	Warehouse Name: sxvnjhpd  	District Name: myuchl    
+Customer Name: xhjxbplm OE ATIONANTIBAR            	Balance: 134546.58   	Warehouse Name: wdjmcbosy 	District Name: iblmyve   
+Customer Name: tcihhhovfzp OE ESEANTIPRI           	Balance: 134270.05   	Warehouse Name: cfljbep   	District Name: xkvjsine  
+Customer Name: ncunvqorcfzos OE CALLYBAROUGHT      	Balance: 133901.55   	Warehouse Name: pzkhk     	District Name: mzrfal    
+Customer Name: oxfoakim OE PRIPRESOUGHT            	Balance: 133755.90   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: qmcaarv OE PRESOUGHTABLE            	Balance: 132438.58   	Warehouse Name: bwaxabqr  	District Name: mrkfbxb   
+<70/20000> Tnx T: 1682.39ms, retry: 0 times 
+Delivery wid:10 carrier:10oid:2278 cid:2036
+oid:2278 cid:1480
+oid:2278 cid:1859
+oid:2278 cid:288
+oid:2278 cid:618
+oid:2278 cid:2912
+oid:2278 cid:1447
+oid:2278 cid:639
+oid:2278 cid:2218
+oid:2278 cid:1768
+<71/20000> Tnx D: 876.76ms, retry: 0 times 
+Delivery wid:1 carrier:9oid:2383 cid:2413
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: ReadWithinUncertaintyIntervalError: read at time 1635690290.945394000,0 encountered previous write with future timestamp 1635690290.947627000,0 within uncertainty interval `t <= (local=1635690290.949594000,0, global=1635690291.445394000,0)`; observed timestamps: [{2 1635690290.945394000,0} {3 1635690290.995577000,1} {5 1635690290.949594000,0}]: "sql txn" meta={id=a14f58ae pri=0.03994326 epo=0 ts=1635690290.945394000,0 min=1635690290.945394000,0 seq=8} lock=true stat=PENDING rts=1635690290.945394000,0 wto=false gul=1635690291.445394000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#readwithinuncertaintyinterval]
+ROLLBACK AND RETRY
+Delivery wid:1 carrier:9oid:2383 cid:2413
+oid:2391 cid:361
+oid:2331 cid:2204
+oid:2331 cid:720
+oid:2331 cid:2703
+oid:2331 cid:174
+oid:2331 cid:585
+oid:2331 cid:1851
+oid:2331 cid:2670
+oid:2331 cid:2915
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_SERIALIZABLE - failed preemptive refresh): "sql txn" meta={id=4c1640f6 key=/Table/56/1/1/1/2413/0 pri=0.00241688 epo=0 ts=1635690291.305635000,2 min=1635690291.250586000,0 seq=131} lock=true stat=PENDING rts=1635690291.250586000,0 wto=false gul=1635690291.750586000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_serializable]
+ROLLBACK AND RETRY
+Delivery wid:1 carrier:9oid:2383 cid:2413
+oid:2391 cid:361
+oid:2331 cid:2204
+oid:2331 cid:720
+oid:2331 cid:2703
+oid:2331 cid:174
+oid:2331 cid:585
+oid:2331 cid:1851
+oid:2331 cid:2670
+oid:2331 cid:2915
+<72/20000> Tnx D: 2796.93ms, retry: 2 times 
+============================ Stock Level Transaction ============================ 
+Searching at Warehouse 10, District 1, Threshold 15, Last 19 items 
+Total number of low stock level items is 0 
+================================================================================= 
+<73/20000> Tnx S: 10.78ms, retry: 0 times 
+Delivery wid:5 carrier:9oid:2295 cid:1556
+oid:2295 cid:2963
+oid:2295 cid:1048
+oid:2295 cid:1728
+oid:2295 cid:2706
+oid:2295 cid:2570
+oid:2295 cid:43
+oid:2295 cid:2299
+oid:2295 cid:961
+oid:2295 cid:2023
+<74/20000> Tnx D: 1120.50ms, retry: 0 times 
+<75/20000> Tnx P: 73.65ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 2, CustomerID: 1083 
+LastName PRESBARABLE, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5352, OrderEntryDate: , NumberOfItems 
+TotalAmount 2161.8299865722656 
+ ItemID 5124, SupplierWarehouse 1, Quantity 10 
+ ItemName mixzazswlvrpw, ItemAmount 293.9, StockQuantity 83 
+ ItemID 6119, SupplierWarehouse 1, Quantity 7 
+ ItemName cnolrbczbxuzfq, ItemAmount 124.18, StockQuantity 18 
+ ItemID 22715, SupplierWarehouse 1, Quantity 7 
+ ItemName qecccslytvtozstdnd, ItemAmount 382.69, StockQuantity 108 
+ ItemID 23135, SupplierWarehouse 1, Quantity 7 
+ ItemName elfxbojpucrqyof, ItemAmount 84.91, StockQuantity 49 
+ ItemID 41505, SupplierWarehouse 1, Quantity 3 
+ ItemName nwsoawbjaelahtdoxmu, ItemAmount 18.900002, StockQuantity 56 
+ ItemID 52967, SupplierWarehouse 1, Quantity 7 
+ ItemName dzubefaqpcxmohdynefc, ItemAmount 532.20996, StockQuantity 29 
+ ItemID 56935, SupplierWarehouse 1, Quantity 3 
+ ItemName quszojbbbmpjwx, ItemAmount 178.31999, StockQuantity 38 
+ ItemID 93791, SupplierWarehouse 1, Quantity 6 
+ ItemName rzpsuodphnkowrwm, ItemAmount 546.72003, StockQuantity 26 
+=============================================================================== 
+
+<76/20000> Tnx N: 237.50ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 2306 
+LastName PRESOUGHTABLE, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5443, OrderEntryDate: , NumberOfItems 
+TotalAmount 4070.6000175476074 
+ ItemID 58851, SupplierWarehouse 1, Quantity 3 
+ ItemName zeyqjwiknmjkktuvxcq, ItemAmount 84.39, StockQuantity 94 
+ ItemID 72263, SupplierWarehouse 1, Quantity 2 
+ ItemName dqximqsenwqlnemvurprtp, ItemAmount 27.54, StockQuantity 82 
+ ItemID 73383, SupplierWarehouse 1, Quantity 4 
+ ItemName uvqutpqyancuzvco, ItemAmount 126.8, StockQuantity 37 
+ ItemID 97365, SupplierWarehouse 1, Quantity 3 
+ ItemName tchzgdalocaksnrkthb, ItemAmount 22.23, StockQuantity 70 
+ ItemID 63697, SupplierWarehouse 1, Quantity 9 
+ ItemName aezqcvlgnrybjndecmzf, ItemAmount 494.01, StockQuantity 83 
+ ItemID 23, SupplierWarehouse 1, Quantity 6 
+ ItemName rdjjeodspobkrsq, ItemAmount 143.70001, StockQuantity 68 
+ ItemID 1055, SupplierWarehouse 1, Quantity 5 
+ ItemName uubtxmxtbdjllsxelnudexs, ItemAmount 129.5, StockQuantity 73 
+ ItemID 2119, SupplierWarehouse 1, Quantity 2 
+ ItemName zohxvhvfmwpaskbiwvsmoo, ItemAmount 139.22, StockQuantity 64 
+ ItemID 6199, SupplierWarehouse 1, Quantity 4 
+ ItemName xhvlfktguivprmsvykb, ItemAmount 207.0, StockQuantity 64 
+ ItemID 12463, SupplierWarehouse 1, Quantity 5 
+ ItemName lqaguuwddtmmeqbmxn, ItemAmount 476.25, StockQuantity 49 
+ ItemID 14055, SupplierWarehouse 1, Quantity 10 
+ ItemName qnauuagfpgzhqqfbpglgsg, ItemAmount 116.0, StockQuantity 56 
+ ItemID 14949, SupplierWarehouse 1, Quantity 6 
+ ItemName ehhifmyuzfyuhkss, ItemAmount 286.13998, StockQuantity 43 
+ ItemID 31461, SupplierWarehouse 1, Quantity 5 
+ ItemName usuqilqahdeowya, ItemAmount 464.45, StockQuantity 82 
+ ItemID 64672, SupplierWarehouse 1, Quantity 3 
+ ItemName ylqxicohhcnzdlgouekr, ItemAmount 259.65002, StockQuantity 26 
+ ItemID 75378, SupplierWarehouse 1, Quantity 7 
+ ItemName uxxerlqtxdihgkxtq, ItemAmount 289.59, StockQuantity 85 
+ ItemID 76135, SupplierWarehouse 1, Quantity 4 
+ ItemName ppuypclwsyepljzgswxses, ItemAmount 107.44, StockQuantity 10 
+ ItemID 88612, SupplierWarehouse 1, Quantity 3 
+ ItemName yvqszaesccwfqylsao, ItemAmount 268.74, StockQuantity 40 
+ ItemID 89631, SupplierWarehouse 1, Quantity 9 
+ ItemName kurgvlugwajesqcxkl, ItemAmount 427.94998, StockQuantity 97 
+=============================================================================== 
+
+<77/20000> Tnx N: 543.05ms, retry: 0 times 
+Delivery wid:6 carrier:8oid:2349 cid:9
+oid:2349 cid:2276
+oid:2349 cid:2399
+oid:2349 cid:250
+oid:2349 cid:561
+oid:2349 cid:1518
+oid:2349 cid:301
+oid:2349 cid:2682
+oid:2349 cid:354
+oid:2349 cid:2401
+<78/20000> Tnx D: 1058.02ms, retry: 0 times 
+Customers with top balances
+Customer Name: pmyywockcaic OE ESEPRIANTI          	Balance: 138504.11   	Warehouse Name: skktees   	District Name: sysrnovgj 
+Customer Name: eggykzklcr OE PRICALLYANTI          	Balance: 138347.84   	Warehouse Name: qccrxfrr  	District Name: uvtdnx    
+Customer Name: dobxzbnr OE ANTIPRIANTI             	Balance: 138312.38   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: aqwddjfajsxpi OE PRIPRIABLE         	Balance: 135514.96   	Warehouse Name: amzkoudtw 	District Name: soclwubn  
+Customer Name: zuxqonjpzoxg OE ANTIESEABLE         	Balance: 135096.84   	Warehouse Name: sxvnjhpd  	District Name: myuchl    
+Customer Name: xhjxbplm OE ATIONANTIBAR            	Balance: 134546.58   	Warehouse Name: wdjmcbosy 	District Name: iblmyve   
+Customer Name: tcihhhovfzp OE ESEANTIPRI           	Balance: 134270.05   	Warehouse Name: cfljbep   	District Name: xkvjsine  
+Customer Name: ncunvqorcfzos OE CALLYBAROUGHT      	Balance: 133901.55   	Warehouse Name: pzkhk     	District Name: mzrfal    
+Customer Name: oxfoakim OE PRIPRESOUGHT            	Balance: 133755.90   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: qmcaarv OE PRESOUGHTABLE            	Balance: 132438.58   	Warehouse Name: bwaxabqr  	District Name: mrkfbxb   
+<79/20000> Tnx T: 672.87ms, retry: 0 times 
+Delivery wid:8 carrier:7SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: ReadWithinUncertaintyIntervalError: read at time 1635690297.077037000,0 encountered previous write with future timestamp 1635690297.077037000,1 within uncertainty interval `t <= (local=1635690297.577037000,0, global=1635690297.577037000,0)`; observed timestamps: [{1 1635690297.077803000,0} {2 1635690297.077037000,0} {3 1635690297.633676000,0} {4 1635690297.077876000,0} {5 1635690297.738865000,0}]: "sql txn" meta={id=11ba97d1 pri=0.00862824 epo=0 ts=1635690297.077037000,0 min=1635690297.077037000,0 seq=0} lock=false stat=PENDING rts=1635690297.077037000,0 wto=false gul=1635690297.577037000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#readwithinuncertaintyinterval]
+ROLLBACK AND RETRY
+Delivery wid:8 carrier:7oid:2383 cid:2413
+oid:2383 cid:480
+oid:2383 cid:463
+oid:2383 cid:2185
+oid:2383 cid:748
+oid:2383 cid:2898
+oid:2383 cid:2861
+oid:2383 cid:1667
+oid:2383 cid:1849
+oid:2383 cid:955
+<80/20000> Tnx D: 2131.03ms, retry: 1 times 
+<81/20000> Tnx P: 65.15ms, retry: 0 times 
+Customers with top balances
+Customer Name: pmyywockcaic OE ESEPRIANTI          	Balance: 138504.11   	Warehouse Name: skktees   	District Name: sysrnovgj 
+Customer Name: eggykzklcr OE PRICALLYANTI          	Balance: 138347.84   	Warehouse Name: qccrxfrr  	District Name: uvtdnx    
+Customer Name: dobxzbnr OE ANTIPRIANTI             	Balance: 138312.38   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: aqwddjfajsxpi OE PRIPRIABLE         	Balance: 135514.96   	Warehouse Name: amzkoudtw 	District Name: soclwubn  
+Customer Name: zuxqonjpzoxg OE ANTIESEABLE         	Balance: 135096.84   	Warehouse Name: sxvnjhpd  	District Name: myuchl    
+Customer Name: xhjxbplm OE ATIONANTIBAR            	Balance: 134546.58   	Warehouse Name: wdjmcbosy 	District Name: iblmyve   
+Customer Name: tcihhhovfzp OE ESEANTIPRI           	Balance: 134270.05   	Warehouse Name: cfljbep   	District Name: xkvjsine  
+Customer Name: ncunvqorcfzos OE CALLYBAROUGHT      	Balance: 133901.55   	Warehouse Name: pzkhk     	District Name: mzrfal    
+Customer Name: oxfoakim OE PRIPRESOUGHT            	Balance: 133755.90   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: qmcaarv OE PRESOUGHTABLE            	Balance: 132438.58   	Warehouse Name: bwaxabqr  	District Name: mrkfbxb   
+<82/20000> Tnx T: 1129.41ms, retry: 0 times 
+SQL Error! sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635690299.947459000,0 too old; wrote at 1635690300.658117000,1: "sql txn" meta={id=f2e0d3e8 pri=0.00937646 epo=0 ts=1635690300.658117000,1 min=1635690299.947459000,0 seq=0} lock=true stat=PENDING rts=1635690299.947459000,0 wto=false gul=1635690300.447459000,0
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]
+ROLLBACK AND RETRY
+<83/20000> Tnx P: 319.76ms, retry: 1 times 
+Customer's name: jqbivannkb OE OUGHTEINGANTI, balance: -10.000000
+last order id: 1997, entry datetime: 2021-08-27 09:50:36.609, carrier id: 9
+item id: 2957, warehouse id: 5, quantity: 5, price: 68, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 3224, warehouse id: 5, quantity: 5, price: 173, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 14283, warehouse id: 5, quantity: 5, price: 44, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 18802, warehouse id: 5, quantity: 5, price: 198, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 21490, warehouse id: 5, quantity: 5, price: 153, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 28054, warehouse id: 5, quantity: 5, price: 142, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 38241, warehouse id: 5, quantity: 5, price: 135, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 44973, warehouse id: 5, quantity: 5, price: 136, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 46131, warehouse id: 5, quantity: 5, price: 118, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 53358, warehouse id: 5, quantity: 5, price: 171, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 56185, warehouse id: 5, quantity: 5, price: 103, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 64103, warehouse id: 5, quantity: 5, price: 89, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 69537, warehouse id: 5, quantity: 5, price: 79, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 71392, warehouse id: 5, quantity: 5, price: 129, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 74803, warehouse id: 5, quantity: 5, price: 41, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 74811, warehouse id: 5, quantity: 5, price: 9, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 75512, warehouse id: 5, quantity: 5, price: 165, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 81412, warehouse id: 5, quantity: 5, price: 43, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 88301, warehouse id: 5, quantity: 5, price: 54, delivery datetime: 2021-08-27 09:50:36.609
+
+item id: 91926, warehouse id: 5, quantity: 5, price: 133, delivery datetime: 2021-08-27 09:50:36.609
+
+<84/20000> Tnx O: 109.16ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 2, CustomerID: 321 
+LastName PRIABLEBAR, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5369, OrderEntryDate: , NumberOfItems 
+TotalAmount 3304.6699752807617 
+ ItemID 6142, SupplierWarehouse 1, Quantity 7 
+ ItemName fqpmgnwuvrfvckuhwv, ItemAmount 83.579994, StockQuantity 47 
+ ItemID 24239, SupplierWarehouse 1, Quantity 9 
+ ItemName pqeviwgleixhxsc, ItemAmount 301.94998, StockQuantity 108 
+ ItemID 40663, SupplierWarehouse 1, Quantity 8 
+ ItemName hzmbvcjjnmvqlrhtfnym, ItemAmount 760.56, StockQuantity 47 
+ ItemID 70823, SupplierWarehouse 1, Quantity 9 
+ ItemName yvjqhuvfxybunyf, ItemAmount 585.45, StockQuantity 54 
+ ItemID 80948, SupplierWarehouse 1, Quantity 10 
+ ItemName sdntgotvkrtkwoe, ItemAmount 233.3, StockQuantity 13 
+ ItemID 81446, SupplierWarehouse 1, Quantity 5 
+ ItemName pjjjbybydzhepvbljlgb, ItemAmount 297.6, StockQuantity 105 
+ ItemID 89815, SupplierWarehouse 1, Quantity 10 
+ ItemName ooyvbxlohsqdlcdqqcmczr, ItemAmount 521.5, StockQuantity 20 
+ ItemID 97957, SupplierWarehouse 1, Quantity 7 
+ ItemName gjhtvwjmpblefiyfhtqzsb, ItemAmount 520.73, StockQuantity 20 
+=============================================================================== 
+
+<85/20000> Tnx N: 209.98ms, retry: 0 times 
+Customer's name: nyroyfrfk OE ANTIANTIATION, balance: -10.000000
+last order id: 431, entry datetime: 2021-08-27 09:50:38.197, carrier id: 3
+item id: 3617, warehouse id: 7, quantity: 5, price: 55, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 6698, warehouse id: 7, quantity: 5, price: 53, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 18504, warehouse id: 7, quantity: 5, price: 157, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 22741, warehouse id: 7, quantity: 5, price: 39, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 22755, warehouse id: 7, quantity: 5, price: 150, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 23046, warehouse id: 7, quantity: 5, price: 147, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 29082, warehouse id: 7, quantity: 5, price: 122, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 29132, warehouse id: 7, quantity: 5, price: 120, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 33946, warehouse id: 7, quantity: 5, price: 31, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 45820, warehouse id: 7, quantity: 5, price: 154, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 50089, warehouse id: 7, quantity: 5, price: 117, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 53561, warehouse id: 7, quantity: 5, price: 66, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 54567, warehouse id: 7, quantity: 5, price: 186, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 55801, warehouse id: 7, quantity: 5, price: 28, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 69491, warehouse id: 7, quantity: 5, price: 31, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 74820, warehouse id: 7, quantity: 5, price: 198, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 82712, warehouse id: 7, quantity: 5, price: 195, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 85927, warehouse id: 7, quantity: 5, price: 155, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 87744, warehouse id: 7, quantity: 5, price: 171, delivery datetime: 2021-08-27 09:50:38.197
+
+item id: 93490, warehouse id: 7, quantity: 5, price: 30, delivery datetime: 2021-08-27 09:50:38.197
+
+<86/20000> Tnx O: 24.28ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 1281 
+LastName BAREINGBAR, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5457, OrderEntryDate: , NumberOfItems 
+TotalAmount 3069.2699661254883 
+ ItemID 10298, SupplierWarehouse 1, Quantity 5 
+ ItemName rbhufckhjswsbw, ItemAmount 291.3, StockQuantity 87 
+ ItemID 20192, SupplierWarehouse 1, Quantity 2 
+ ItemName lqhjndqmvrmfiwwcsnh, ItemAmount 104.54, StockQuantity 89 
+ ItemID 31207, SupplierWarehouse 1, Quantity 8 
+ ItemName ckskxngimdlguhulrvg, ItemAmount 607.2, StockQuantity 13 
+ ItemID 56935, SupplierWarehouse 1, Quantity 10 
+ ItemName quszojbbbmpjwx, ItemAmount 594.39996, StockQuantity 24 
+ ItemID 78559, SupplierWarehouse 1, Quantity 10 
+ ItemName bcazznvamcwfpvuwyeqle, ItemAmount 752.5, StockQuantity 69 
+ ItemID 81091, SupplierWarehouse 1, Quantity 10 
+ ItemName dwfghvruywkivflrdt, ItemAmount 629.0, StockQuantity 96 
+ ItemID 85671, SupplierWarehouse 1, Quantity 1 
+ ItemName ogenmwrcapjtvxkjkbmxqs, ItemAmount 90.33, StockQuantity 18 
+=============================================================================== 
+
+<87/20000> Tnx N: 579.61ms, retry: 0 times 
+Customer's name: psvijandwwy OE OUGHTOUGHTABLE, balance: -10.000000
+last order id: 2729, entry datetime: 2021-08-27 09:50:39.626, carrier id: 0
+item id: 10859, warehouse id: 9, quantity: 5, price: 6206, delivery datetime: null
+
+item id: 21163, warehouse id: 9, quantity: 5, price: 7727, delivery datetime: null
+
+item id: 22415, warehouse id: 9, quantity: 5, price: 4408, delivery datetime: null
+
+item id: 48468, warehouse id: 9, quantity: 5, price: 3923, delivery datetime: null
+
+item id: 49435, warehouse id: 9, quantity: 5, price: 1043, delivery datetime: null
+
+item id: 50638, warehouse id: 9, quantity: 5, price: 4962, delivery datetime: null
+
+item id: 54469, warehouse id: 9, quantity: 5, price: 4287, delivery datetime: null
+
+item id: 54844, warehouse id: 9, quantity: 5, price: 5905, delivery datetime: null
+
+item id: 72093, warehouse id: 9, quantity: 5, price: 7440, delivery datetime: null
+
+item id: 73536, warehouse id: 9, quantity: 5, price: 1523, delivery datetime: null
+
+item id: 75216, warehouse id: 9, quantity: 5, price: 2088, delivery datetime: null
+
+item id: 80914, warehouse id: 9, quantity: 5, price: 3871, delivery datetime: null
+
+item id: 83962, warehouse id: 9, quantity: 5, price: 9255, delivery datetime: null
+
+item id: 92227, warehouse id: 9, quantity: 5, price: 4327, delivery datetime: null
+
+<88/20000> Tnx O: 83.20ms, retry: 0 times 
+============================ Stock Level Transaction ============================ 
+Searching at Warehouse 3, District 9, Threshold 18, Last 13 items 
+Total number of low stock level items is 0 
+================================================================================= 
+<89/20000> Tnx S: 4.45ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 765 
+LastName CALLYANTIPRES, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5459, OrderEntryDate: , NumberOfItems 
+TotalAmount 5850.629858970642 
+ ItemID 80467, SupplierWarehouse 1, Quantity 8 
+ ItemName powpsqvejdwbyggox, ItemAmount 367.76, StockQuantity 45 
+ ItemID 85778, SupplierWarehouse 1, Quantity 3 
+ ItemName lmixforwegirlbqnglts, ItemAmount 179.45999, StockQuantity 43 
+ ItemID 96690, SupplierWarehouse 1, Quantity 6 
+ ItemName gizkevrukvstsm, ItemAmount 448.44, StockQuantity 104 
+ ItemID 97414, SupplierWarehouse 1, Quantity 9 
+ ItemName habouqinamsifadz, ItemAmount 387.44998, StockQuantity 56 
+ ItemID 39801, SupplierWarehouse 1, Quantity 1 
+ ItemName wablimnfttbbdbfz, ItemAmount 19.71, StockQuantity 35 
+ ItemID 97719, SupplierWarehouse 1, Quantity 2 
+ ItemName xqdguievhqbwbusgbxuhbfe, ItemAmount 188.04, StockQuantity 90 
+ ItemID 44371, SupplierWarehouse 1, Quantity 1 
+ ItemName gvzqqeufoaitnhlanazfdxd, ItemAmount 4.17, StockQuantity 26 
+ ItemID 67255, SupplierWarehouse 1, Quantity 7 
+ ItemName eeornjlcnokysvzfszhu, ItemAmount 416.08, StockQuantity 17 
+ ItemID 9343, SupplierWarehouse 1, Quantity 7 
+ ItemName cxhhavzunlkniatdfbkqf, ItemAmount 678.23, StockQuantity 15 
+ ItemID 15079, SupplierWarehouse 1, Quantity 6 
+ ItemName pbzdtjfmhiiuojndjqlq, ItemAmount 317.16, StockQuantity 10 
+ ItemID 24262, SupplierWarehouse 1, Quantity 6 
+ ItemName enpldwvvmjguacohm, ItemAmount 581.33997, StockQuantity 49 
+ ItemID 29855, SupplierWarehouse 1, Quantity 7 
+ ItemName dxcvzdpnenkqqkxx, ItemAmount 302.33, StockQuantity 41 
+ ItemID 32483, SupplierWarehouse 1, Quantity 7 
+ ItemName eqpmgdgionxhkpydxrbac, ItemAmount 161.42, StockQuantity 64 
+ ItemID 38555, SupplierWarehouse 1, Quantity 7 
+ ItemName eenfrvsquueiwxuaqen, ItemAmount 519.39996, StockQuantity 31 
+ ItemID 73280, SupplierWarehouse 1, Quantity 9 
+ ItemName xuhichmoxuvmpteu, ItemAmount 716.04, StockQuantity 93 
+ ItemID 73367, SupplierWarehouse 1, Quantity 2 
+ ItemName qdfbnowycrwwhl, ItemAmount 6.8, StockQuantity 108 
+ ItemID 76499, SupplierWarehouse 1, Quantity 3 
+ ItemName emzsscnzqokozutp, ItemAmount 179.70001, StockQuantity 96 
+ ItemID 87212, SupplierWarehouse 1, Quantity 8 
+ ItemName naxokqekcrppk, ItemAmount 185.52, StockQuantity 31 
+ ItemID 99987, SupplierWarehouse 1, Quantity 2 
+ ItemName siywqhkhjzfyqgmx, ItemAmount 191.58, StockQuantity 77 
+=============================================================================== 
+
+<90/20000> Tnx N: 223.21ms, retry: 0 times 
+<91/20000> Tnx P: 57.15ms, retry: 0 times 
+Delivery wid:5 carrier:3oid:2298 cid:873
+oid:2298 cid:2945
+oid:2298 cid:200
+oid:2298 cid:652
+oid:2298 cid:2665
+oid:2298 cid:837
+oid:2298 cid:1444
+oid:2298 cid:1494
+oid:2298 cid:1322
+oid:2298 cid:782
+<92/20000> Tnx D: 712.65ms, retry: 0 times 
+Delivery wid:2 carrier:3oid:2355 cid:2260
+oid:2355 cid:1570
+oid:2355 cid:1003
+oid:2355 cid:288
+oid:2355 cid:227
+oid:2355 cid:1110
+oid:2355 cid:66
+oid:2355 cid:2628
+oid:2355 cid:95
+oid:2355 cid:2919
+<93/20000> Tnx D: 835.74ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 1277 
+LastName OUGHTATIONBAR, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5464, OrderEntryDate: , NumberOfItems 
+TotalAmount 3578.209987640381 
+ ItemID 8573, SupplierWarehouse 1, Quantity 7 
+ ItemName kjuzzgdjgnccoxangqz, ItemAmount 398.44, StockQuantity 38 
+ ItemID 11255, SupplierWarehouse 1, Quantity 7 
+ ItemName amwgftzbauaqjnjlmwxjmc, ItemAmount 580.44, StockQuantity 69 
+ ItemID 18406, SupplierWarehouse 1, Quantity 9 
+ ItemName paarwddbmmosebmukuowgo, ItemAmount 884.88, StockQuantity 92 
+ ItemID 31191, SupplierWarehouse 1, Quantity 7 
+ ItemName nbesoeajhrdkpluni, ItemAmount 427.63, StockQuantity 69 
+ ItemID 36579, SupplierWarehouse 1, Quantity 3 
+ ItemName esyptyuqdfmozmsikvvw, ItemAmount 283.62, StockQuantity 26 
+ ItemID 41702, SupplierWarehouse 1, Quantity 5 
+ ItemName czfildawntxngdjwgn, ItemAmount 139.4, StockQuantity 76 
+ ItemID 56550, SupplierWarehouse 1, Quantity 1 
+ ItemName qqlldaaxnbzxijazrhiaoof, ItemAmount 98.32, StockQuantity 99 
+ ItemID 63068, SupplierWarehouse 1, Quantity 4 
+ ItemName njtsdcwuhqranehzrq, ItemAmount 62.84, StockQuantity 101 
+ ItemID 66391, SupplierWarehouse 1, Quantity 10 
+ ItemName pvimtsrfogybbhdjmi, ItemAmount 309.8, StockQuantity 29 
+ ItemID 81381, SupplierWarehouse 1, Quantity 4 
+ ItemName qpltywcncecrkdmcnv, ItemAmount 392.84, StockQuantity 61 
+=============================================================================== 
+
+<94/20000> Tnx N: 145.45ms, retry: 0 times 
+============================ New Order Transactions ============================ 
+WarehouseID 1, DistrictID: 1, CustomerID: 290 
+LastName ABLEATIONEING, Credit: GC, Discount: 0.0 
+WarehouseTaxRate 0.0, DistrictTaxRate: 0.0 
+OrderID 5465, OrderEntryDate: , NumberOfItems 
+TotalAmount 1200.1600074768066 
+ ItemID 6799, SupplierWarehouse 1, Quantity 1 
+ ItemName opktnrltbysvqj, ItemAmount 41.23, StockQuantity 10 
+ ItemID 52631, SupplierWarehouse 1, Quantity 7 
+ ItemName ukvpimmtyfqysbc, ItemAmount 634.83, StockQuantity 16 
+ ItemID 63557, SupplierWarehouse 1, Quantity 6 
+ ItemName xtpfljnnpzivrssx, ItemAmount 267.18, StockQuantity 103 
+ ItemID 73168, SupplierWarehouse 1, Quantity 4 
+ ItemName aklsmftsovrdelserhao, ItemAmount 45.64, StockQuantity 91 
+ ItemID 73407, SupplierWarehouse 1, Quantity 2 
+ ItemName ybikkpjeeakcssov, ItemAmount 119.86, StockQuantity 54 
+ ItemID 80455, SupplierWarehouse 1, Quantity 1 
+ ItemName lwwtukteuekmethcixyilqh, ItemAmount 91.42, StockQuantity 59 
+=============================================================================== 
+
+<95/20000> Tnx N: 132.59ms, retry: 0 times 
+Delivery wid:4 carrier:10oid:2407 cid:1539
+oid:2407 cid:1993
+oid:2407 cid:2296
+oid:2407 cid:433
+oid:2407 cid:1999
+oid:2407 cid:2526
+oid:2407 cid:1505
+oid:2407 cid:1839
+oid:2407 cid:142
+oid:2407 cid:1578
+<96/20000> Tnx D: 711.90ms, retry: 0 times 
+<97/20000> Tnx P: 60.95ms, retry: 0 times 
+Delivery wid:10 carrier:9oid:2284 cid:2943
+oid:2284 cid:433
+oid:2284 cid:2578
+oid:2284 cid:2300
+oid:2284 cid:2110
+oid:2284 cid:700
+oid:2284 cid:148
+oid:2284 cid:1902
+oid:2284 cid:2177
+oid:2284 cid:683
+<98/20000> Tnx D: 617.60ms, retry: 0 times 
+<99/20000> Tnx P: 43.94ms, retry: 0 times 
+Delivery wid:9 carrier:9oid:2316 cid:2710
+oid:2316 cid:1382
+oid:2316 cid:2067
+oid:2316 cid:696
+oid:2316 cid:2634
+oid:2316 cid:118
+oid:2316 cid:1753
+oid:2316 cid:213
+oid:2316 cid:629
+oid:2316 cid:1288
+<100/20000> Tnx D: 565.27ms, retry: 0 times 
+========================Statistics========================
+4.451089859008789
+5235.5615234375
+Total 100 transactions, execution time 74.70s, avg latency 720.43ms, throughput 1.34 query/s,
+median latency 564.67ms, 95th percentile latency 2132.80ms, 95th percentile latency 3703.28ms  
+
+Txn P: avg latency 116.77ms, retry 0.19 times  
+Txn R: avg latency 4124.33ms, retry 0.00 times  
+Txn S: avg latency 49.86ms, retry 0.00 times  
+Txn D: avg latency 1040.96ms, retry 0.17 times  
+Txn T: avg latency 1401.41ms, retry 0.00 times  
+Txn I: avg latency 583.70ms, retry 0.00 times  
+Txn N: avg latency 483.04ms, retry 0.21 times  
+Txn O: avg latency 235.81ms, retry 0.00 times  
+
+==========================================================
+Successfully wrote results to out/cockroachdb-A-local.csv!

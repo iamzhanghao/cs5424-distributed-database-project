@@ -1,0 +1,509 @@
+_______________________________Important_Message________________________________
+
+CRYPTOCURRENCY MINING, PASSWORD CRACKING, NETWORK SCANNING prohibited.
+
+NO BACKUP for homedirs. Please do OWN BACKUP. User homedir quota 500G.
+
+LIST of hardware <https://dochub.comp.nus.edu.sg/cf/guides/compute-cluster/hardware>
+
+USE /temp local-to-node storage for faster computation! Remember to SAVE your results!
+
+Reserved till 10 Nov 2021 : xcnd26-29 (CS4225/CS5425)
+
+Reserved 4 Oct - 12 Nov 2021 : xgpf0-9 (CS3244)
+
+Reserved 27 Aug - 19 Nov 2021 : xgpg0-2 (CS4248)
+
+Reserved till 20 Nov 2021 : xcne5-7 (CS2106)
+
+Reserved till 20 Nov 2021 : xcne3-4 (CS3210)
+
+Reserved 20 Sep -  20 Nov 2021 : xgpc0-7, xgpd0-7 (CS3210)
+
+Reserved till 1 Dec 2021 : xcnc1-10,12-17 (TIC4005)
+
+Reserved 23 Aug - 5 Dec 2021 : xcnc20-49, xcnd30-59 (CS4224/CS5424)
+
+Reserved till 5 Dec 2021 : xcnb14 (FYP)
+
+Reserved till 20 Dec 2021 : xgpe2-11 (CS4246/CS5446)
+
+Reserved till 30 Apr 2022 : xgpb1 (FYP)
+
+Reserved till 30 Apr 2022 : xcne0 (CS3213)
+
+Reserved till 4 Dec 2021 : xgpc8 (CS1010S)
+
+Reserved till 26 Nov 2021 : xcne1-2 (CS3103)
+
+Reserved till 30 Nov 2021 : cpga0-2
+
+Reserved till 7 Nov 2021 : xgpg3
+
+Reserved till 30 Nov 2021 : xgpe1, xgpd9
+
+Reserved till 30 Nov 2021 : xgpg7, xgpg8
+
+************************************************************
+
+
+xgpc and xgpd nodes are now running Ubuntu 20.04 (with CUDA 11.2)
+************************************************************
+
+Offline: xcna15, xcnb15, xcnd9, xcnd11, xgpb2, xcne0
+
+--------------------------------------------------------------------------------
+
+/home/stuproj/cs4224c/cs5424-distributed-database-project
+Running on host: xcnd31.comp.nus.edu.sg:26267
+Ready to read Xact file project_files/xact_files_A/10.txt
+Delivery wid:8 carrier:6oid:2108 cid:1908
+oid:2108 cid:2092
+oid:2108 cid:1835
+oid:2108 cid:3
+oid:2108 cid:2581
+oid:2108 cid:1384
+oid:2108 cid:2315
+oid:2108 cid:1057
+oid:2108 cid:2896
+oid:2108 cid:352
+<1/20000> Tnx D: 251ms 
+Customers with top balances
+Customer Name: ichrsluutmcvcn OE PRESBARABLE       	Balance: 131751.12   	Warehouse Name: amzkoudtw 	District Name: ajfywt    
+Customer Name: kohyfbjdrxmq OE OUGHTCALLYABLE      	Balance: 131331.34   	Warehouse Name: bwaxabqr  	District Name: ucjqympbt 
+Customer Name: vsvrxfawnpmjiae OE OUGHTATIONBAR    	Balance: 121412.55   	Warehouse Name: skktees   	District Name: mzzfwqbe  
+Customer Name: ehmumjzgzv OE BARANTIBAR            	Balance: 120876.27   	Warehouse Name: cfljbep   	District Name: xpuvppg   
+Customer Name: sgjmrjukgehmyi OE ABLEOUGHTATION    	Balance: 119979.91   	Warehouse Name: skktees   	District Name: xnroyngk  
+Customer Name: zybnbeq OE ESEPRESATION             	Balance: 119829.71   	Warehouse Name: qccrxfrr  	District Name: uvtdnx    
+Customer Name: rxnoxdb OE ESEANTIPRES              	Balance: 119468.89   	Warehouse Name: amzkoudtw 	District Name: soclwubn  
+Customer Name: wcmfgfqa OE BARESEOUGHT             	Balance: 117798.13   	Warehouse Name: qccrxfrr  	District Name: rmmxgdts  
+Customer Name: brcferpbcjvaptd OE PRESBARPRES      	Balance: 116537.44   	Warehouse Name: wdjmcbosy 	District Name: dxuadjtoa 
+Customer Name: lixhmswlef OE ANTIPRESPRI           	Balance: 116170.37   	Warehouse Name: cfljbep   	District Name: bnsvx     
+<2/20000> Tnx T: 811ms 
+Delivery wid:6 carrier:3oid:2109 cid:342
+oid:2109 cid:1648
+oid:2109 cid:19
+oid:2109 cid:2870
+oid:2109 cid:930
+oid:2109 cid:1058
+oid:2109 cid:273
+oid:2109 cid:2243
+oid:2109 cid:459
+oid:2109 cid:551
+<3/20000> Tnx D: 172ms 
+<4/20000> Tnx N: 0ms 
+Delivery wid:9 carrier:2oid:2105 cid:1272
+oid:2105 cid:151
+oid:2105 cid:2370
+oid:2105 cid:670
+oid:2105 cid:2845
+oid:2105 cid:960
+oid:2105 cid:943
+oid:2105 cid:1199
+oid:2105 cid:2204
+oid:2105 cid:1651
+<5/20000> Tnx D: 161ms 
+<6/20000> Tnx N: 1ms 
+<7/20000> Tnx P: 9ms 
+<8/20000> Tnx N: 1ms 
+Delivery wid:10 carrier:2oid:2102 cid:1297
+oid:2102 cid:2314
+oid:2102 cid:2019
+oid:2102 cid:346
+oid:2102 cid:2952
+oid:2102 cid:2031
+oid:2102 cid:2098
+oid:2102 cid:203
+oid:2102 cid:571
+oid:2102 cid:2632
+<9/20000> Tnx D: 161ms 
+Customer's name: azrfgzdhpw OE PRIATIONBAR, balance: -10.000000
+last order id: 1195, entry datetime: 2021-08-27 09:50:34.392, carrier id: 2
+item id: 3294, warehouse id: 2, quantity: 5, price: 172, delivery datetime: 2021-08-27 09:50:34.392
+
+item id: 4971, warehouse id: 2, quantity: 5, price: 180, delivery datetime: 2021-08-27 09:50:34.392
+
+item id: 18483, warehouse id: 2, quantity: 5, price: 174, delivery datetime: 2021-08-27 09:50:34.392
+
+item id: 42131, warehouse id: 2, quantity: 5, price: 110, delivery datetime: 2021-08-27 09:50:34.392
+
+item id: 53714, warehouse id: 2, quantity: 5, price: 148, delivery datetime: 2021-08-27 09:50:34.392
+
+item id: 62284, warehouse id: 2, quantity: 5, price: 171, delivery datetime: 2021-08-27 09:50:34.392
+
+item id: 69941, warehouse id: 2, quantity: 5, price: 139, delivery datetime: 2021-08-27 09:50:34.392
+
+item id: 73699, warehouse id: 2, quantity: 5, price: 189, delivery datetime: 2021-08-27 09:50:34.392
+
+item id: 77382, warehouse id: 2, quantity: 5, price: 69, delivery datetime: 2021-08-27 09:50:34.392
+
+item id: 82675, warehouse id: 2, quantity: 5, price: 2, delivery datetime: 2021-08-27 09:50:34.392
+
+item id: 94179, warehouse id: 2, quantity: 5, price: 67, delivery datetime: 2021-08-27 09:50:34.392
+
+item id: 94483, warehouse id: 2, quantity: 5, price: 29, delivery datetime: 2021-08-27 09:50:34.392
+
+<10/20000> Tnx O: 9ms 
+CWID: 4, C_DID: 2, C_ID: 606
+<11/20000> Tnx R: 3116ms 
+<12/20000> Tnx N: 0ms 
+<13/20000> Tnx N: 0ms 
+Delivery wid:9 carrier:9oid:2106 cid:66
+oid:2106 cid:466
+oid:2106 cid:1613
+oid:2106 cid:2663
+oid:2106 cid:2967
+oid:2106 cid:837
+oid:2106 cid:424
+oid:2106 cid:1608
+oid:2106 cid:986
+oid:2106 cid:1044
+sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_SERIALIZABLE - failed preemptive refresh): "sql txn" meta={id=c4b50941 key=/Table/56/1/9/1/66/0 pri=0.01662378 epo=0 ts=1635609407.529962445,1 min=1635609406.494452792,4 seq=174} lock=true stat=PENDING rts=1635609406.494452792,4 wto=false gul=1635609406.994452792,4
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_serializable]<14/20000> Tnx D: 2967ms 
+<15/20000> Tnx N: 1ms 
+Delivery wid:1 carrier:2oid:2109 cid:1032
+oid:2109 cid:1480
+oid:2109 cid:968
+oid:2109 cid:411
+oid:2109 cid:206
+oid:2109 cid:2190
+oid:2109 cid:1206
+oid:2109 cid:465
+oid:2109 cid:1045
+oid:2109 cid:2136
+<16/20000> Tnx D: 249ms 
+Delivery wid:3 carrier:9oid:2108 cid:1466
+oid:2108 cid:2449
+oid:2108 cid:724
+oid:2108 cid:1607
+oid:2108 cid:900
+oid:2108 cid:149
+oid:2108 cid:687
+oid:2108 cid:88
+oid:2108 cid:748
+oid:2108 cid:1228
+<17/20000> Tnx D: 246ms 
+<18/20000> Tnx S: 0ms 
+<19/20000> Tnx P: 9ms 
+Customers with top balances
+Customer Name: oxfoakim OE PRIPRESOUGHT            	Balance: 133755.90   	Warehouse Name: bwaxabqr  	District Name: huqfwz    
+Customer Name: ichrsluutmcvcn OE PRESBARABLE       	Balance: 131751.12   	Warehouse Name: amzkoudtw 	District Name: ajfywt    
+Customer Name: kohyfbjdrxmq OE OUGHTCALLYABLE      	Balance: 131331.34   	Warehouse Name: bwaxabqr  	District Name: ucjqympbt 
+Customer Name: vsvrxfawnpmjiae OE OUGHTATIONBAR    	Balance: 121412.55   	Warehouse Name: skktees   	District Name: mzzfwqbe  
+Customer Name: ehmumjzgzv OE BARANTIBAR            	Balance: 120876.27   	Warehouse Name: cfljbep   	District Name: xpuvppg   
+Customer Name: sgjmrjukgehmyi OE ABLEOUGHTATION    	Balance: 119979.91   	Warehouse Name: skktees   	District Name: xnroyngk  
+Customer Name: zybnbeq OE ESEPRESATION             	Balance: 119829.71   	Warehouse Name: qccrxfrr  	District Name: uvtdnx    
+Customer Name: rxnoxdb OE ESEANTIPRES              	Balance: 119468.89   	Warehouse Name: amzkoudtw 	District Name: soclwubn  
+Customer Name: nbsbfsxmjz OE PRESESEBAR            	Balance: 117971.16   	Warehouse Name: bwaxabqr  	District Name: gbgsjz    
+Customer Name: wcmfgfqa OE BARESEOUGHT             	Balance: 117798.13   	Warehouse Name: qccrxfrr  	District Name: rmmxgdts  
+<20/20000> Tnx T: 793ms 
+<21/20000> Tnx N: 0ms 
+<22/20000> Tnx S: 0ms 
+Delivery wid:2 carrier:2oid:2112 cid:1902
+oid:2112 cid:1798
+oid:2112 cid:2378
+oid:2112 cid:795
+oid:2112 cid:2589
+oid:2112 cid:2569
+oid:2112 cid:68
+oid:2112 cid:1671
+oid:2112 cid:2216
+oid:2112 cid:933
+sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: TransactionRetryError: retry txn (RETRY_SERIALIZABLE - failed preemptive refresh): "sql txn" meta={id=947002e7 key=/Table/56/1/2/1/1902/0 pri=0.00310387 epo=0 ts=1635609413.614376142,4 min=1635609413.094500120,3 seq=134} lock=true stat=PENDING rts=1635609413.094500120,3 wto=false gul=1635609413.594500120,3
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html#retry_serializable]<23/20000> Tnx D: 330ms 
+<24/20000> Tnx N: 0ms 
+Delivery wid:6 carrier:7oid:2111 cid:601
+oid:2111 cid:735
+oid:2111 cid:1123
+oid:2111 cid:475
+oid:2111 cid:490
+oid:2111 cid:2927
+oid:2111 cid:2615
+oid:2111 cid:2467
+oid:2111 cid:2865
+oid:2111 cid:2659
+<25/20000> Tnx D: 794ms 
+<26/20000> Tnx R: 1525ms 
+<27/20000> Tnx N: 1ms 
+sql state = [40001]cause = [null]message = [ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]<28/20000> Tnx P: 2495ms 
+<29/20000> Tnx N: 1ms 
+<30/20000> Tnx S: 0ms 
+<31/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<32/20000> Tnx P: 1ms 
+<33/20000> Tnx N: 1ms 
+<34/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<35/20000> Tnx I: 7ms 
+<36/20000> Tnx S: 0ms 
+Delivery wid:7 carrier:10sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<37/20000> Tnx D: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<38/20000> Tnx P: 1ms 
+<39/20000> Tnx N: 0ms 
+Delivery wid:10 carrier:7sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<40/20000> Tnx D: 1ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<41/20000> Tnx T: 1ms 
+Delivery wid:1 carrier:8sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<42/20000> Tnx D: 0ms 
+<43/20000> Tnx N: 1ms 
+<44/20000> Tnx S: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<45/20000> Tnx P: 0ms 
+<46/20000> Tnx N: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<47/20000> Tnx P: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<48/20000> Tnx P: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<49/20000> Tnx R: 106ms 
+<50/20000> Tnx N: 0ms 
+<51/20000> Tnx N: 1ms 
+Delivery wid:3 carrier:5sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<52/20000> Tnx D: 1ms 
+<53/20000> Tnx N: 0ms 
+Delivery wid:6 carrier:8sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<54/20000> Tnx D: 1ms 
+<55/20000> Tnx S: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<56/20000> Tnx P: 0ms 
+<57/20000> Tnx N: 0ms 
+Delivery wid:6 carrier:6sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<58/20000> Tnx D: 0ms 
+<59/20000> Tnx N: 0ms 
+<60/20000> Tnx N: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<61/20000> Tnx P: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<62/20000> Tnx P: 1ms 
+Delivery wid:6 carrier:5sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<63/20000> Tnx D: 0ms 
+Delivery wid:5 carrier:2sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<64/20000> Tnx D: 1ms 
+<65/20000> Tnx S: 0ms 
+Delivery wid:1 carrier:4sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<66/20000> Tnx D: 0ms 
+<67/20000> Tnx N: 0ms 
+Delivery wid:5 carrier:4sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<68/20000> Tnx D: 0ms 
+<69/20000> Tnx N: 0ms 
+Delivery wid:3 carrier:7sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<70/20000> Tnx D: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<71/20000> Tnx P: 0ms 
+Delivery wid:3 carrier:5sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<72/20000> Tnx D: 1ms 
+<73/20000> Tnx N: 0ms 
+<74/20000> Tnx N: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<75/20000> Tnx P: 0ms 
+<76/20000> Tnx N: 1ms 
+<77/20000> Tnx N: 0ms 
+<78/20000> Tnx N: 0ms 
+<79/20000> Tnx N: 1ms 
+Delivery wid:1 carrier:8sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<80/20000> Tnx D: 0ms 
+<81/20000> Tnx N: 0ms 
+Delivery wid:1 carrier:3sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<82/20000> Tnx D: 1ms 
+Delivery wid:6 carrier:3sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<83/20000> Tnx D: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<84/20000> Tnx I: 6ms 
+Delivery wid:10 carrier:5sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<85/20000> Tnx D: 1ms 
+Delivery wid:9 carrier:7sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<86/20000> Tnx D: 0ms 
+<87/20000> Tnx N: 0ms 
+<88/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<89/20000> Tnx P: 1ms 
+<90/20000> Tnx N: 0ms 
+Delivery wid:8 carrier:10sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<91/20000> Tnx D: 1ms 
+Delivery wid:1 carrier:9sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<92/20000> Tnx D: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<93/20000> Tnx P: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<94/20000> Tnx P: 1ms 
+<95/20000> Tnx S: 0ms 
+Delivery wid:4 carrier:8sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<96/20000> Tnx D: 0ms 
+<97/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<98/20000> Tnx P: 1ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<99/20000> Tnx T: 0ms 
+<100/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<101/20000> Tnx P: 0ms 
+<102/20000> Tnx N: 0ms 
+<103/20000> Tnx N: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<104/20000> Tnx T: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<105/20000> Tnx I: 6ms 
+<106/20000> Tnx N: 0ms 
+<107/20000> Tnx N: 0ms 
+<108/20000> Tnx N: 0ms 
+Delivery wid:8 carrier:4sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<109/20000> Tnx D: 1ms 
+<110/20000> Tnx N: 0ms 
+Delivery wid:9 carrier:9sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<111/20000> Tnx D: 1ms 
+Delivery wid:2 carrier:2sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<112/20000> Tnx D: 0ms 
+<113/20000> Tnx N: 0ms 
+<114/20000> Tnx N: 0ms 
+Delivery wid:9 carrier:1sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<115/20000> Tnx D: 0ms 
+<116/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<117/20000> Tnx P: 1ms 
+Delivery wid:9 carrier:9sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<118/20000> Tnx D: 0ms 
+<119/20000> Tnx S: 0ms 
+<120/20000> Tnx N: 0ms 
+Delivery wid:1 carrier:1sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<121/20000> Tnx D: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<122/20000> Tnx P: 0ms 
+<123/20000> Tnx N: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<124/20000> Tnx I: 5ms 
+Delivery wid:5 carrier:7sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<125/20000> Tnx D: 1ms 
+<126/20000> Tnx N: 0ms 
+Delivery wid:2 carrier:5sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<127/20000> Tnx D: 1ms 
+Delivery wid:5 carrier:10sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<128/20000> Tnx D: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<129/20000> Tnx P: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<130/20000> Tnx P: 0ms 
+<131/20000> Tnx N: 0ms 
+<132/20000> Tnx N: 1ms 
+Delivery wid:7 carrier:1sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<133/20000> Tnx D: 0ms 
+<134/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<135/20000> Tnx O: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<136/20000> Tnx O: 1ms 
+<137/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<138/20000> Tnx P: 0ms 
+<139/20000> Tnx S: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<140/20000> Tnx T: 1ms 
+Delivery wid:5 carrier:7sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<141/20000> Tnx D: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<142/20000> Tnx I: 5ms 
+<143/20000> Tnx N: 1ms 
+Delivery wid:5 carrier:9sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<144/20000> Tnx D: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<145/20000> Tnx P: 0ms 
+<146/20000> Tnx S: 0ms 
+<147/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<148/20000> Tnx O: 1ms 
+Delivery wid:9 carrier:9sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<149/20000> Tnx D: 1ms 
+<150/20000> Tnx N: 0ms 
+<151/20000> Tnx N: 0ms 
+<152/20000> Tnx N: 0ms 
+<153/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<154/20000> Tnx R: 111ms 
+<155/20000> Tnx N: 0ms 
+<156/20000> Tnx N: 0ms 
+<157/20000> Tnx N: 0ms 
+<158/20000> Tnx N: 0ms 
+Delivery wid:9 carrier:9sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<159/20000> Tnx D: 1ms 
+<160/20000> Tnx N: 0ms 
+<161/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<162/20000> Tnx I: 5ms 
+<163/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<164/20000> Tnx P: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<165/20000> Tnx P: 1ms 
+<166/20000> Tnx N: 0ms 
+<167/20000> Tnx N: 0ms 
+<168/20000> Tnx N: 0ms 
+<169/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<170/20000> Tnx R: 100ms 
+<171/20000> Tnx N: 0ms 
+<172/20000> Tnx N: 0ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<173/20000> Tnx T: 1ms 
+<174/20000> Tnx N: 0ms 
+<175/20000> Tnx N: 0ms 
+Delivery wid:9 carrier:1sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<176/20000> Tnx D: 0ms 
+<177/20000> Tnx N: 1ms 
+Delivery wid:2 carrier:4sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<178/20000> Tnx D: 0ms 
+Delivery wid:3 carrier:4sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<179/20000> Tnx D: 1ms 
+<180/20000> Tnx N: 0ms 
+<181/20000> Tnx N: 0ms 
+Delivery wid:4 carrier:4sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<182/20000> Tnx D: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<183/20000> Tnx P: 0ms 
+Delivery wid:9 carrier:7sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<184/20000> Tnx D: 1ms 
+<185/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<186/20000> Tnx P: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<187/20000> Tnx P: 1ms 
+<188/20000> Tnx N: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<189/20000> Tnx P: 0ms 
+<190/20000> Tnx S: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<191/20000> Tnx P: 0ms 
+<192/20000> Tnx N: 0ms 
+Delivery wid:7 carrier:9sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<193/20000> Tnx D: 1ms 
+<194/20000> Tnx N: 0ms 
+Delivery wid:2 carrier:8sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<195/20000> Tnx D: 1ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<196/20000> Tnx P: 0ms 
+Delivery wid:6 carrier:2sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<197/20000> Tnx D: 1ms 
+Customers with top balances
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<198/20000> Tnx T: 0ms 
+sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<199/20000> Tnx P: 1ms 
+Delivery wid:4 carrier:7sql state = [25P02]cause = [org.postgresql.util.PSQLException: ERROR: restart transaction: TransactionRetryWithProtoRefreshError: WriteTooOldError: write at timestamp 1635609415.011715056,6 too old; wrote at 1635609416.186269404,1: "sql txn" meta={id=9b4a47a7 pri=0.00265427 epo=0 ts=1635609416.186269404,1 min=1635609415.011715056,6 seq=0} lock=true stat=PENDING rts=1635609415.011715056,6 wto=false gul=1635609415.511715056,6
+  Hint: See: https://www.cockroachlabs.com/docs/v21.1/transaction-retry-error-reference.html]message = [ERROR: current transaction is aborted, commands ignored until end of transaction block]<200/20000> Tnx D: 0ms 
+============Statistics============
+Total 200 transactions, avg latency 72.529999ms 
+Txn P: avg latency 76ms 
+Txn R: avg latency 991ms 
+Txn S: avg latency 0ms 
+Txn D: avg latency 102ms 
+Txn T: avg latency 201ms 
+Txn I: avg latency 5ms 
+Txn N: avg latency 0ms 
+Txn O: avg latency 3ms 
+
