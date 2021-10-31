@@ -528,7 +528,7 @@ public class Cassandra {
         // order items
         ResultSet rs_order_items = session.execute(String.format(get_order_items, cwid, cdid, last_order_id));
         for(Row item : rs_order_items){
-            System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %d, Price: %d, Delivery Datetime: %s\n", 
+            System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %f, Price: %f, Delivery Datetime: %s\n", 
             item.getInt("ol_i_id"), 
             item.getInt("ol_supply_w_id"), 
             item.getBigDecimal("ol_quantity").doubleValue(), 
@@ -671,7 +671,7 @@ public class Cassandra {
             List<Row> items = session.execute(String.format(get_items, i_ids_str.toString())).all();
             for(Row item : items){
                 item_map.put(item.getInt("i_id"), item.getString("i_name"));
-                System.out.printf("Popular I_NAME: %s, quantity: %d\n", 
+                System.out.printf("Popular I_NAME: %s, Quantity: %f\n", 
                     item.getString("i_name"), 
                     max_quantity);
             }
