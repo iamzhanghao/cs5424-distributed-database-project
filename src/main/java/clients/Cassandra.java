@@ -637,7 +637,7 @@ public class Cassandra {
             System.out.printf(String.format("OID: %d, O_ENTRY_D: %s, Customer Name: %s\n", 
                 o_id, 
                 order.getInstant("o_entry_d").toString(),
-                customer.getString("c_first")+" "+customer.getString("c_middle")+" "+customer.getString("c_last"));
+                customer.getString("c_first")+" "+customer.getString("c_middle")+" "+customer.getString("c_last")));
 
             List<Row> ols = ol_map.get(o_id);
             Map<Integer, Integer> quantity_map = new HashMap<>();
