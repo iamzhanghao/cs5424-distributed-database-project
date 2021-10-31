@@ -68,14 +68,14 @@ public class Cassandra {
             char txnType = splits[0].toCharArray()[0];
             long latency = invokeTransaction(session, splits, scanner);
             latencies.add(new TransactionStatistics(txnType, latency));
-            System.out.printf("<%d/20000> Tnx %c: %dms \n", txnCount, txnType, latency);
+            System.out.printf("<%d/20000> Tnx %c: %fms \n", txnCount, txnType, (float)latency/1000);
         }
         session.close();
         TransactionStatistics.printStatistics(latencies);
     }
 
     private static long invokeTransaction(CqlSession session, String[] splits, Scanner scanner) {
-        long start = System.currentTimeMillis();
+        long start = System.nanoTime();
         switch (splits[0].toCharArray()[0]) {
             case 'N':
                 int cid = Integer.parseInt(splits[1]);
@@ -143,7 +143,7 @@ public class Cassandra {
                 break;
         }
 
-        return System.currentTimeMillis() - start;
+        return System.nanoTime() - start;
     }
 
     private static void newOrderTransaction(CqlSession session, int cid, int wid, int did, int number_of_items,
