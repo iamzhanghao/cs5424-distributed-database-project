@@ -10,7 +10,6 @@ import com.datastax.oss.driver.api.core.cql.Row;
 import java.io.FileInputStream;
 import java.math.BigDecimal;
 import java.net.InetSocketAddress;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
@@ -22,14 +21,17 @@ public class Cassandra {
     private static final int TXN_LIMIT = 200;
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 4) {
-            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n e.g. ./Cassandra localhost 9042 A 1");
+        if (args.length != 5) {
+            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n " +
+                    "e.g. ./Cassandra localhost 9042 A 1 out/cassandra-A-local-1.csv");
         }
 
         String host = args[0];
         int port = Integer.parseInt(args[1]);
         String schema = args[2];
         String client = args[3];
+        String csvPath = args[4];
+
 
         String schema_name = "schema_a";
         String dataDir = "project_files/xact_files_A/1.txt";
@@ -41,7 +43,8 @@ public class Cassandra {
             schema_name = "schema_b";
             dataDir = "project_files/xact_files_B/" + client + ".txt";
         } else {
-            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n e.g. ./Cassandra localhost 9042 A 1");
+            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n " +
+                    "e.g. ./Cassandra localhost 9042 A 1 out/cassandra-A-local-1.csv");
             return;
         }
 
@@ -59,8 +62,14 @@ public class Cassandra {
         FileInputStream stream = new FileInputStream(dataDir);
         Scanner scanner = new Scanner(stream);
 
+        // Client 1 always write CSV header
+        if(client.equals("1")){
+            TransactionStatistics.writeCsvHeader(csvPath);
+        }
+
         ArrayList<TransactionStatistics> latencies = new ArrayList<>();
         int txnCount = 0;
+        long clientStartTime = System.currentTimeMillis();
         while (scanner.hasNextLine() && txnCount < TXN_LIMIT) {
             txnCount++;
             String line = scanner.nextLine();
@@ -72,7 +81,8 @@ public class Cassandra {
             System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, (float) latency / 1000000, 0);
         }
         session.close();
-        TransactionStatistics.printStatistics(latencies);
+        float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
+        TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
     }
 
     private static long invokeTransaction(CqlSession session, String[] splits, Scanner scanner) {
@@ -253,7 +263,7 @@ public class Cassandra {
                         .setInt(2, next_order_id)
                         .setInt(3, idx)
                         .setInt(4, current_item)
-                        .setDefaultTimestamp( 0)
+                        .setDefaultTimestamp(0)
                         .setBigDecimal(6, item_amount)
                         .setInt(7, supplier_warehouses.get(idx))
                         .setBigDecimal(8, quantities.get(idx))

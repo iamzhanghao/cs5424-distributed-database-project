@@ -13,18 +13,20 @@ import java.util.*;
 public class CockroachDB {
 
     // Limit number of transactions executed, during actual experiment change to 20000
-    private static final int TXN_LIMIT = 200;
+    private static final int TXN_LIMIT = 100;
     private static final int MAX_RETRY_COUNT = 1000;
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 4) {
-            System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client>\n e.g. ./CockroachDB localhost 26267 A 1");
+        if (args.length != 5) {
+            System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client> <csv_path>\n " +
+                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local-1.csv");
         }
 
         String host = args[0];
         int port = Integer.parseInt(args[1]);
         String schema = args[2];
         String client = args[3];
+        String csvPath = args[4];
 
         String schema_name = "schema_a";
         String dataDir = "project_files/xact_files_A/1.txt";
@@ -36,7 +38,8 @@ public class CockroachDB {
             schema_name = "schema_b";
             dataDir = "project_files/xact_files_B/" + client + ".txt";
         } else {
-            System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client>\n e.g. ./CockroachDB localhost 26267 A 1");
+            System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client>\n " +
+                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local-1.csv");
             return;
         }
 
@@ -64,8 +67,14 @@ public class CockroachDB {
 
         System.out.println("Ready to read Xact file " + dataDir);
 
+        // Client 1 always write CSV header
+        if(client.equals("1")){
+            TransactionStatistics.writeCsvHeader(csvPath);
+        }
+
         ArrayList<TransactionStatistics> latencies = new ArrayList<>();
         int txnCount = 0;
+        long clientStartTime = System.currentTimeMillis();
         while (scanner.hasNextLine() && txnCount < TXN_LIMIT) {
             long start = System.nanoTime();
             txnCount++;
@@ -73,12 +82,12 @@ public class CockroachDB {
             String[] splits = line.split(",");
             char txnType = splits[0].toCharArray()[0];
             int retryCount = invokeTransaction(conn, splits, scanner);
-
             float latency = System.nanoTime() - start;
-            latencies.add(new TransactionStatistics(txnType, (float) latency / 1000000, (float)retryCount));
+            latencies.add(new TransactionStatistics(txnType, (float) latency / 1000000, (float) retryCount));
             System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, retryCount);
         }
-        TransactionStatistics.printStatistics(latencies);
+        float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
+        TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
     }
 
     private static int invokeTransaction(Connection conn, String[] splits, Scanner scanner) {
