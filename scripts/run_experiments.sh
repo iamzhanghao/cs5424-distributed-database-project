@@ -14,7 +14,7 @@ for i in {0..4}
 do
   ssh_host=cs4224c@xcnd$(($i+30)).comp.nus.edu.sg
   java_host=xcnd$(($i+30)).comp.nus.edu.sg
-  for j in {1..8}
+  for j in {0..7}
   do
       client=$((i*8 + j))
       nohup ssh ${ssh_host} -n "
