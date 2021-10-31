@@ -531,7 +531,7 @@ public class Cassandra {
             System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %d, Price: %d, Delivery Datetime: %s\n", 
             item.getInt("ol_i_id"), 
             item.getInt("ol_supply_w_id"), 
-            item.getInt("ol_quantity"), 
+            item.getBigDecimal("ol_quantity").doubleValue(), 
             item.getInt("ol_amount"), 
             item.getString("ol_delivery_d"));
         }
@@ -640,24 +640,24 @@ public class Cassandra {
                 customer.getString("c_first")+" "+customer.getString("c_middle")+" "+customer.getString("c_last")));
 
             List<Row> ols = ol_map.get(o_id);
-            Map<Integer, Integer> quantity_map = new HashMap<>();
+            Map<Integer, Double> quantity_map = new HashMap<>();
             for(Row ol : ols){
                 Integer i_id = ol.getInt("ol_i_id");
-                Integer ol_quantity = ol.getInt("ol_quantity");
+                double ol_quantity = ol.getBigDecimal("ol_quantity").doubleValue();
                 if (!quantity_map.containsKey(i_id)){
                     quantity_map.put(i_id, ol_quantity);
                 } else {
                     quantity_map.put(i_id, quantity_map.get(i_id) + ol_quantity);
                 }
             }
-            Integer max_quantity = Integer.MIN_VALUE;
-            for(Map.Entry<Integer, Integer> q : quantity_map.entrySet()){
+            Double max_quantity = Double.MIN_VALUE;
+            for(Map.Entry<Integer, Double> q : quantity_map.entrySet()){
                 max_quantity = Math.max(max_quantity, q.getValue());
             }
 
             Set<Integer> i_ids = new HashSet<>();
             for(Row ol : ols){
-                if (ol.getInt("ol_quantity") == max_quantity) {
+                if (ol.getBigDecimal("ol_quantity").doubleValue() == max_quantity) {
                     all_popular_items.add(ol.getInt("ol_i_id"));
                     i_ids.add(ol.getInt("ol_i_id"));
                 }
