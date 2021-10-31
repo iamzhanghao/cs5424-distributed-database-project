@@ -22,7 +22,7 @@ public class Cassandra {
     public static void main(String[] args) throws Exception {
         if (args.length != 5) {
             System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n " +
-                    "e.g. ./Cassandra localhost 9042 A 1 out/cassandra-A-local-1.csv");
+                    "e.g. ./Cassandra localhost 9042 A 1 out/cassandra-A-local.csv");
         }
 
         String host = args[0];
@@ -43,7 +43,7 @@ public class Cassandra {
             dataDir = "project_files/xact_files_B/" + client + ".txt";
         } else {
             System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n " +
-                    "e.g. ./Cassandra localhost 9042 A 1 out/cassandra-A-local-1.csv");
+                    "e.g. ./Cassandra localhost 9042 A 1 out/cassandra-A-local.csv");
             return;
         }
 
