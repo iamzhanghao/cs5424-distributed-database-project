@@ -522,7 +522,7 @@ public class Cassandra {
             customer.getBigDecimal("c_balance").doubleValue());
         System.out.printf("Customer last order id: %d, Entry Datetime: %s, Carrier id: %d\n",
             last_order_id,
-            last_order.getInstant("o_entry_d")).toString(),
+            last_order.getInstant("o_entry_d").toString(),
             last_order.getInt("o_carrier_id"));
 
         // order items
@@ -636,7 +636,7 @@ public class Cassandra {
             Row customer = customer_map.get(order.getInt("o_c_id"));
             System.out.printf(String.format("OID: %d, O_ENTRY_D: %s, Customer Name: %s\n", 
                 o_id, 
-                order.getInstant("o_entry_d")).toString(),
+                order.getInstant("o_entry_d").toString(),
                 customer.getString("c_first")+" "+customer.getString("c_middle")+" "+customer.getString("c_last"));
 
             List<Row> ols = ol_map.get(o_id);
