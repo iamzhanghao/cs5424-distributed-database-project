@@ -15,11 +15,15 @@ import java.util.*;
 public class CockroachDB {
 
     // Limit number of transactions executed, during actual experiment change to 20000
-    private static final int TXN_LIMIT = 20000000;
-    private static final int MAX_RETRY_COUNT = 200;
-    private static final int RETRY_QUERY_AFTER = 500;
+    private static final int TXN_LIMIT = 200000000;
+    private static final int MAX_RETRY_COUNT = 10000;
+    private static final int RETRY_QUERY_AFTER = 1000;
 
     private static CockroachDbSQLConnectionHelper connHelper;
+
+    private static int getDelay(){
+        return 300 + (int)(Math.random() * ((RETRY_QUERY_AFTER - 300) + 1));
+    }
 
     public static void main(String[] args) throws Exception {
         if (args.length != 5) {
@@ -130,7 +134,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(RETRY_QUERY_AFTER);
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -156,7 +160,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(RETRY_QUERY_AFTER);
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -180,7 +184,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(RETRY_QUERY_AFTER);
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -205,7 +209,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(RETRY_QUERY_AFTER);
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -231,7 +235,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(RETRY_QUERY_AFTER);
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -256,7 +260,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(RETRY_QUERY_AFTER);
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -278,7 +282,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(RETRY_QUERY_AFTER);
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -303,7 +307,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(RETRY_QUERY_AFTER);
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
