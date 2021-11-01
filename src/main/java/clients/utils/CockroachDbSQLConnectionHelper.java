@@ -28,7 +28,9 @@ public class CockroachDbSQLConnectionHelper {
 
     public void connect() {
         try {
-            this.conn.close();
+            if (this.conn != null) {
+                this.conn.close();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
