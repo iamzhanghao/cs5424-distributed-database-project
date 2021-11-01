@@ -10,21 +10,19 @@ sh scripts/stop_experiments.sh
 
 mvn clean package
 
-for i in {0..4}
+for client in {0..39}
 do
-  ssh_host=cs4224c@xcnd$(($i+30)).comp.nus.edu.sg
-  java_host=xcnd$(($i+30)).comp.nus.edu.sg
-  for j in {0..7}
-  do
-      client=$((i*8 + j))
-      nohup ssh ${ssh_host} -n "
-        cd cs5424-distributed-database-project;
-        pwd;
-        java -jar target/${db}.jar ${java_host} ${port} ${schema} ${client} out/${db}-${schema}-${exp}.csv
-      " > out/${db}-${schema}-${exp}-${client}.out &
-      echo "Started client ${client} on ${java_host}"
-      sleep 1;
-  done
+  ssh_host=cs4224c@xcnd$(($((client%5))+30)).comp.nus.edu.sg
+  java_host=xcnd$(($((client%5))+30)).comp.nus.edu.sg
+
+  nohup ssh ${ssh_host} -n "
+    cd cs5424-distributed-database-project;
+    pwd;
+    java -jar target/${db}.jar ${java_host} ${port} ${schema} ${client} out/${db}-${schema}-${exp}.csv
+  " > out/${db}-${schema}-${exp}-${client}.out &
+  echo "Started client ${client} on ${java_host}"
+  sleep 1;
+
 done
 
 
