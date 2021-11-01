@@ -66,3 +66,4 @@ cockroach sql --insecure -f schema/cockroachdb/schema_a.sql --host=localhost:262
 cockroach sql --insecure -f schema/cockroachdb/schema_b.sql --host=localhost:26267
 
 cockroach sql --insecure -f schema/cockroachdb/add_index_a.sql --host=localhost:26267
+cockroach sql --insecure -f schema/cockroachdb/add_index_b.sql --host=localhost:26267

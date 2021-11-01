@@ -5,10 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.rmi.server.ExportException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.DoubleSummaryStatistics;
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class TransactionStatistics {
 
@@ -53,7 +51,7 @@ public class TransactionStatistics {
         return latencies[index - 1];
     }
 
-    public static void getStatistics(ArrayList<TransactionStatistics> stats, float clientTotalTime, String clientId, String csvFilePath) {
+    public static String getStatistics(ArrayList<TransactionStatistics> stats, float clientTotalTime, String clientId, String csvFilePath) {
         System.out.println("========================Statistics========================");
         double statValues[] = new double[stats.size()];
         for (int i = 0; i < stats.size(); i++) {
@@ -72,9 +70,6 @@ public class TransactionStatistics {
         else
             median = statValues[statValues.length / 2];
 
-        System.out.println(statValues[0]);
-        System.out.println(statValues[99]);
-
         System.out.printf("Total %d transactions, execution time %.2fs, avg latency %.2fms, throughput %.2f query/s,\n" +
                         "median latency %.2fms, 95th percentile latency %.2fms, 95th percentile latency %.2fms  \n",
                 numberOfTransactions, totalExcutionTimeSeconds, doubleStats.getAverage(), throughput,
@@ -84,6 +79,9 @@ public class TransactionStatistics {
         System.out.println("==========================================================");
         writeStatisticsToCsv(clientId, numberOfTransactions, totalExcutionTimeSeconds, doubleStats.getAverage(), throughput,
                 median, percentile(statValues, 95), percentile(statValues, 99), csvFilePath);
+        return String.format("Statistics: %d,%.2f,%.2f,%.2f,%.2f,%.2f,%.2f",
+                numberOfTransactions, totalExcutionTimeSeconds, doubleStats.getAverage(), throughput, median,
+                percentile(statValues, 95), percentile(statValues, 99));
     }
 
     public static void writeCsvHeader(String csvFilePath){
@@ -100,7 +98,7 @@ public class TransactionStatistics {
         }
     }
 
-    public static void writeStatisticsToCsv(String clientId, int numberOfTransactions, float totalExcutionTimeSeconds,
+    private static void writeStatisticsToCsv(String clientId, int numberOfTransactions, float totalExcutionTimeSeconds,
                                             double mean, double throughput, double median, double percentile95,
                                             double percentile99, String csvFilePath) {
         PrintWriter pw = null;
@@ -125,4 +123,7 @@ public class TransactionStatistics {
 
     }
 
+    public static void printServerTime() {
+        System.out.println("Current Time at server: " + new SimpleDateFormat("YYYY-mm-dd HH:mm:ss").format(Calendar.getInstance().getTime()));
+    }
 }

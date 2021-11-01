@@ -1,7 +1,9 @@
 package clients;
 
+import clients.utils.CockroachDbSQLConnectionHelper;
+import clients.utils.Customer;
+import clients.utils.Order;
 import clients.utils.TransactionStatistics;
-import org.postgresql.ds.PGSimpleDataSource;
 
 import java.io.FileInputStream;
 import java.math.BigDecimal;
@@ -13,13 +15,20 @@ import java.util.*;
 public class CockroachDB {
 
     // Limit number of transactions executed, during actual experiment change to 20000
-    private static final int TXN_LIMIT = 100;
-    private static final int MAX_RETRY_COUNT = 1000;
+    private static final int TXN_LIMIT = 200000000;
+    private static final int MAX_RETRY_COUNT = 10000;
+    private static final int RETRY_QUERY_AFTER = 1000;
+
+    private static CockroachDbSQLConnectionHelper connHelper;
+
+    private static int getDelay(){
+        return 300 + (int)(Math.random() * ((RETRY_QUERY_AFTER - 300) + 1));
+    }
 
     public static void main(String[] args) throws Exception {
         if (args.length != 5) {
             System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client> <csv_path>\n " +
-                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local-1.csv");
+                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local.csv");
         }
 
         String host = args[0];
@@ -39,58 +48,60 @@ public class CockroachDB {
             dataDir = "project_files/xact_files_B/" + client + ".txt";
         } else {
             System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client>\n " +
-                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local-1.csv");
+                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local.csv");
             return;
         }
 
         System.out.printf("Running on host: %s:%d", host, port);
+        TransactionStatistics.printServerTime();
         System.out.println();
 
-        PGSimpleDataSource ds = new PGSimpleDataSource();
-        ds.setServerName(host);
-        ds.setPortNumber(port);
-        ds.setDatabaseName(schema_name);
-        ds.setUser("root");
-        ds.setPassword(null);
-//        ds.setSsl(true);
-//        ds.setSslMode("require");
-//        ds.setSslCert("certs/client.root.crt");
-//        ds.setSslKey("certs/client.root.key.pk8");
-        ds.setSslMode("disable");
-        ds.setReWriteBatchedInserts(true); // add `rewriteBatchedInserts=true` to pg connection string
-        ds.setApplicationName("CockroachDB App");
+        connHelper = new CockroachDbSQLConnectionHelper(host, port, schema_name);
 
-        Connection conn = ds.getConnection();
-        conn.setAutoCommit(false);
         FileInputStream stream = new FileInputStream(dataDir);
         Scanner scanner = new Scanner(stream);
 
         System.out.println("Ready to read Xact file " + dataDir);
 
-        // Client 1 always write CSV header
-        if(client.equals("1")){
+        // Client 0 always write CSV header
+        if (client.equals("0")) {
             TransactionStatistics.writeCsvHeader(csvPath);
         }
 
         ArrayList<TransactionStatistics> latencies = new ArrayList<>();
         int txnCount = 0;
         long clientStartTime = System.currentTimeMillis();
-        while (scanner.hasNextLine() && txnCount < TXN_LIMIT) {
+        while (scanner.hasNextLine() && (txnCount < TXN_LIMIT)) {
             long start = System.nanoTime();
             txnCount++;
             String line = scanner.nextLine();
             String[] splits = line.split(",");
             char txnType = splits[0].toCharArray()[0];
-            int retryCount = invokeTransaction(conn, splits, scanner);
+            int retryCount = invokeTransaction(splits, scanner);
             float latency = System.nanoTime() - start;
             latencies.add(new TransactionStatistics(txnType, (float) latency / 1000000, (float) retryCount));
             System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, retryCount);
         }
         float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
-        TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
+        String message = TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
+        while (true) {
+            try {
+                getDbState();
+            } catch (SQLException e) {
+                System.out.println("RETRY DB STATE in 2 seconds");
+                if (e.getSQLState().equals("08003")){
+                    connHelper.connect();
+                }
+            }
+            Thread.sleep(2000);
+            break;
+        }
+        connHelper.close();
+        System.out.println();
+        System.err.println(message);
     }
 
-    private static int invokeTransaction(Connection conn, String[] splits, Scanner scanner) {
+    private static int invokeTransaction(String[] splits, Scanner scanner) {
         int retryCount = 0;
         switch (splits[0].toCharArray()[0]) {
             case 'N':
@@ -110,17 +121,20 @@ public class CockroachDB {
                 }
                 for (int i = 0; i < MAX_RETRY_COUNT; i++) {
                     try {
-                        newOrderTransaction(conn, cid, wid, did, numItems, items, supplierWarehouses, quantities);
+                        newOrderTransaction(cid, wid, did, numItems, items, supplierWarehouses, quantities);
                         break;
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
+                        if (e.getSQLState().equals("08003")){
+                            connHelper.connect();
+                        }
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
                     try {
-                        conn.rollback();
-                        Thread.sleep(100);
+                        connHelper.getConn().rollback();
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -133,17 +147,20 @@ public class CockroachDB {
                 BigDecimal payment = new BigDecimal(splits[4]);
                 for (int i = 0; i < MAX_RETRY_COUNT; i++) {
                     try {
-                        paymentTransaction(conn, cwid, cdid, cid, payment);
+                        paymentTransaction(cwid, cdid, cid, payment);
                         break;
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
+                        if (e.getSQLState().equals("08003")){
+                            connHelper.connect();
+                        }
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
                     try {
-                        conn.rollback();
-                        Thread.sleep(100);
+                        connHelper.getConn().rollback();
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -154,17 +171,20 @@ public class CockroachDB {
                 int carrierid = Integer.parseInt(splits[2]);
                 for (int i = 0; i < MAX_RETRY_COUNT; i++) {
                     try {
-                        deliveryTransaction(conn, wid, carrierid);
+                        deliveryTransaction(wid, carrierid);
                         break;
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
+                        if (e.getSQLState().equals("08003")){
+                            connHelper.connect();
+                        }
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
                     try {
-                        conn.rollback();
-                        Thread.sleep(100);
+                        connHelper.getConn().rollback();
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -176,17 +196,20 @@ public class CockroachDB {
                 cid = Integer.parseInt(splits[3]);
                 for (int i = 0; i < MAX_RETRY_COUNT; i++) {
                     try {
-                        orderStatusTransaction(conn, cwid, cdid, cid);
+                        orderStatusTransaction(cwid, cdid, cid);
                         break;
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
+                        if (e.getSQLState().equals("08003")){
+                            connHelper.connect();
+                        }
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
                     try {
-                        conn.rollback();
-                        Thread.sleep(100);
+                        connHelper.getConn().rollback();
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -199,17 +222,20 @@ public class CockroachDB {
                 int l = Integer.parseInt(splits[4]);
                 for (int i = 0; i < MAX_RETRY_COUNT; i++) {
                     try {
-                        stockLevelTransaction(conn, wid, did, t, l);
+                        stockLevelTransaction(wid, did, t, l);
                         break;
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
+                        if (e.getSQLState().equals("08003")){
+                            connHelper.connect();
+                        }
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
                     try {
-                        conn.rollback();
-                        Thread.sleep(100);
+                        connHelper.getConn().rollback();
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -221,17 +247,20 @@ public class CockroachDB {
                 l = Integer.parseInt(splits[3]);
                 for (int i = 0; i < MAX_RETRY_COUNT; i++) {
                     try {
-                        popularItemTransaction(conn, wid, did, l);
+                        popularItemTransaction(wid, did, l);
                         break;
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
+                        if (e.getSQLState().equals("08003")){
+                            connHelper.connect();
+                        }
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
                     try {
-                        conn.rollback();
-                        Thread.sleep(100);
+                        connHelper.getConn().rollback();
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -240,17 +269,20 @@ public class CockroachDB {
             case 'T':
                 for (int i = 0; i < MAX_RETRY_COUNT; i++) {
                     try {
-                        topBalanceTransaction(conn);
+                        topBalanceTransaction();
                         break;
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
+                        if (e.getSQLState().equals("08003")){
+                            connHelper.connect();
+                        }
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
                     try {
-                        conn.rollback();
-                        Thread.sleep(100);
+                        connHelper.getConn().rollback();
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -262,17 +294,20 @@ public class CockroachDB {
                 cid = Integer.parseInt(splits[3]);
                 for (int i = 0; i < MAX_RETRY_COUNT; i++) {
                     try {
-                        relatedCustomerTransaction(conn, cwid, cdid, cid);
+                        relatedCustomerTransaction(cwid, cdid, cid);
                         break;
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
+                        if (e.getSQLState().equals("08003")) {
+                            connHelper.connect();
+                        }
                     }
                     retryCount++;
                     System.out.println("ROLLBACK AND RETRY");
                     try {
-                        conn.rollback();
-                        Thread.sleep(100);
+                        connHelper.getConn().rollback();
+                        Thread.sleep(getDelay());
                     } catch (Exception e) {
                     }
                 }
@@ -281,9 +316,9 @@ public class CockroachDB {
         return retryCount;
     }
 
-    private static void newOrderTransaction(Connection conn, int cid, int wid, int did, int number_of_items,
+    private static void newOrderTransaction(int cid, int wid, int did, int number_of_items,
                                             ArrayList<Integer> items, ArrayList<Integer> supplier_warehouses, ArrayList<Integer> quantities) throws SQLException {
-        Statement stmt = conn.createStatement();
+        Statement stmt = connHelper.getConn().createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM district_tab WHERE D_W_ID = " + wid + " AND D_ID = " + did);
         Integer next_order_id = 0;
         while (rs.next()) {
@@ -293,7 +328,7 @@ public class CockroachDB {
 
         next_order_id += 1;
 
-        PreparedStatement updateDistrict = conn.prepareStatement(
+        PreparedStatement updateDistrict = connHelper.getConn().prepareStatement(
                 "UPDATE district_tab SET D_NEXT_O_ID = ? WHERE D_W_ID = ? AND D_ID = ?");
         updateDistrict.setInt(1, next_order_id);
         updateDistrict.setInt(2, wid);
@@ -305,7 +340,7 @@ public class CockroachDB {
             all_local = 1;
         }
 
-        PreparedStatement createOrder = conn.prepareStatement("UPSERT INTO order_tab (O_W_ID, O_D_ID, O_ID, O_C_ID," +
+        PreparedStatement createOrder = connHelper.getConn().prepareStatement("UPSERT INTO order_tab (O_W_ID, O_D_ID, O_ID, O_C_ID," +
                 " O_CARRIER_ID, O_OL_CNT, O_ALL_LOCAL, O_ENTRY_D) VALUES (?,?,?,?,?,?,?,?)");
         createOrder.setInt(1, wid);
         createOrder.setInt(2, did);
@@ -345,7 +380,7 @@ public class CockroachDB {
                 strDid = "0" + did;
             }
 
-            PreparedStatement itemStock = conn.prepareStatement("SELECT s_quantity,s_ytd,s_order_cnt," +
+            PreparedStatement itemStock = connHelper.getConn().prepareStatement("SELECT s_quantity,s_ytd,s_order_cnt," +
                     "s_remote_cnt, s_dist_" + strDid + " FROM stock_tab WHERE s_w_id=? AND s_i_id=?;");
 
             itemStock.setInt(1, wid);
@@ -372,7 +407,7 @@ public class CockroachDB {
                 s_remote_cnt += 1;
             }
 
-            PreparedStatement updateStock = conn.prepareStatement("UPDATE stock_tab SET " +
+            PreparedStatement updateStock = connHelper.getConn().prepareStatement("UPDATE stock_tab SET " +
                     "s_quantity=?, s_ytd=?, s_order_cnt=?, s_remote_cnt=? WHERE s_w_id=? AND s_i_id=?;");
             updateStock.setInt(1, adjusted_quantity);
             updateStock.setFloat(2, s_ytd + quantities.get(idx));
@@ -387,7 +422,7 @@ public class CockroachDB {
             float item_amount = price * quantities.get(idx);
             total_amount += item_amount;
 
-            PreparedStatement insertOrderLine = conn.prepareStatement("UPSERT INTO order_line_tab (OL_W_ID, OL_D_ID, " +
+            PreparedStatement insertOrderLine = connHelper.getConn().prepareStatement("UPSERT INTO order_line_tab (OL_W_ID, OL_D_ID, " +
                     "OL_O_ID, OL_NUMBER, OL_I_ID, OL_DELIVERY_D, OL_AMOUNT, OL_SUPPLY_W_ID, OL_QUANTITY, OL_DIST_INFO) " +
                     "VALUES (?,?,?,?,?,?,?,?,?,?);");
             insertOrderLine.setInt(1, wid);
@@ -431,7 +466,7 @@ public class CockroachDB {
         rs.close();
 
         total_amount = total_amount * (1 + warehouse_tax_rate + district_tax_rate) * (1 - discount);
-        conn.commit();
+        connHelper.getConn().commit();
 
         System.out.printf("============================ New Order Transactions ============================ \n");
         System.out.printf("WarehouseID %d, DistrictID: %d, CustomerID: %d \n", wid, did, cid);
@@ -447,21 +482,21 @@ public class CockroachDB {
         System.out.println();
     }
 
-    private static void paymentTransaction(Connection conn, int cwid, int cdid, int cid, BigDecimal payment) throws SQLException {
-        PreparedStatement updateWarehouse = conn.prepareStatement(
+    private static void paymentTransaction(int cwid, int cdid, int cid, BigDecimal payment) throws SQLException {
+        PreparedStatement updateWarehouse = connHelper.getConn().prepareStatement(
                 "UPDATE warehouse_tab SET W_YTD = W_YTD + ? WHERE W_ID = ?;");
         updateWarehouse.setBigDecimal(1, payment);
         updateWarehouse.setInt(2, cwid);
         updateWarehouse.executeUpdate();
 
-        PreparedStatement updateDistrict = conn.prepareStatement(
+        PreparedStatement updateDistrict = connHelper.getConn().prepareStatement(
                 "UPDATE district_tab SET D_YTD = D_YTD + ? WHERE  D_W_ID = ? AND D_ID=?");
         updateDistrict.setBigDecimal(1, payment);
         updateDistrict.setInt(2, cwid);
         updateDistrict.setInt(3, cdid);
         updateDistrict.executeUpdate();
 
-        PreparedStatement updateCustomer = conn.prepareStatement(
+        PreparedStatement updateCustomer = connHelper.getConn().prepareStatement(
                 "UPDATE customer_tab " +
                         "SET C_BALANCE= C_BALANCE - ?, C_YTD_PAYMENT= C_YTD_PAYMENT + ?, C_PAYMENT_CNT= C_PAYMENT_CNT + 1 " +
                         "WHERE C_W_ID = ? AND C_D_ID = ? AND C_ID = ?");
@@ -472,14 +507,14 @@ public class CockroachDB {
         updateCustomer.setInt(5, cid);
         updateCustomer.executeUpdate();
 
-        conn.commit();
+        connHelper.getConn().commit();
     }
 
-    private static void deliveryTransaction(Connection conn, int wid, int carrierid) throws SQLException {
+    private static void deliveryTransaction(int wid, int carrierid) throws SQLException {
         System.out.printf("Delivery wid:%d carrier:%d", wid, carrierid);
         for (int did = 1; did <= 10; did++) {
             // get the yet-to-deliver order with its client id
-            PreparedStatement getOrderAndCustomer = conn.prepareStatement(
+            PreparedStatement getOrderAndCustomer = connHelper.getConn().prepareStatement(
                     "SELECT o_id, o_c_id " +
                             "FROM order_tab " +
                             "WHERE o_w_id = ? AND o_d_id = ? AND o_carrier_id ISNULL " +
@@ -497,7 +532,7 @@ public class CockroachDB {
                 System.out.printf("oid:%d cid:%d\n", oid, cid);
 
                 // assign the carrier id to the order
-                PreparedStatement updateOrder = conn.prepareStatement(
+                PreparedStatement updateOrder = connHelper.getConn().prepareStatement(
                         "UPDATE order_tab " +
                                 "SET o_carrier_id = ? " +
                                 "WHERE o_w_id = ? AND o_d_id = ? AND o_id = ?"
@@ -509,7 +544,7 @@ public class CockroachDB {
                 updateOrder.executeUpdate();
 
                 // assign the current timestamp to each order line
-                PreparedStatement updateOrderLine = conn.prepareStatement(
+                PreparedStatement updateOrderLine = connHelper.getConn().prepareStatement(
                         "UPDATE order_line_tab " +
                                 "SET ol_delivery_d = CURRENT_TIMESTAMP " +
                                 "WHERE ol_o_id = ? AND ol_w_id = ? AND ol_d_id = ?"
@@ -520,7 +555,7 @@ public class CockroachDB {
                 updateOrderLine.executeUpdate();
 
                 // get the amount sum of all order lines
-                PreparedStatement getOrderLineSum = conn.prepareStatement(
+                PreparedStatement getOrderLineSum = connHelper.getConn().prepareStatement(
                         "SELECT SUM(ol_amount) " +
                                 "FROM order_line_tab " +
                                 "WHERE ol_o_id = ? AND ol_w_id = ? AND ol_d_id = ?"
@@ -537,7 +572,7 @@ public class CockroachDB {
 
 
                 // update the customer's balance and delivery count
-                PreparedStatement updateCustomerInfo = conn.prepareStatement(
+                PreparedStatement updateCustomerInfo = connHelper.getConn().prepareStatement(
                         "UPDATE customer_tab " +
                                 "SET c_balance = c_balance + ?, c_delivery_cnt = c_delivery_cnt + ? " +
                                 "WHERE c_id = ? AND c_w_id = ? AND c_d_id = ?"
@@ -550,17 +585,17 @@ public class CockroachDB {
                 updateCustomerInfo.executeUpdate();
             }
         }
-        conn.commit();
+        connHelper.getConn().commit();
     }
 
-    private static void orderStatusTransaction(Connection conn, int cwid, int cdid, int cid) throws SQLException {
+    private static void orderStatusTransaction(int cwid, int cdid, int cid) throws SQLException {
         String get_customer_last_order = "SELECT c_first, c_middle, c_last, c_balance, o_w_id, o_d_id, o_c_id, o_id, o_entry_d, o_carrier_id "
                 + "FROM customer_tab, order_tab WHERE c_id = o_c_id AND c_d_id = o_d_id AND c_w_id = o_w_id "
                 + "AND c_w_id = %d AND c_d_id = %d AND c_id = %d order by o_id desc LIMIT 1 ";
         String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d from order_line_tab "
                 + "where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
 
-        Statement st = conn.createStatement();
+        Statement st = connHelper.getConn().createStatement();
 
         //Customer Last Order
         ResultSet rs_customer_last_order = st.executeQuery(String.format(get_customer_last_order, cwid, cdid, cid));
@@ -568,13 +603,13 @@ public class CockroachDB {
         if (rs_customer_last_order.next()) {
             int last_order_id = rs_customer_last_order.getInt("o_id");
 
-            System.out.printf("Customer's name: %s %s %s, balance: %f\n",
+            System.out.printf("Customer name: %s %s %s, Balance: %f\n",
                     rs_customer_last_order.getString("c_first"),
                     rs_customer_last_order.getString("c_middle"),
                     rs_customer_last_order.getString("c_last"),
                     rs_customer_last_order.getBigDecimal("c_balance").doubleValue());
 
-            System.out.printf("last order id: %d, entry datetime: %s, carrier id: %d\n",
+            System.out.printf("Customer last order id: %d, Entry Datetime: %s, Carrier id: %d\n",
                     last_order_id,
                     rs_customer_last_order.getString("o_entry_d"),
                     rs_customer_last_order.getInt("o_carrier_id"));
@@ -583,7 +618,7 @@ public class CockroachDB {
             ResultSet rs_order_items = st.executeQuery(String.format(get_order_items, cwid, cdid, last_order_id));
 
             while (rs_order_items.next()) {
-                System.out.printf("item id: %d, warehouse id: %d, quantity: %d, price: %d, delivery datetime: %s\n",
+                System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %d, Price: %d, Delivery Datetime: %s\n",
                         rs_order_items.getInt("ol_i_id"),
                         rs_order_items.getInt("ol_supply_w_id"),
                         rs_order_items.getInt("ol_quantity"),
@@ -598,8 +633,8 @@ public class CockroachDB {
 
     }
 
-    private static void stockLevelTransaction(Connection conn, int wid, int did, int threshold, int l) throws SQLException {
-        Statement stmt = conn.createStatement();
+    private static void stockLevelTransaction(int wid, int did, int threshold, int l) throws SQLException {
+        Statement stmt = connHelper.getConn().createStatement();
         ResultSet rs = stmt.executeQuery("SELECT d_next_o_id FROM district_tab WHERE d_w_id=" + wid + " AND d_id=" + did + ";");
         Integer latest_order_id = 0;
         while (rs.next()) {
@@ -607,7 +642,7 @@ public class CockroachDB {
         }
 
         Integer earliest_order_id = latest_order_id - l;
-        PreparedStatement getOrderLine = conn.prepareStatement("SELECT ol_i_id FROM order_line_tab " +
+        PreparedStatement getOrderLine = connHelper.getConn().prepareStatement("SELECT ol_i_id FROM order_line_tab " +
                 "WHERE ol_d_id=? AND ol_w_id=? AND ol_o_id>? AND ol_o_id<?;");
         getOrderLine.setInt(1, did);
         getOrderLine.setInt(2, wid);
@@ -632,7 +667,7 @@ public class CockroachDB {
         System.out.printf("================================================================================= \n");
     }
 
-    private static void popularItemTransaction(Connection conn, int wid, int did, int l) throws SQLException {
+    private static void popularItemTransaction(int wid, int did, int l) throws SQLException {
 
         // get order join with customer
         String get_order_customer = "select o_id, o_d_id, o_w_id, o_entry_d, o_c_id, c_first, c_middle, c_last "
@@ -665,7 +700,7 @@ public class CockroachDB {
                 + get_ol_quantity_max
                 + ")";
 
-        Statement st = conn.createStatement();
+        Statement st = connHelper.getConn().createStatement();
         ResultSet rs_popular_items = st.executeQuery(String.format(get_popular_items, wid, did, l));
 
         Map<Integer, ArrayList<String>> orders = new HashMap<Integer, ArrayList<String>>();
@@ -724,9 +759,9 @@ public class CockroachDB {
         rs_popular_items.close();
     }
 
-    private static void topBalanceTransaction(Connection conn) throws SQLException {
+    private static void topBalanceTransaction() throws SQLException {
         System.out.println("Customers with top balances");
-        Statement stmt = conn.createStatement();
+        Statement stmt = connHelper.getConn().createStatement();
         ResultSet rs = stmt.executeQuery(
                 "SELECT\n" +
                         "  c.w_id,\n" +
@@ -775,46 +810,152 @@ public class CockroachDB {
         }
     }
 
-    private static void relatedCustomerTransaction(Connection conn, int cwid, int cdid, int cid) throws SQLException {
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(
-                "SELECT DISTINCT w_id_1 as c_w_id, d_id_1 as c_d_id, c_id_1 as c_id " +
-                        "FROM (SELECT o_w_id as w_id_1, o_c_id as c_id_1,  o_d_id as d_id_1, ol_i_id as i_1" +
-                        "      FROM order_tab  ,order_line_tab " +
-                        "      WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id AND o_w_id <> " + cwid + ") AS a, " +
-                        "     (SELECT o_w_id as w_id_2, o_c_id as c_id_2,  o_d_id as d_id_2, ol_i_id as i_2" +
-                        "      FROM order_tab  ,order_line_tab " +
-                        "      WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id AND o_w_id <> " + cwid + ") AS b " +
-                        "WHERE w_id_1 = w_id_2 AND c_id_1 = c_id_2 AND d_id_1 = d_id_2 AND i_1 <> i_2 " +
-                        "" +
-                        "AND i_1 IN (SELECT DISTINCT ol_i_id as c_items " +
-                        "            FROM order_tab , order_line_tab " +
-                        "            WHERE o_w_id = ol_w_id " +
-                        "            AND o_d_id = ol_d_id " +
-                        "            AND o_id = ol_o_id " +
-                        "            AND o_w_id = " + cwid +
-                        "            AND o_d_id = " + cdid +
-                        "            AND o_c_id = " + cid + ")" +
-                        "" +
-                        "AND i_2 IN (SELECT DISTINCT ol_i_id as c_items " +
-                        "            FROM order_tab , order_line_tab " +
-                        "            WHERE o_w_id = ol_w_id " +
-                        "            AND o_d_id = ol_d_id " +
-                        "            AND o_id = ol_o_id " +
-                        "            AND o_w_id = " + cwid +
-                        "            AND o_d_id = " + cdid +
-                        "            AND o_c_id = " + cid + ")"
-        );
-
-        while (rs.next()) {
-            int r_cwid = rs.getInt(1);
-            int r_cdid = rs.getInt(2);
-            int r_cid = rs.getInt(3);
-
-            System.out.printf("CWID: %d, C_DID: %d, C_ID: %d", r_cwid, r_cdid, r_cid);
-            System.out.println();
+    private static void relatedCustomerTransaction(int cwid, int cdid, int cid) throws SQLException {
+        Statement stmt = connHelper.getConn().createStatement();
+        Set<Customer> relatedCustomers = new HashSet<>();
+        ArrayList<Integer> orders = new ArrayList<>();
+        // Select orderids from this customer
+        ResultSet orderRs = stmt.executeQuery(String.format(
+                "SELECT o_id FROM order_tab WHERE o_w_id = %d and o_d_id = %d and o_c_id = %d", cwid, cdid, cid));
+        while (orderRs.next()) {
+            int o_id = orderRs.getInt(1);
+            orders.add(o_id);
         }
-        rs.close();
+        if (orders.size() > 0) {
+            for (int o_id : orders) {
+                ResultSet relatedOrdersRs = stmt.executeQuery(String.format(
+                        "SELECT DISTINCT ol_w_id, ol_d_id, ol_o_id, COUNT(ol_number) FROM order_line_tab \n" +
+                                "WHERE ol_i_id in ( SELECT DISTINCT ol_i_id FROM order_line_tab WHERE ol_w_id = %d and ol_d_id = %d and ol_o_id = %d )\n" +
+                                "AND ol_w_id <> %d \n" +
+                                "GROUP BY (ol_w_id, ol_d_id,ol_o_id)\n" +
+                                "HAVING COUNT(ol_number)>=2",  cwid, cdid, o_id, cwid));
+                ArrayList<Order> realtedOrders = new ArrayList<>();
+                while (relatedOrdersRs.next()) {
+                    int ol_w_id = relatedOrdersRs.getInt(1);
+                    int ol_d_id = relatedOrdersRs.getInt(2);
+                    int ol_o_id = relatedOrdersRs.getInt(3);
+                    realtedOrders.add(new Order(ol_w_id,ol_d_id,ol_o_id));
+                }
+                relatedOrdersRs.close();
+
+                ArrayList<String> conditions = new ArrayList<>();
+                for (Order order:realtedOrders) {
+                    conditions.add(String.format(" (o_w_id = %d AND o_d_id = %d AND o_id = %d) ",order.w_id,order.d_id,order.o_id));
+                }
+                if (realtedOrders.size()>0){
+                    ResultSet customerRs = stmt.executeQuery(
+                            String.format("SELECT DISTINCT o_w_id, o_d_id, o_c_id FROM order_tab WHERE %s ;",String.join(" OR ",conditions)));
+                    while (customerRs.next()) {
+                        int c_w_id = customerRs.getInt(1);
+                        int c_d_id = customerRs.getInt(2);
+                        int c_id = customerRs.getInt(3);
+                        relatedCustomers.add(new Customer(c_w_id,c_d_id,c_id));
+                    }
+                    customerRs.close();
+                }
+                relatedOrdersRs.close();
+            }
+        }
+        orderRs.close();
+        for (Customer cust:relatedCustomers) {
+            System.out.printf("Related Customer: w_id:%d, d_id:%d, c_id: %d\n",cust.w_id,cust.d_id,cust.c_id);
+        }
+
+    }
+
+    private static void getDbState() throws SQLException {
+        System.out.println("======================DB State ============================");
+        StringBuilder res = new StringBuilder();
+
+        Statement warehouseSum = connHelper.getConn().createStatement();
+        ResultSet warehouseResultSet = warehouseSum.executeQuery("SELECT sum(W_YTD) from warehouse_tab;");
+        while (warehouseResultSet.next()) {
+            BigDecimal w_ytd = warehouseResultSet.getBigDecimal(1);
+            System.out.printf("W_YTD: %f\n", w_ytd);
+            res.append(w_ytd.doubleValue() + "\n");
+        }
+        warehouseResultSet.close();
+
+        Statement districtSum = connHelper.getConn().createStatement();
+        ResultSet districtResultSet = districtSum.executeQuery("SELECT sum(D_YTD), sum(D_NEXT_O_ID) from district_tab;");
+        while (districtResultSet.next()) {
+            BigDecimal d_ytd = districtResultSet.getBigDecimal(1);
+            BigDecimal d_next_o_ytd = districtResultSet.getBigDecimal(2);
+
+            System.out.printf("D_YTD: %f\n", d_ytd);
+            res.append(d_ytd.doubleValue() + "\n");
+            System.out.printf("D_NEXT_O_ID: %f\n", d_next_o_ytd);
+            res.append(d_next_o_ytd.doubleValue() + "\n");
+        }
+        districtResultSet.close();
+
+        Statement customerSum = connHelper.getConn().createStatement();
+        ResultSet customerResultSet = customerSum.executeQuery("select sum(C_BALANCE), sum(C_YTD_PAYMENT), sum(C_PAYMENT_CNT), sum(C_DELIVERY_CNT) from Customer_tab;");
+        while (customerResultSet.next()) {
+            BigDecimal c_balance = customerResultSet.getBigDecimal(1);
+            System.out.printf("C_BALANCE: %f\n", c_balance);
+            res.append(c_balance.doubleValue() + "\n");
+            BigDecimal c_tyd_payment = customerResultSet.getBigDecimal(2);
+            System.out.printf("C_YTD_PAYMENT: %f\n", c_tyd_payment);
+            res.append(c_tyd_payment.doubleValue() + "\n");
+            BigDecimal c_payment_count = customerResultSet.getBigDecimal(3);
+            System.out.printf("C_PAYMENT_CNT: %f\n", c_payment_count);
+            res.append(c_payment_count.doubleValue() + "\n");
+            BigDecimal c_delivery_cnt = customerResultSet.getBigDecimal(4);
+            System.out.printf("C_DELIVERY_CNT: %f\n", c_delivery_cnt);
+            res.append(c_delivery_cnt.doubleValue() + "\n");
+        }
+        customerResultSet.close();
+
+        Statement orderSum = connHelper.getConn().createStatement();
+        ResultSet orderResultSet = orderSum.executeQuery("select max(O_ID), sum(O_OL_CNT) from Order_tab;");
+        while (orderResultSet.next()) {
+            BigDecimal o_id = orderResultSet.getBigDecimal(1);
+            BigDecimal o_ol_cnt = orderResultSet.getBigDecimal(2);
+
+            System.out.printf("O_ID: %f\n", o_id);
+            res.append(o_id.doubleValue() + "\n");
+            System.out.printf("O_OL_CNT: %f\n", o_ol_cnt);
+            res.append(o_ol_cnt.doubleValue() + "\n");
+        }
+        orderResultSet.close();
+
+        Statement orderLineSum = connHelper.getConn().createStatement();
+        ResultSet orderLineResultSet = orderLineSum.executeQuery("select sum(OL_AMOUNT), sum(OL_QUANTITY) from Order_Line_tab;");
+        while (orderLineResultSet.next()) {
+            BigDecimal ol_amount = orderLineResultSet.getBigDecimal(1);
+            BigDecimal ol_quantity = orderLineResultSet.getBigDecimal(2);
+
+            System.out.printf("OL_AMOUNT: %f\n", ol_amount);
+            res.append(ol_amount.doubleValue() + "\n");
+            System.out.printf("OL_QUANTITY: %f\n", ol_quantity);
+            res.append(ol_quantity.doubleValue() + "\n");
+        }
+        orderLineResultSet.close();
+
+        Statement stockSum = connHelper.getConn().createStatement();
+        ResultSet stockResultSet = stockSum.executeQuery("select sum(S_QUANTITY), sum(S_YTD), sum(S_ORDER_CNT), sum(S_REMOTE_CNT) from Stock_tab;");
+        while (stockResultSet.next()) {
+            BigDecimal s_quantity = stockResultSet.getBigDecimal(1);
+            System.out.printf("S_QUANTITY: %f\n", s_quantity);
+            res.append(s_quantity.doubleValue() + "\n");
+            BigDecimal s_ytd = stockResultSet.getBigDecimal(2);
+            System.out.printf("S_YTD: %f\n", s_ytd);
+            res.append(s_ytd.doubleValue() + "\n");
+            BigDecimal s_order_cnt = stockResultSet.getBigDecimal(3);
+            System.out.printf("S_ORDER_CNT: %f\n", s_order_cnt);
+            res.append(s_order_cnt.doubleValue() + "\n");
+            BigDecimal s_remote_cnt = stockResultSet.getBigDecimal(4);
+            System.out.printf("S_REMOTE_CNT: %f\n", s_remote_cnt);
+            res.append(s_remote_cnt.doubleValue() + "\n");
+        }
+        stockResultSet.close();
+
+
+        System.out.println("======================DB State Plain=======================");
+        System.out.println(res);
+        TransactionStatistics.printServerTime();
+        System.out.println();
     }
 
 }
