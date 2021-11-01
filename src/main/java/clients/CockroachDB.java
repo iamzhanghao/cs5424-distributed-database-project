@@ -1,6 +1,8 @@
 package clients;
 
 import clients.utils.CockroachDbSQLConnectionHelper;
+import clients.utils.Customer;
+import clients.utils.Order;
 import clients.utils.TransactionStatistics;
 
 import java.io.FileInputStream;
@@ -293,7 +295,7 @@ public class CockroachDB {
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
-                        if (e.getSQLState().equals("08003")){
+                        if (e.getSQLState().equals("08003")) {
                             connHelper.connect();
                         }
                     }
@@ -806,44 +808,55 @@ public class CockroachDB {
 
     private static void relatedCustomerTransaction(int cwid, int cdid, int cid) throws SQLException {
         Statement stmt = connHelper.getConn().createStatement();
-        ResultSet rs = stmt.executeQuery(
-                "SELECT DISTINCT w_id_1 as c_w_id, d_id_1 as c_d_id, c_id_1 as c_id " +
-                        "FROM (SELECT o_w_id as w_id_1, o_c_id as c_id_1,  o_d_id as d_id_1, ol_i_id as i_1" +
-                        "      FROM order_tab  ,order_line_tab " +
-                        "      WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id AND o_w_id <> " + cwid + ") AS a, " +
-                        "     (SELECT o_w_id as w_id_2, o_c_id as c_id_2,  o_d_id as d_id_2, ol_i_id as i_2" +
-                        "      FROM order_tab  ,order_line_tab " +
-                        "      WHERE o_w_id = ol_w_id AND o_d_id = ol_d_id AND o_id = ol_o_id AND o_w_id <> " + cwid + ") AS b " +
-                        "WHERE w_id_1 = w_id_2 AND c_id_1 = c_id_2 AND d_id_1 = d_id_2 AND i_1 <> i_2 " +
-                        "" +
-                        "AND i_1 IN (SELECT DISTINCT ol_i_id as c_items " +
-                        "            FROM order_tab , order_line_tab " +
-                        "            WHERE o_w_id = ol_w_id " +
-                        "            AND o_d_id = ol_d_id " +
-                        "            AND o_id = ol_o_id " +
-                        "            AND o_w_id = " + cwid +
-                        "            AND o_d_id = " + cdid +
-                        "            AND o_c_id = " + cid + ")" +
-                        "" +
-                        "AND i_2 IN (SELECT DISTINCT ol_i_id as c_items " +
-                        "            FROM order_tab , order_line_tab " +
-                        "            WHERE o_w_id = ol_w_id " +
-                        "            AND o_d_id = ol_d_id " +
-                        "            AND o_id = ol_o_id " +
-                        "            AND o_w_id = " + cwid +
-                        "            AND o_d_id = " + cdid +
-                        "            AND o_c_id = " + cid + ")"
-        );
-
-        while (rs.next()) {
-            int r_cwid = rs.getInt(1);
-            int r_cdid = rs.getInt(2);
-            int r_cid = rs.getInt(3);
-
-            System.out.printf("CWID: %d, C_DID: %d, C_ID: %d", r_cwid, r_cdid, r_cid);
-            System.out.println();
+        Set<Customer> relatedCustomers = new HashSet<>();
+        ArrayList<Integer> orders = new ArrayList<>();
+        // Select orderids from this customer
+        ResultSet orderRs = stmt.executeQuery(String.format(
+                "SELECT o_id FROM order_tab WHERE o_w_id = %d and o_d_id = %d and o_c_id = %d", cwid, cdid, cid));
+        while (orderRs.next()) {
+            int o_id = orderRs.getInt(1);
+            orders.add(o_id);
         }
-        rs.close();
+        if (orders.size() > 0) {
+            for (int o_id : orders) {
+                ResultSet relatedOrdersRs = stmt.executeQuery(String.format(
+                        "SELECT DISTINCT ol_w_id, ol_d_id, ol_o_id, COUNT(ol_number) FROM order_line_tab \n" +
+                                "WHERE ol_i_id in ( SELECT DISTINCT ol_i_id FROM order_line_tab WHERE ol_w_id = %d and ol_d_id = %d and ol_o_id = %d )\n" +
+                                "AND ol_w_id <> %d \n" +
+                                "GROUP BY (ol_w_id, ol_d_id,ol_o_id)\n" +
+                                "HAVING COUNT(ol_number)>=2",  cwid, cdid, o_id, cwid));
+                ArrayList<Order> realtedOrders = new ArrayList<>();
+                while (relatedOrdersRs.next()) {
+                    int ol_w_id = relatedOrdersRs.getInt(1);
+                    int ol_d_id = relatedOrdersRs.getInt(2);
+                    int ol_o_id = relatedOrdersRs.getInt(3);
+                    realtedOrders.add(new Order(ol_w_id,ol_d_id,ol_o_id));
+                }
+                relatedOrdersRs.close();
+
+                ArrayList<String> conditions = new ArrayList<>();
+                for (Order order:realtedOrders) {
+                    conditions.add(String.format(" (o_w_id = %d AND o_d_id = %d AND o_id = %d) ",order.w_id,order.d_id,order.o_id));
+                }
+                if (realtedOrders.size()>0){
+                    ResultSet customerRs = stmt.executeQuery(
+                            String.format("SELECT DISTINCT o_w_id, o_d_id, o_c_id FROM order_tab WHERE %s ;",String.join(" OR ",conditions)));
+                    while (customerRs.next()) {
+                        int c_w_id = customerRs.getInt(1);
+                        int c_d_id = customerRs.getInt(2);
+                        int c_id = customerRs.getInt(3);
+                        relatedCustomers.add(new Customer(c_w_id,c_d_id,c_id));
+                    }
+                    customerRs.close();
+                }
+                relatedOrdersRs.close();
+            }
+        }
+        orderRs.close();
+        for (Customer cust:relatedCustomers) {
+            System.out.printf("Related Customer: w_id:%d, d_id:%d, c_id: %d\n",cust.w_id,cust.d_id,cust.c_id);
+        }
+
     }
 
     private static void getDbState() throws SQLException {
