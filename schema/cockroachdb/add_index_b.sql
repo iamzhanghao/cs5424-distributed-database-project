@@ -15,6 +15,7 @@ CREATE INDEX ON item_tab (i_im_id);
 CREATE INDEX ON order_line_tab (ol_d_id);
 CREATE INDEX ON order_line_tab (ol_w_id);
 CREATE INDEX ON order_line_tab (ol_o_id);
+CREATE INDEX ON order_line_tab (ol_i_id);
 CREATE INDEX ON order_line_tab (ol_amount);
 CREATE INDEX ON order_line_tab (ol_supply_w_id);
 CREATE INDEX ON order_line_tab (ol_quantity);
