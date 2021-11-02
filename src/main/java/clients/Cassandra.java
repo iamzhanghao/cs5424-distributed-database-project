@@ -13,6 +13,8 @@ import java.io.FileInputStream;
 import java.math.BigDecimal;
 import java.net.InetSocketAddress;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Cassandra {
 
@@ -168,7 +170,7 @@ public class Cassandra {
     private static void newOrderTransaction(CqlSession session, int cid, int wid, int did, int number_of_items,
                                             ArrayList<Integer> items, ArrayList<Integer> supplier_warehouses, ArrayList<BigDecimal> quantities) {
         try {
-            ResultSet rs = session.execute("SELECT * FROM district_tab WHERE D_W_ID = " + wid + " AND D_ID = " + did);
+            ResultSet rs = session.execute("SELECT D_NEXT_O_ID FROM district_tab WHERE D_W_ID = " + wid + " AND D_ID = " + did);
             Integer next_order_id = 0;
             next_order_id = rs.one().getInt("D_NEXT_O_ID");
 
@@ -195,7 +197,8 @@ public class Cassandra {
                     .setInt(1, did)
                     .setInt(2, next_order_id)
                     .setInt(3, cid)
-                    .setInt(4, 0)
+//                    .setInt(4, 0)
+                    .setString(4, "null")
                     .setBigDecimal(5, BigDecimal.valueOf(number_of_items))
                     .setBigDecimal(6, BigDecimal.valueOf(all_local))
                     .setDefaultTimestamp(System.currentTimeMillis());
@@ -355,169 +358,170 @@ public class Cassandra {
         }
     }
 
-    private static void deliveryTransaction(CqlSession session, int wid, int carrierid) {
-        System.out.println("Delivery Txn");
-        for(int did  = 1; did <= 10; did ++) {
-            // get the yet-to-deliver order with its client id
-            PreparedStatement getOrderAndCustomerId = session.prepare(
-                    "SELECT\n" +
-                            "\to_id,\n" +
-                            "\to_c_id\n" +
-                            "FROM\n" +
-                            "\torder_tab_not_null\n" +
+    private static void deliveryTransactionUnit(CqlSession session, int wid, int carrierid, int did) {
+        // get the yet-to-deliver order with its client id
+        PreparedStatement getOrderAndCustomerId = session.prepare(
+                "SELECT\n" +
+                        "\to_id,\n" +
+                        "\to_c_id\n" +
+                        "FROM\n" +
+                        "\torder_tab\n" +
+                        "WHERE\n" +
+                        "\to_w_id = ?\n" +
+                        "\tAND o_d_id = ?\n" +
+                        "\tAND o_carrier_id = 'null'\n" +
+                        "ORDER BY\n" +
+                        "\to_id\n" +
+                        "LIMIT 1 ALLOW FILTERING"
+        );
+        BoundStatement getOrderAndCustomerIdBound = getOrderAndCustomerId.bind()
+                .setInt(0, wid)
+                .setInt(1, did);
+        ResultSet rs = session.execute(getOrderAndCustomerIdBound);
+
+        // proceed when a yet-to-deliver order exists
+        if(rs.iterator().hasNext()) {
+            Row row = rs.one();
+            int orderID = row.getInt("o_id");
+            int customerID = row.getInt("o_c_id");
+
+//            System.out.printf("order: %d customer:%d ", orderID, customerID);
+
+            // assign the carrier id to the order
+            PreparedStatement updateOrder = session.prepare(
+                    "UPDATE\n" +
+                            "\torder_tab\n" +
+                            "SET\n" +
+                            "\to_carrier_id = ?\n" +
                             "WHERE\n" +
                             "\to_w_id = ?\n" +
                             "\tAND o_d_id = ?\n" +
-                            "\tAND o_carrier_id = 'null'\n" +
-                            "ORDER BY\n" +
-                            "\to_id\n" +
-                            "LIMIT 1 ALLOW FILTERING"
+                            "\tAND o_id = ?"
             );
-            BoundStatement getOrderAndCustomerIdBound = getOrderAndCustomerId.bind()
+            BoundStatement updateOrderBound = updateOrder.bind()
+                    .setString(0, String.valueOf(carrierid))
+                    .setInt(1, wid)
+                    .setInt(2, did)
+                    .setInt(3, orderID);
+            session.execute(updateOrderBound);
+
+            // assign the current timestamp to each order line
+            // get the count and amount sum of order lines
+            PreparedStatement getOrderLineCount = session.prepare(
+                    "SELECT\n" +
+                            "\tcount(1), sum(ol_amount) as sum\n" +
+                            "FROM\n" +
+                            "\torder_line_tab\n" +
+                            "WHERE\n" +
+                            "\tol_w_id = ?\n" +
+                            "\tAND ol_d_id = ?\n" +
+                            "\tAND ol_o_id = ?"
+            );
+            BoundStatement getOrderLineCountBound = getOrderLineCount.bind()
                     .setInt(0, wid)
-                    .setInt(1, did);
-            ResultSet rs = session.execute(getOrderAndCustomerIdBound);
+                    .setInt(1, did)
+                    .setInt(2, orderID);
+            rs = session.execute(getOrderLineCountBound);
+            row = rs.one();
+            long orderLineCount = row.getLong("count");
+            BigDecimal orderLineSum = row.getBigDecimal("sum");
+//            System.out.printf("order count: %d order sum: %d", orderLineCount, orderLineSum.intValue());
 
-            // proceed when a yet-to-deliver order exists
-            if(rs.iterator().hasNext()) {
-                Row row = rs.one();
-                int orderID = row.getInt("o_id");
-                int customerID = row.getInt("o_c_id");
-
-//                System.out.printf("%d %d\n", orderID, customerID);
-
-                // assign the carrier id to the order
-                PreparedStatement updateOrder = session.prepare(
-                        "UPDATE\n" +
-                                "\torder_tab_not_null\n" +
-                                "SET\n" +
-                                "\to_carrier_id = ?\n" +
-                                "WHERE\n" +
-                                "\to_w_id = ?\n" +
-                                "\tAND o_d_id = ?\n" +
-                                "\tAND o_id = ?"
-                );
-                BoundStatement updateOrderBound = updateOrder.bind()
-                        .setString(0, String.valueOf(carrierid))
-                        .setInt(1, wid)
-                        .setInt(2, did)
-                        .setInt(3, orderID);
-                session.execute(updateOrderBound);
-
-                // assign the current timestamp to each order line
-                // get the count and amount sum of order lines
-                PreparedStatement getOrderLineCount = session.prepare(
-                        "SELECT\n" +
-                                "\tcount(1), sum(ol_amount) as sum\n" +
-                                "FROM\n" +
-                                "\torder_line_tab\n" +
-                                "WHERE\n" +
-                                "\tol_w_id = ?\n" +
-                                "\tAND ol_d_id = ?\n" +
-                                "\tAND ol_o_id = ?"
-                );
-                BoundStatement getOrderLineCountBound = getOrderLineCount.bind()
+            // update per order line
+            PreparedStatement updateOrderLine = session.prepare(
+                    "UPDATE\n" +
+                            "\torder_line_tab\n" +
+                            "SET\n" +
+                            "\tol_delivery_d = toTimestamp (now())\n" +
+                            "WHERE\n" +
+                            "\tol_w_id = ?\n" +
+                            "\tAND ol_d_id = ?\n" +
+                            "\tAND ol_o_id = ?\n" +
+                            "\tAND ol_number = ?;"
+            );
+            for(int line = 1; line <= orderLineCount; line ++) {
+                BoundStatement updateOrderLineBound = updateOrderLine.bind()
                         .setInt(0, wid)
                         .setInt(1, did)
-                        .setInt(2, orderID);
-                rs = session.execute(getOrderLineCountBound);
-                row = rs.one();
-                long orderLineCount = row.getLong("count");
-                BigDecimal orderLineSum = row.getBigDecimal("sum");
+                        .setInt(2, orderID)
+                        .setInt(3, line);
+                session.execute(updateOrderLineBound);
+            }
 
-                // update per order line
-                PreparedStatement updateOrderLine = session.prepare(
-                        "UPDATE\n" +
-                                "\torder_line_tab\n" +
-                                "SET\n" +
-                                "\tol_delivery_d = toTimestamp (now())\n" +
-                                "WHERE\n" +
-                                "\tol_w_id = ?\n" +
-                                "\tAND ol_d_id = ?\n" +
-                                "\tAND ol_o_id = ?\n" +
-                                "\tAND ol_number = ?;"
-                );
-                for(int line = 1; line <= orderLineCount; line ++) {
-                    BoundStatement updateOrderLineBound = updateOrderLine.bind()
-                            .setInt(0, wid)
-                            .setInt(1, did)
-                            .setInt(2, orderID)
-                            .setInt(3, line);
-                    session.execute(updateOrderLineBound);
-                }
-//                // get the amount sum of all order lines
-//                PreparedStatement getOrderLineSum = session.prepare(
-//                    "SELECT\n" +
-//                            "\tSUM(ol_amount) AS sum\n" +
-//                            "FROM\n" +
-//                            "\torder_line_tab\n" +
-//                            "WHERE\n" +
-//                            "\tol_o_id = ?\n" +
-//                            "\tAND ol_w_id = ?\n" +
-//                            "\tAND ol_d_id = ?"
-//                );
-//                BoundStatement getOrderLineSumBound = getOrderLineSum.bind()
-//                        .setInt(0, orderID)
-//                        .setInt(1, wid)
-//                        .setInt(2, did);
-//                rs = session.execute(getOrderLineSumBound);
-//                BigDecimal orderLineSum = rs.one().getBigDecimal("sum");
-//                System.out.printf("Order Amount sum: %f", orderLineSum);
-
-                // update the customer's balance and delivery info
-                // get the present customer balance and delivery count
-                PreparedStatement getCustomerInfo = session.prepare(
-                        "SELECT\n" +
-                                "\tc_balance,\n" +
-                                "\tc_delivery_cnt\n" +
-                                "FROM\n" +
-                                "\tcustomer_tab\n" +
-                                "WHERE\n" +
-                                "\tc_id = ?\n" +
-                                "\tAND c_w_id = ?\n" +
-                                "\tAND c_d_id = ?"
-                );
-                BoundStatement getCustomerInfoBound = getCustomerInfo.bind()
-                        .setInt(0, customerID)
-                        .setInt(1, wid)
-                        .setInt(2, did);
-                rs = session.execute(getCustomerInfoBound);
-                row = rs.one();
-                BigDecimal balance = row.getBigDecimal("c_balance");
-                int count = row.getInt("c_delivery_cnt");
+            // update the customer's balance and delivery info
+            // get the present customer balance and delivery count
+            PreparedStatement getCustomerInfo = session.prepare(
+                    "SELECT\n" +
+                            "\tc_balance,\n" +
+                            "\tc_delivery_cnt\n" +
+                            "FROM\n" +
+                            "\tcustomer_tab\n" +
+                            "WHERE\n" +
+                            "\tc_id = ?\n" +
+                            "\tAND c_w_id = ?\n" +
+                            "\tAND c_d_id = ?"
+            );
+            BoundStatement getCustomerInfoBound = getCustomerInfo.bind()
+                    .setInt(0, customerID)
+                    .setInt(1, wid)
+                    .setInt(2, did);
+            rs = session.execute(getCustomerInfoBound);
+            row = rs.one();
+            BigDecimal balance = row.getBigDecimal("c_balance");
+            int count = row.getInt("c_delivery_cnt");
 //                System.out.printf("balance%f count%d", balance, count);
 
-                // update the present customer balance and delivery count
-                PreparedStatement updateCustomerInfo = session.prepare(
-                        "UPDATE\n" +
-                                "\tcustomer_tab\n" +
-                                "SET\n" +
-                                "\tc_balance = ?,\n" +
-                                "\tc_delivery_cnt = ?\n" +
-                                "WHERE\n" +
-                                "\tc_id = ?\n" +
-                                "\tAND c_w_id = ?\n" +
-                                "\tAND c_d_id = ?"
-                );
-                BoundStatement updateCustomerInfoBound = updateCustomerInfo.bind()
-                        .setBigDecimal(0, balance.add(orderLineSum))
-                        .setInt(1, count+1)
-                        .setInt(2, customerID)
-                        .setInt(3, wid)
-                        .setInt(4, did);
-                session.execute(updateCustomerInfoBound);
-            }
+            // update the present customer balance and delivery count
+            PreparedStatement updateCustomerInfo = session.prepare(
+                    "UPDATE\n" +
+                            "\tcustomer_tab\n" +
+                            "SET\n" +
+                            "\tc_balance = ?,\n" +
+                            "\tc_delivery_cnt = ?\n" +
+                            "WHERE\n" +
+                            "\tc_id = ?\n" +
+                            "\tAND c_w_id = ?\n" +
+                            "\tAND c_d_id = ?"
+            );
+            BoundStatement updateCustomerInfoBound = updateCustomerInfo.bind()
+                    .setBigDecimal(0, balance.add(orderLineSum))
+                    .setInt(1, count+1)
+                    .setInt(2, customerID)
+                    .setInt(3, wid)
+                    .setInt(4, did);
+            session.execute(updateCustomerInfoBound);
+//            System.out.printf("did: %d order: %d customer %d new balance: %f new count : %d\n", did, orderID, customerID, balance.add(orderLineSum), count + 1);
         }
+    }
+
+    private static void deliveryTransaction(CqlSession session, int wid, int carrierid) {
+        System.out.println("Delivery Txn");
+
+        // parallel version
+        List<Integer> didRange = IntStream.rangeClosed(1, 10)
+                .boxed().collect(Collectors.toList());
+        didRange.parallelStream().forEach(
+                did -> {
+//                    System.out.printf("did: %d ", did);
+                    deliveryTransactionUnit(session, wid, carrierid, did);
+                }
+        );
+
+        // serial version
+//        for(int did = 1; did <= 10; did ++) {
+//            System.out.printf("did: %d ", did);
+//            deliveryTransactionUnit(session, wid, carrierid, did);
+//        }
     }
 
     private static void orderStatusTransaction(CqlSession session, int cwid, int cdid, int cid) {
         String get_customer = "select c_first, c_middle, c_last, c_balance from customer_tab "
-            + "where c_w_id = %d and c_d_id = %d and c_id = %d ";
+                + "where c_w_id = %d and c_d_id = %d and c_id = %d ";
         String get_last_order = "SELECT o_w_id, o_d_id, o_c_id, o_id, o_entry_d, o_carrier_id "
-            + "FROM order_tab "
-            + "WHERE o_w_id = %d AND o_d_id = %d AND o_c_id = %d order by o_id desc LIMIT 1 ALLOW FILTERING";
+                + "FROM order_tab "
+                + "WHERE o_w_id = %d AND o_d_id = %d AND o_c_id = %d order by o_id desc LIMIT 1 ALLOW FILTERING";
         String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d "
-            + "from order_line_tab where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
+                + "from order_line_tab where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
 
         // customer last order
         Row customer  = session.execute(String.format(get_customer, cwid, cdid, cid)).one();
@@ -525,24 +529,24 @@ public class Cassandra {
         int last_order_id = last_order.getInt("o_id");
 
         System.out.printf("Customer name: %s %s %s, Balance: %f\n",
-            customer.getString("c_first"),
-            customer.getString("c_middle"),
-            customer.getString("c_last"),
-            customer.getBigDecimal("c_balance").doubleValue());
-        System.out.printf("Customer last order id: %d, Entry Datetime: %s, Carrier id: %d\n",
-            last_order_id,
-            last_order.getInstant("o_entry_d").toString(),
-            last_order.getInt("o_carrier_id"));
+                customer.getString("c_first"),
+                customer.getString("c_middle"),
+                customer.getString("c_last"),
+                customer.getBigDecimal("c_balance").doubleValue());
+        System.out.printf("Customer last order id: %d, Entry Datetime: %s, Carrier id: %s\n",
+                last_order_id,
+                last_order.getInstant("o_entry_d").toString(),
+                last_order.getString("o_carrier_id"));
 
         // order items
         ResultSet rs_order_items = session.execute(String.format(get_order_items, cwid, cdid, last_order_id));
         for(Row item : rs_order_items){
-            System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %f, Price: %f, Delivery Datetime: %s\n", 
-            item.getInt("ol_i_id"), 
-            item.getInt("ol_supply_w_id"), 
-            item.getBigDecimal("ol_quantity").doubleValue(), 
-            item.getBigDecimal("ol_amount").doubleValue(), 
-            item.getInstant("ol_delivery_d") != null ? item.getInstant("ol_delivery_d").toString() : "");
+            System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %f, Price: %f, Delivery Datetime: %s\n",
+                    item.getInt("ol_i_id"),
+                    item.getInt("ol_supply_w_id"),
+                    item.getBigDecimal("ol_quantity").doubleValue(),
+                    item.getBigDecimal("ol_amount").doubleValue(),
+                    item.getInstant("ol_delivery_d") != null ? item.getInstant("ol_delivery_d").toString() : "");
         }
 
 
@@ -589,11 +593,11 @@ public class Cassandra {
         String get_N = "select d_next_o_id from district_tab where d_w_id = %d and d_id = %d";
         String get_order = "select o_id, o_entry_d, o_c_id from order_tab where o_w_id = %d and o_d_id = %d and o_id in ( %s )";
         String get_order_lines = "select ol_o_id, ol_i_id, ol_quantity from order_line_tab "
-            + "where ol_w_id = %d and ol_d_id = %d and ol_o_id in ( %s )";
+                + "where ol_w_id = %d and ol_d_id = %d and ol_o_id in ( %s )";
         String get_customer = "select c_id, c_first, c_middle, c_last from customer_tab "
-            + "where c_w_id = %d and c_d_id = %d and c_id in ( %s )";
+                + "where c_w_id = %d and c_d_id = %d and c_id in ( %s )";
         String get_items = "select i_id, i_name from item_tab where i_id in ( %s )";
-        
+
 
         Integer N = session.execute(String.format(get_N, wid, did)).one().getInt("d_next_o_id");
 
@@ -601,10 +605,10 @@ public class Cassandra {
         for(int i = N-l; i <N; i++){
             o_ids.add((N-i)+"");
         }
-        
+
         List<Row> orders = session.execute(String.format(get_order, wid, did, o_ids.toString())).all();
         List<Row> order_lines = session.execute(String.format(get_order_lines, wid, did, o_ids.toString())).all();
-        
+
         StringJoiner c_ids = new StringJoiner(",");
         for(Row order : orders){
             c_ids.add(order.getInt("o_c_id")+"");
@@ -615,7 +619,7 @@ public class Cassandra {
         System.out.printf("WID: %d, DID: %d, Number of last orders: %d\n", wid, did, l);
         System.out.println();
 
-        
+
         Set<Integer> all_popular_items = new HashSet<>();
         List<Set<Integer>> popular_items_each_order = new ArrayList<Set<Integer>>();
         Map<Integer, Row> customer_map = new HashMap<>();
@@ -643,10 +647,10 @@ public class Cassandra {
         for(Row order : orders){
             int o_id = order.getInt("o_id");
             Row customer = customer_map.get(order.getInt("o_c_id"));
-            System.out.printf(String.format("OID: %d, O_ENTRY_D: %s, Customer Name: %s\n", 
-                o_id, 
-                order.getInstant("o_entry_d").toString(),
-                customer.getString("c_first")+" "+customer.getString("c_middle")+" "+customer.getString("c_last")));
+            System.out.printf(String.format("OID: %d, O_ENTRY_D: %s, Customer Name: %s\n",
+                    o_id,
+                    order.getInstant("o_entry_d").toString(),
+                    customer.getString("c_first")+" "+customer.getString("c_middle")+" "+customer.getString("c_last")));
 
             List<Row> ols = ol_map.get(o_id);
             Map<Integer, Double> quantity_map = new HashMap<>();
@@ -680,13 +684,13 @@ public class Cassandra {
             List<Row> items = session.execute(String.format(get_items, i_ids_str.toString())).all();
             for(Row item : items){
                 item_map.put(item.getInt("i_id"), item.getString("i_name"));
-                System.out.printf("Popular I_NAME: %s, Quantity: %f\n", 
-                    item.getString("i_name"), 
-                    max_quantity);
+                System.out.printf("Popular I_NAME: %s, Quantity: %f\n",
+                        item.getString("i_name"),
+                        max_quantity);
             }
 
             popular_items_each_order.add(i_ids);
-        
+
         }
 
         for(Integer i_id : all_popular_items){
@@ -696,9 +700,9 @@ public class Cassandra {
                     count ++;
                 }
             }
-            System.out.printf("Popular I_NAME: %s, Percentage of Orders having Popular Items: %f\n", 
-                item_map.get(i_id), 
-                (float) count * 1 / orders.size());
+            System.out.printf("Popular I_NAME: %s, Percentage of Orders having Popular Items: %f\n",
+                    item_map.get(i_id),
+                    (float) count * 1 / orders.size());
         }
     }
 
