@@ -148,30 +148,52 @@ PRIMARY KEY (o_w_id, o_id, o_d_id)
 COPY order_tab_not_null (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
 FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND NULL='' AND HEADER=FALSE;
 
-CREATE TABLE customer_tab_by_balance (
-c_w_id         INT,
-c_d_id         INT,
-c_id           INT,
-c_first        VARCHAR,
-c_middle       VARCHAR,
-c_last         VARCHAR,
-c_street_1     VARCHAR,
-c_street_2     VARCHAR,
-c_city         VARCHAR,
-c_state        VARCHAR,
-c_zip          VARCHAR,
-c_phone        VARCHAR,
-c_since        TIMESTAMP,
-c_credit       VARCHAR,
-c_credit_lim   DECIMAL,
-c_discount     DECIMAL,
-c_balance      DECIMAL,
-c_ytd_payment  FLOAT,
-c_payment_cnt  INT,
-c_delivery_cnt INT,
-c_data         VARCHAR,
-PRIMARY KEY (c_w_id, c_balance, c_d_id, c_id)
-);
+//CREATE TABLE customer_tab_by_balance (
+//c_w_id         INT,
+//c_d_id         INT,
+//c_id           INT,
+//c_first        VARCHAR,
+//c_middle       VARCHAR,
+//c_last         VARCHAR,
+//c_street_1     VARCHAR,
+//c_street_2     VARCHAR,
+//c_city         VARCHAR,
+//c_state        VARCHAR,
+//c_zip          VARCHAR,
+//c_phone        VARCHAR,
+//c_since        TIMESTAMP,
+//c_credit       VARCHAR,
+//c_credit_lim   DECIMAL,
+//c_discount     DECIMAL,
+//c_balance      DECIMAL,
+//c_ytd_payment  FLOAT,
+//c_payment_cnt  INT,
+//c_delivery_cnt INT,
+//c_data         VARCHAR,
+//PRIMARY KEY (c_w_id, c_balance, c_d_id, c_id)
+//);
+//
+//COPY customer_tab_by_balance (c_w_id, c_d_id, c_id, c_first, c_middle, c_last, c_street_1, c_street_2, c_city, c_state, c_zip, c_phone, c_since, c_credit, c_credit_lim, c_discount, c_balance, c_ytd_payment, c_payment_cnt, c_delivery_cnt, c_data)
+//FROM 'project_files/data_files/customer.csv' WITH DELIMITER=',' AND HEADER=FALSE;
 
-COPY customer_tab_by_balance (c_w_id, c_d_id, c_id, c_first, c_middle, c_last, c_street_1, c_street_2, c_city, c_state, c_zip, c_phone, c_since, c_credit, c_credit_lim, c_discount, c_balance, c_ytd_payment, c_payment_cnt, c_delivery_cnt, c_data)
-FROM 'project_files/data_files/customer.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+CREATE MATERIALIZED VIEW customer_tab_by_balance AS
+SELECT
+c_balance,
+c_w_id,
+c_d_id,
+c_first,
+c_middle,
+c_last,
+c_id
+FROM
+customer_tab
+WHERE
+c_balance IS NOT NULL
+AND c_w_id IS NOT NULL
+AND c_d_id IS NOT NULL
+AND c_first IS NOT NULL
+AND c_middle IS NOT NULL
+AND c_id IS NOT NULL
+AND c_last IS NOT NULL PRIMARY KEY (
+c_w_id, c_balance, c_d_id, c_id
+);
