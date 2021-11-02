@@ -37,4 +37,4 @@ CREATE INDEX ON order_line_tab (ol_supply_w_id);
 -- CREATE INDEX ON stock_tab (s_remote_cnt);
 --
 -- CREATE INDEX ON warehouse_tab (w_ytd);
-
+CREATE INDEX ON warehouse_district_customer (c_id, w_id, d_id);
