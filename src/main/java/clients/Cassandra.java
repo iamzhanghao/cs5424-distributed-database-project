@@ -79,6 +79,15 @@ public class Cassandra {
             latencies.add(new TransactionStatistics(txnType, latency / 1000000, 0));
             System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, 0);
         }
+        while (true) {
+            try {
+                getDbState(session);
+            } catch (Exception e) {
+                System.out.println("RETRY DB STATE in 2 seconds");
+            }
+            Thread.sleep(2000);
+            break;
+        }
         session.close();
         float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
         TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
@@ -778,5 +787,87 @@ public class Cassandra {
 
     private static void relatedCustomerTransaction(CqlSession session, int cwid, int cdid, int cid) {
 
+    }
+    private static void getDbState(CqlSession session) throws Exception {
+        System.out.println("====================== DB State ============================");
+        StringBuilder res = new StringBuilder();
+
+        ResultSet warehouseResultSet = session.execute("SELECT sum(W_YTD) from warehouse_tab;");
+        for (Row warehouseRow : warehouseResultSet) {
+            BigDecimal w_ytd = warehouseRow.getBigDecimal(1);
+            System.out.printf("W_YTD: %f\n", w_ytd);
+            res.append(w_ytd.doubleValue() + "\n");
+        }
+
+        ResultSet districtResultSet = session.execute("SELECT sum(D_YTD), sum(D_NEXT_O_ID) from district_tab;");
+        for (Row districtRow : districtResultSet) {
+            BigDecimal d_ytd = districtRow.getBigDecimal(1);
+            BigDecimal d_next_o_ytd = districtRow.getBigDecimal(2);
+
+            System.out.printf("D_YTD: %f\n", d_ytd);
+            res.append(d_ytd.doubleValue() + "\n");
+            System.out.printf("D_NEXT_O_ID: %f\n", d_next_o_ytd);
+            res.append(d_next_o_ytd.doubleValue() + "\n");
+        }
+
+        ResultSet customerResultSet = session.execute("select sum(C_BALANCE), sum(C_YTD_PAYMENT), sum(C_PAYMENT_CNT), sum(C_DELIVERY_CNT) from Customer_tab;");
+        for (Row customerRow : customerResultSet) {
+            BigDecimal c_balance = customerRow.getBigDecimal(1);
+            System.out.printf("C_BALANCE: %f\n", c_balance);
+            res.append(c_balance.doubleValue() + "\n");
+            BigDecimal c_tyd_payment = customerRow.getBigDecimal(2);
+            System.out.printf("C_YTD_PAYMENT: %f\n", c_tyd_payment);
+            res.append(c_tyd_payment.doubleValue() + "\n");
+            BigDecimal c_payment_count = customerRow.getBigDecimal(3);
+            System.out.printf("C_PAYMENT_CNT: %f\n", c_payment_count);
+            res.append(c_payment_count.doubleValue() + "\n");
+            BigDecimal c_delivery_cnt = customerRow.getBigDecimal(4);
+            System.out.printf("C_DELIVERY_CNT: %f\n", c_delivery_cnt);
+            res.append(c_delivery_cnt.doubleValue() + "\n");
+        }
+
+        ResultSet orderResultSet = session.execute("select max(O_ID), sum(O_OL_CNT) from Order_tab;");
+        for (Row orderRow : orderResultSet) {
+            BigDecimal o_id = orderRow.getBigDecimal(1);
+            BigDecimal o_ol_cnt = orderRow.getBigDecimal(2);
+
+            System.out.printf("O_ID: %f\n", o_id);
+            res.append(o_id.doubleValue() + "\n");
+            System.out.printf("O_OL_CNT: %f\n", o_ol_cnt);
+            res.append(o_ol_cnt.doubleValue() + "\n");
+        }
+
+        ResultSet orderLineResultSet = session.execute("select sum(OL_AMOUNT), sum(OL_QUANTITY) from Order_Line_tab;");
+        for (Row orderLineRow : orderLineResultSet) {
+            BigDecimal ol_amount = orderLineRow.getBigDecimal(1);
+            BigDecimal ol_quantity = orderLineRow.getBigDecimal(2);
+
+            System.out.printf("OL_AMOUNT: %f\n", ol_amount);
+            res.append(ol_amount.doubleValue() + "\n");
+            System.out.printf("OL_QUANTITY: %f\n", ol_quantity);
+            res.append(ol_quantity.doubleValue() + "\n");
+        }
+
+        ResultSet stockResultSet = session.execute("select sum(S_QUANTITY), sum(S_YTD), sum(S_ORDER_CNT), sum(S_REMOTE_CNT) from Stock_tab;");
+        for (Row stockRow : stockResultSet) {
+            BigDecimal s_quantity = stockRow.getBigDecimal(1);
+            System.out.printf("S_QUANTITY: %f\n", s_quantity);
+            res.append(s_quantity.doubleValue() + "\n");
+            BigDecimal s_ytd = stockRow.getBigDecimal(2);
+            System.out.printf("S_YTD: %f\n", s_ytd);
+            res.append(s_ytd.doubleValue() + "\n");
+            BigDecimal s_order_cnt = stockRow.getBigDecimal(3);
+            System.out.printf("S_ORDER_CNT: %f\n", s_order_cnt);
+            res.append(s_order_cnt.doubleValue() + "\n");
+            BigDecimal s_remote_cnt = stockRow.getBigDecimal(4);
+            System.out.printf("S_REMOTE_CNT: %f\n", s_remote_cnt);
+            res.append(s_remote_cnt.doubleValue() + "\n");
+        }
+
+
+        System.out.println("======================DB State Plain=======================");
+        System.out.println(res);
+        TransactionStatistics.printServerTime();
+        System.out.println();
     }
 }
