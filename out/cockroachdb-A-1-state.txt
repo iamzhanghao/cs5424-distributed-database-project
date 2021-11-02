@@ -1,0 +1,49 @@
+========================Statistics========================
+Total 20000 transactions, execution time 31639.37s, avg latency 1581.81ms, throughput 0.63 query/s,
+median latency 191.99ms, 95th percentile latency 8136.60ms, 99th percentile latency 24813.69ms
+
+Txn P: avg latency 246.77ms, retry 0.03 times
+Txn R: avg latency 275.57ms, retry 0.00 times
+Txn S: avg latency 23.28ms, retry 0.00 times
+Txn D: avg latency 505.68ms, retry 0.09 times
+Txn T: avg latency 330.10ms, retry 0.02 times
+Txn I: avg latency 809.45ms, retry 0.00 times
+Txn N: avg latency 3426.60ms, retry 1.35 times
+Txn O: avg latency 51.34ms, retry 0.00 times
+
+==========================================================
+Successfully wrote results to out/cockroachdb-A-1.csv!
+======================DB State ============================
+W_YTD: 310108532.590000
+D_YTD: 310108532.590000
+D_NEXT_O_ID: 620100.000000
+C_BALANCE: 5316033356.450000
+C_YTD_PAYMENT: 310108532.589999
+C_PAYMENT_CNT: 460000.000000
+C_DELIVERY_CNT: 90000.000000
+O_ID: 42903.000000
+O_OL_CNT: 7744530.000000
+OL_AMOUNT: 6997815982.963445
+OL_QUANTITY: 40754804.000000
+S_QUANTITY: 55648578.000000
+S_YTD: 22010559.000000
+S_ORDER_CNT: 3995681.000000
+S_REMOTE_CNT: 39589.000000
+======================DB State Plain=======================
+3.1010853259E8
+3.1010853259E8
+620100.0
+5.31603335645E9
+3.1010853258999854E8
+460000.0
+90000.0
+42903.0
+7744530.0
+6.997815982963445E9
+4.0754804E7
+5.5648578E7
+2.2010559E7
+3995681.0
+39589.0
+
+Current Time at server: 2021-04-02 11:04:42
