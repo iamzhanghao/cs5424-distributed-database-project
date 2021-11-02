@@ -15,14 +15,16 @@ import java.util.*;
 public class CockroachDB {
 
     // Limit number of transactions executed, during actual experiment change to 20000
-    private static final int TXN_LIMIT = 200000000;
-    private static final int MAX_RETRY_COUNT = 10000;
-    private static final int RETRY_QUERY_AFTER = 1000;
+    private static final int TXN_LIMIT = 2000;
+    private static final int MAX_RETRY_COUNT = 100000000;
+    private static final int RETRY_QUERY_AFTER = 500;
 
     private static CockroachDbSQLConnectionHelper connHelper;
 
-    private static int getDelay(){
-        return 300 + (int)(Math.random() * ((RETRY_QUERY_AFTER - 300) + 1));
+    private static int getDelay(int count) {
+        int random = 200 + (int) (Math.random() * ((RETRY_QUERY_AFTER - 200) + 1));
+        System.out.printf("Retry count= %d, retry in %d milliseconds", count, random);
+        return random;
     }
 
     public static void main(String[] args) throws Exception {
@@ -89,7 +91,7 @@ public class CockroachDB {
                 getDbState();
             } catch (SQLException e) {
                 System.out.println("RETRY DB STATE in 2 seconds");
-                if (e.getSQLState().equals("08003")){
+                if (e.getSQLState().equals("08003")) {
                     connHelper.connect();
                 }
             }
@@ -126,7 +128,7 @@ public class CockroachDB {
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
-                        if (e.getSQLState().equals("08003")){
+                        if (e.getSQLState().equals("08003")) {
                             connHelper.connect();
                         }
                     }
@@ -134,7 +136,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(getDelay());
+                        Thread.sleep(getDelay(i));
                     } catch (Exception e) {
                     }
                 }
@@ -152,7 +154,7 @@ public class CockroachDB {
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
-                        if (e.getSQLState().equals("08003")){
+                        if (e.getSQLState().equals("08003")) {
                             connHelper.connect();
                         }
                     }
@@ -160,7 +162,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(getDelay());
+                        Thread.sleep(getDelay(i));
                     } catch (Exception e) {
                     }
                 }
@@ -176,7 +178,7 @@ public class CockroachDB {
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
-                        if (e.getSQLState().equals("08003")){
+                        if (e.getSQLState().equals("08003")) {
                             connHelper.connect();
                         }
                     }
@@ -184,7 +186,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(getDelay());
+                        Thread.sleep(getDelay(i));
                     } catch (Exception e) {
                     }
                 }
@@ -201,7 +203,7 @@ public class CockroachDB {
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
-                        if (e.getSQLState().equals("08003")){
+                        if (e.getSQLState().equals("08003")) {
                             connHelper.connect();
                         }
                     }
@@ -209,7 +211,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(getDelay());
+                        Thread.sleep(getDelay(i));
                     } catch (Exception e) {
                     }
                 }
@@ -227,7 +229,7 @@ public class CockroachDB {
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
-                        if (e.getSQLState().equals("08003")){
+                        if (e.getSQLState().equals("08003")) {
                             connHelper.connect();
                         }
                     }
@@ -235,7 +237,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(getDelay());
+                        Thread.sleep(getDelay(i));
                     } catch (Exception e) {
                     }
                 }
@@ -252,7 +254,7 @@ public class CockroachDB {
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
-                        if (e.getSQLState().equals("08003")){
+                        if (e.getSQLState().equals("08003")) {
                             connHelper.connect();
                         }
                     }
@@ -260,7 +262,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(getDelay());
+                        Thread.sleep(getDelay(i));
                     } catch (Exception e) {
                     }
                 }
@@ -274,7 +276,7 @@ public class CockroachDB {
                     } catch (SQLException e) {
                         System.out.printf("SQL Error! sql state = [%s]cause = [%s]message = [%s]\n", e.getSQLState(), e.getCause(),
                                 e.getMessage());
-                        if (e.getSQLState().equals("08003")){
+                        if (e.getSQLState().equals("08003")) {
                             connHelper.connect();
                         }
                     }
@@ -282,7 +284,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(getDelay());
+                        Thread.sleep(getDelay(i));
                     } catch (Exception e) {
                     }
                 }
@@ -307,7 +309,7 @@ public class CockroachDB {
                     System.out.println("ROLLBACK AND RETRY");
                     try {
                         connHelper.getConn().rollback();
-                        Thread.sleep(getDelay());
+                        Thread.sleep(getDelay(i));
                     } catch (Exception e) {
                     }
                 }
@@ -828,28 +830,28 @@ public class CockroachDB {
                                 "WHERE ol_i_id in ( SELECT DISTINCT ol_i_id FROM order_line_tab WHERE ol_w_id = %d and ol_d_id = %d and ol_o_id = %d )\n" +
                                 "AND ol_w_id <> %d \n" +
                                 "GROUP BY (ol_w_id, ol_d_id,ol_o_id)\n" +
-                                "HAVING COUNT(ol_number)>=2",  cwid, cdid, o_id, cwid));
+                                "HAVING COUNT(ol_number)>=2", cwid, cdid, o_id, cwid));
                 ArrayList<Order> realtedOrders = new ArrayList<>();
                 while (relatedOrdersRs.next()) {
                     int ol_w_id = relatedOrdersRs.getInt(1);
                     int ol_d_id = relatedOrdersRs.getInt(2);
                     int ol_o_id = relatedOrdersRs.getInt(3);
-                    realtedOrders.add(new Order(ol_w_id,ol_d_id,ol_o_id));
+                    realtedOrders.add(new Order(ol_w_id, ol_d_id, ol_o_id));
                 }
                 relatedOrdersRs.close();
 
                 ArrayList<String> conditions = new ArrayList<>();
-                for (Order order:realtedOrders) {
-                    conditions.add(String.format(" (o_w_id = %d AND o_d_id = %d AND o_id = %d) ",order.w_id,order.d_id,order.o_id));
+                for (Order order : realtedOrders) {
+                    conditions.add(String.format(" (o_w_id = %d AND o_d_id = %d AND o_id = %d) ", order.w_id, order.d_id, order.o_id));
                 }
-                if (realtedOrders.size()>0){
+                if (realtedOrders.size() > 0) {
                     ResultSet customerRs = stmt.executeQuery(
-                            String.format("SELECT DISTINCT o_w_id, o_d_id, o_c_id FROM order_tab WHERE %s ;",String.join(" OR ",conditions)));
+                            String.format("SELECT DISTINCT o_w_id, o_d_id, o_c_id FROM order_tab WHERE %s ;", String.join(" OR ", conditions)));
                     while (customerRs.next()) {
                         int c_w_id = customerRs.getInt(1);
                         int c_d_id = customerRs.getInt(2);
                         int c_id = customerRs.getInt(3);
-                        relatedCustomers.add(new Customer(c_w_id,c_d_id,c_id));
+                        relatedCustomers.add(new Customer(c_w_id, c_d_id, c_id));
                     }
                     customerRs.close();
                 }
@@ -857,8 +859,8 @@ public class CockroachDB {
             }
         }
         orderRs.close();
-        for (Customer cust:relatedCustomers) {
-            System.out.printf("Related Customer: w_id:%d, d_id:%d, c_id: %d\n",cust.w_id,cust.d_id,cust.c_id);
+        for (Customer cust : relatedCustomers) {
+            System.out.printf("Related Customer: w_id:%d, d_id:%d, c_id: %d\n", cust.w_id, cust.d_id, cust.c_id);
         }
 
     }
