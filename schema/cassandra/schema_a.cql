@@ -69,7 +69,7 @@ CREATE TABLE order_tab (
     o_d_id       INT,
     o_id         INT,
     o_c_id       INT,
-    o_carrier_id INT,
+    o_carrier_id VARCHAR,
     o_ol_cnt     DECIMAL,
     o_all_local  DECIMAL,
     o_entry_d    TIMESTAMP,
@@ -78,7 +78,7 @@ CREATE TABLE order_tab (
 WITH CLUSTERING ORDER BY (o_id DESC);
 
 COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
-    FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND NULL='null' AND HEADER=FALSE;
+    FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND NULL='' AND HEADER=FALSE;
 
 CREATE TABLE item_tab (
     i_id    INT,

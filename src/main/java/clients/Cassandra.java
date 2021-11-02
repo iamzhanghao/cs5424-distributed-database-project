@@ -186,7 +186,8 @@ public class Cassandra {
                     .setInt(1, did)
                     .setInt(2, next_order_id)
                     .setInt(3, cid)
-                    .setInt(4, 0)
+//                    .setInt(4, 0)
+                    .setString(4, "null")
                     .setBigDecimal(5, BigDecimal.valueOf(number_of_items))
                     .setBigDecimal(6, BigDecimal.valueOf(all_local))
                     .setDefaultTimestamp(System.currentTimeMillis());
@@ -355,7 +356,7 @@ public class Cassandra {
                             "\to_id,\n" +
                             "\to_c_id\n" +
                             "FROM\n" +
-                            "\torder_tab_not_null\n" +
+                            "\torder_tab\n" +
                             "WHERE\n" +
                             "\to_w_id = ?\n" +
                             "\tAND o_d_id = ?\n" +
@@ -380,7 +381,7 @@ public class Cassandra {
                 // assign the carrier id to the order
                 PreparedStatement updateOrder = session.prepare(
                         "UPDATE\n" +
-                                "\torder_tab_not_null\n" +
+                                "\torder_tab\n" +
                                 "SET\n" +
                                 "\to_carrier_id = ?\n" +
                                 "WHERE\n" +
@@ -520,10 +521,10 @@ public class Cassandra {
             customer.getString("c_middle"),
             customer.getString("c_last"),
             customer.getBigDecimal("c_balance").doubleValue());
-        System.out.printf("Customer last order id: %d, Entry Datetime: %s, Carrier id: %d\n",
+        System.out.printf("Customer last order id: %d, Entry Datetime: %s, Carrier id: %s\n",
             last_order_id,
             last_order.getInstant("o_entry_d").toString(),
-            last_order.getInt("o_carrier_id"));
+            last_order.getString("o_carrier_id"));
 
         // order items
         ResultSet rs_order_items = session.execute(String.format(get_order_items, cwid, cdid, last_order_id));
