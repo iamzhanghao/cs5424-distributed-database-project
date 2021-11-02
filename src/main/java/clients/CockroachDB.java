@@ -15,14 +15,14 @@ import java.util.*;
 public class CockroachDB {
 
     // Limit number of transactions executed, during actual experiment change to 20000
-    private static final int TXN_LIMIT = 2000;
+    private static final int TXN_LIMIT = 200000;
     private static final int MAX_RETRY_COUNT = 100000000;
-    private static final int RETRY_QUERY_AFTER = 500;
+    private static final int RETRY_QUERY_AFTER = 200;
 
     private static CockroachDbSQLConnectionHelper connHelper;
 
     private static int getDelay(int count) {
-        int random = 200 + (int) (Math.random() * ((RETRY_QUERY_AFTER - 200) + 1));
+        int random = 100 + (int) (Math.random() * ((RETRY_QUERY_AFTER - 100) + 1));
         System.out.printf("Retry count= %d, retry in %d milliseconds", count, random);
         return random;
     }
