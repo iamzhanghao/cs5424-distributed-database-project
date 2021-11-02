@@ -782,5 +782,42 @@ public class Cassandra {
 
     private static void relatedCustomerTransaction(CqlSession session, int cwid, int cdid, int cid) {
 
+        ResultSet rs;
+        // get related orders
+        PreparedStatement getOrder = session.prepare(
+                "SELECT o_id FROM schema_a.order_tab WHERE o_w_id = ? and o_d_id = ? and o_c_id = ? " +
+                        "ALLOW FILTERING "
+        );
+        BoundStatement getOrdersBound = getOrder.bind()
+                .setInt(0, cwid)
+                .setInt(1, cdid)
+                .setInt(2, cid);
+        getOrdersBound.setConsistencyLevel(ConsistencyLevel.ONE);
+        rs = session.execute(getOrdersBound);
+        List<Row> orders = rs.all();
+        ArrayList<Set<Integer>> itemSets = new ArrayList<>();
+        for (Row order : orders) {
+            Set<Integer> set = new HashSet<>();
+            System.out.println(order.getInt("o_id"));
+            PreparedStatement getItems = session.prepare(
+                    "SELECT ol_i_id FROM schema_a.order_line_tab WHERE ol_w_id = ? and ol_d_id = ? and ol_o_id = ? "+
+                                "ALLOW FILTERING "
+            );
+            BoundStatement itemsBound = getItems.bind()
+                    .setInt(0, cwid)
+                    .setInt(1, cdid)
+                    .setInt(2, cid);
+            itemsBound.setConsistencyLevel(ConsistencyLevel.ONE);
+            rs = session.execute(itemsBound);
+            List<Row> items = rs.all();
+            for (Row item : items) {
+                set.add(item.getInt("ol_i_id"));
+            }
+            System.out.println(set);
+            itemSets.add(set);
+        }
+        System.out.println(itemSets);
+
+
     }
 }
