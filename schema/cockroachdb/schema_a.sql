@@ -145,3 +145,19 @@ IMPORT INTO stock_tab (s_w_id, s_i_id, s_quantity, s_ytd, s_order_cnt, s_remote_
     CSV DATA (
         'nodelocal://1/project_files/data_files/stock.csv'
     );
+
+CREATE TABLE warehouse_district_customer AS
+SELECT
+    customer_tab.c_id,
+    customer_tab.c_last,
+    customer_tab.c_credit,
+    customer_tab.c_discount,
+    warehouse_tab.w_tax,
+    warehouse_tab.w_id,
+    district_tab.d_id,
+    district_tab.d_tax
+FROM
+    warehouse_tab
+        LEFT JOIN district_tab ON warehouse_tab.w_id = district_tab.d_w_id
+        LEFT JOIN customer_tab ON customer_tab.c_w_id = district_tab.d_w_id AND
+                                  customer_tab.c_d_id = district_tab.d_id;

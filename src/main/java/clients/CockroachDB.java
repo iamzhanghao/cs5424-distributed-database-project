@@ -443,28 +443,45 @@ public class CockroachDB {
         double discount = 0;
         String last_name = "";
         String credit = "";
-        rs = stmt.executeQuery("SELECT c_last, c_credit, c_discount FROM customer_tab " +
-                "WHERE c_id = " + cid + " AND c_d_id = " + did + " AND c_w_id = " + wid);
-        while (rs.next()) {
-            discount = rs.getInt("c_discount");
-            last_name = rs.getString("c_last");
-            credit = rs.getString("c_credit");
-            break;
-        }
-
         double warehouse_tax_rate = 0;
-        rs = stmt.executeQuery("SELECT w_tax FROM warehouse_tab WHERE w_id = " + wid);
-        while (rs.next()) {
-            warehouse_tax_rate = rs.getInt("w_tax");
-            break;
-        }
-
         double district_tax_rate = 0;
-        rs = stmt.executeQuery("SELECT d_tax FROM district_tab WHERE d_id = " + did + " AND d_w_id = " + wid);
-        while (rs.next()) {
-            district_tax_rate = rs.getInt("d_tax");
-            break;
-        }
+
+        PreparedStatement get_user_info = connHelper.getConn().prepareStatement("select c_last, c_credit, c_discount, w_tax, d_tax from " +
+                "warehouse_district_customer where w_id=? and d_id=? and c_id=?;");
+        get_user_info.setInt(1, wid);
+        get_user_info.setInt(2, did);
+        get_user_info.setInt(3, cid);
+        rs = get_user_info.executeQuery();
+        rs.next();
+        last_name = rs.getString("c_last");
+        discount = rs.getInt("c_discount");
+        credit = rs.getString("c_credit");
+        warehouse_tax_rate = rs.getInt("w_tax");
+        district_tax_rate = rs.getInt("d_tax");
+
+
+//        rs = stmt.executeQuery("SELECT c_last, c_credit, c_discount FROM customer_tab " +
+//                "WHERE c_id = " + cid + " AND c_d_id = " + did + " AND c_w_id = " + wid);
+//        while (rs.next()) {
+//            discount = rs.getInt("c_discount");
+//            last_name = rs.getString("c_last");
+//            credit = rs.getString("c_credit");
+//            break;
+//        }
+
+//        double warehouse_tax_rate = 0;
+//        rs = stmt.executeQuery("SELECT w_tax FROM warehouse_tab WHERE w_id = " + wid);
+//        while (rs.next()) {
+//            warehouse_tax_rate = rs.getInt("w_tax");
+//            break;
+//        }
+
+//        double district_tax_rate = 0;
+//        rs = stmt.executeQuery("SELECT d_tax FROM district_tab WHERE d_id = " + did + " AND d_w_id = " + wid);
+//        while (rs.next()) {
+//            district_tax_rate = rs.getInt("d_tax");
+//            break;
+//        }
         rs.close();
 
         total_amount = total_amount * (1 + warehouse_tax_rate + district_tax_rate) * (1 - discount);
