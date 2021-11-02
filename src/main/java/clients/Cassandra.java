@@ -161,7 +161,7 @@ public class Cassandra {
     private static void newOrderTransaction(CqlSession session, int cid, int wid, int did, int number_of_items,
                                             ArrayList<Integer> items, ArrayList<Integer> supplier_warehouses, ArrayList<BigDecimal> quantities) {
         try {
-            ResultSet rs = session.execute("SELECT * FROM district_tab WHERE D_W_ID = " + wid + " AND D_ID = " + did);
+            ResultSet rs = session.execute("SELECT D_NEXT_O_ID FROM district_tab WHERE D_W_ID = " + wid + " AND D_ID = " + did);
             Integer next_order_id = 0;
             next_order_id = rs.one().getInt("D_NEXT_O_ID");
 
