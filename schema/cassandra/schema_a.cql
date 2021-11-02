@@ -89,14 +89,17 @@ c_w_id, c_balance, c_d_id, c_id
 CREATE TABLE order_tab (
 o_w_id       INT,
 o_d_id       INT,
-o_id         INT,
 o_c_id       INT,
+o_id         INT,
 o_carrier_id VARCHAR,
 o_ol_cnt     DECIMAL,
 o_all_local  DECIMAL,
 o_entry_d    TIMESTAMP,
 PRIMARY KEY (o_w_id, o_id, o_d_id)
 );
+
+CREATE INDEX user_state
+    ON schema_a.order_tab (o_c_id);
 
 COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
 FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND NULL='' AND HEADER=FALSE;
