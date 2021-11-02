@@ -73,8 +73,9 @@ CREATE TABLE order_tab (
                            o_ol_cnt     DECIMAL,
                            o_all_local  DECIMAL,
                            o_entry_d    TIMESTAMP,
-                           PRIMARY KEY (o_w_id, o_d_id, o_id)
-);
+                           PRIMARY KEY ((o_w_id, o_d_id), o_id)
+)
+WITH CLUSTERING ORDER BY (o_id DESC);
 
 COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
     FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND NULL='null' AND HEADER=FALSE;
