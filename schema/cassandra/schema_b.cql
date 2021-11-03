@@ -17,7 +17,7 @@ PRIMARY KEY (ol_w_id, ol_d_id, ol_o_id, ol_number)
 );
 
 CREATE INDEX IF NOT EXISTS order_line_tab_items
-    ON schema_a.order_line_tab ( ol_i_id );
+    ON schema_b.order_line_tab ( ol_i_id );
 
 COPY order_line_tab (ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id, ol_quantity, ol_dist_info)
 FROM 'project_files/data_files/order-line.csv' WITH DELIMITER=',' AND NULL='null' AND HEADER=FALSE;

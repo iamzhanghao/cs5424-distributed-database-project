@@ -83,14 +83,10 @@ public class Cassandra {
             latencies.add(new TransactionStatistics(txnType, latency / 1000000, 0));
             System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, 0);
         }
-        while (true) {
-            try {
-                getDbState(session);
-            } catch (Exception e) {
-                System.out.println("RETRY DB STATE in 2 seconds");
-            }
-            Thread.sleep(2000);
-            break;
+        try {
+            getDbState(session);
+        } catch (Exception e) {
+            System.out.println("DB State Error, Other clients still runing... Ignore...");
         }
         session.close();
         float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
