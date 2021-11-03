@@ -18,6 +18,8 @@ PRIMARY KEY (ol_w_id, ol_d_id, ol_o_id, ol_number)
 
 DROP INDEX IF EXISTS order_line_tab_items;
 
+DROP INDEX IF EXISTS order_line_tab_items_b;
+
 CREATE INDEX IF NOT EXISTS order_line_tab_items_b
     ON schema_b.order_line_tab ( ol_i_id );
 

@@ -16,7 +16,9 @@ ol_dist_info   VARCHAR,
 PRIMARY KEY (ol_w_id, ol_d_id, ol_o_id, ol_number)
 );
 
-DROP INDEX IF EXISTS order_line_tab_items
+DROP INDEX IF EXISTS order_line_tab_items;
+
+DROP INDEX IF EXISTS order_line_tab_items_a;
 
 CREATE INDEX IF NOT EXISTS order_line_tab_items_a
     ON schema_a.order_line_tab ( ol_i_id );
