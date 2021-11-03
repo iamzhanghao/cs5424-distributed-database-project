@@ -21,6 +21,7 @@ sh scripts/run_experiments.sh 3 A cockroachdb 26267
 sh scripts/run_experiments.sh 2 B cockroachdb 26267
 sh scripts/run_experiments.sh 1 A cassandra 3042
 sh scripts/run_experiments.sh 1 B cassandra 3042
+sh scripts/stop_experiments.sh
 
 /temp/CS4224C/apache-cassandra-4.0.0/bin/cqlsh -f schema/cassandra/schema_a.cql xcnd30.comp.nus.edu.sg 3042
 /temp/CS4224C/apache-cassandra-4.0.0/bin/cqlsh -f schema/cassandra/schema_b.cql xcnd30.comp.nus.edu.sg 3042

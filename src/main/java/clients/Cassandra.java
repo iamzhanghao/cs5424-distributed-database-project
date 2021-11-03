@@ -3,6 +3,10 @@ package clients;
 import clients.utils.*;
 import com.datastax.oss.driver.api.core.ConsistencyLevel;
 import com.datastax.oss.driver.api.core.CqlSession;
+import com.datastax.oss.driver.api.core.config.DefaultDriverOption;
+import com.datastax.oss.driver.api.core.config.DriverConfig;
+import com.datastax.oss.driver.api.core.config.DriverConfigLoader;
+import com.datastax.oss.driver.api.core.config.DriverExecutionProfile;
 import com.datastax.oss.driver.api.core.cql.BoundStatement;
 import com.datastax.oss.driver.api.core.cql.PreparedStatement;
 import com.datastax.oss.driver.api.core.cql.ResultSet;
@@ -11,18 +15,23 @@ import com.datastax.oss.driver.api.core.cql.Row;
 import java.io.FileInputStream;
 import java.math.BigDecimal;
 import java.net.InetSocketAddress;
+import java.net.SocketOptions;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.time.Duration;
 
 public class Cassandra {
 
     // Limit number of txns executed
-    private static final int TXN_LIMIT = 200;
+    private static final int TXN_LIMIT = 2;
 //    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
+
 
     // For testing in local only:
     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
+
+
 
     public static void main(String[] args) throws Exception {
         if (args.length != 5) {
@@ -52,14 +61,25 @@ public class Cassandra {
             return;
         }
 
+        DriverConfigLoader loader =
+                DriverConfigLoader.programmaticBuilder()
+                        .withDuration(DefaultDriverOption.REQUEST_TIMEOUT, Duration.ofSeconds(30))
+                        .startProfile("slow")
+                        .withDuration(DefaultDriverOption.REQUEST_TIMEOUT, Duration.ofSeconds(30))
+                        .endProfile()
+                        .build();
+
         System.out.printf("Running on host: %s:%d", host, port);
         System.out.println();
 
         CqlSession session = CqlSession
                 .builder()
                 .addContactPoint(new InetSocketAddress(host, port))
+                .withConfigLoader(loader)
                 .withKeyspace(schema_name)
                 .withLocalDatacenter("datacenter1")
+
+
                 .build();
 
         FileInputStream stream = new FileInputStream(dataDir);
@@ -86,11 +106,13 @@ public class Cassandra {
         try {
             getDbState(session);
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("DB State Error, Other clients still runing... Ignore...");
         }
         session.close();
         float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
-        TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
+        String message = TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
+        System.err.println(message);
     }
 
     private static long invokeTransaction(CqlSession session, String[] splits, Scanner scanner) {
@@ -320,7 +342,7 @@ public class Cassandra {
     private static void paymentTransaction(CqlSession session, int cwid, int cdid, int cid, BigDecimal payment) {
         try {
             Row warehouseRow = session.execute(
-                    session.prepare(" SELECT w_ytd FROM schema_a.warehouse_tab WHERE w_id= " + cwid + " ;")
+                    session.prepare(" SELECT w_ytd FROM warehouse_tab WHERE w_id= " + cwid + " ;")
                             .bind()
                             .setConsistencyLevel(USE_QUORUM)).one();
             BigDecimal old_ytd = warehouseRow.getBigDecimal("w_ytd");
@@ -331,8 +353,8 @@ public class Cassandra {
                     .setInt(1, cwid).setConsistencyLevel(USE_QUORUM));
 
             Row customer_row = session.execute(session.prepare(
-                    "SELECT c_balance, c_ytd_payment, c_payment_cnt FROM schema_a.customer_tab " +
-                            String.format("WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d  ALLOW FILTERING; ", cwid, cdid, cid))
+                            "SELECT c_balance, c_ytd_payment, c_payment_cnt FROM customer_tab " +
+                                    String.format("WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d  ALLOW FILTERING; ", cwid, cdid, cid))
                     .bind()
                     .setConsistencyLevel(USE_QUORUM)).one();
 
@@ -341,7 +363,7 @@ public class Cassandra {
             int old_c_payment_cnt = customer_row.getInt("c_payment_cnt");
 
             session.execute(session.prepare(
-                            "Update schema_a.customer_tab " +
+                            "Update customer_tab " +
                                     "SET c_balance = ?,c_ytd_payment = ?, c_payment_cnt = ? " +
                                     "WHERE c_w_id = ? AND c_d_id = ? AND c_id = ? ;").bind()
                     .setBigDecimal(0, old_c_balance.subtract(payment))
@@ -379,7 +401,7 @@ public class Cassandra {
         ResultSet rs = session.execute(getOrderAndCustomerIdBound);
 
         // proceed when a yet-to-deliver order exists
-        if(rs.iterator().hasNext()) {
+        if (rs.iterator().hasNext()) {
             Row row = rs.one();
             int orderID = row.getInt("o_id");
             int customerID = row.getInt("o_c_id");
@@ -438,7 +460,7 @@ public class Cassandra {
                             "\tAND ol_o_id = ?\n" +
                             "\tAND ol_number = ?;"
             );
-            for(int line = 1; line <= orderLineCount; line ++) {
+            for (int line = 1; line <= orderLineCount; line++) {
                 BoundStatement updateOrderLineBound = updateOrderLine.bind()
                         .setInt(0, wid)
                         .setInt(1, did)
@@ -484,7 +506,7 @@ public class Cassandra {
             );
             BoundStatement updateCustomerInfoBound = updateCustomerInfo.bind()
                     .setBigDecimal(0, balance.add(orderLineSum))
-                    .setInt(1, count+1)
+                    .setInt(1, count + 1)
                     .setInt(2, customerID)
                     .setInt(3, wid)
                     .setInt(4, did);
@@ -523,7 +545,7 @@ public class Cassandra {
                 + "from order_line_tab where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
 
         // customer last order
-        Row customer  = session.execute(String.format(get_customer, cwid, cdid, cid)).one();
+        Row customer = session.execute(String.format(get_customer, cwid, cdid, cid)).one();
         Row last_order = session.execute(String.format(get_last_order, cwid, cdid, cid)).one();
         int last_order_id = last_order.getInt("o_id");
 
@@ -539,7 +561,7 @@ public class Cassandra {
 
         // order items
         ResultSet rs_order_items = session.execute(String.format(get_order_items, cwid, cdid, last_order_id));
-        for(Row item : rs_order_items){
+        for (Row item : rs_order_items) {
             System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %f, Price: %f, Delivery Datetime: %s\n",
                     item.getInt("ol_i_id"),
                     item.getInt("ol_supply_w_id"),
@@ -601,16 +623,16 @@ public class Cassandra {
         Integer N = session.execute(String.format(get_N, wid, did)).one().getInt("d_next_o_id");
 
         StringJoiner o_ids = new StringJoiner(",");
-        for(int i = N-l; i <N; i++){
-            o_ids.add((N-i)+"");
+        for (int i = N - l; i < N; i++) {
+            o_ids.add((N - i) + "");
         }
 
         List<Row> orders = session.execute(String.format(get_order, wid, did, o_ids.toString())).all();
         List<Row> order_lines = session.execute(String.format(get_order_lines, wid, did, o_ids.toString())).all();
 
         StringJoiner c_ids = new StringJoiner(",");
-        for(Row order : orders){
-            c_ids.add(order.getInt("o_c_id")+"");
+        for (Row order : orders) {
+            c_ids.add(order.getInt("o_c_id") + "");
         }
 
         List<Row> customers = session.execute(String.format(get_customer, wid, did, c_ids.toString())).all();
@@ -626,9 +648,9 @@ public class Cassandra {
         Map<Integer, String> item_map = new HashMap<>();
 
         // group order_line by o_id
-        for (Row ol : order_lines){
+        for (Row ol : order_lines) {
             Integer ol_o_id = ol.getInt("ol_o_id");
-            if (!ol_map.containsKey(ol_o_id)){
+            if (!ol_map.containsKey(ol_o_id)) {
                 List<Row> ol_list = new ArrayList<Row>();
                 ol_list.add(ol);
                 ol_map.put(ol_o_id, ol_list);
@@ -639,36 +661,36 @@ public class Cassandra {
             }
         }
         // group customers by c_id
-        for(Row customer : customers){
+        for (Row customer : customers) {
             customer_map.put(customer.getInt("c_id"), customer);
         }
 
-        for(Row order : orders){
+        for (Row order : orders) {
             int o_id = order.getInt("o_id");
             Row customer = customer_map.get(order.getInt("o_c_id"));
             System.out.printf(String.format("OID: %d, O_ENTRY_D: %s, Customer Name: %s\n",
                     o_id,
                     order.getInstant("o_entry_d").toString(),
-                    customer.getString("c_first")+" "+customer.getString("c_middle")+" "+customer.getString("c_last")));
+                    customer.getString("c_first") + " " + customer.getString("c_middle") + " " + customer.getString("c_last")));
 
             List<Row> ols = ol_map.get(o_id);
             Map<Integer, Double> quantity_map = new HashMap<>();
-            for(Row ol : ols){
+            for (Row ol : ols) {
                 Integer i_id = ol.getInt("ol_i_id");
                 double ol_quantity = ol.getBigDecimal("ol_quantity").doubleValue();
-                if (!quantity_map.containsKey(i_id)){
+                if (!quantity_map.containsKey(i_id)) {
                     quantity_map.put(i_id, ol_quantity);
                 } else {
                     quantity_map.put(i_id, quantity_map.get(i_id) + ol_quantity);
                 }
             }
             Double max_quantity = Double.MIN_VALUE;
-            for(Map.Entry<Integer, Double> q : quantity_map.entrySet()){
+            for (Map.Entry<Integer, Double> q : quantity_map.entrySet()) {
                 max_quantity = Math.max(max_quantity, q.getValue());
             }
 
             Set<Integer> i_ids = new HashSet<>();
-            for(Row ol : ols){
+            for (Row ol : ols) {
                 if (ol.getBigDecimal("ol_quantity").doubleValue() == max_quantity) {
                     all_popular_items.add(ol.getInt("ol_i_id"));
                     i_ids.add(ol.getInt("ol_i_id"));
@@ -676,12 +698,12 @@ public class Cassandra {
             }
 
             StringJoiner i_ids_str = new StringJoiner(",");
-            for(Integer i_id : i_ids){
-                i_ids_str.add(i_id+"");
+            for (Integer i_id : i_ids) {
+                i_ids_str.add(i_id + "");
             }
 
             List<Row> items = session.execute(String.format(get_items, i_ids_str.toString())).all();
-            for(Row item : items){
+            for (Row item : items) {
                 item_map.put(item.getInt("i_id"), item.getString("i_name"));
                 System.out.printf("Popular I_NAME: %s, Quantity: %f\n",
                         item.getString("i_name"),
@@ -692,11 +714,11 @@ public class Cassandra {
 
         }
 
-        for(Integer i_id : all_popular_items){
+        for (Integer i_id : all_popular_items) {
             int count = 0;
-            for(Set<Integer> items : popular_items_each_order){
-                if (items.contains(i_id)){
-                    count ++;
+            for (Set<Integer> items : popular_items_each_order) {
+                if (items.contains(i_id)) {
+                    count++;
                 }
             }
             System.out.printf("Popular I_NAME: %s, Percentage of Orders having Popular Items: %f\n",
@@ -712,7 +734,7 @@ public class Cassandra {
         PriorityQueue<CustomerBalance> customersWithBalance = new PriorityQueue<>(10, comparator);
 
         // get the 10 customers with biggest
-        for(int wid = 1; wid <= 10; wid ++) {
+        for (int wid = 1; wid <= 10; wid++) {
             PreparedStatement getCustomerBalanceInfo = session.prepare(
                     "SELECT\n" +
                             "\tc_w_id,\n" +
@@ -734,7 +756,7 @@ public class Cassandra {
 
             ResultSet rs = session.execute(getCustomerBalanceInfoBound);
 
-            while(rs.iterator().hasNext()) {
+            while (rs.iterator().hasNext()) {
                 Row row = rs.one();
                 CustomerBalance customer = new CustomerBalance(
                         row.getInt("c_w_id"),
@@ -749,7 +771,7 @@ public class Cassandra {
         }
 
         // compose results based on the top 10 balanced customers
-        for(int i = 0; i < 10; i ++) {
+        for (int i = 0; i < 10; i++) {
             CustomerBalance customer = customersWithBalance.poll();
 
             //get warehouse name
@@ -795,7 +817,7 @@ public class Cassandra {
         ResultSet rs;
         // get related orders
         PreparedStatement getOrder = session.prepare(
-                "SELECT o_id FROM schema_a.order_tab WHERE o_w_id = ? and o_d_id = ? and o_c_id = ? " +
+                "SELECT o_id FROM order_tab WHERE o_w_id = ? and o_d_id = ? and o_c_id = ? " +
                         "ALLOW FILTERING "
         );
         BoundStatement getOrdersBound = getOrder.bind()
@@ -810,7 +832,7 @@ public class Cassandra {
         for (Row order : orders) {
 
             rs = session.execute(session.prepare(
-                            "SELECT ol_i_id FROM schema_a.order_line_tab WHERE ol_w_id = ? and ol_d_id = ? and ol_o_id = ? " +
+                            "SELECT ol_i_id FROM order_line_tab WHERE ol_w_id = ? and ol_d_id = ? and ol_o_id = ? " +
                                     "ALLOW FILTERING ")
                     .bind()
                     .setInt(0, cwid)
@@ -822,7 +844,7 @@ public class Cassandra {
             Set<Order> orderedAtLeastOnce = new HashSet<>();
 
             for (Row item : items) {
-                ResultSet relatedOrdersForItem = session.execute(session.prepare(String.format("SELECT ol_w_id, ol_d_id, ol_o_id FROM schema_a.order_line_tab \n" +
+                ResultSet relatedOrdersForItem = session.execute(session.prepare(String.format("SELECT ol_w_id, ol_d_id, ol_o_id FROM order_line_tab \n" +
                                 "WHERE ol_i_id = %d \n" +
                                 "ALLOW FILTERING ", item.getInt("ol_i_id")))
                         .bind()
@@ -843,7 +865,7 @@ public class Cassandra {
 
 
             for (Order relatedOrder : relatedOrders) {
-                Row relatedCustomer = session.execute(session.prepare(String.format("SELECT o_w_id, o_d_id, o_c_id from schema_a.order_tab\n" +
+                Row relatedCustomer = session.execute(session.prepare(String.format("SELECT o_w_id, o_d_id, o_c_id from order_tab\n" +
                         "WHERE o_w_id = %d AND o_d_id= %d AND o_id = %d\n" +
                         "ALLOW FILTERING", relatedOrder.w_id, relatedOrder.d_id, relatedOrder.o_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
 
@@ -863,81 +885,91 @@ public class Cassandra {
 
 
     }
+
     private static void getDbState(CqlSession session) throws Exception {
         System.out.println("====================== DB State ============================");
         StringBuilder res = new StringBuilder();
 
-        ResultSet warehouseResultSet = session.execute("SELECT sum(W_YTD) from warehouse_tab;");
-        for (Row warehouseRow : warehouseResultSet) {
-            BigDecimal w_ytd = warehouseRow.getBigDecimal(1);
-            System.out.printf("W_YTD: %f\n", w_ytd);
-            res.append(w_ytd.doubleValue() + "\n");
-        }
+        Row warehouseRow = session.execute(session.prepare(
+                        "SELECT sum(W_YTD) as w_ytd from schema_a.warehouse_tab")
+                .bind()
+                .setConsistencyLevel(USE_QUORUM)).one();
+        BigDecimal w_ytd = warehouseRow.getBigDecimal("w_ytd");
+        System.out.printf("W_YTD: %f\n", w_ytd);
+        res.append(w_ytd.doubleValue() + "\n");
 
-        ResultSet districtResultSet = session.execute("SELECT sum(D_YTD), sum(D_NEXT_O_ID) from district_tab;");
-        for (Row districtRow : districtResultSet) {
-            BigDecimal d_ytd = districtRow.getBigDecimal(1);
-            BigDecimal d_next_o_ytd = districtRow.getBigDecimal(2);
+        Row districtResult = session.execute(session.prepare(
+                        "SELECT sum(D_YTD) as d_ytd, sum(D_NEXT_O_ID) as d_next_o_ytd from district_tab;")
+                .bind()
+                .setConsistencyLevel(USE_QUORUM)).one();
+        BigDecimal d_ytd = districtResult.getBigDecimal("d_ytd");
+        int d_next_o_ytd = districtResult.getInt("d_next_o_ytd");
 
-            System.out.printf("D_YTD: %f\n", d_ytd);
-            res.append(d_ytd.doubleValue() + "\n");
-            System.out.printf("D_NEXT_O_ID: %f\n", d_next_o_ytd);
-            res.append(d_next_o_ytd.doubleValue() + "\n");
-        }
+        System.out.printf("D_YTD: %f\n", d_ytd);
+        res.append(d_ytd.doubleValue() + "\n");
+        System.out.printf("D_NEXT_O_ID: %d\n", d_next_o_ytd);
+        res.append(d_next_o_ytd + "\n");
 
-        ResultSet customerResultSet = session.execute("select sum(C_BALANCE), sum(C_YTD_PAYMENT), sum(C_PAYMENT_CNT), sum(C_DELIVERY_CNT) from Customer_tab;");
-        for (Row customerRow : customerResultSet) {
-            BigDecimal c_balance = customerRow.getBigDecimal(1);
-            System.out.printf("C_BALANCE: %f\n", c_balance);
-            res.append(c_balance.doubleValue() + "\n");
-            BigDecimal c_tyd_payment = customerRow.getBigDecimal(2);
-            System.out.printf("C_YTD_PAYMENT: %f\n", c_tyd_payment);
-            res.append(c_tyd_payment.doubleValue() + "\n");
-            BigDecimal c_payment_count = customerRow.getBigDecimal(3);
-            System.out.printf("C_PAYMENT_CNT: %f\n", c_payment_count);
-            res.append(c_payment_count.doubleValue() + "\n");
-            BigDecimal c_delivery_cnt = customerRow.getBigDecimal(4);
-            System.out.printf("C_DELIVERY_CNT: %f\n", c_delivery_cnt);
-            res.append(c_delivery_cnt.doubleValue() + "\n");
-        }
+        Row customerResult = session.execute(session.prepare(
+                        "select sum(C_BALANCE) as c_balance, sum(C_YTD_PAYMENT) as c_tyd_payment, " +
+                                "sum(C_PAYMENT_CNT) as c_payment_count , sum(C_DELIVERY_CNT) as c_delivery_cnt from Customer_tab;")
+                .bind()
+                .setConsistencyLevel(USE_QUORUM)).one();
+        BigDecimal c_balance = customerResult.getBigDecimal("c_balance");
+        System.out.printf("C_BALANCE: %f\n", c_balance);
+        res.append(c_balance.doubleValue() + "\n");
+        float c_tyd_payment = customerResult.getFloat("c_tyd_payment");
+        System.out.printf("C_YTD_PAYMENT: %f\n", c_tyd_payment);
+        res.append(c_tyd_payment + "\n");
+        int c_payment_count = customerResult.getInt("c_payment_count");
+        System.out.printf("C_PAYMENT_CNT: %d\n", c_payment_count);
+        res.append(c_payment_count + "\n");
+        int c_delivery_cnt = customerResult.getInt("c_delivery_cnt");
+        System.out.printf("C_DELIVERY_CNT: %d\n", c_delivery_cnt);
+        res.append(c_delivery_cnt + "\n");
 
-        ResultSet orderResultSet = session.execute("select max(O_ID), sum(O_OL_CNT) from Order_tab;");
-        for (Row orderRow : orderResultSet) {
-            BigDecimal o_id = orderRow.getBigDecimal(1);
-            BigDecimal o_ol_cnt = orderRow.getBigDecimal(2);
+        Row orderResult = session.execute(session.prepare(
+                        "select max(O_ID) as o_id, sum(O_OL_CNT) as o_ol_cnt from Order_tab;")
+                .bind()
+                .setConsistencyLevel(USE_QUORUM)).one();
+        int o_id = orderResult.getInt("o_id");
+        BigDecimal o_ol_cnt = orderResult.getBigDecimal("o_ol_cnt");
 
-            System.out.printf("O_ID: %f\n", o_id);
-            res.append(o_id.doubleValue() + "\n");
-            System.out.printf("O_OL_CNT: %f\n", o_ol_cnt);
-            res.append(o_ol_cnt.doubleValue() + "\n");
-        }
+        System.out.printf("O_ID: %d\n", o_id);
+        res.append(o_id + "\n");
+        System.out.printf("O_OL_CNT: %f\n", o_ol_cnt);
+        res.append(o_ol_cnt.doubleValue() + "\n");
 
-        ResultSet orderLineResultSet = session.execute("select sum(OL_AMOUNT), sum(OL_QUANTITY) from Order_Line_tab;");
-        for (Row orderLineRow : orderLineResultSet) {
-            BigDecimal ol_amount = orderLineRow.getBigDecimal(1);
-            BigDecimal ol_quantity = orderLineRow.getBigDecimal(2);
+        Row orderLineRow = session.execute(
+                session.prepare("select sum(OL_AMOUNT) as ol_amount, sum(OL_QUANTITY) as ol_quantity from Order_line_tab;")
+                        .bind()
+                        .setConsistencyLevel(USE_QUORUM)).one();
+        BigDecimal ol_amount = orderLineRow.getBigDecimal("ol_amount");
+        BigDecimal ol_quantity = orderLineRow.getBigDecimal("ol_quantity");
 
-            System.out.printf("OL_AMOUNT: %f\n", ol_amount);
-            res.append(ol_amount.doubleValue() + "\n");
-            System.out.printf("OL_QUANTITY: %f\n", ol_quantity);
-            res.append(ol_quantity.doubleValue() + "\n");
-        }
+        System.out.printf("OL_AMOUNT: %f\n", ol_amount);
+        res.append(ol_amount.doubleValue() + "\n");
+        System.out.printf("OL_QUANTITY: %f\n", ol_quantity);
+        res.append(ol_quantity.doubleValue() + "\n");
 
-        ResultSet stockResultSet = session.execute("select sum(S_QUANTITY), sum(S_YTD), sum(S_ORDER_CNT), sum(S_REMOTE_CNT) from Stock_tab;");
-        for (Row stockRow : stockResultSet) {
-            BigDecimal s_quantity = stockRow.getBigDecimal(1);
-            System.out.printf("S_QUANTITY: %f\n", s_quantity);
-            res.append(s_quantity.doubleValue() + "\n");
-            BigDecimal s_ytd = stockRow.getBigDecimal(2);
-            System.out.printf("S_YTD: %f\n", s_ytd);
-            res.append(s_ytd.doubleValue() + "\n");
-            BigDecimal s_order_cnt = stockRow.getBigDecimal(3);
-            System.out.printf("S_ORDER_CNT: %f\n", s_order_cnt);
-            res.append(s_order_cnt.doubleValue() + "\n");
-            BigDecimal s_remote_cnt = stockRow.getBigDecimal(4);
-            System.out.printf("S_REMOTE_CNT: %f\n", s_remote_cnt);
-            res.append(s_remote_cnt.doubleValue() + "\n");
-        }
+        DriverConfig config = session.getContext().getConfig();
+
+        Row stockRow = session.execute(session.prepare(
+                "select sum(S_QUANTITY) as s_quantity, sum(S_YTD) as s_ytd, sum(S_ORDER_CNT) as s_order_cnt," +
+                        " sum(S_REMOTE_CNT) as s_remote_cnt from Stock_tab;")
+                .bind().setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
+        BigDecimal s_quantity = stockRow.getBigDecimal("s_quantity");
+        System.out.printf("S_QUANTITY: %f\n", s_quantity);
+        res.append(s_quantity.doubleValue() + "\n");
+        BigDecimal s_ytd = stockRow.getBigDecimal("s_ytd");
+        System.out.printf("S_YTD: %f\n", s_ytd);
+        res.append(s_ytd.doubleValue() + "\n");
+        int s_order_cnt = stockRow.getInt("s_order_cnt");
+        System.out.printf("S_ORDER_CNT: %d\n", s_order_cnt);
+        res.append(s_order_cnt + "\n");
+        int s_remote_cnt = stockRow.getInt("s_remote_cnt");
+        System.out.printf("S_REMOTE_CNT: %d\n", s_remote_cnt);
+        res.append(s_remote_cnt + "\n");
 
 
         System.out.println("======================DB State Plain=======================");
