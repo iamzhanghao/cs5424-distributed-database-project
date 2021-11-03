@@ -139,8 +139,6 @@ o_entry_d    TIMESTAMP,
 PRIMARY KEY (o_w_id, o_id, o_d_id)
 );
 
-CREATE INDEX user_state
-    ON schema_a.order_tab (o_c_id);
 
 COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
 FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND NULL='' AND HEADER=FALSE;
