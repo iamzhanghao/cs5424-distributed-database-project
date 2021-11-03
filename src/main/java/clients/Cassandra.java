@@ -85,6 +85,9 @@ public class Cassandra {
         if (client.equals("1")) {
             TransactionStatistics.writeCsvHeader(csvPath);
         }
+        if (isDbState==1){
+            TXN_LIMIT =0;
+        }
 
         ArrayList<TransactionStatistics> latencies = new ArrayList<>();
         int txnCount = 0;
