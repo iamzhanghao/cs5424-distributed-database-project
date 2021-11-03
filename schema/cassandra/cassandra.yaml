@@ -894,10 +894,10 @@ sstable_preemptive_open_interval_in_mb: 50
 
 # How long the coordinator should wait for read operations to complete.
 # Lowest acceptable value is 10 ms.
-read_request_timeout_in_ms: 5000
+read_request_timeout_in_ms: 30000
 # How long the coordinator should wait for seq or index scans to complete.
 # Lowest acceptable value is 10 ms.
-range_request_timeout_in_ms: 10000
+range_request_timeout_in_ms: 30000
 # How long the coordinator should wait for writes to complete.
 # Lowest acceptable value is 10 ms.
 write_request_timeout_in_ms: 2000
@@ -915,7 +915,7 @@ cas_contention_timeout_in_ms: 1000
 truncate_request_timeout_in_ms: 60000
 # The default timeout for other, miscellaneous operations.
 # Lowest acceptable value is 10 ms.
-request_timeout_in_ms: 10000
+request_timeout_in_ms: 30000
 
 # Defensive settings for protecting Cassandra from true network partitions.
 # See (CASSANDRA-14358) for details.
