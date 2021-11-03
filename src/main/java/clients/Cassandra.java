@@ -1,8 +1,7 @@
 package clients;
 
-import clients.utils.CustomerBalance;
-import clients.utils.CustomerBalanceComparator;
-import clients.utils.TransactionStatistics;
+import clients.utils.*;
+import com.datastax.oss.driver.api.core.ConsistencyLevel;
 import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.cql.BoundStatement;
 import com.datastax.oss.driver.api.core.cql.PreparedStatement;
@@ -20,6 +19,10 @@ public class Cassandra {
 
     // Limit number of txns executed
     private static final int TXN_LIMIT = 200;
+//    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
+
+    // For testing in local only:
+    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
 
     public static void main(String[] args) throws Exception {
         if (args.length != 5) {
@@ -56,7 +59,6 @@ public class Cassandra {
                 .builder()
                 .addContactPoint(new InetSocketAddress(host, port))
                 .withKeyspace(schema_name)
-//                .withLocalDatacenter("cs5424-c")
                 .withLocalDatacenter("datacenter1")
                 .build();
 
@@ -64,7 +66,7 @@ public class Cassandra {
         Scanner scanner = new Scanner(stream);
 
         // Client 1 always write CSV header
-        if(client.equals("1")){
+        if (client.equals("1")) {
             TransactionStatistics.writeCsvHeader(csvPath);
         }
 
@@ -321,40 +323,41 @@ public class Cassandra {
 
     private static void paymentTransaction(CqlSession session, int cwid, int cdid, int cid, BigDecimal payment) {
         try {
-            ResultSet warehouse_result = session.execute(
-                    "SELECT w_ytd FROM warehouse_tab WHERE w_id = " + cwid + " ;");
-            Row warehouseRow = warehouse_result.one();
+            Row warehouseRow = session.execute(
+                    session.prepare(" SELECT w_ytd FROM schema_a.warehouse_tab WHERE w_id= " + cwid + " ;")
+                            .bind()
+                            .setConsistencyLevel(USE_QUORUM)).one();
             BigDecimal old_ytd = warehouseRow.getBigDecimal("w_ytd");
-            PreparedStatement updateWarehouse = session.prepare(
-                    "UPDATE warehouse_tab SET W_YTD = ? WHERE W_ID = ?;");
-            BoundStatement updateWarehouseBound = updateWarehouse.bind()
-                    .setBigDecimal(0, old_ytd.add(payment))
-                    .setInt(1, cwid);
-            session.execute(updateWarehouseBound);
 
-            ResultSet customer_result = session.execute(
-                    "SELECT c_balance, c_ytd_payment, c_payment_cnt FROM customer_tab " +
-                            String.format("WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d ;", cwid, cdid, cid));
-            Row customer_row = customer_result.one();
+            session.execute(session.prepare(
+                            "UPDATE warehouse_tab SET W_YTD = ? WHERE W_ID = ?;").bind()
+                    .setBigDecimal(0, old_ytd.add(payment))
+                    .setInt(1, cwid).setConsistencyLevel(USE_QUORUM));
+
+            Row customer_row = session.execute(session.prepare(
+                    "SELECT c_balance, c_ytd_payment, c_payment_cnt FROM schema_a.customer_tab " +
+                            String.format("WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d  ALLOW FILTERING; ", cwid, cdid, cid))
+                    .bind()
+                    .setConsistencyLevel(USE_QUORUM)).one();
+
             BigDecimal old_c_balance = customer_row.getBigDecimal("c_balance");
             float old_c_ytd_payment = customer_row.getFloat("c_ytd_payment");
             int old_c_payment_cnt = customer_row.getInt("c_payment_cnt");
 
-            PreparedStatement updateCustomer = session.prepare(
-                    "Update customer_tab " +
-                            "SET c_balance = ?,c_ytd_payment = ?, c_payment_cnt = ? " +
-                            "WHERE c_w_id = ? AND c_d_id = ? AND c_id = ? ;");
-            BoundStatement updateCustomerBound = updateCustomer.bind()
+            session.execute(session.prepare(
+                            "Update schema_a.customer_tab " +
+                                    "SET c_balance = ?,c_ytd_payment = ?, c_payment_cnt = ? " +
+                                    "WHERE c_w_id = ? AND c_d_id = ? AND c_id = ? ;").bind()
                     .setBigDecimal(0, old_c_balance.subtract(payment))
                     .setFloat(1, old_c_ytd_payment + payment.floatValue())
                     .setInt(2, old_c_payment_cnt + 1)
                     .setInt(3, cwid)
                     .setInt(4, cdid)
-                    .setInt(5, cid);
-            session.execute(updateCustomerBound);
+                    .setInt(5, cid)
+                    .setConsistencyLevel(USE_QUORUM));
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -790,6 +793,78 @@ public class Cassandra {
     }
 
     private static void relatedCustomerTransaction(CqlSession session, int cwid, int cdid, int cid) {
+
+        Set<Customer> relatedCustomerSet = new HashSet<>();
+
+        ResultSet rs;
+        // get related orders
+        PreparedStatement getOrder = session.prepare(
+                "SELECT o_id FROM schema_a.order_tab WHERE o_w_id = ? and o_d_id = ? and o_c_id = ? " +
+                        "ALLOW FILTERING "
+        );
+        BoundStatement getOrdersBound = getOrder.bind()
+                .setInt(0, cwid)
+                .setInt(1, cdid)
+                .setInt(2, cid);
+        getOrdersBound.setConsistencyLevel(ConsistencyLevel.ONE);
+        rs = session.execute(getOrdersBound);
+        List<Row> orders = rs.all();
+        ArrayList<Set<Integer>> itemSets = new ArrayList<>();
+        Set<Order> relatedOrders = new HashSet<>();
+        for (Row order : orders) {
+
+            rs = session.execute(session.prepare(
+                            "SELECT ol_i_id FROM schema_a.order_line_tab WHERE ol_w_id = ? and ol_d_id = ? and ol_o_id = ? " +
+                                    "ALLOW FILTERING ")
+                    .bind()
+                    .setInt(0, cwid)
+                    .setInt(1, cdid)
+                    .setInt(2, order.getInt("o_id"))
+                    .setConsistencyLevel(ConsistencyLevel.ONE));
+            List<Row> items = rs.all();
+
+            Set<Order> orderedAtLeastOnce = new HashSet<>();
+
+            for (Row item : items) {
+                ResultSet relatedOrdersForItem = session.execute(session.prepare(String.format("SELECT ol_w_id, ol_d_id, ol_o_id FROM schema_a.order_line_tab \n" +
+                                "WHERE ol_i_id = %d \n" +
+                                "ALLOW FILTERING ", item.getInt("ol_i_id")))
+                        .bind()
+                        .setConsistencyLevel(ConsistencyLevel.ONE));
+
+                for (Row relatedOrderForItem : relatedOrdersForItem) {
+                    Order newOrder = new Order(relatedOrderForItem.getInt("ol_w_id"),
+                            relatedOrderForItem.getInt("ol_d_id"),
+                            relatedOrderForItem.getInt("ol_o_id"));
+                    if (newOrder.w_id != cwid) {
+                        if (orderedAtLeastOnce.contains(newOrder)) {
+                            relatedOrders.add(newOrder);
+                        }
+                        orderedAtLeastOnce.add(newOrder);
+                    }
+                }
+            }
+
+
+            for (Order relatedOrder : relatedOrders) {
+                Row relatedCustomer = session.execute(session.prepare(String.format("SELECT o_w_id, o_d_id, o_c_id from schema_a.order_tab\n" +
+                        "WHERE o_w_id = %d AND o_d_id= %d AND o_id = %d\n" +
+                        "ALLOW FILTERING", relatedOrder.w_id, relatedOrder.d_id, relatedOrder.o_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+
+                relatedCustomerSet.add(
+                        new Customer(relatedCustomer.getInt("o_w_id"),
+                                relatedCustomer.getInt("o_w_id"),
+                                relatedCustomer.getInt("o_w_id")));
+            }
+
+        }
+        if (relatedCustomerSet.isEmpty()) {
+            System.out.println("No related customer");
+        } else {
+            System.out.print("Related Customer: ");
+            System.out.println(relatedCustomerSet);
+        }
+
 
     }
     private static void getDbState(CqlSession session) throws Exception {

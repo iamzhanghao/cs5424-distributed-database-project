@@ -1,0 +1,28 @@
+/temp/CS4224C/apache-cassandra-4.0.0/bin/cassandra
+
+./ngrok http http://localhost:8090
+
+tail -90  cockroachdb-A-2-9.out
+
+
+ssh -t cs4224c@sunfire.comp.nus.edu.sg ssh xcnd30.comp.nus.edu.sg
+ssh -t cs4224c@sunfire.comp.nus.edu.sg ssh xcnd31.comp.nus.edu.sg
+ssh -t cs4224c@sunfire.comp.nus.edu.sg ssh xcnd32.comp.nus.edu.sg
+ssh -t cs4224c@sunfire.comp.nus.edu.sg ssh xcnd33.comp.nus.edu.sg
+ssh -t cs4224c@sunfire.comp.nus.edu.sg ssh xcnd34.comp.nus.edu.sg
+
+ssh cs4224c@xcnd30.comp.nus.edu.sg
+ssh cs4224c@xcnd31.comp.nus.edu.sg
+ssh cs4224c@xcnd32.comp.nus.edu.sg
+ssh cs4224c@xcnd33.comp.nus.edu.sg
+ssh cs4224c@xcnd34.comp.nus.edu.sg
+
+sh scripts/run_experiments.sh 3 A cockroachdb 26267
+sh scripts/run_experiments.sh 2 B cockroachdb 26267
+sh scripts/run_experiments.sh 1 A cassandra 3042
+sh scripts/run_experiments.sh 1 B cassandra 3042
+
+/temp/CS4224C/apache-cassandra-4.0.0/bin/cqlsh -f schema/cassandra/schema_a.cql xcnd30.comp.nus.edu.sg 3042
+/temp/CS4224C/apache-cassandra-4.0.0/bin/cqlsh -f schema/cassandra/schema_b.cql xcnd30.comp.nus.edu.sg 3042
+
+/temp/CS4224C/apache-cassandra-4.0.0/bin/nodetool status

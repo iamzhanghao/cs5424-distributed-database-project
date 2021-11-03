@@ -2,6 +2,50 @@ DROP KEYSPACE IF EXISTS schema_a;
 CREATE KEYSPACE schema_a with replication = {'class': 'SimpleStrategy', 'replication_factor' : 3};
 USE schema_a;
 
+CREATE TABLE order_line_tab (
+ol_w_id        INT,
+ol_d_id        INT,
+ol_o_id        INT,
+ol_number      INT,
+ol_i_id        INT,
+ol_delivery_d  TIMESTAMP,
+ol_amount      DECIMAL,
+ol_supply_w_id INT,
+ol_quantity    DECIMAL,
+ol_dist_info   VARCHAR,
+PRIMARY KEY (ol_w_id, ol_d_id, ol_o_id, ol_number)
+);
+
+CREATE INDEX IF NOT EXISTS order_line_tab_items
+    ON schema_a.order_line_tab ( ol_i_id );
+
+COPY order_line_tab (ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id, ol_quantity, ol_dist_info)
+FROM 'project_files/data_files/order-line.csv' WITH DELIMITER=',' AND NULL='null' AND HEADER=FALSE;
+
+CREATE TABLE stock_tab (
+s_w_id       INT,
+s_i_id       INT,
+s_quantity   DECIMAL,
+s_ytd        DECIMAL,
+s_order_cnt  INT,
+s_remote_cnt INT,
+s_dist_01    VARCHAR,
+s_dist_02    VARCHAR,
+s_dist_03    VARCHAR,
+s_dist_04    VARCHAR,
+s_dist_05    VARCHAR,
+s_dist_06    VARCHAR,
+s_dist_07    VARCHAR,
+s_dist_08    VARCHAR,
+s_dist_09    VARCHAR,
+s_dist_10    VARCHAR,
+d_data       VARCHAR,
+PRIMARY KEY (s_w_id, s_i_id)
+);
+
+COPY stock_tab (s_w_id, s_i_id, s_quantity, s_ytd, s_order_cnt, s_remote_cnt, s_dist_01, s_dist_02, s_dist_03, s_dist_04, s_dist_05, s_dist_06, s_dist_07, s_dist_08, s_dist_09, s_dist_10, d_data)
+FROM 'project_files/data_files/stock.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+
 CREATE TABLE warehouse_tab (
 w_id       INT,
 w_name     VARCHAR,
@@ -89,14 +133,15 @@ c_w_id, c_balance, c_d_id, c_id
 CREATE TABLE order_tab (
 o_w_id       INT,
 o_d_id       INT,
-o_id         INT,
 o_c_id       INT,
+o_id         INT,
 o_carrier_id VARCHAR,
 o_ol_cnt     DECIMAL,
 o_all_local  DECIMAL,
 o_entry_d    TIMESTAMP,
 PRIMARY KEY (o_w_id, o_id, o_d_id)
 );
+
 
 COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
 FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND NULL='' AND HEADER=FALSE;
@@ -112,44 +157,3 @@ PRIMARY KEY (i_id)
 
 COPY item_tab (i_id, i_name, i_price, i_im_id, i_data)
 FROM 'project_files/data_files/item.csv' WITH DELIMITER=',' AND HEADER=FALSE;
-
-CREATE TABLE order_line_tab (
-ol_w_id        INT,
-ol_d_id        INT,
-ol_o_id        INT,
-ol_number      INT,
-ol_i_id        INT,
-ol_delivery_d  TIMESTAMP,
-ol_amount      DECIMAL,
-ol_supply_w_id INT,
-ol_quantity    DECIMAL,
-ol_dist_info   VARCHAR,
-PRIMARY KEY (ol_w_id, ol_d_id, ol_o_id, ol_number)
-);
-
-COPY order_line_tab (ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id, ol_quantity, ol_dist_info)
-FROM 'project_files/data_files/order-line.csv' WITH DELIMITER=',' AND NULL='null' AND HEADER=FALSE;
-
-CREATE TABLE stock_tab (
-s_w_id       INT,
-s_i_id       INT,
-s_quantity   DECIMAL,
-s_ytd        DECIMAL,
-s_order_cnt  INT,
-s_remote_cnt INT,
-s_dist_01    VARCHAR,
-s_dist_02    VARCHAR,
-s_dist_03    VARCHAR,
-s_dist_04    VARCHAR,
-s_dist_05    VARCHAR,
-s_dist_06    VARCHAR,
-s_dist_07    VARCHAR,
-s_dist_08    VARCHAR,
-s_dist_09    VARCHAR,
-s_dist_10    VARCHAR,
-d_data       VARCHAR,
-PRIMARY KEY (s_w_id, s_i_id)
-);
-
-COPY stock_tab (s_w_id, s_i_id, s_quantity, s_ytd, s_order_cnt, s_remote_cnt, s_dist_01, s_dist_02, s_dist_03, s_dist_04, s_dist_05, s_dist_06, s_dist_07, s_dist_08, s_dist_09, s_dist_10, d_data)
-FROM 'project_files/data_files/stock.csv' WITH DELIMITER=',' AND HEADER=FALSE;
