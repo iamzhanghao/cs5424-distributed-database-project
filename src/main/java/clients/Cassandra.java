@@ -273,32 +273,18 @@ public class Cassandra {
                 session.execute(insertOrderLineBound);
             }
 
-            PreparedStatement getUserInfo = session.prepare("select c_last, c_credit, c_discount, w_tax, d_tax from " +
-                    "warehouse_district_customer where w_id=? and d_id=? and c_id=?;");
-            BoundStatement getUserInfoBound = getUserInfo.bind()
-                    .setInt(1, wid)
-                    .setInt(2, did)
-                    .setInt(3, cid);
-            rs = session.execute(getUserInfoBound);
+            rs = session.execute("SELECT c_last, c_credit, c_discount FROM customer_tab " +
+                    "WHERE c_id = " + cid + " AND c_d_id = " + did + " AND c_w_id = " + wid);
             Row row = rs.one();
-            String last_name = row.getString("c_last");
             BigDecimal discount = row.getBigDecimal("c_discount");
+            String last_name = row.getString("c_last");
             String credit = row.getString("c_credit");
-            BigDecimal warehouse_tax_rate = row.getBigDecimal("w_tax");
-            BigDecimal district_tax_rate = row.getBigDecimal("d_tax");
 
-//            rs = session.execute("SELECT c_last, c_credit, c_discount FROM customer_tab " +
-//                    "WHERE c_id = " + cid + " AND c_d_id = " + did + " AND c_w_id = " + wid);
-//            Row row = rs.one();
-//            BigDecimal discount = row.getBigDecimal("c_discount");
-//            String last_name = row.getString("c_last");
-//            String credit = row.getString("c_credit");
-//
-//            rs = session.execute("SELECT w_tax FROM warehouse_tab WHERE w_id = " + wid);
-//            BigDecimal warehouse_tax_rate = rs.one().getBigDecimal("w_tax");
-//
-//            rs = session.execute("SELECT d_tax FROM district_tab WHERE d_id = " + did + " AND d_w_id = " + wid);
-//            BigDecimal district_tax_rate = rs.one().getBigDecimal("d_tax");
+            rs = session.execute("SELECT w_tax FROM warehouse_tab WHERE w_id = " + wid);
+            BigDecimal warehouse_tax_rate = rs.one().getBigDecimal("w_tax");
+
+            rs = session.execute("SELECT d_tax FROM district_tab WHERE d_id = " + did + " AND d_w_id = " + wid);
+            BigDecimal district_tax_rate = rs.one().getBigDecimal("d_tax");
 
             total_amount = total_amount.multiply((warehouse_tax_rate.add(BigDecimal.valueOf(1)).
                     add(district_tax_rate)).multiply(BigDecimal.valueOf(1)).subtract(discount));
