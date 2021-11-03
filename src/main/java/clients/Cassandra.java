@@ -311,32 +311,28 @@ public class Cassandra {
 
     private static void paymentTransaction(CqlSession session, int cwid, int cdid, int cid, BigDecimal payment) {
         try {
-            BoundStatement warehouseStmt = session.prepare(
-                    " SELECT w_ytd FROM schema_a.warehouse_tab WHERE w_id= " + cwid + " ;").bind();
-            warehouseStmt.setConsistencyLevel(ConsistencyLevel.QUORUM);
-            ResultSet warehouse_result = session.execute(warehouseStmt);
-            Row warehouseRow = warehouse_result.one();
+            Row warehouseRow = session.execute(
+                    session.prepare(" SELECT w_ytd FROM schema_a.warehouse_tab WHERE w_id= " + cwid + " ;")
+                            .bind()
+                            .setConsistencyLevel(ConsistencyLevel.QUORUM)).one();
             BigDecimal old_ytd = warehouseRow.getBigDecimal("w_ytd");
 
-            BoundStatement updateWarehouseBound = session.prepare(
+            session.execute(session.prepare(
                             "UPDATE warehouse_tab SET W_YTD = ? WHERE W_ID = ?;").bind()
                     .setBigDecimal(0, old_ytd.add(payment))
-                    .setInt(1, cwid);
-            updateWarehouseBound.setConsistencyLevel(ConsistencyLevel.QUORUM);
-            session.execute(updateWarehouseBound);
+                    .setInt(1, cwid).setConsistencyLevel(ConsistencyLevel.QUORUM));
 
-            BoundStatement customer_stmt = session.prepare(
+            Row customer_row = session.execute(session.prepare(
                     "SELECT c_balance, c_ytd_payment, c_payment_cnt FROM schema_a.customer_tab " +
-                            String.format("WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d  ALLOW FILTERING; ", cwid, cdid, cid)).bind();
-            customer_stmt.setConsistencyLevel(ConsistencyLevel.QUORUM);
-            ResultSet customer_result = session.execute(customer_stmt);
-            Row customer_row = customer_result.one();
+                            String.format("WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d  ALLOW FILTERING; ", cwid, cdid, cid))
+                    .bind()
+                    .setConsistencyLevel(ConsistencyLevel.QUORUM)).one();
 
             BigDecimal old_c_balance = customer_row.getBigDecimal("c_balance");
             float old_c_ytd_payment = customer_row.getFloat("c_ytd_payment");
             int old_c_payment_cnt = customer_row.getInt("c_payment_cnt");
 
-            BoundStatement updateCustomerBound = session.prepare(
+            session.execute(session.prepare(
                             "Update schema_a.customer_tab " +
                                     "SET c_balance = ?,c_ytd_payment = ?, c_payment_cnt = ? " +
                                     "WHERE c_w_id = ? AND c_d_id = ? AND c_id = ? ;").bind()
