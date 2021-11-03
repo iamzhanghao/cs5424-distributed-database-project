@@ -1,5 +1,5 @@
 DROP KEYSPACE IF EXISTS schema_b;
-CREATE KEYSPACE schema_a with replication = {'class': 'SimpleStrategy', 'replication_factor' : 3};
+CREATE KEYSPACE schema_b with replication = {'class': 'SimpleStrategy', 'replication_factor' : 3};
 USE schema_b;
 
 CREATE TABLE order_line_tab (
