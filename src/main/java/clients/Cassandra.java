@@ -22,8 +22,8 @@ import java.util.stream.IntStream;
 public class Cassandra {
 
     // Limit number of txns executed
-    private static int TXN_LIMIT = 2000;
     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
+    private static int TXN_LIMIT = 1000;
 
 
     // For testing in local only:
@@ -76,8 +76,6 @@ public class Cassandra {
                 .withConfigLoader(loader)
                 .withKeyspace(schema_name)
                 .withLocalDatacenter("datacenter1")
-
-
                 .build();
 
         FileInputStream stream = new FileInputStream(dataDir);
@@ -575,9 +573,17 @@ public class Cassandra {
                 customer.getString("c_middle"),
                 customer.getString("c_last"),
                 customer.getBigDecimal("c_balance").doubleValue());
+
+        String entryDate = "NULL";
+        try{
+           entryDate =  last_order.getInstant("o_entry_d").toString();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         System.out.printf("Customer last order id: %d, Entry Datetime: %s, Carrier id: %s\n",
                 last_order_id,
-                last_order.getInstant("o_entry_d").toString(),
+                entryDate,
                 last_order.getString("o_carrier_id"));
 
         // order items
