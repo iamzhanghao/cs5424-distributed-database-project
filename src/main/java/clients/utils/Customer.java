@@ -28,4 +28,12 @@ public class Customer {
         return Objects.hash(w_id, d_id, c_id);
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "w_id=" + w_id +
+                ", d_id=" + d_id +
+                ", c_id=" + c_id +
+                '}';
+    }
 }

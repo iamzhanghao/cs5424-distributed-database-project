@@ -1,8 +1,7 @@
 package clients;
 
-import clients.utils.CustomerBalance;
-import clients.utils.CustomerBalanceComparator;
-import clients.utils.TransactionStatistics;
+import clients.utils.*;
+import com.datastax.oss.driver.api.core.ConsistencyLevel;
 import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.cql.BoundStatement;
 import com.datastax.oss.driver.api.core.cql.PreparedStatement;
@@ -64,7 +63,7 @@ public class Cassandra {
         Scanner scanner = new Scanner(stream);
 
         // Client 1 always write CSV header
-        if(client.equals("1")){
+        if (client.equals("1")) {
             TransactionStatistics.writeCsvHeader(csvPath);
         }
 
@@ -802,27 +801,60 @@ public class Cassandra {
         rs = session.execute(getOrdersBound);
         List<Row> orders = rs.all();
         ArrayList<Set<Integer>> itemSets = new ArrayList<>();
+        Set<Order> relatedOrders = new HashSet<>();
         for (Row order : orders) {
-            Set<Integer> set = new HashSet<>();
-            System.out.println(order.getInt("o_id"));
-            PreparedStatement getItems = session.prepare(
-                    "SELECT ol_i_id FROM schema_a.order_line_tab WHERE ol_w_id = ? and ol_d_id = ? and ol_o_id = ? "+
-                                "ALLOW FILTERING "
-            );
-            BoundStatement itemsBound = getItems.bind()
+
+            rs = session.execute(session.prepare(
+                            "SELECT ol_i_id FROM schema_a.order_line_tab WHERE ol_w_id = ? and ol_d_id = ? and ol_o_id = ? " +
+                                    "ALLOW FILTERING ")
+                    .bind()
                     .setInt(0, cwid)
                     .setInt(1, cdid)
-                    .setInt(2, cid);
-            itemsBound.setConsistencyLevel(ConsistencyLevel.ONE);
-            rs = session.execute(itemsBound);
+                    .setInt(2, order.getInt("o_id"))
+                    .setConsistencyLevel(ConsistencyLevel.ONE));
             List<Row> items = rs.all();
+
+            Set<Order> orderedAtLeastOnce = new HashSet<>();
+
             for (Row item : items) {
-                set.add(item.getInt("ol_i_id"));
+                ResultSet relatedOrdersForItem = session.execute(session.prepare(String.format("SELECT ol_w_id, ol_d_id, ol_o_id FROM schema_a.order_line_tab \n" +
+                                "WHERE ol_i_id = %d \n" +
+                                "ALLOW FILTERING ", item.getInt("ol_i_id")))
+                        .bind()
+                        .setConsistencyLevel(ConsistencyLevel.ONE));
+
+                for (Row relatedOrderForItem : relatedOrdersForItem) {
+                    Order newOrder = new Order(relatedOrderForItem.getInt("ol_w_id"),
+                            relatedOrderForItem.getInt("ol_d_id"),
+                            relatedOrderForItem.getInt("ol_o_id"));
+                    if (newOrder.w_id != cwid) {
+                        if (orderedAtLeastOnce.contains(newOrder)) {
+                            relatedOrders.add(newOrder);
+                        }
+                        orderedAtLeastOnce.add(newOrder);
+                    }
+                }
             }
-            System.out.println(set);
-            itemSets.add(set);
+
+
+            for (Order relatedOrder : relatedOrders) {
+                Row relatedCustomer = session.execute(session.prepare(String.format("SELECT o_w_id, o_d_id, o_c_id from schema_a.order_tab\n" +
+                        "WHERE o_w_id = %d AND o_d_id= %d AND o_id = %d\n" +
+                        "ALLOW FILTERING", relatedOrder.w_id, relatedOrder.d_id, relatedOrder.o_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+
+                relatedCustomerSet.add(
+                        new Customer(relatedCustomer.getInt("o_w_id"),
+                                relatedCustomer.getInt("o_w_id"),
+                                relatedCustomer.getInt("o_w_id")));
+            }
+
         }
-        System.out.println(itemSets);
+        if(relatedCustomerSet.isEmpty()){
+            System.out.println("No related customer");
+        }else{
+            System.out.print("Related Customer: ");
+            System.out.println(relatedCustomerSet);
+        }
 
 
     }

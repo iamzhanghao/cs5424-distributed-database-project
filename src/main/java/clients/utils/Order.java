@@ -25,4 +25,9 @@ public class Order {
     public int hashCode() {
         return Objects.hash(w_id, d_id, o_id);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d,%d,%d",w_id,d_id,o_id);
+    }
 }
