@@ -32,8 +32,8 @@ public class Cassandra {
 
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 5) {
-            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client> <db_state>\n " +
+        if (args.length != 6) {
+            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client> <csv> <db_state>\n " +
                     "e.g. ./Cassandra localhost 9042 A 1 out/cassandra-A-local.csv 0");
         }
 
@@ -42,7 +42,7 @@ public class Cassandra {
         String schema = args[2];
         String client = args[3];
         String csvPath = args[4];
-        String isDbState = args[5];
+        int isDbState = Integer.parseInt(args[5]);
 
         String schema_name = "schema_a";
         String dataDir = "project_files/xact_files_A/1.txt";
@@ -55,7 +55,7 @@ public class Cassandra {
             dataDir = "project_files/xact_files_B/" + client + ".txt";
         } else {
             System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n " +
-                    "e.g. ./Cassandra localhost 9042 A 1 out/cassandra-A-local.csv");
+                    "e.g. ./Cassandra localhost 9042 A 1 out/cassandra-A-local.csv 0");
             return;
         }
 
@@ -101,7 +101,7 @@ public class Cassandra {
             latencies.add(new TransactionStatistics(txnType, latency / 1000000, 0));
             System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, 0);
         }
-        if (isDbState.equals("1")){
+        if (isDbState == 1){
             try {
                 getDbState(session);
             } catch (Exception e) {

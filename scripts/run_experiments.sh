@@ -18,7 +18,7 @@ do
   nohup ssh ${ssh_host} -n "
     cd cs5424-distributed-database-project;
     pwd;
-    java -jar target/${db}.jar ${java_host} ${port} ${schema} ${client} out/${db}-${schema}-${exp}.csv
+    java -jar target/${db}.jar ${java_host} ${port} ${schema} ${client} out/${db}-${schema}-${exp}.csv 0
   " > out/${db}-${schema}-${exp}-${client}.out &
   echo "Started client ${client} on ${java_host}"
   sleep 1;
