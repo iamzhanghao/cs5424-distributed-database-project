@@ -23,7 +23,7 @@ public class Cassandra {
 
     // Limit number of txns executed
     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
-    private static int TXN_LIMIT = 1000;
+    private static int TXN_LIMIT = 500;
 
 
     // For testing in local only:
@@ -922,7 +922,7 @@ public class Cassandra {
         StringBuilder res = new StringBuilder();
 
         Row warehouseRow = session.execute(session.prepare(
-                        "SELECT sum(W_YTD) as w_ytd from schema_a.warehouse_tab")
+                        "SELECT sum(W_YTD) as w_ytd from warehouse_tab")
                 .bind()
                 .setConsistencyLevel(USE_QUORUM)).one();
         BigDecimal w_ytd = warehouseRow.getBigDecimal("w_ytd");
