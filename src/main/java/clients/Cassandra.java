@@ -22,7 +22,7 @@ import java.util.stream.IntStream;
 public class Cassandra {
 
     // Limit number of txns executed
-    private static final int TXN_LIMIT = 2000;
+    private static int TXN_LIMIT = 2000;
     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
 
 
@@ -33,8 +33,8 @@ public class Cassandra {
 
     public static void main(String[] args) throws Exception {
         if (args.length != 5) {
-            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client>\n " +
-                    "e.g. ./Cassandra localhost 9042 A 1 out/cassandra-A-local.csv");
+            System.err.println("run the program by: ./Cassandra <host> <port> <schema_name> <client> <db_state>\n " +
+                    "e.g. ./Cassandra localhost 9042 A 1 out/cassandra-A-local.csv 0");
         }
 
         String host = args[0];
@@ -42,7 +42,7 @@ public class Cassandra {
         String schema = args[2];
         String client = args[3];
         String csvPath = args[4];
-
+        String isDbState = args[5];
 
         String schema_name = "schema_a";
         String dataDir = "project_files/xact_files_A/1.txt";
@@ -101,11 +101,13 @@ public class Cassandra {
             latencies.add(new TransactionStatistics(txnType, latency / 1000000, 0));
             System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, 0);
         }
-        try {
-            getDbState(session);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("DB State Error, Other clients still runing... Ignore...");
+        if (isDbState.equals("1")){
+            try {
+                getDbState(session);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("DB State Error, Other clients still runing... Ignore...");
+            }
         }
         session.close();
         float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
