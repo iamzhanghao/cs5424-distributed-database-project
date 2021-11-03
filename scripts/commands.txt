@@ -6,8 +6,13 @@
 
 ./ngrok http http://localhost:8090
 
-tail -90  cockroachdb-A-2-9.out
-cat cockroachdb-A-2.csv
+tail -90  out/cockroachdb-A-2-9.out
+tail -90  out/cockroachdb-A-2-9.out
+tail -90  out/cassandra-A-2-9.out
+tail -90  out/cassandra-B-1-9.out
+
+
+cat out/cockroachdb-A-2.csv
 
 ./ngrok http http://localhost:8090
 
