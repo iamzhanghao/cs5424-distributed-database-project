@@ -1,5 +1,5 @@
 DROP KEYSPACE IF EXISTS schema_b;
-CREATE KEYSPACE schema_b with replication = {'class': 'SimpleStrategy', 'replication_factor' : 3};
+CREATE KEYSPACE schema_a with replication = {'class': 'SimpleStrategy', 'replication_factor' : 3};
 USE schema_b;
 
 CREATE TABLE order_line_tab (
@@ -15,6 +15,9 @@ ol_quantity    DECIMAL,
 ol_dist_info   VARCHAR,
 PRIMARY KEY (ol_w_id, ol_d_id, ol_o_id, ol_number)
 );
+
+CREATE INDEX IF NOT EXISTS order_line_tab_items
+    ON schema_a.order_line_tab ( ol_i_id );
 
 COPY order_line_tab (ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id, ol_quantity, ol_dist_info)
 FROM 'project_files/data_files/order-line.csv' WITH DELIMITER=',' AND NULL='null' AND HEADER=FALSE;
@@ -128,17 +131,17 @@ c_w_id, c_balance, c_d_id, c_id
 );
 
 CREATE TABLE order_tab (
-                           o_w_id       INT,
-                           o_d_id       INT,
-                           o_id         INT,
-                           o_c_id       INT,
-                           o_carrier_id INT,
-                           o_ol_cnt     DECIMAL,
-                           o_all_local  DECIMAL,
-                           o_entry_d    TIMESTAMP,
-                           PRIMARY KEY ((o_w_id, o_d_id), o_id)
-)
-WITH CLUSTERING ORDER BY (o_id DESC);
+o_w_id       INT,
+o_d_id       INT,
+o_c_id       INT,
+o_id         INT,
+o_carrier_id VARCHAR,
+o_ol_cnt     DECIMAL,
+o_all_local  DECIMAL,
+o_entry_d    TIMESTAMP,
+PRIMARY KEY (o_w_id, o_id, o_d_id)
+);
+
 
 COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
 FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND NULL='' AND HEADER=FALSE;
