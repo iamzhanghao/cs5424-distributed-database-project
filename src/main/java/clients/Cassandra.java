@@ -558,48 +558,52 @@ public class Cassandra {
     }
 
     private static void orderStatusTransaction(CqlSession session, int cwid, int cdid, int cid) {
-        String get_customer = "select c_first, c_middle, c_last, c_balance from customer_tab "
-                + "where c_w_id = %d and c_d_id = %d and c_id = %d ";
-        String get_last_order = "SELECT o_w_id, o_d_id, o_c_id, o_id, o_entry_d, o_carrier_id "
-                + "FROM order_tab "
-                + "WHERE o_w_id = %d AND o_d_id = %d AND o_c_id = %d order by o_id desc LIMIT 1 ALLOW FILTERING";
-        String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d "
-                + "from order_line_tab where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
-
-        // customer last order
-        Row customer = session.execute(session.prepare(String.format(get_customer, cwid, cdid, cid)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
-        Row last_order = session.execute(session.prepare(String.format(get_last_order, cwid, cdid, cid)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
-        int last_order_id = last_order.getInt("o_id");
-
-        System.out.printf("Customer name: %s %s %s, Balance: %f\n",
-                customer.getString("c_first"),
-                customer.getString("c_middle"),
-                customer.getString("c_last"),
-                customer.getBigDecimal("c_balance").doubleValue());
-
-        String entryDate = "NULL";
         try{
-           entryDate =  last_order.getInstant("o_entry_d").toString();
+            String get_customer = "select c_first, c_middle, c_last, c_balance from customer_tab "
+                    + "where c_w_id = %d and c_d_id = %d and c_id = %d ";
+            String get_last_order = "SELECT o_w_id, o_d_id, o_c_id, o_id, o_entry_d, o_carrier_id "
+                    + "FROM order_tab "
+                    + "WHERE o_w_id = %d AND o_d_id = %d AND o_c_id = %d order by o_id desc LIMIT 1 ALLOW FILTERING";
+            String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d "
+                    + "from order_line_tab where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
+
+            // customer last order
+            Row customer = session.execute(session.prepare(String.format(get_customer, cwid, cdid, cid)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+            Row last_order = session.execute(session.prepare(String.format(get_last_order, cwid, cdid, cid)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+            int last_order_id = last_order.getInt("o_id");
+
+            System.out.printf("Customer name: %s %s %s, Balance: %f\n",
+                    customer.getString("c_first"),
+                    customer.getString("c_middle"),
+                    customer.getString("c_last"),
+                    customer.getBigDecimal("c_balance").doubleValue());
+
+            String entryDate = "NULL";
+            try{
+                entryDate =  last_order.getInstant("o_entry_d").toString();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            System.out.printf("Customer last order id: %d, Entry Datetime: %s, Carrier id: %s\n",
+                    last_order_id,
+                    entryDate,
+                    last_order.getString("o_carrier_id"));
+
+            // order items
+            ResultSet rs_order_items = session.execute(session.prepare(String.format(get_order_items, cwid, cdid, last_order_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE));
+            for (Row item : rs_order_items) {
+                System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %f, Price: %f, Delivery Datetime: %s\n",
+                        item.getInt("ol_i_id"),
+                        item.getInt("ol_supply_w_id"),
+                        item.getBigDecimal("ol_quantity").doubleValue(),
+                        item.getBigDecimal("ol_amount").doubleValue(),
+                        item.getInstant("ol_delivery_d") != null ? item.getInstant("ol_delivery_d").toString() : "");
+            }
+
         }catch (Exception e){
-            e.printStackTrace();
+//            e.getMessage();
         }
-
-        System.out.printf("Customer last order id: %d, Entry Datetime: %s, Carrier id: %s\n",
-                last_order_id,
-                entryDate,
-                last_order.getString("o_carrier_id"));
-
-        // order items
-        ResultSet rs_order_items = session.execute(session.prepare(String.format(get_order_items, cwid, cdid, last_order_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE));
-        for (Row item : rs_order_items) {
-            System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %f, Price: %f, Delivery Datetime: %s\n",
-                    item.getInt("ol_i_id"),
-                    item.getInt("ol_supply_w_id"),
-                    item.getBigDecimal("ol_quantity").doubleValue(),
-                    item.getBigDecimal("ol_amount").doubleValue(),
-                    item.getInstant("ol_delivery_d") != null ? item.getInstant("ol_delivery_d").toString() : "");
-        }
-
 
     }
 
