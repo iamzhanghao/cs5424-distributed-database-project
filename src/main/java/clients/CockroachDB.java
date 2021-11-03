@@ -440,6 +440,12 @@ public class CockroachDB {
             insertOrderLine.execute();
         }
 
+        double discount = 0;
+        String last_name = "";
+        String credit = "";
+        double warehouse_tax_rate = 0;
+        double district_tax_rate = 0;
+
         PreparedStatement get_user_info = connHelper.getConn().prepareStatement("select c_last, c_credit, c_discount, w_tax, d_tax from " +
                 "warehouse_district_customer where w_id=? and d_id=? and c_id=?;");
         get_user_info.setInt(1, wid);
@@ -447,11 +453,11 @@ public class CockroachDB {
         get_user_info.setInt(3, cid);
         rs = get_user_info.executeQuery();
         rs.next();
-        String last_name = rs.getString("c_last");
-        double discount = rs.getInt("c_discount");
-        String credit = rs.getString("c_credit");
-        double warehouse_tax_rate = rs.getInt("w_tax");
-        double district_tax_rate = rs.getInt("d_tax");
+        last_name = rs.getString("c_last");
+        discount = rs.getInt("c_discount");
+        credit = rs.getString("c_credit");
+        warehouse_tax_rate = rs.getInt("w_tax");
+        district_tax_rate = rs.getInt("d_tax");
 
 
 //        rs = stmt.executeQuery("SELECT c_last, c_credit, c_discount FROM customer_tab " +
