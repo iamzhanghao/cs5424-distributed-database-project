@@ -6,7 +6,6 @@ import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.config.DefaultDriverOption;
 import com.datastax.oss.driver.api.core.config.DriverConfig;
 import com.datastax.oss.driver.api.core.config.DriverConfigLoader;
-import com.datastax.oss.driver.api.core.config.DriverExecutionProfile;
 import com.datastax.oss.driver.api.core.cql.BoundStatement;
 import com.datastax.oss.driver.api.core.cql.PreparedStatement;
 import com.datastax.oss.driver.api.core.cql.ResultSet;
@@ -15,16 +14,15 @@ import com.datastax.oss.driver.api.core.cql.Row;
 import java.io.FileInputStream;
 import java.math.BigDecimal;
 import java.net.InetSocketAddress;
-import java.net.SocketOptions;
+import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.time.Duration;
 
 public class Cassandra {
 
     // Limit number of txns executed
-    private static final int TXN_LIMIT = 2;
+    private static final int TXN_LIMIT = 1000;
 //    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
 
 
@@ -190,7 +188,7 @@ public class Cassandra {
     private static void newOrderTransaction(CqlSession session, int cid, int wid, int did, int number_of_items,
                                             ArrayList<Integer> items, ArrayList<Integer> supplier_warehouses, ArrayList<BigDecimal> quantities) {
         try {
-            ResultSet rs = session.execute("SELECT D_NEXT_O_ID FROM district_tab WHERE D_W_ID = " + wid + " AND D_ID = " + did);
+            ResultSet rs = session.execute(session.prepare("SELECT D_NEXT_O_ID FROM district_tab WHERE D_W_ID = " + wid + " AND D_ID = " + did).bind().setConsistencyLevel(USE_QUORUM));
             Integer next_order_id = 0;
             next_order_id = rs.one().getInt("D_NEXT_O_ID");
 
@@ -201,7 +199,9 @@ public class Cassandra {
             BoundStatement updateDistrictBound = updateDistrict.bind()
                     .setInt(0, next_order_id)
                     .setInt(1, wid)
-                    .setInt(2, did);
+                    .setInt(2, did)
+                    .setConsistencyLevel(USE_QUORUM);
+
             session.execute(updateDistrictBound);
 
             int all_local = 0;
@@ -221,7 +221,8 @@ public class Cassandra {
                     .setString(4, "null")
                     .setBigDecimal(5, BigDecimal.valueOf(number_of_items))
                     .setBigDecimal(6, BigDecimal.valueOf(all_local))
-                    .setDefaultTimestamp(System.currentTimeMillis());
+                    .setDefaultTimestamp(System.currentTimeMillis())
+                    .setConsistencyLevel(USE_QUORUM);
             session.execute(createOrderBound);
 
 
@@ -252,7 +253,7 @@ public class Cassandra {
                         "s_remote_cnt, s_dist_" + strDid + " FROM stock_tab WHERE s_w_id=? AND s_i_id=?;");
                 BoundStatement itemStockBound = itemStock.bind()
                         .setInt(0, wid)
-                        .setInt(1, current_item);
+                        .setInt(1, current_item).setConsistencyLevel(USE_QUORUM);
                 rs = session.execute(itemStockBound);
                 row = rs.one();
                 BigDecimal s_quantity = row.getBigDecimal("s_quantity");
@@ -276,7 +277,8 @@ public class Cassandra {
                         .setInt(2, s_order_cnt + 1)
                         .setInt(3, s_remote_cnt)
                         .setInt(4, wid)
-                        .setInt(5, current_item);
+                        .setInt(5, current_item)
+                        .setConsistencyLevel(USE_QUORUM);
 
                 session.execute(updateStockBound);
 
@@ -298,21 +300,22 @@ public class Cassandra {
                         .setBigDecimal(6, item_amount)
                         .setInt(7, supplier_warehouses.get(idx))
                         .setBigDecimal(8, quantities.get(idx))
-                        .setString(9, "S_DIST_" + did);
+                        .setString(9, "S_DIST_" + did)
+                        .setConsistencyLevel(USE_QUORUM);
                 session.execute(insertOrderLineBound);
             }
 
-            rs = session.execute("SELECT c_last, c_credit, c_discount FROM customer_tab " +
-                    "WHERE c_id = " + cid + " AND c_d_id = " + did + " AND c_w_id = " + wid);
+            rs = session.execute(session.prepare("SELECT c_last, c_credit, c_discount FROM customer_tab " +
+                    "WHERE c_id = " + cid + " AND c_d_id = " + did + " AND c_w_id = " + wid).bind().setConsistencyLevel(USE_QUORUM));
             Row row = rs.one();
             BigDecimal discount = row.getBigDecimal("c_discount");
             String last_name = row.getString("c_last");
             String credit = row.getString("c_credit");
 
-            rs = session.execute("SELECT w_tax FROM warehouse_tab WHERE w_id = " + wid);
+            rs = session.execute(session.prepare("SELECT w_tax FROM warehouse_tab WHERE w_id = " + wid).bind().setConsistencyLevel(USE_QUORUM));
             BigDecimal warehouse_tax_rate = rs.one().getBigDecimal("w_tax");
 
-            rs = session.execute("SELECT d_tax FROM district_tab WHERE d_id = " + did + " AND d_w_id = " + wid);
+            rs = session.execute(session.prepare("SELECT d_tax FROM district_tab WHERE d_id = " + did + " AND d_w_id = " + wid).bind().setConsistencyLevel(USE_QUORUM));
             BigDecimal district_tax_rate = rs.one().getBigDecimal("d_tax");
 
             total_amount = total_amount.multiply((warehouse_tax_rate.add(BigDecimal.valueOf(1)).
@@ -397,7 +400,8 @@ public class Cassandra {
         );
         BoundStatement getOrderAndCustomerIdBound = getOrderAndCustomerId.bind()
                 .setInt(0, wid)
-                .setInt(1, did);
+                .setInt(1, did)
+                .setConsistencyLevel(USE_QUORUM);
         ResultSet rs = session.execute(getOrderAndCustomerIdBound);
 
         // proceed when a yet-to-deliver order exists
@@ -423,7 +427,8 @@ public class Cassandra {
                     .setString(0, String.valueOf(carrierid))
                     .setInt(1, wid)
                     .setInt(2, did)
-                    .setInt(3, orderID);
+                    .setInt(3, orderID)
+                    .setConsistencyLevel(USE_QUORUM);
             session.execute(updateOrderBound);
 
             // assign the current timestamp to each order line
@@ -441,7 +446,8 @@ public class Cassandra {
             BoundStatement getOrderLineCountBound = getOrderLineCount.bind()
                     .setInt(0, wid)
                     .setInt(1, did)
-                    .setInt(2, orderID);
+                    .setInt(2, orderID)
+                    .setConsistencyLevel(USE_QUORUM);
             rs = session.execute(getOrderLineCountBound);
             row = rs.one();
             long orderLineCount = row.getLong("count");
@@ -465,7 +471,8 @@ public class Cassandra {
                         .setInt(0, wid)
                         .setInt(1, did)
                         .setInt(2, orderID)
-                        .setInt(3, line);
+                        .setInt(3, line)
+                        .setConsistencyLevel(USE_QUORUM);
                 session.execute(updateOrderLineBound);
             }
 
@@ -485,7 +492,8 @@ public class Cassandra {
             BoundStatement getCustomerInfoBound = getCustomerInfo.bind()
                     .setInt(0, customerID)
                     .setInt(1, wid)
-                    .setInt(2, did);
+                    .setInt(2, did)
+                    .setConsistencyLevel(USE_QUORUM);
             rs = session.execute(getCustomerInfoBound);
             row = rs.one();
             BigDecimal balance = row.getBigDecimal("c_balance");
@@ -509,7 +517,8 @@ public class Cassandra {
                     .setInt(1, count + 1)
                     .setInt(2, customerID)
                     .setInt(3, wid)
-                    .setInt(4, did);
+                    .setInt(4, did)
+                    .setConsistencyLevel(USE_QUORUM);
             session.execute(updateCustomerInfoBound);
 //            System.out.printf("did: %d order: %d customer %d new balance: %f new count : %d\n", did, orderID, customerID, balance.add(orderLineSum), count + 1);
         }
@@ -545,8 +554,8 @@ public class Cassandra {
                 + "from order_line_tab where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
 
         // customer last order
-        Row customer = session.execute(String.format(get_customer, cwid, cdid, cid)).one();
-        Row last_order = session.execute(String.format(get_last_order, cwid, cdid, cid)).one();
+        Row customer = session.execute(session.prepare(String.format(get_customer, cwid, cdid, cid)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+        Row last_order = session.execute(session.prepare(String.format(get_last_order, cwid, cdid, cid)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
         int last_order_id = last_order.getInt("o_id");
 
         System.out.printf("Customer name: %s %s %s, Balance: %f\n",
@@ -560,7 +569,7 @@ public class Cassandra {
                 last_order.getString("o_carrier_id"));
 
         // order items
-        ResultSet rs_order_items = session.execute(String.format(get_order_items, cwid, cdid, last_order_id));
+        ResultSet rs_order_items = session.execute(session.prepare(String.format(get_order_items, cwid, cdid, last_order_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE));
         for (Row item : rs_order_items) {
             System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %f, Price: %f, Delivery Datetime: %s\n",
                     item.getInt("ol_i_id"),
@@ -575,7 +584,7 @@ public class Cassandra {
 
     private static void stockLevelTransaction(CqlSession session, int wid, int did, int threshold, int l) {
         try {
-            ResultSet rs = session.execute("SELECT d_next_o_id FROM district_tab WHERE d_w_id=" + wid + " AND d_id=" + did + ";");
+            ResultSet rs = session.execute(session.prepare("SELECT d_next_o_id FROM district_tab WHERE d_w_id=" + wid + " AND d_id=" + did + ";").bind().setConsistencyLevel(ConsistencyLevel.ONE));
             Integer latest_order_id = rs.one().getInt("d_next_o_id");
 
             Integer earliest_order_id = latest_order_id - l;
@@ -585,7 +594,8 @@ public class Cassandra {
                     .setInt(0, did)
                     .setInt(1, wid)
                     .setInt(2, earliest_order_id)
-                    .setInt(3, latest_order_id);
+                    .setInt(3, latest_order_id)
+                    .setConsistencyLevel(ConsistencyLevel.ONE);
             rs = session.execute(getOrderLineBound);
 
             int low_stock_count = 0;
@@ -593,7 +603,7 @@ public class Cassandra {
             while (iterator.hasNext()) {
                 Row curr_row = iterator.next();
                 int item = curr_row.getInt("ol_i_id");
-                ResultSet curr_quantity = session.execute("SELECT s_quantity FROM stock_tab WHERE s_w_id=" + wid + " AND s_i_id=" + item);
+                ResultSet curr_quantity = session.execute(session.prepare("SELECT s_quantity FROM stock_tab WHERE s_w_id=" + wid + " AND s_i_id=" + item).bind().setConsistencyLevel(ConsistencyLevel.ONE));
                 BigDecimal quantity = curr_quantity.one().getBigDecimal("s_quantity");
                 if (quantity.compareTo(BigDecimal.valueOf(threshold)) == -1) {
                     low_stock_count += 1;
@@ -620,22 +630,23 @@ public class Cassandra {
         String get_items = "select i_id, i_name from item_tab where i_id in ( %s )";
 
 
-        Integer N = session.execute(String.format(get_N, wid, did)).one().getInt("d_next_o_id");
+        Integer N = session.execute(session.prepare(String.format(get_N, wid, did)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one().getInt("d_next_o_id");
+
 
         StringJoiner o_ids = new StringJoiner(",");
         for (int i = N - l; i < N; i++) {
             o_ids.add((N - i) + "");
         }
 
-        List<Row> orders = session.execute(String.format(get_order, wid, did, o_ids.toString())).all();
-        List<Row> order_lines = session.execute(String.format(get_order_lines, wid, did, o_ids.toString())).all();
+        List<Row> orders = session.execute(session.prepare(String.format(get_order, wid, did, o_ids.toString())).bind().setConsistencyLevel(ConsistencyLevel.ONE)).all();
+        List<Row> order_lines = session.execute(session.prepare(String.format(get_order_lines, wid, did, o_ids.toString())).bind().setConsistencyLevel(ConsistencyLevel.ONE)).all();
 
         StringJoiner c_ids = new StringJoiner(",");
         for (Row order : orders) {
             c_ids.add(order.getInt("o_c_id") + "");
         }
 
-        List<Row> customers = session.execute(String.format(get_customer, wid, did, c_ids.toString())).all();
+        List<Row> customers = session.execute(session.prepare(String.format(get_customer, wid, did, c_ids.toString())).bind().setConsistencyLevel(ConsistencyLevel.ONE)).all();
 
         System.out.printf("WID: %d, DID: %d, Number of last orders: %d\n", wid, did, l);
         System.out.println();
@@ -752,7 +763,7 @@ public class Cassandra {
                             "LIMIT 10"
             );
             BoundStatement getCustomerBalanceInfoBound = getCustomerBalanceInfo.bind()
-                    .setInt(0, wid);
+                    .setInt(0, wid).setConsistencyLevel(ConsistencyLevel.ONE);
 
             ResultSet rs = session.execute(getCustomerBalanceInfoBound);
 
@@ -784,7 +795,8 @@ public class Cassandra {
                             "\tw_id = ?"
             );
             BoundStatement getWarehouseNameBound = getWarehouseName.bind()
-                    .setInt(0, customer.wid);
+                    .setInt(0, customer.wid)
+                    .setConsistencyLevel(ConsistencyLevel.ONE);
             ResultSet rs = session.execute(getWarehouseNameBound);
             String warehouseName = rs.one().getString("w_name");
 
@@ -800,7 +812,8 @@ public class Cassandra {
             );
             BoundStatement getDistrictNameBound = getDistrictName.bind()
                     .setInt(0, customer.did)
-                    .setInt(1, customer.wid);
+                    .setInt(1, customer.wid)
+                    .setConsistencyLevel(ConsistencyLevel.ONE);
             rs = session.execute(getDistrictNameBound);
             String districtName = rs.one().getString("d_name");
 
@@ -823,8 +836,8 @@ public class Cassandra {
         BoundStatement getOrdersBound = getOrder.bind()
                 .setInt(0, cwid)
                 .setInt(1, cdid)
-                .setInt(2, cid);
-        getOrdersBound.setConsistencyLevel(ConsistencyLevel.ONE);
+                .setInt(2, cid)
+                .setConsistencyLevel(ConsistencyLevel.ONE);
         rs = session.execute(getOrdersBound);
         List<Row> orders = rs.all();
         ArrayList<Set<Integer>> itemSets = new ArrayList<>();
