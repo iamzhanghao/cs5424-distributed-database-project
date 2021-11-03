@@ -1,5 +1,7 @@
 package clients.utils;
 
+import java.util.Objects;
+
 public class Order {
     public int w_id;
     public int d_id;
@@ -11,4 +13,16 @@ public class Order {
         this.o_id = o_id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order)) return false;
+        Order order = (Order) o;
+        return w_id == order.w_id && d_id == order.d_id && o_id == order.o_id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(w_id, d_id, o_id);
+    }
 }
