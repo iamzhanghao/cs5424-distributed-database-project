@@ -71,7 +71,7 @@ public class TransactionStatistics {
             median = statValues[statValues.length / 2];
 
         System.out.printf("Total %d transactions, execution time %.2fs, avg latency %.2fms, throughput %.2f query/s,\n" +
-                        "median latency %.2fms, 95th percentile latency %.2fms, 95th percentile latency %.2fms  \n",
+                        "median latency %.2fms, 95th percentile latency %.2fms, 99th percentile latency %.2fms  \n",
                 numberOfTransactions, totalExcutionTimeSeconds, doubleStats.getAverage(), throughput,
                 median, percentile(statValues, 95), percentile(statValues, 99));
         System.out.println();
