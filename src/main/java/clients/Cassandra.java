@@ -19,6 +19,10 @@ public class Cassandra {
 
     // Limit number of txns executed
     private static final int TXN_LIMIT = 200;
+//    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
+
+    // For testing in local only:
+    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
 
     public static void main(String[] args) throws Exception {
         if (args.length != 5) {
@@ -314,19 +318,19 @@ public class Cassandra {
             Row warehouseRow = session.execute(
                     session.prepare(" SELECT w_ytd FROM schema_a.warehouse_tab WHERE w_id= " + cwid + " ;")
                             .bind()
-                            .setConsistencyLevel(ConsistencyLevel.QUORUM)).one();
+                            .setConsistencyLevel(USE_QUORUM)).one();
             BigDecimal old_ytd = warehouseRow.getBigDecimal("w_ytd");
 
             session.execute(session.prepare(
                             "UPDATE warehouse_tab SET W_YTD = ? WHERE W_ID = ?;").bind()
                     .setBigDecimal(0, old_ytd.add(payment))
-                    .setInt(1, cwid).setConsistencyLevel(ConsistencyLevel.QUORUM));
+                    .setInt(1, cwid).setConsistencyLevel(USE_QUORUM));
 
             Row customer_row = session.execute(session.prepare(
                     "SELECT c_balance, c_ytd_payment, c_payment_cnt FROM schema_a.customer_tab " +
                             String.format("WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d  ALLOW FILTERING; ", cwid, cdid, cid))
                     .bind()
-                    .setConsistencyLevel(ConsistencyLevel.QUORUM)).one();
+                    .setConsistencyLevel(USE_QUORUM)).one();
 
             BigDecimal old_c_balance = customer_row.getBigDecimal("c_balance");
             float old_c_ytd_payment = customer_row.getFloat("c_ytd_payment");
@@ -341,9 +345,8 @@ public class Cassandra {
                     .setInt(2, old_c_payment_cnt + 1)
                     .setInt(3, cwid)
                     .setInt(4, cdid)
-                    .setInt(5, cid);
-            updateCustomerBound.setConsistencyLevel(ConsistencyLevel.QUORUM);
-            session.execute(updateCustomerBound);
+                    .setInt(5, cid)
+                    .setConsistencyLevel(USE_QUORUM));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -783,6 +786,8 @@ public class Cassandra {
 
     private static void relatedCustomerTransaction(CqlSession session, int cwid, int cdid, int cid) {
 
+        Set<Customer> relatedCustomerSet = new HashSet<>();
+
         ResultSet rs;
         // get related orders
         PreparedStatement getOrder = session.prepare(
@@ -845,9 +850,9 @@ public class Cassandra {
             }
 
         }
-        if(relatedCustomerSet.isEmpty()){
+        if (relatedCustomerSet.isEmpty()) {
             System.out.println("No related customer");
-        }else{
+        } else {
             System.out.print("Related Customer: ");
             System.out.println(relatedCustomerSet);
         }
