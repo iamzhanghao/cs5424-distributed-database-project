@@ -29,8 +29,8 @@ public class CockroachDB {
 
     public static void main(String[] args) throws Exception {
         if (args.length != 5) {
-            System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client> <csv_path>\n " +
-                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local.csv");
+            System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client> <csv_path> <is_db_state>\n " +
+                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local.csv 0");
         }
 
         String host = args[0];
@@ -38,6 +38,8 @@ public class CockroachDB {
         String schema = args[2];
         String client = args[3];
         String csvPath = args[4];
+        String isDbState = args[5];
+
 
         String schema_name = "schema_a";
         String dataDir = "project_files/xact_files_A/1.txt";
@@ -86,17 +88,19 @@ public class CockroachDB {
         }
         float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
         String message = TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
-        while (true) {
-            try {
-                getDbState();
-            } catch (SQLException e) {
-                System.out.println("RETRY DB STATE in 2 seconds");
-                if (e.getSQLState().equals("08003")) {
-                    connHelper.connect();
+        if (isDbState.equals("1")){
+            while (true) {
+                try {
+                    getDbState();
+                } catch (SQLException e) {
+                    System.out.println("RETRY DB STATE in 2 seconds");
+                    if (e.getSQLState().equals("08003")) {
+                        connHelper.connect();
+                    }
                 }
+                Thread.sleep(2000);
+                break;
             }
-            Thread.sleep(2000);
-            break;
         }
         connHelper.close();
         System.out.println();
@@ -440,6 +444,12 @@ public class CockroachDB {
             insertOrderLine.execute();
         }
 
+        double discount = 0;
+        String last_name = "";
+        String credit = "";
+        double warehouse_tax_rate = 0;
+        double district_tax_rate = 0;
+
         PreparedStatement get_user_info = connHelper.getConn().prepareStatement("select c_last, c_credit, c_discount, w_tax, d_tax from " +
                 "warehouse_district_customer where w_id=? and d_id=? and c_id=?;");
         get_user_info.setInt(1, wid);
@@ -447,11 +457,11 @@ public class CockroachDB {
         get_user_info.setInt(3, cid);
         rs = get_user_info.executeQuery();
         rs.next();
-        String last_name = rs.getString("c_last");
-        double discount = rs.getInt("c_discount");
-        String credit = rs.getString("c_credit");
-        double warehouse_tax_rate = rs.getInt("w_tax");
-        double district_tax_rate = rs.getInt("d_tax");
+        last_name = rs.getString("c_last");
+        discount = rs.getInt("c_discount");
+        credit = rs.getString("c_credit");
+        warehouse_tax_rate = rs.getInt("w_tax");
+        district_tax_rate = rs.getInt("d_tax");
 
 
 //        rs = stmt.executeQuery("SELECT c_last, c_credit, c_discount FROM customer_tab " +
