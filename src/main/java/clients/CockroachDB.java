@@ -15,7 +15,7 @@ import java.util.*;
 public class CockroachDB {
 
     // Limit number of transactions executed, during actual experiment change to 20000
-    private static final int TXN_LIMIT = 200000;
+    private static int TXN_LIMIT = 200000;
     private static final int MAX_RETRY_COUNT = 100000000;
     private static final int RETRY_QUERY_AFTER = 200;
 
@@ -38,7 +38,7 @@ public class CockroachDB {
         String schema = args[2];
         String client = args[3];
         String csvPath = args[4];
-        String isDbState = args[5];
+        int isDbState = Integer.parseInt(args[5]);
 
 
         String schema_name = "schema_a";
@@ -72,6 +72,10 @@ public class CockroachDB {
             TransactionStatistics.writeCsvHeader(csvPath);
         }
 
+        if(isDbState==1){
+            TXN_LIMIT=0;
+        }
+
         ArrayList<TransactionStatistics> latencies = new ArrayList<>();
         int txnCount = 0;
         long clientStartTime = System.currentTimeMillis();
@@ -88,7 +92,7 @@ public class CockroachDB {
         }
         float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
         String message = TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
-        if (isDbState.equals("1")){
+        if (isDbState==1){
             while (true) {
                 try {
                     getDbState();
