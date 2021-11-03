@@ -59,7 +59,6 @@ public class Cassandra {
                 .builder()
                 .addContactPoint(new InetSocketAddress(host, port))
                 .withKeyspace(schema_name)
-//                .withLocalDatacenter("cs5424-c")
                 .withLocalDatacenter("datacenter1")
                 .build();
 
