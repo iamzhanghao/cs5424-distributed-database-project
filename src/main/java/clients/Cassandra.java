@@ -91,17 +91,24 @@ public class Cassandra {
         ArrayList<TransactionStatistics> latencies = new ArrayList<>();
         int txnCount = 0;
         long clientStartTime = System.currentTimeMillis();
+        StringBuilder errors = new StringBuilder();
         while (scanner.hasNextLine() && txnCount < TXN_LIMIT) {
             txnCount++;
             String line = scanner.nextLine();
             String[] splits = line.split(",");
             char txnType = splits[0].toCharArray()[0];
-            float latency = invokeTransaction(session, splits, scanner);
-            // TODO: Add retry count
-            latencies.add(new TransactionStatistics(txnType, latency / 1000000, 0));
-            System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, 0);
+            try {
+                float latency = invokeTransaction(session, splits, scanner);
+                // TODO: Add retry count
+                latencies.add(new TransactionStatistics(txnType, latency / 1000000, 0));
+                System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, 0);
+            } catch (Exception e) {
+                errors.append("Error at txn " + txnCount + "type " + txnType + '\n');
+                errors.append(e.getLocalizedMessage() + '\n');
+//                e.printStackTrace();
+            }
         }
-        if (isDbState == 1){
+        if (isDbState == 1) {
             try {
                 getDbState(session);
             } catch (Exception e) {
@@ -111,7 +118,10 @@ public class Cassandra {
         }
         session.close();
         float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
+        System.out.println("Errors: (If any)");
+        System.out.println(errors);
         String message = TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
+
         System.err.println(message);
     }
 
@@ -970,8 +980,8 @@ public class Cassandra {
         DriverConfig config = session.getContext().getConfig();
 
         Row stockRow = session.execute(session.prepare(
-                "select sum(S_QUANTITY) as s_quantity, sum(S_YTD) as s_ytd, sum(S_ORDER_CNT) as s_order_cnt," +
-                        " sum(S_REMOTE_CNT) as s_remote_cnt from Stock_tab;")
+                        "select sum(S_QUANTITY) as s_quantity, sum(S_YTD) as s_ytd, sum(S_ORDER_CNT) as s_order_cnt," +
+                                " sum(S_REMOTE_CNT) as s_remote_cnt from Stock_tab;")
                 .bind().setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
         BigDecimal s_quantity = stockRow.getBigDecimal("s_quantity");
         System.out.printf("S_QUANTITY: %f\n", s_quantity);
