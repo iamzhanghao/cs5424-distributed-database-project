@@ -1225,35 +1225,42 @@ public class Cassandra {
         System.out.printf("O_OL_CNT: %f\n", o_ol_cnt);
         res.append(o_ol_cnt.doubleValue() + "\n");
 
-        Row orderLineRow = session.execute(
-                session.prepare("select sum(OL_AMOUNT) as ol_amount, sum(OL_QUANTITY) as ol_quantity from Order_line_tab;")
-                        .bind()
-                        .setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
-        BigDecimal ol_amount = orderLineRow.getBigDecimal("ol_amount");
-        BigDecimal ol_quantity = orderLineRow.getBigDecimal("ol_quantity");
 
-        System.out.printf("OL_AMOUNT: %f\n", ol_amount);
-        res.append(ol_amount.doubleValue() + "\n");
-        System.out.printf("OL_QUANTITY: %f\n", ol_quantity);
-        res.append(ol_quantity.doubleValue() + "\n");
-
-
-        Row stockRow = session.execute(session.prepare(
-                        "select sum(S_QUANTITY) as s_quantity, sum(S_YTD) as s_ytd, sum(S_ORDER_CNT) as s_order_cnt," +
-                                " sum(S_REMOTE_CNT) as s_remote_cnt from Stock_tab;")
-                .bind().setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
-        BigDecimal s_quantity = stockRow.getBigDecimal("s_quantity");
-        System.out.printf("S_QUANTITY: %f\n", s_quantity);
-        res.append(s_quantity.doubleValue() + "\n");
-        BigDecimal s_ytd = stockRow.getBigDecimal("s_ytd");
-        System.out.printf("S_YTD: %f\n", s_ytd);
-        res.append(s_ytd.doubleValue() + "\n");
-        int s_order_cnt = stockRow.getInt("s_order_cnt");
-        System.out.printf("S_ORDER_CNT: %d\n", s_order_cnt);
-        res.append(s_order_cnt + "\n");
-        int s_remote_cnt = stockRow.getInt("s_remote_cnt");
-        System.out.printf("S_REMOTE_CNT: %d\n", s_remote_cnt);
-        res.append(s_remote_cnt + "\n");
+        // NOTE: The follwing 2 queries generate drvier timeout exception, run manually in cqlsh instead
+//        select sum(OL_AMOUNT) as ol_amount, sum(OL_QUANTITY) as ol_quantity from schema_a.Order_line_tab;
+//
+//        select sum(S_QUANTITY) as s_quantity, sum(S_YTD) as s_ytd, sum(S_ORDER_CNT) as s_order_cnt, sum(S_REMOTE_CNT) as s_remote_cnt from schema_a.Stock_tab;
+//
+//
+//        Row orderLineRow = session.execute(
+//                session.prepare("select sum(OL_AMOUNT) as ol_amount, sum(OL_QUANTITY) as ol_quantity from Order_line_tab;")
+//                        .bind()
+//                        .setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
+//        BigDecimal ol_amount = orderLineRow.getBigDecimal("ol_amount");
+//        BigDecimal ol_quantity = orderLineRow.getBigDecimal("ol_quantity");
+//
+//        System.out.printf("OL_AMOUNT: %f\n", ol_amount);
+//        res.append(ol_amount.doubleValue() + "\n");
+//        System.out.printf("OL_QUANTITY: %f\n", ol_quantity);
+//        res.append(ol_quantity.doubleValue() + "\n");
+//
+//
+//        Row stockRow = session.execute(session.prepare(
+//                        "select sum(S_QUANTITY) as s_quantity, sum(S_YTD) as s_ytd, sum(S_ORDER_CNT) as s_order_cnt," +
+//                                " sum(S_REMOTE_CNT) as s_remote_cnt from Stock_tab;")
+//                .bind().setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
+//        BigDecimal s_quantity = stockRow.getBigDecimal("s_quantity");
+//        System.out.printf("S_QUANTITY: %f\n", s_quantity);
+//        res.append(s_quantity.doubleValue() + "\n");
+//        BigDecimal s_ytd = stockRow.getBigDecimal("s_ytd");
+//        System.out.printf("S_YTD: %f\n", s_ytd);
+//        res.append(s_ytd.doubleValue() + "\n");
+//        int s_order_cnt = stockRow.getInt("s_order_cnt");
+//        System.out.printf("S_ORDER_CNT: %d\n", s_order_cnt);
+//        res.append(s_order_cnt + "\n");
+//        int s_remote_cnt = stockRow.getInt("s_remote_cnt");
+//        System.out.printf("S_REMOTE_CNT: %d\n", s_remote_cnt);
+//        res.append(s_remote_cnt + "\n");
 
 
         System.out.println("======================DB State Plain=======================");
