@@ -472,7 +472,7 @@ public class Cassandra {
             int orderID = row.getInt("o_id");
             int customerID = row.getInt("o_c_id");
 
-            System.out.printf("Processing delivery for order %d created by customer %d", orderID, customerID);
+            System.out.printf("Processing delivery for order %d created by customer %d\n", orderID, customerID);
 
             // assign the carrier id to the order
             PreparedStatement updateOrder = session.prepare(
@@ -986,8 +986,8 @@ public class Cassandra {
 
                         relatedCustomerSet.add(
                                 new Customer(relatedCustomer.getInt("o_w_id"),
-                                        relatedCustomer.getInt("o_w_id"),
-                                        relatedCustomer.getInt("o_w_id")));
+                                        relatedCustomer.getInt("o_d_id"),
+                                        relatedCustomer.getInt("o_c_id")));
                     }
             );
 

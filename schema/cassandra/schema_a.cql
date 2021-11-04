@@ -155,6 +155,7 @@ COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_loca
 FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND HEADER=FALSE;
 
 CREATE INDEX ON order_tab (o_carrier_id);
+CREATE INDEX on order_tab (o_c_id) ;
 
 
 CREATE TABLE item_tab (
