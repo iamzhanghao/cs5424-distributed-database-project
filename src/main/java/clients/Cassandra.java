@@ -22,7 +22,7 @@ public class Cassandra {
     private static int TXN_LIMIT = 200000;
 
     // For testing in local only:
-    // private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
+//     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
     // For running experiment
     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
 
@@ -643,14 +643,15 @@ public class Cassandra {
                     item.getInstant("ol_delivery_d") != null ? item.getInstant("ol_delivery_d").toString() : "");
         }
 
-    }catch(
-    Exception e)
-
-    {
-//            e.getMessage();
     }
-
-}
+//    catch(
+//    Exception e)
+//
+//    {
+//            e.getMessage();
+//    }
+//
+//}
 
     private static void stockLevelTransactionSchemaA(CqlSession session, int wid, int did, int threshold, int l) {
         try {
