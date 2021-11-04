@@ -16,8 +16,6 @@ ol_dist_info   VARCHAR,
 PRIMARY KEY (ol_w_id, ol_d_id, ol_o_id, ol_number)
 );
 
-
-
 COPY order_line_tab (ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id, ol_quantity, ol_dist_info)
 FROM 'project_files/data_files/order-line.csv' WITH DELIMITER=',' AND NULL='null' AND HEADER=FALSE;
 
@@ -27,6 +25,7 @@ DROP INDEX IF EXISTS order_line_tab_items_a;
 
 CREATE INDEX IF NOT EXISTS order_line_tab_items_a
     ON schema_a.order_line_tab ( ol_i_id );
+
 
 CREATE TABLE stock_tab (
 s_w_id       INT,
@@ -52,6 +51,7 @@ PRIMARY KEY (s_w_id, s_i_id)
 COPY stock_tab (s_w_id, s_i_id, s_quantity, s_ytd, s_order_cnt, s_remote_cnt, s_dist_01, s_dist_02, s_dist_03, s_dist_04, s_dist_05, s_dist_06, s_dist_07, s_dist_08, s_dist_09, s_dist_10, d_data)
 FROM 'project_files/data_files/stock.csv' WITH DELIMITER=',' AND HEADER=FALSE;
 
+
 CREATE TABLE warehouse_tab (
 w_id       INT,
 w_name     VARCHAR,
@@ -67,6 +67,7 @@ PRIMARY KEY (w_id)
 
 COPY warehouse_tab (w_id, w_name, w_street_1, w_street_2, w_city, w_state, w_zip, w_tax, w_ytd)
 FROM 'project_files/data_files/warehouse.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+
 
 CREATE TABLE district_tab (
 d_w_id      INT,
@@ -85,6 +86,7 @@ PRIMARY KEY (d_w_id, d_id)
 
 COPY district_tab (d_w_id, d_id, d_name, d_street_1, d_street_2, d_city, d_state, d_zip, d_tax, d_ytd, d_next_o_id)
 FROM 'project_files/data_files/district.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+
 
 CREATE TABLE customer_tab (
 c_w_id         INT,
@@ -136,6 +138,7 @@ AND c_last IS NOT NULL PRIMARY KEY (
 c_w_id, c_balance, c_d_id, c_id
 );
 
+
 CREATE TABLE order_tab (
 o_w_id       INT,
 o_d_id       INT,
@@ -148,9 +151,19 @@ o_entry_d    TIMESTAMP,
 PRIMARY KEY (o_w_id, o_id, o_d_id)
 );
 
-
 COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
-FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND NULL='' AND HEADER=FALSE;
+FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+
+DROP INDEX IF EXISTS order_tab_carrier_a;
+
+CREATE INDEX IF NOT EXISTS order_tab_carrier_a
+    ON schema_a.order_tab (o_carrier_id);
+
+DROP INDEX IF EXISTS order_tab_customer_a;
+
+CREATE INDEX IF NOT EXISTS order_tab_customer_a
+    on schema_a.order_tab (o_c_id) ;
+
 
 CREATE TABLE item_tab (
 i_id    INT,
