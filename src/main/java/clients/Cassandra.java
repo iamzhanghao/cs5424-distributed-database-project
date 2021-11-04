@@ -22,9 +22,9 @@ public class Cassandra {
     private static int TXN_LIMIT = 200000;
 
     // For testing in local only:
-//     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
+     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
     // For running experiment
-    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
+//    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
 
     public static void main(String[] args) throws Exception {
         if (args.length != 6) {
@@ -1006,9 +1006,168 @@ public class Cassandra {
 
     }
 
+
     private static void newOrderTransactionSchemaB(CqlSession session, int cid, int wid, int did, int number_of_items,
                                                    ArrayList<Integer> items, ArrayList<Integer> supplier_warehouses, ArrayList<BigDecimal> quantities) {
-        newOrderTransactionA(session, cid, wid, did, number_of_items, items, supplier_warehouses, quantities);
+        // TODO: not adding to DB
+        try {
+            ResultSet rs = session.execute(
+                    session.prepare("SELECT D_NEXT_O_ID FROM district_tab WHERE D_W_ID = " + wid + " AND D_ID = " + did)
+                            .bind().setConsistencyLevel(USE_QUORUM));
+            int prev_order_id = rs.one().getInt("D_NEXT_O_ID");
+
+            final int next_order_id = prev_order_id + 1;
+
+            PreparedStatement updateDistrict = session
+                    .prepare("UPDATE district_tab SET D_NEXT_O_ID = ? WHERE D_W_ID = ? AND D_ID = ?");
+            BoundStatement updateDistrictBound = updateDistrict.bind().setInt(0, next_order_id).setInt(1, wid)
+                    .setInt(2, did).setConsistencyLevel(USE_QUORUM);
+
+            session.executeAsync(updateDistrictBound);
+
+            int all_local = 0;
+            if (supplier_warehouses.stream().distinct().count() <= 1 && supplier_warehouses.contains(wid)) {
+                all_local = 1;
+            }
+
+//            PreparedStatement createOrder = session.prepare("INSERT INTO order_tab (O_W_ID, O_D_ID, O_ID, O_C_ID,"
+//                    + " O_CARRIER_ID, O_OL_CNT, O_ALL_LOCAL, O_ENTRY_D) VALUES (?,?,?,?,?,?,?,?)");
+//
+//            BoundStatement createOrderBound = createOrder.bind().setInt(0, wid).setInt(1, did).setInt(2, next_order_id)
+//                    .setInt(3, cid)
+//                    // .setInt(4, 0)
+//                    .setString(4, "null").setBigDecimal(5, BigDecimal.valueOf(number_of_items))
+//                    .setBigDecimal(6, BigDecimal.valueOf(all_local)).setDefaultTimestamp(System.currentTimeMillis())
+//                    .setConsistencyLevel(USE_QUORUM);
+//            session.execute(createOrderBound);
+
+            BigDecimal total_amount = new BigDecimal(0);
+            List<BigDecimal> amount_list = new ArrayList<>();
+            ArrayList<String> itemNames = new ArrayList<String>();
+            ArrayList<BigDecimal> itemPrices = new ArrayList<BigDecimal>();
+            ArrayList<BigDecimal> itemStocks = new ArrayList<BigDecimal>();
+
+            BatchStatement batchState = BatchStatement.newInstance(BatchType.LOGGED);
+
+            for (int idx = 0; idx < items.size(); idx++) {
+                int current_item = items.get(idx);
+
+                rs = session.execute("SELECT i_price, i_name FROM item_tab WHERE i_id = " + current_item);
+                Row row = rs.one();
+                BigDecimal price = row.getBigDecimal("i_price");
+                String name = row.getString("i_name");
+
+                itemNames.add(name);
+                itemPrices.add(price);
+
+                String strDid = "";
+                if (did == 10) {
+                    strDid = String.valueOf(did);
+                } else {
+                    strDid = "0" + did;
+                }
+
+                PreparedStatement itemStock = session.prepare("SELECT s_quantity,s_ytd,s_order_cnt,"
+                        + "s_remote_cnt, s_dist_" + strDid + " FROM stock_tab WHERE s_w_id=? AND s_i_id=?;");
+                BoundStatement itemStockBound = itemStock.bind().setInt(0, wid).setInt(1, current_item)
+                        .setConsistencyLevel(USE_QUORUM);
+                rs = session.execute(itemStockBound);
+                row = rs.one();
+                BigDecimal s_quantity = row.getBigDecimal("s_quantity");
+                BigDecimal s_ytd = row.getBigDecimal("s_ytd");
+                int s_order_cnt = row.getInt("s_order_cnt");
+                int s_remote_cnt = row.getInt("s_remote_cnt");
+
+                BigDecimal adjusted_quantity = s_quantity.subtract(quantities.get(idx));
+                if (adjusted_quantity.compareTo(BigDecimal.TEN) == -1) {
+                    adjusted_quantity.add(BigDecimal.valueOf(100));
+                }
+                if (supplier_warehouses.get(idx) != wid) {
+                    s_remote_cnt += 1;
+                }
+
+                PreparedStatement updateStock = session.prepare("UPDATE stock_tab SET "
+                        + "s_quantity=?, s_ytd=?, s_order_cnt=?, s_remote_cnt=? WHERE s_w_id=? AND s_i_id=?;");
+                BoundStatement updateStockBound = updateStock.bind().setBigDecimal(0, adjusted_quantity)
+                        .setBigDecimal(1, s_ytd.add(quantities.get(idx))).setInt(2, s_order_cnt + 1)
+                        .setInt(3, s_remote_cnt).setInt(4, wid).setInt(5, current_item).setConsistencyLevel(USE_QUORUM);
+
+                session.execute(updateStockBound);
+
+                itemStocks.add(adjusted_quantity);
+
+                BigDecimal item_amount = price.multiply(quantities.get(idx));
+                total_amount = total_amount.add(item_amount);
+
+//                PreparedStatement insertOrderLine = session.prepare("INSERT INTO order_line_tab (OL_W_ID, OL_D_ID, "
+//                        + "OL_O_ID, OL_NUMBER, OL_I_ID, OL_DELIVERY_D, OL_AMOUNT, OL_SUPPLY_W_ID, OL_QUANTITY, OL_DIST_INFO) "
+//                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+//                BoundStatement insertOrderLineBound = insertOrderLine.bind().setInt(0, wid).setInt(1, did)
+//                        .setInt(2, next_order_id).setInt(3, idx).setInt(4, current_item).setDefaultTimestamp(0)
+//                        .setBigDecimal(6, item_amount).setInt(7, supplier_warehouses.get(idx))
+//                        .setBigDecimal(8, quantities.get(idx)).setString(9, "S_DIST_" + did)
+//                        .setConsistencyLevel(USE_QUORUM);
+
+                PreparedStatement insertOrder = session.prepare("INSERT INTO combined_order_tab " +
+                        "(ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id,\n" +
+                        "ol_quantity, ol_dist_info, ol_c_id, ol_carrier_id, ol_cnt, ol_all_local, ol_entry_d) " +
+                        "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+                );
+                BoundStatement insertOrderBound = insertOrder.bind()
+                                .setInt(0, wid).setInt(1, did).setInt(2, next_order_id).setInt(3, idx)
+                                .setInt(4, current_item).setDefaultTimestamp(0).setBigDecimal(6, item_amount)
+                                .setInt(7, supplier_warehouses.get(idx)).setBigDecimal(8, quantities.get(idx))
+                                .setString(9, "S_DIST_" + did).setInt(10, cid).setString(11, "null")
+                                .setBigDecimal(12, BigDecimal.valueOf(items.size()))
+                                .setBigDecimal(13, BigDecimal.valueOf(all_local))
+                                .setDefaultTimestamp(System.currentTimeMillis())
+                                .setConsistencyLevel(USE_QUORUM);
+                batchState.add(insertOrderBound);
+            }
+
+            session.executeAsync(batchState);
+
+            rs = session
+                    .execute(session
+                            .prepare("SELECT c_last, c_credit, c_discount FROM customer_tab " + "WHERE c_id = " + cid
+                                    + " AND c_d_id = " + did + " AND c_w_id = " + wid)
+                            .bind().setConsistencyLevel(USE_QUORUM));
+            Row row = rs.one();
+            BigDecimal discount = row.getBigDecimal("c_discount");
+            String last_name = row.getString("c_last");
+            String credit = row.getString("c_credit");
+
+            rs = session.execute(session.prepare("SELECT w_tax FROM warehouse_tab WHERE w_id = " + wid).bind()
+                    .setConsistencyLevel(USE_QUORUM));
+            BigDecimal warehouse_tax_rate = rs.one().getBigDecimal("w_tax");
+
+            rs = session.execute(
+                    session.prepare("SELECT d_tax FROM district_tab WHERE d_id = " + did + " AND d_w_id = " + wid)
+                            .bind().setConsistencyLevel(USE_QUORUM));
+            BigDecimal district_tax_rate = rs.one().getBigDecimal("d_tax");
+
+            total_amount = total_amount.multiply((warehouse_tax_rate.add(BigDecimal.valueOf(1)).add(district_tax_rate))
+                    .multiply(BigDecimal.valueOf(1)).subtract(discount));
+
+            System.out.printf("============================ New Order Transactions ============================ \n");
+            System.out.printf("WarehouseID %d, DistrictID: %d, CustomerID: %d \n", wid, did, cid);
+            System.out.printf("LastName %s, Credit: %s, Discount: %s \n", last_name, credit, discount);
+            System.out.printf("WarehouseTaxRate %s, DistrictTaxRate: %s \n", warehouse_tax_rate, district_tax_rate);
+            System.out.printf("OrderID %s, OrderEntryDate: %s, NumberOfItems \n", next_order_id, "", number_of_items);
+            System.out.printf("TotalAmount %s \n", total_amount);
+            for (int idx = 0; idx < items.size(); idx++) {
+                System.out.printf(" ItemID %s, SupplierWarehouse %s, Quantity %s \n", items.get(idx),
+                        supplier_warehouses.get(idx), quantities.get(idx));
+                System.out.printf(" ItemName %s, ItemAmount %s, StockQuantity %s \n", itemNames.get(idx),
+                        itemPrices.get(idx).multiply(quantities.get(idx)), itemStocks.get(idx));
+            }
+            System.out.printf("=============================================================================== \n");
+            System.out.println();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.printf("Create Order Error! cause = [%s] message = [%s]", e.getCause(), e.getMessage());
+        }
     }
 
     private static void paymentTransactionSchemaB(CqlSession session, int cwid, int cdid, int cid, BigDecimal payment) {
@@ -1163,7 +1322,41 @@ public class Cassandra {
     }
 
     private static void stockLevelTransactionSchemaB(CqlSession session, int wid, int did, int threshold, int l) {
-        stockLevelTransactionSchemaA(session, wid, did, threshold, l);
+        try {
+            ResultSet rs = session.execute(session.prepare("SELECT d_next_o_id FROM district_tab WHERE d_w_id=" + wid + " AND d_id=" + did + ";").bind().setConsistencyLevel(ConsistencyLevel.ONE));
+            Integer latest_order_id = rs.one().getInt("d_next_o_id");
+
+            Integer earliest_order_id = latest_order_id - l;
+            PreparedStatement getOrderLine = session.prepare("SELECT ol_i_id FROM combined_order_tab " +
+                    "WHERE ol_d_id=? AND ol_w_id=? AND ol_o_id>? AND ol_o_id<?;");
+            BoundStatement getOrderLineBound = getOrderLine.bind()
+                    .setInt(0, did)
+                    .setInt(1, wid)
+                    .setInt(2, earliest_order_id)
+                    .setInt(3, latest_order_id)
+                    .setConsistencyLevel(ConsistencyLevel.ONE);
+            rs = session.execute(getOrderLineBound);
+
+            int low_stock_count = 0;
+            Iterator<Row> iterator = rs.iterator();
+            while (iterator.hasNext()) {
+                Row curr_row = iterator.next();
+                int item = curr_row.getInt("ol_i_id");
+                ResultSet curr_quantity = session.execute(session.prepare("SELECT s_quantity FROM stock_tab WHERE s_w_id=" + wid + " AND s_i_id=" + item).bind().setConsistencyLevel(ConsistencyLevel.ONE));
+                BigDecimal quantity = curr_quantity.one().getBigDecimal("s_quantity");
+                if (quantity.compareTo(BigDecimal.valueOf(threshold)) == -1) {
+                    low_stock_count += 1;
+                }
+            }
+
+            System.out.printf("============================ Stock Level Transaction ============================ \n");
+            System.out.printf("Searching at Warehouse %d, District %d, Threshold %d, Last %d items \n", wid, did, threshold, l);
+            System.out.printf("Total number of low stock level items is %d \n", low_stock_count);
+            System.out.printf("================================================================================= \n");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.printf("Stock Level Transaction Error! cause = [%s] message = [%s]", e.getCause(), e.getMessage());
+        }
     }
 
     private static void popularItemTransactionSchemaB(CqlSession session, int wid, int did, int l) {
@@ -1175,7 +1368,192 @@ public class Cassandra {
     }
 
     private static void relatedCustomerTransactionSchemaB(CqlSession session, int cwid, int cdid, int cid) {
-        relatedCustomerTransactionSchemaA(session, cwid, cdid, cid);
+
+        Set<Customer> relatedCustomerSet = new HashSet<>();
+
+        ResultSet rs;
+        // get related orders
+//        PreparedStatement getOrder = session.prepare(
+//                "SELECT ol_o_id FROM combined_order_tab WHERE o_w_id = ? and o_d_id = ? and o_c_id = ? " +
+//                        "ALLOW FILTERING "
+//        );
+//        BoundStatement getOrdersBound = getOrder.bind()
+//                .setInt(0, cwid)
+//                .setInt(1, cdid)
+//                .setInt(2, cid)
+//                .setConsistencyLevel(ConsistencyLevel.ONE);
+//        rs = session.execute(getOrdersBound);
+//        List<Row> orders = rs.all();
+        ArrayList<Set<Integer>> itemSets = new ArrayList<>();
+        Set<Order> relatedOrders = new HashSet<>();
+//        for (Row order : orders) {
+////        while(ordersIt.hasNext()) {
+////            Row order = ordersIt.next();
+//            rs = session.execute(session.prepare(
+//                            "SELECT ol_i_id FROM order_line_tab WHERE ol_w_id = ? and ol_d_id = ? and ol_o_id = ? " +
+//                                    "ALLOW FILTERING ")
+//                    .bind()
+//                    .setInt(0, cwid)
+//                    .setInt(1, cdid)
+//                    .setInt(2, order.getInt("o_id"))
+//                    .setConsistencyLevel(ConsistencyLevel.ONE));
+//            List<Row> items = rs.all();
+//
+//            Set<Order> orderedAtLeastOnce = new HashSet<>();
+//
+////            for (Row item : items) {
+////                ResultSet relatedOrdersForItem = session.execute(session.prepare(String.format("SELECT ol_w_id, ol_d_id, ol_o_id FROM order_line_tab \n" +
+////                                "WHERE ol_i_id = %d \n" +
+////                                "ALLOW FILTERING ", item.getInt("ol_i_id")))
+////                        .bind()
+////                        .setConsistencyLevel(ConsistencyLevel.ONE));
+////
+////                for (Row relatedOrderForItem : relatedOrdersForItem) {
+////                    Order newOrder = new Order(relatedOrderForItem.getInt("ol_w_id"),
+////                            relatedOrderForItem.getInt("ol_d_id"),
+////                            relatedOrderForItem.getInt("ol_o_id"));
+////                    if (newOrder.w_id != cwid) {
+////                        if (orderedAtLeastOnce.contains(newOrder)) {
+////                            relatedOrders.add(newOrder);
+////                        }
+////                        orderedAtLeastOnce.add(newOrder);
+////                    }
+////                }
+////            }
+//
+//            items.parallelStream().forEach(
+//                    item -> {
+//                        ResultSet relatedOrdersForItem = session.execute(session.prepare(String.format("SELECT ol_w_id, ol_d_id, ol_o_id FROM order_line_tab \n" +
+//                                        "WHERE ol_i_id = %d \n" +
+//                                        "ALLOW FILTERING ", item.getInt("ol_i_id")))
+//                                .bind()
+//                                .setConsistencyLevel(ConsistencyLevel.ONE));
+//
+//                        for (Row relatedOrderForItem : relatedOrdersForItem) {
+//                            Order newOrder = new Order(relatedOrderForItem.getInt("ol_w_id"),
+//                                    relatedOrderForItem.getInt("ol_d_id"),
+//                                    relatedOrderForItem.getInt("ol_o_id"));
+//                            if (newOrder.w_id != cwid) {
+//                                if (orderedAtLeastOnce.contains(newOrder)) {
+//                                    relatedOrders.add(newOrder);
+//                                }
+//                                orderedAtLeastOnce.add(newOrder);
+//                            }
+//                        }
+//                    }
+//            );
+//
+//
+////            for (Order relatedOrder : relatedOrders) {
+////                Row relatedCustomer = session.execute(session.prepare(String.format("SELECT o_w_id, o_d_id, o_c_id from order_tab\n" +
+////                        "WHERE o_w_id = %d AND o_d_id= %d AND o_id = %d\n" +
+////                        "ALLOW FILTERING", relatedOrder.w_id, relatedOrder.d_id, relatedOrder.o_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+////
+////                relatedCustomerSet.add(
+////                        new Customer(relatedCustomer.getInt("o_w_id"),
+////                                relatedCustomer.getInt("o_w_id"),
+////                                relatedCustomer.getInt("o_w_id")));
+////            }
+//            relatedOrders.parallelStream().forEach(
+//                    relatedOrder -> {
+//                        Row relatedCustomer = session.execute(session.prepare(String.format("SELECT o_w_id, o_d_id, o_c_id from order_tab\n" +
+//                                "WHERE o_w_id = %d AND o_d_id= %d AND o_id = %d\n" +
+//                                "ALLOW FILTERING", relatedOrder.w_id, relatedOrder.d_id, relatedOrder.o_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+//
+//                        relatedCustomerSet.add(
+//                                new Customer(relatedCustomer.getInt("o_w_id"),
+//                                        relatedCustomer.getInt("o_d_id"),
+//                                        relatedCustomer.getInt("o_c_id")));
+//                    }
+//            );
+//
+//        }
+
+        rs = session.execute(session.prepare(
+                        "SELECT ol_i_id FROM combined_order_tab WHERE ol_w_id = ? and ol_d_id = ? and ol_c_id = ? " +
+                                "ALLOW FILTERING ")
+                .bind()
+                .setInt(0, cwid)
+                .setInt(1, cdid)
+                .setInt(2, cid)
+                .setConsistencyLevel(ConsistencyLevel.ONE));
+        List<Row> items = rs.all();
+
+        Set<Order> orderedAtLeastOnce = new HashSet<>();
+
+//            for (Row item : items) {
+//                ResultSet relatedOrdersForItem = session.execute(session.prepare(String.format("SELECT ol_w_id, ol_d_id, ol_o_id FROM order_line_tab \n" +
+//                                "WHERE ol_i_id = %d \n" +
+//                                "ALLOW FILTERING ", item.getInt("ol_i_id")))
+//                        .bind()
+//                        .setConsistencyLevel(ConsistencyLevel.ONE));
+//
+//                for (Row relatedOrderForItem : relatedOrdersForItem) {
+//                    Order newOrder = new Order(relatedOrderForItem.getInt("ol_w_id"),
+//                            relatedOrderForItem.getInt("ol_d_id"),
+//                            relatedOrderForItem.getInt("ol_o_id"));
+//                    if (newOrder.w_id != cwid) {
+//                        if (orderedAtLeastOnce.contains(newOrder)) {
+//                            relatedOrders.add(newOrder);
+//                        }
+//                        orderedAtLeastOnce.add(newOrder);
+//                    }
+//                }
+//            }
+
+        items.parallelStream().forEach(
+                item -> {
+                    ResultSet relatedOrdersForItem = session.execute(session.prepare(String.format("SELECT ol_w_id, ol_d_id, ol_o_id FROM combined_order_tab \n" +
+                                    "WHERE ol_i_id = %d \n" +
+                                    "ALLOW FILTERING ", item.getInt("ol_i_id")))
+                            .bind()
+                            .setConsistencyLevel(ConsistencyLevel.ONE));
+
+                    for (Row relatedOrderForItem : relatedOrdersForItem) {
+                        Order newOrder = new Order(relatedOrderForItem.getInt("ol_w_id"),
+                                relatedOrderForItem.getInt("ol_d_id"),
+                                relatedOrderForItem.getInt("ol_o_id"));
+                        if (newOrder.w_id != cwid) {
+                            if (orderedAtLeastOnce.contains(newOrder)) {
+                                relatedOrders.add(newOrder);
+                            }
+                            orderedAtLeastOnce.add(newOrder);
+                        }
+                    }
+                }
+        );
+
+
+//            for (Order relatedOrder : relatedOrders) {
+//                Row relatedCustomer = session.execute(session.prepare(String.format("SELECT o_w_id, o_d_id, o_c_id from order_tab\n" +
+//                        "WHERE o_w_id = %d AND o_d_id= %d AND o_id = %d\n" +
+//                        "ALLOW FILTERING", relatedOrder.w_id, relatedOrder.d_id, relatedOrder.o_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+//
+//                relatedCustomerSet.add(
+//                        new Customer(relatedCustomer.getInt("o_w_id"),
+//                                relatedCustomer.getInt("o_w_id"),
+//                                relatedCustomer.getInt("o_w_id")));
+//            }
+        relatedOrders.parallelStream().forEach(
+                relatedOrder -> {
+                    Row relatedCustomer = session.execute(session.prepare(String.format("SELECT ol_w_id, ol_d_id, ol_c_id from combined_order_tab\n" +
+                            "WHERE ol_w_id = %d AND ol_d_id= %d AND ol_o_id = %d\n" +
+                            "LIMIT 1\n" +
+                            "ALLOW FILTERING", relatedOrder.w_id, relatedOrder.d_id, relatedOrder.o_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+
+                    relatedCustomerSet.add(
+                            new Customer(relatedCustomer.getInt("ol_w_id"),
+                                    relatedCustomer.getInt("ol_d_id"),
+                                    relatedCustomer.getInt("ol_c_id")));
+                }
+        );
+        if (relatedCustomerSet.isEmpty()) {
+            System.out.println("No related customer");
+        } else {
+            System.out.print("Related Customer: ");
+            System.out.println(relatedCustomerSet);
+        }
+
     }
 
 
