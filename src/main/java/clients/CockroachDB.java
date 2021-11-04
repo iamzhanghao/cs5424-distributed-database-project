@@ -530,7 +530,50 @@ public class CockroachDB {
         updateCustomer.setInt(5, cid);
         updateCustomer.executeUpdate();
 
+        Statement stmt = connHelper.getConn().createStatement();
+
+
+        ResultSet rs = stmt.executeQuery(String.format(
+                "SELECT (c_w_id, c_d_id, c_id) as identifier, ( c_first, c_middle, c_last) as name,\n" +
+                        " (C_STREET_1, C_STREET_2, C_CITY, C_STATE, C_ZIP) as address , C_PHONE, C_SINCE, C_CREDIT, C_CREDIT_LIM, C_DISCOUNT, C_BALANCE\n" +
+                        " FROM customer_tab \n" +
+                        "WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d", cwid, cdid, cid
+        ));
+
+        System.out.println("Customer payment");
+        while (rs.next()) {
+            System.out.printf("Customer %s, name: %s, address: %s\n phone %s, c_since %s, c_credit %s, c_credit_lim %f, " +
+                            " c_discount %f, c_balance %f\n",
+                    rs.getString("identifier"), rs.getString("name"),rs.getString("address"),
+                    rs.getString("c_phone"),rs.getString("c_since"),rs.getString("c_credit"),
+                    rs.getBigDecimal("c_credit_lim"),rs.getBigDecimal("c_discount"),rs.getBigDecimal("c_balance"));
+        }
+
+        rs = stmt.executeQuery(String.format(
+                "SELECT W_STREET_1, W_STREET_2, W_CITY, W_STATE, W_ZIP FROM warehouse_tab \n" +
+                        "WHERE w_id = %d", cwid
+        ));
+
+        while (rs.next()) {
+            System.out.printf("Warehouse: street_1: %s, street_2: %s, w_city %s, w_state %s, w_zip %s\n",
+                    rs.getString("w_street_1"), rs.getString("w_street_2"),rs.getString("w_city"),
+                    rs.getString("w_state"),rs.getString("w_zip"));
+        }
+
+        rs = stmt.executeQuery(String.format(
+                "SELECT D_STREET_1, D_STREET_2, D_CITY, D_STATE, D_ZIP FROM district_tab \n" +
+                        "WHERE d_w_id = %d AND d_id = %d ", cwid, cdid
+        ));
+
+        while (rs.next()) {
+            System.out.printf("District address: d_street_1: %s, d_street_2: %s, d_city %s, d_state %s, d_zip %s\n",
+                    rs.getString("d_street_1"), rs.getString("d_street_2"),rs.getString("d_city"),
+                    rs.getString("d_state"),rs.getString("d_zip"));
+        }
+
+        System.out.printf("Payment amount: %f", payment.doubleValue());
         connHelper.getConn().commit();
+
     }
 
     private static void deliveryTransaction(int wid, int carrierid) throws SQLException {
