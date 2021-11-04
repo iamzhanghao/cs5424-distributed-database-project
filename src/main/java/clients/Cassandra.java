@@ -367,6 +367,21 @@ public class Cassandra {
                     .setBigDecimal(0, old_ytd.add(payment))
                     .setInt(1, cwid).setConsistencyLevel(USE_QUORUM));
 
+            Row old_d_ytd_row = session.execute(session.prepare("SELECT d_ytd FROM district_tab WHERE d_w_id = ? AND d_id = ?;")
+                    .bind()
+                    .setInt(0,cwid)
+                    .setInt(1,cdid)
+                    .setConsistencyLevel(USE_QUORUM)).one();
+            BigDecimal old_d_ytd = old_d_ytd_row.getBigDecimal("d_ytd");
+
+            session.executeAsync(session.prepare("UPDATE district_tab SET d_ytd = ? WHERE d_w_id = ? AND d_id = ?;")
+                    .bind()
+                    .setBigDecimal(0,old_d_ytd.add(payment))
+                    .setInt(1,cwid)
+                    .setInt(2,cdid)
+                    .setConsistencyLevel(USE_QUORUM)
+            );
+
             Row customer_row = session.execute(session.prepare(
                             "SELECT c_balance, c_ytd_payment, c_payment_cnt FROM customer_tab " +
                                     String.format("WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d  ALLOW FILTERING; ", cwid, cdid, cid))
@@ -388,6 +403,41 @@ public class Cassandra {
                     .setInt(4, cdid)
                     .setInt(5, cid)
                     .setConsistencyLevel(USE_QUORUM));
+
+            Row customer = session.execute(session.prepare(String.format(
+                    "SELECT (c_w_id, c_d_id, c_id) as identifier, ( c_first, c_middle, c_last) as name,\n" +
+                            " (C_STREET_1, C_STREET_2, C_CITY, C_STATE, C_ZIP) as address , C_PHONE, C_SINCE, C_CREDIT, C_CREDIT_LIM, C_DISCOUNT, C_BALANCE\n" +
+                            " FROM customer_tab \n" +
+                            "WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d", cwid, cdid, cid
+            )).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+            System.out.println("Customer payment");
+            System.out.printf("Customer (%d,%d,%d), name: (%s,%s,%s), address: (%s,%s,%s,%s,%s) \nphone %s, c_since %s, c_credit %s, c_credit_lim %f, " +
+                            " c_discount %f, c_balance %f\n",
+                    customer.getTupleValue("identifier").getInt(0),customer.getTupleValue("identifier").getInt(1),customer.getTupleValue("identifier").getInt(2),
+                    customer.getTupleValue("name").getString(0),customer.getTupleValue("name").getString(1),customer.getTupleValue("name").getString(2),
+                    customer.getTupleValue("address").getString(0),customer.getTupleValue("address").getString(1),customer.getTupleValue("address").getString(2),
+                    customer.getTupleValue("address").getString(3),customer.getTupleValue("address").getString(4),
+                    customer.getString("c_phone"),customer.getInstant("c_since"),customer.getString("c_credit"),
+                    customer.getBigDecimal("c_credit_lim"),customer.getBigDecimal("c_discount"),customer.getBigDecimal("c_balance"));
+
+
+            Row warehouse = session.execute(session.prepare(String.format(
+                    "SELECT W_STREET_1, W_STREET_2, W_CITY, W_STATE, W_ZIP FROM warehouse_tab \n" +
+                            "WHERE w_id = %d", cwid
+            )).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+            System.out.printf("Warehouse: street_1: %s, street_2: %s, w_city %s, w_state %s, w_zip %s\n",
+                    warehouse.getString("w_street_1"), warehouse.getString("w_street_2"),warehouse.getString("w_city"),
+                    warehouse.getString("w_state"),warehouse.getString("w_zip"));
+
+            Row district = session.execute(session.prepare(String.format(
+                    "SELECT D_STREET_1, D_STREET_2, D_CITY, D_STATE, D_ZIP FROM district_tab \n" +
+                            "WHERE d_w_id = %d AND d_id = %d ", cwid, cdid
+            )).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+            System.out.printf("District address: d_street_1: %s, d_street_2: %s, d_city %s, d_state %s, d_zip %s\n",
+                    district.getString("d_street_1"), district.getString("d_street_2"),district.getString("d_city"),
+                    district.getString("d_state"),district.getString("d_zip"));
+
+            System.out.printf("Payment amount: %f", payment.doubleValue());
 
         } catch (Exception e) {
             e.printStackTrace();
