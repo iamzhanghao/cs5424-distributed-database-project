@@ -61,9 +61,9 @@ public class Cassandra {
 
         DriverConfigLoader loader =
                 DriverConfigLoader.programmaticBuilder()
-                        .withDuration(DefaultDriverOption.REQUEST_TIMEOUT, Duration.ofSeconds(30))
+                        .withDuration(DefaultDriverOption.REQUEST_TIMEOUT, Duration.ofSeconds(3000))
                         .startProfile("slow")
-                        .withDuration(DefaultDriverOption.REQUEST_TIMEOUT, Duration.ofSeconds(30))
+                        .withDuration(DefaultDriverOption.REQUEST_TIMEOUT, Duration.ofSeconds(3000))
                         .endProfile()
                         .build();
 
