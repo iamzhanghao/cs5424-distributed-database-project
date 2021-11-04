@@ -1,5 +1,15 @@
 ========================Statistics========================
+(Fastest CLient)
+Total 20000 transactions, execution time 4676.69s, avg latency 242.68ms, throughput 4.11 query/s,
+median latency 140.13ms, 95th percentile latency 858.93ms, 99th percentile latency 1705.49ms
 
+Txn P: avg latency 95.36ms, retry 0.00 times
+Txn R: avg latency 93.22ms, retry 0.00 times
+Txn S: avg latency 787.05ms, retry 0.00 times
+Txn D: avg latency 382.95ms, retry 0.00 times
+Txn T: avg latency 207.10ms, retry 0.00 times
+Txn I: avg latency 508.92ms, retry 0.00 times
+Txn N: avg latency 177.96ms, retry 0.00 times
 
 ======================DB State ============================
 W_YTD: 
