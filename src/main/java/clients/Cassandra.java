@@ -925,13 +925,16 @@ public class Cassandra {
     }
 
     private static void getDbState(CqlSession session) throws Exception {
+
+        DriverConfig config = session.getContext().getConfig();
+
         System.out.println("====================== DB State ============================");
         StringBuilder res = new StringBuilder();
 
         Row warehouseRow = session.execute(session.prepare(
                         "SELECT sum(W_YTD) as w_ytd from warehouse_tab")
                 .bind()
-                .setConsistencyLevel(USE_QUORUM)).one();
+                .setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
         BigDecimal w_ytd = warehouseRow.getBigDecimal("w_ytd");
         System.out.printf("W_YTD: %f\n", w_ytd);
         res.append(w_ytd.doubleValue() + "\n");
@@ -939,7 +942,7 @@ public class Cassandra {
         Row districtResult = session.execute(session.prepare(
                         "SELECT sum(D_YTD) as d_ytd, sum(D_NEXT_O_ID) as d_next_o_ytd from district_tab;")
                 .bind()
-                .setConsistencyLevel(USE_QUORUM)).one();
+                .setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
         BigDecimal d_ytd = districtResult.getBigDecimal("d_ytd");
         int d_next_o_ytd = districtResult.getInt("d_next_o_ytd");
 
@@ -952,7 +955,7 @@ public class Cassandra {
                         "select sum(C_BALANCE) as c_balance, sum(C_YTD_PAYMENT) as c_tyd_payment, " +
                                 "sum(C_PAYMENT_CNT) as c_payment_count , sum(C_DELIVERY_CNT) as c_delivery_cnt from Customer_tab;")
                 .bind()
-                .setConsistencyLevel(USE_QUORUM)).one();
+                .setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
         BigDecimal c_balance = customerResult.getBigDecimal("c_balance");
         System.out.printf("C_BALANCE: %f\n", c_balance);
         res.append(c_balance.doubleValue() + "\n");
@@ -969,7 +972,7 @@ public class Cassandra {
         Row orderResult = session.execute(session.prepare(
                         "select max(O_ID) as o_id, sum(O_OL_CNT) as o_ol_cnt from Order_tab;")
                 .bind()
-                .setConsistencyLevel(USE_QUORUM)).one();
+                .setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
         int o_id = orderResult.getInt("o_id");
         BigDecimal o_ol_cnt = orderResult.getBigDecimal("o_ol_cnt");
 
@@ -981,7 +984,7 @@ public class Cassandra {
         Row orderLineRow = session.execute(
                 session.prepare("select sum(OL_AMOUNT) as ol_amount, sum(OL_QUANTITY) as ol_quantity from Order_line_tab;")
                         .bind()
-                        .setConsistencyLevel(USE_QUORUM)).one();
+                        .setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
         BigDecimal ol_amount = orderLineRow.getBigDecimal("ol_amount");
         BigDecimal ol_quantity = orderLineRow.getBigDecimal("ol_quantity");
 
@@ -990,7 +993,6 @@ public class Cassandra {
         System.out.printf("OL_QUANTITY: %f\n", ol_quantity);
         res.append(ol_quantity.doubleValue() + "\n");
 
-        DriverConfig config = session.getContext().getConfig();
 
         Row stockRow = session.execute(session.prepare(
                         "select sum(S_QUANTITY) as s_quantity, sum(S_YTD) as s_ytd, sum(S_ORDER_CNT) as s_order_cnt," +
