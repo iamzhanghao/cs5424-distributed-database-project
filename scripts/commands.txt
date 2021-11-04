@@ -31,7 +31,7 @@ ssh cs4224c@xcnd34.comp.nus.edu.sg
 sh scripts/run_experiments.sh 3 A cockroachdb 26267
 sh scripts/run_experiments.sh 2 B cockroachdb 26267
 sh scripts/run_experiments.sh 1 A cassandra 3042
-sh scripts/run_experiments.sh 1 B cassandra 3042
+sh scripts/run_experiments.sh 2 B cassandra 3042
 sh scripts/stop_experiments.sh
 
 /temp/CS4224C/apache-cassandra-4.0.0/bin/cqlsh -f schema/cassandra/schema_a.cql xcnd30.comp.nus.edu.sg 3042
@@ -48,3 +48,10 @@ java -jar target/cassandra.jar xcnd30.comp.nus.edu.sg 3042 A 0 temp 1
 java -jar target/cassandra.jar xcnd30.comp.nus.edu.sg 3042 B 0 temp 1
 
 /temp/CS4224C/apache-cassandra-4.0.0/bin/cqlsh --request-timeout=3000 xcnd30.comp.nus.edu.sg 3042
+
+nodetool garbagecollect schema_b order_tab
+nodetool garbagecollect schema_b order_line_tab
+nodetool garbagecollect schema_b district_tab
+nodetool garbagecollect schema_b customer_tab
+nodetool garbagecollect schema_b item_tab
+
