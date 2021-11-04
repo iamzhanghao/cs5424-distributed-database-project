@@ -163,3 +163,27 @@ PRIMARY KEY (i_id)
 
 COPY item_tab (i_id, i_name, i_price, i_im_id, i_data)
 FROM 'project_files/data_files/item.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+
+CREATE TABLE combined_order_tab (
+ol_w_id INT,
+ol_d_id INT,
+ol_o_id INT,
+ol_number INT,
+ol_i_id INT,
+ol_delivery_d TIMESTAMP,
+ol_amount DECIMAL,
+ol_supply_w_id INT,
+ol_quantity DECIMAL,
+ol_dist_info VARCHAR,
+ol_c_id int,
+ol_carrier_id varchar,
+ol_cnt DECIMAL,
+ol_all_local DECIMAL,
+ol_entry_d TIMESTAMP,
+PRIMARY KEY (ol_w_id, ol_o_id, ol_d_id, ol_number)
+);
+
+COPY combined_order_tab (ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id,
+ol_quantity, ol_dist_info, ol_c_id, ol_carrier_id, ol_cnt, ol_all_local, ol_entry_d)
+FROM 'projecct_files/data_files/order_combined.csv'
+WITH delimiter = ','  AND  header = false  AND  NULL='NULL';

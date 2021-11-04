@@ -15,7 +15,7 @@ import java.util.*;
 public class CockroachDB {
 
     // Limit number of transactions executed, during actual experiment change to 20000
-    private static final int TXN_LIMIT = 200000;
+    private static int TXN_LIMIT = 200000;
     private static final int MAX_RETRY_COUNT = 100000000;
     private static final int RETRY_QUERY_AFTER = 200;
 
@@ -28,7 +28,7 @@ public class CockroachDB {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 5) {
+        if (args.length != 6) {
             System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client> <csv_path> <is_db_state>\n " +
                     "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local.csv 0");
         }
@@ -38,7 +38,7 @@ public class CockroachDB {
         String schema = args[2];
         String client = args[3];
         String csvPath = args[4];
-        String isDbState = args[5];
+        int isDbState = Integer.parseInt(args[5]);
 
 
         String schema_name = "schema_a";
@@ -52,8 +52,12 @@ public class CockroachDB {
             dataDir = "project_files/xact_files_B/" + client + ".txt";
         } else {
             System.err.println("run the program by: ./CockroachDB <host> <port> <schema_name> <client>\n " +
-                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local.csv");
+                    "e.g. ./CockroachDB localhost 26267 A 1 out/cockroachdb-A-local.csv 0");
             return;
+        }
+
+        if (isDbState == 1) {
+            TXN_LIMIT = 0;
         }
 
         System.out.printf("Running on host: %s:%d", host, port);
@@ -88,7 +92,7 @@ public class CockroachDB {
         }
         float clientTotalTime = (float) (System.currentTimeMillis() - clientStartTime) / 1000;
         String message = TransactionStatistics.getStatistics(latencies, clientTotalTime, client, csvPath);
-        if (isDbState.equals("1")){
+        if (isDbState == 1) {
             while (true) {
                 try {
                     getDbState();
@@ -530,7 +534,50 @@ public class CockroachDB {
         updateCustomer.setInt(5, cid);
         updateCustomer.executeUpdate();
 
+        Statement stmt = connHelper.getConn().createStatement();
+
+
+        ResultSet rs = stmt.executeQuery(String.format(
+                "SELECT (c_w_id, c_d_id, c_id) as identifier, ( c_first, c_middle, c_last) as name,\n" +
+                        " (C_STREET_1, C_STREET_2, C_CITY, C_STATE, C_ZIP) as address , C_PHONE, C_SINCE, C_CREDIT, C_CREDIT_LIM, C_DISCOUNT, C_BALANCE\n" +
+                        " FROM customer_tab \n" +
+                        "WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d", cwid, cdid, cid
+        ));
+
+        System.out.println("Customer payment");
+        while (rs.next()) {
+            System.out.printf("Customer %s, name: %s, address: %s\n phone %s, c_since %s, c_credit %s, c_credit_lim %f, " +
+                            " c_discount %f, c_balance %f\n",
+                    rs.getString("identifier"), rs.getString("name"), rs.getString("address"),
+                    rs.getString("c_phone"), rs.getString("c_since"), rs.getString("c_credit"),
+                    rs.getBigDecimal("c_credit_lim"), rs.getBigDecimal("c_discount"), rs.getBigDecimal("c_balance"));
+        }
+
+        rs = stmt.executeQuery(String.format(
+                "SELECT W_STREET_1, W_STREET_2, W_CITY, W_STATE, W_ZIP FROM warehouse_tab \n" +
+                        "WHERE w_id = %d", cwid
+        ));
+
+        while (rs.next()) {
+            System.out.printf("Warehouse: street_1: %s, street_2: %s, w_city %s, w_state %s, w_zip %s\n",
+                    rs.getString("w_street_1"), rs.getString("w_street_2"), rs.getString("w_city"),
+                    rs.getString("w_state"), rs.getString("w_zip"));
+        }
+
+        rs = stmt.executeQuery(String.format(
+                "SELECT D_STREET_1, D_STREET_2, D_CITY, D_STATE, D_ZIP FROM district_tab \n" +
+                        "WHERE d_w_id = %d AND d_id = %d ", cwid, cdid
+        ));
+
+        while (rs.next()) {
+            System.out.printf("District address: d_street_1: %s, d_street_2: %s, d_city %s, d_state %s, d_zip %s\n",
+                    rs.getString("d_street_1"), rs.getString("d_street_2"), rs.getString("d_city"),
+                    rs.getString("d_state"), rs.getString("d_zip"));
+        }
+
+        System.out.printf("Payment amount: %f", payment.doubleValue());
         connHelper.getConn().commit();
+
     }
 
     private static void deliveryTransaction(int wid, int carrierid) throws SQLException {
