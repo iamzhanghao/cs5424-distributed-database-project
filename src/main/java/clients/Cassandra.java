@@ -21,7 +21,7 @@ public class Cassandra {
 
     // Limit number of txns executed
     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
-    private static int TXN_LIMIT = 1000;
+    private static int TXN_LIMIT = 20000;
 
 
     // For testing in local only:
