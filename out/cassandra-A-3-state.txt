@@ -1,6 +1,33 @@
-====================== DB State ============================
-W_YTD: 301649721.610000[s0-io-5] WARN com.datastax.oss.driver.internal.core.cql.CqlRequestHandler - Query '[0 values] SELECT sum(W_YTD) as w_ytd from warehouse_tab' generated server side warning(s): Aggregation query used without partition key
+========================Statistics========================
+(Slowest)
+Total 20000 transactions, execution time 8449.89s, avg latency 422.26ms, throughput 2.37 query/s,
+median latency 56.58ms, 95th percentile latency 1916.23ms, 99th percentile latency 6683.39ms
 
+Txn P: avg latency 17.41ms, retry 0.00 times
+Txn R: avg latency 404.71ms, retry 0.00 times
+Txn S: avg latency 394.02ms, retry 0.00 times
+Txn T: avg latency 41.86ms, retry 0.00 times
+Txn D: avg latency 1784.47ms, retry 0.00 times
+Txn I: avg latency 108.75ms, retry 0.00 times
+Txn N: avg latency 55.40ms, retry 0.00 times
+Txn O: avg latency 225.23ms, retry 0.00 times
+
+========================Statistics========================
+Fastest
+Total 20000 transactions, execution time 8096.57s, avg latency 404.65ms, throughput 2.47 query/s,
+median latency 51.42ms, 95th percentile latency 1767.89ms, 99th percentile latency 6547.90ms
+
+Txn P: avg latency 15.86ms, retry 0.00 times
+Txn R: avg latency 405.98ms, retry 0.00 times
+Txn S: avg latency 348.85ms, retry 0.00 times
+Txn T: avg latency 38.30ms, retry 0.00 times
+Txn D: avg latency 1717.63ms, retry 0.00 times
+Txn I: avg latency 102.64ms, retry 0.00 times
+Txn N: avg latency 50.04ms, retry 0.00 times
+Txn O: avg latency 236.57ms, retry 0.00 times
+
+====================== DB State ============================
+W_YTD: 301649721.610000
 D_YTD: 309160747.460000
 D_NEXT_O_ID: 608079
 C_BALANCE: 5406988224.760000
@@ -25,29 +52,9 @@ S_REMOTE_CNT: 39572
 295898
 40574
 7594868.0
-
-
-
-
-========================Statistics========================
-
-
-======================DB State ============================
-W_YTD: 
-D_YTD: 
-D_NEXT_O_ID: 
-C_BALANCE: 
-C_YTD_PAYMENT: 
-C_PAYMENT_CNT: 
-C_DELIVERY_CNT: 
-O_ID: 
-O_OL_CNT: 
-OL_AMOUNT: 
-OL_QUANTITY: 
-S_QUANTITY: 
-S_YTD: 
-S_ORDER_CNT: 
-S_REMOTE_CNT: 
-======================DB State Plain=======================
-
-
+5888341566.04
+18744245
+32976489
+22001848.0
+3994081
+39572
