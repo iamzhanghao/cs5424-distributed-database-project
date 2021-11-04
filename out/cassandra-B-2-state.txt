@@ -1,0 +1,22 @@
+========================Statistics========================
+
+
+======================DB State ============================
+W_YTD: 
+D_YTD: 
+D_NEXT_O_ID: 
+C_BALANCE: 
+C_YTD_PAYMENT: 
+C_PAYMENT_CNT: 
+C_DELIVERY_CNT: 
+O_ID: 
+O_OL_CNT: 
+OL_AMOUNT: 
+OL_QUANTITY: 
+S_QUANTITY: 
+S_YTD: 
+S_ORDER_CNT: 
+S_REMOTE_CNT: 
+======================DB State Plain=======================
+
+
