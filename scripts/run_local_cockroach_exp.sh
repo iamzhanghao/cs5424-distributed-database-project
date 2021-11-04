@@ -7,10 +7,9 @@ db='cockroachdb'
 port=26267
 
 
-
 mvn clean package
 
-for client in {1..8}
+for client in {1..10}
   do
       nohup java -jar target/${db}.jar localhost $((client%5 + port)) ${schema} ${client} out/${db}-${schema}-${exp}.csv > out/${db}-${schema}-${exp}-${client}.out 0 &
       echo "Started client ${client} on port $((client%5 + port))"
