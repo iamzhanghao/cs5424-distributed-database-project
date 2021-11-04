@@ -154,8 +154,15 @@ PRIMARY KEY (o_w_id, o_id, o_d_id)
 COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
 FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND HEADER=FALSE;
 
-CREATE INDEX ON order_tab (o_carrier_id);
-CREATE INDEX on order_tab (o_c_id) ;
+DROP INDEX IF EXISTS order_tab_carrier_a;
+
+CREATE INDEX IF NOT EXISTS order_tab_carrier_a
+    ON schema_a.order_tab (o_carrier_id);
+
+DROP INDEX IF EXISTS order_tab_customer_a;
+
+CREATE INDEX IF NOT EXISTS order_tab_customer_a
+    on schema_a.order_tab (o_c_id) ;
 
 
 CREATE TABLE item_tab (
