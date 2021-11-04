@@ -19,12 +19,13 @@ import java.util.stream.IntStream;
 public class Cassandra {
 
     // Limit number of txns executed
-    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
     private static int TXN_LIMIT = 200000;
 
 
     // For testing in local only:
 //    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
+    //     For running experiment
+    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
 
 
     public static void main(String[] args) throws Exception {
