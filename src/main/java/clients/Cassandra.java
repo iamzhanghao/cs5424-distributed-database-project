@@ -478,6 +478,8 @@ public class Cassandra {
 
     private static void deliveryTransactionUnitSchemaA(CqlSession session, int wid, int carrierid, int did) {
         // get the yet-to-deliver order with its client id
+        // no need order by in the statement as o_id has been defined as primary clustering key
+        // index created on carrier_id
         PreparedStatement getOrderAndCustomerId = session.prepare(
                 "SELECT\n" +
                         "\to_id,\n" +
@@ -488,8 +490,6 @@ public class Cassandra {
                         "\to_w_id = ?\n" +
                         "\tAND o_d_id = ?\n" +
                         "\tAND o_carrier_id = 'null'\n" +
-                        "ORDER BY\n" +
-                        "\to_id\n" +
                         "LIMIT 1 ALLOW FILTERING"
         );
         BoundStatement getOrderAndCustomerIdBound = getOrderAndCustomerId.bind()
@@ -504,7 +504,7 @@ public class Cassandra {
             int orderID = row.getInt("o_id");
             int customerID = row.getInt("o_c_id");
 
-//            System.out.printf("order: %d customer:%d ", orderID, customerID);
+            System.out.printf("Processing delivery for order %d created by customer %d", orderID, customerID);
 
             // assign the carrier id to the order
             PreparedStatement updateOrder = session.prepare(
@@ -881,6 +881,7 @@ public class Cassandra {
         }
 
         // compose results based on the top 10 balanced customers
+        // sequence needed, execute in parallel
         for (int i = 0; i < 10; i++) {
             CustomerBalance customer = customersWithBalance.poll();
 
