@@ -22,7 +22,7 @@ public class Cassandra {
     private static int TXN_LIMIT = 200000;
 
     // For testing in local only:
-    // private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
+//     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
     // For running experiment
     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.QUORUM;
 
@@ -643,14 +643,15 @@ public class Cassandra {
                     item.getInstant("ol_delivery_d") != null ? item.getInstant("ol_delivery_d").toString() : "");
         }
 
-    }catch(
-    Exception e)
-
-    {
-//            e.getMessage();
     }
-
-}
+//    catch(
+//    Exception e)
+//
+//    {
+//            e.getMessage();
+//    }
+//
+//}
 
     private static void stockLevelTransactionSchemaA(CqlSession session, int wid, int did, int threshold, int l) {
         try {
@@ -1010,13 +1011,151 @@ public class Cassandra {
         newOrderTransactionA(session, cid, wid, did, number_of_items, items, supplier_warehouses, quantities);
     }
 
-
     private static void paymentTransactionSchemaB(CqlSession session, int cwid, int cdid, int cid, BigDecimal payment) {
         paymentTransactionSchemaA(session, cwid, cdid, cid, payment);
     }
 
+    private static void deliveryTransactionUnitSchemaB(CqlSession session, int wid, int carrierid, int did) {
+        // get the yet-to-deliver order with its client id
+        // no need order by in the statement as o_id has been defined as primary clustering key
+        // index created on carrier_id
+        PreparedStatement getOrderAndCustomerId = session.prepare(
+                "SELECT\n" +
+                        "\tol_o_id,\n" +
+                        "\tol_c_id\n" +
+                        "FROM\n" +
+                        "\tcombined_order_tab\n" +
+                        "WHERE\n" +
+                        "\tol_w_id = ?\n" +
+                        "\tAND ol_d_id = ?\n" +
+                        "\tAND ol_carrier_id = 'null'\n" +
+                        "LIMIT 1 ALLOW FILTERING;"
+        );
+        BoundStatement getOrderAndCustomerIdBound = getOrderAndCustomerId.bind()
+                .setInt(0, wid)
+                .setInt(1, did)
+                .setConsistencyLevel(USE_QUORUM);
+        ResultSet rs = session.execute(getOrderAndCustomerIdBound);
+
+        // proceed when a yet-to-deliver order exists
+        if (rs.iterator().hasNext()) {
+            Row row = rs.one();
+            int orderID = row.getInt("ol_o_id");
+            int customerID = row.getInt("ol_c_id");
+
+            System.out.printf("Processing delivery for order %d created by customer %d\n", orderID, customerID);
+
+
+            // assign the current timestamp to each order line
+            // get the count and amount sum of order lines
+            PreparedStatement getOrderLineCount = session.prepare(
+                    "SELECT\n" +
+                            "\tcount(1), sum(ol_amount) as sum\n" +
+                            "FROM\n" +
+                            "\tcombined_order_tab\n" +
+                            "WHERE\n" +
+                            "\tol_w_id = ?\n" +
+                            "\tAND ol_d_id = ?\n" +
+                            "\tAND ol_o_id = ?"
+            );
+            BoundStatement getOrderLineCountBound = getOrderLineCount.bind()
+                    .setInt(0, wid)
+                    .setInt(1, did)
+                    .setInt(2, orderID)
+                    .setConsistencyLevel(USE_QUORUM);
+            rs = session.execute(getOrderLineCountBound);
+            row = rs.one();
+            long orderLineCount = row.getLong("count");
+            BigDecimal orderLineSum = row.getBigDecimal("sum");
+//            System.out.printf("order count: %d order sum: %d", orderLineCount, orderLineSum.intValue());
+
+            // update per order line
+            PreparedStatement updateOrderLine = session.prepare(
+                    "UPDATE\n" +
+                            "\tcombined_order_tab\n" +
+                            "SET\n" +
+                            "\tol_delivery_d = toTimestamp (now()),\n" +
+                            "\tol_carrier_id = ?\n" +
+                            "WHERE\n" +
+                            "\tol_w_id = ?\n" +
+                            "\tAND ol_d_id = ?\n" +
+                            "\tAND ol_o_id = ?\n" +
+                            "\tAND ol_number = ?;"
+            );
+
+            BatchStatement batchState = BatchStatement.newInstance(BatchType.LOGGED);
+
+            for (int line = 1; line <= orderLineCount; line++) {
+                BoundStatement updateOrderLineBound = updateOrderLine.bind()
+                        .setString(0, String.valueOf(carrierid))
+                        .setInt(1, wid)
+                        .setInt(2, did)
+                        .setInt(3, orderID)
+                        .setInt(4, line)
+                        .setConsistencyLevel(USE_QUORUM);
+                batchState.add(updateOrderLineBound);
+            }
+
+            session.execute(batchState);
+
+            // update the customer's balance and delivery info
+            // get the present customer balance and delivery count
+            PreparedStatement getCustomerInfo = session.prepare(
+                    "SELECT\n" +
+                            "\tc_balance,\n" +
+                            "\tc_delivery_cnt\n" +
+                            "FROM\n" +
+                            "\tcustomer_tab\n" +
+                            "WHERE\n" +
+                            "\tc_id = ?\n" +
+                            "\tAND c_w_id = ?\n" +
+                            "\tAND c_d_id = ?"
+            );
+            BoundStatement getCustomerInfoBound = getCustomerInfo.bind()
+                    .setInt(0, customerID)
+                    .setInt(1, wid)
+                    .setInt(2, did)
+                    .setConsistencyLevel(USE_QUORUM);
+            rs = session.execute(getCustomerInfoBound);
+            row = rs.one();
+            BigDecimal balance = row.getBigDecimal("c_balance");
+            int count = row.getInt("c_delivery_cnt");
+//                System.out.printf("balance%f count%d", balance, count);
+
+            // update the present customer balance and delivery count
+            PreparedStatement updateCustomerInfo = session.prepare(
+                    "UPDATE\n" +
+                            "\tcustomer_tab\n" +
+                            "SET\n" +
+                            "\tc_balance = ?,\n" +
+                            "\tc_delivery_cnt = ?\n" +
+                            "WHERE\n" +
+                            "\tc_id = ?\n" +
+                            "\tAND c_w_id = ?\n" +
+                            "\tAND c_d_id = ?"
+            );
+            BoundStatement updateCustomerInfoBound = updateCustomerInfo.bind()
+                    .setBigDecimal(0, balance.add(orderLineSum))
+                    .setInt(1, count + 1)
+                    .setInt(2, customerID)
+                    .setInt(3, wid)
+                    .setInt(4, did)
+                    .setConsistencyLevel(USE_QUORUM);
+            session.executeAsync(updateCustomerInfoBound);
+//            System.out.printf("did: %d order: %d customer %d new balance: %f new count : %d\n", did, orderID, customerID, balance.add(orderLineSum), count + 1);
+        }
+    }
+
     private static void deliveryTransactionSchemaB(CqlSession session, int wid, int carrierid) {
-        deliveryTransactionSchemaA(session, wid, carrierid);
+        System.out.println("Delivery Txn");
+        // parallel version
+        List<Integer> didRange = IntStream.rangeClosed(1, 10)
+                .boxed().collect(Collectors.toList());
+        didRange.parallelStream().forEach(
+                did -> {
+                    deliveryTransactionUnitSchemaB(session, wid, carrierid, did);
+                }
+        );
     }
 
     private static void orderStatusTransactionSchemaB(CqlSession session, int cwid, int cdid, int cid) {

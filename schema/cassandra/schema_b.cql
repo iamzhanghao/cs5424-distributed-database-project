@@ -2,31 +2,64 @@ DROP KEYSPACE IF EXISTS schema_b;
 CREATE KEYSPACE schema_b with replication = {'class': 'SimpleStrategy', 'replication_factor' : 3};
 USE schema_b;
 
-CREATE TABLE order_line_tab (
-ol_w_id        INT,
-ol_d_id        INT,
-ol_o_id        INT,
-ol_number      INT,
-ol_i_id        INT,
-ol_delivery_d  TIMESTAMP,
-ol_amount      DECIMAL,
+CREATE TABLE combined_order_tab (
+ol_w_id INT,
+ol_d_id INT,
+ol_o_id INT,
+ol_number INT,
+ol_i_id INT,
+ol_delivery_d TIMESTAMP,
+ol_amount DECIMAL,
 ol_supply_w_id INT,
-ol_quantity    DECIMAL,
-ol_dist_info   VARCHAR,
-PRIMARY KEY (ol_w_id, ol_d_id, ol_o_id, ol_number)
+ol_quantity DECIMAL,
+ol_dist_info VARCHAR,
+ol_c_id INT,
+ol_carrier_id VARCHAR,
+ol_cnt DECIMAL,
+ol_all_local DECIMAL,
+ol_entry_d TIMESTAMP,
+PRIMARY KEY ((ol_w_id, ol_d_id), ol_o_id, ol_number)
 );
 
+COPY combined_order_tab (ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id,
+ol_quantity, ol_dist_info, ol_c_id, ol_carrier_id, ol_cnt, ol_all_local, ol_entry_d)
+FROM 'project_files/data_files/order_combined.csv'
+WITH delimiter = ','  AND  header = false  AND  NULL='NULL';
 
+DROP INDEX IF EXISTS combined_order_carrier_a;
 
-COPY order_line_tab (ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id, ol_quantity, ol_dist_info)
-FROM 'project_files/data_files/order-line.csv' WITH DELIMITER=',' AND NULL='null' AND HEADER=FALSE;
+CREATE INDEX IF NOT EXISTS combined_order_carrier_a
+ON schema_b.combined_order_tab (ol_carrier_id);
 
-DROP INDEX IF EXISTS order_line_tab_items;
+DROP INDEX IF EXISTS combined_order_customer_a;
 
-DROP INDEX IF EXISTS order_line_tab_items_b;
+CREATE INDEX IF NOT EXISTS combined_order_customer_a
+on schema_b.combined_order_tab (ol_c_id) ;
 
-CREATE INDEX IF NOT EXISTS order_line_tab_items_b
-    ON schema_b.order_line_tab ( ol_i_id );
+//CREATE TABLE order_line_tab (
+//ol_w_id        INT,
+//ol_d_id        INT,
+//ol_o_id        INT,
+//ol_number      INT,
+//ol_i_id        INT,
+//ol_delivery_d  TIMESTAMP,
+//ol_amount      DECIMAL,
+//ol_supply_w_id INT,
+//ol_quantity    DECIMAL,
+//ol_dist_info   VARCHAR,
+//PRIMARY KEY (ol_w_id, ol_d_id, ol_o_id, ol_number)
+//);
+//
+//COPY order_line_tab (ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id, ol_quantity, ol_dist_info)
+//FROM 'project_files/data_files/order-line.csv' WITH DELIMITER=',' AND NULL='null' AND HEADER=FALSE;
+//
+//DROP INDEX IF EXISTS order_line_tab_items;
+//
+//DROP INDEX IF EXISTS order_line_tab_items_a;
+//
+//CREATE INDEX IF NOT EXISTS order_line_tab_items_a
+//ON schema_a.order_line_tab ( ol_i_id );
+
 
 CREATE TABLE stock_tab (
 s_w_id       INT,
@@ -52,6 +85,7 @@ PRIMARY KEY (s_w_id, s_i_id)
 COPY stock_tab (s_w_id, s_i_id, s_quantity, s_ytd, s_order_cnt, s_remote_cnt, s_dist_01, s_dist_02, s_dist_03, s_dist_04, s_dist_05, s_dist_06, s_dist_07, s_dist_08, s_dist_09, s_dist_10, d_data)
 FROM 'project_files/data_files/stock.csv' WITH DELIMITER=',' AND HEADER=FALSE;
 
+
 CREATE TABLE warehouse_tab (
 w_id       INT,
 w_name     VARCHAR,
@@ -67,6 +101,7 @@ PRIMARY KEY (w_id)
 
 COPY warehouse_tab (w_id, w_name, w_street_1, w_street_2, w_city, w_state, w_zip, w_tax, w_ytd)
 FROM 'project_files/data_files/warehouse.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+
 
 CREATE TABLE district_tab (
 d_w_id      INT,
@@ -85,6 +120,7 @@ PRIMARY KEY (d_w_id, d_id)
 
 COPY district_tab (d_w_id, d_id, d_name, d_street_1, d_street_2, d_city, d_state, d_zip, d_tax, d_ytd, d_next_o_id)
 FROM 'project_files/data_files/district.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+
 
 CREATE TABLE customer_tab (
 c_w_id         INT,
@@ -136,21 +172,25 @@ AND c_last IS NOT NULL PRIMARY KEY (
 c_w_id, c_balance, c_d_id, c_id
 );
 
-CREATE TABLE order_tab (
-o_w_id       INT,
-o_d_id       INT,
-o_c_id       INT,
-o_id         INT,
-o_carrier_id VARCHAR,
-o_ol_cnt     DECIMAL,
-o_all_local  DECIMAL,
-o_entry_d    TIMESTAMP,
-PRIMARY KEY (o_w_id, o_id, o_d_id)
-);
 
+//CREATE TABLE order_tab (
+//o_w_id       INT,
+//o_d_id       INT,
+//o_c_id       INT,
+//o_id         INT,
+//o_carrier_id VARCHAR,
+//o_ol_cnt     DECIMAL,
+//o_all_local  DECIMAL,
+//o_entry_d    TIMESTAMP,
+//PRIMARY KEY (o_w_id, o_id, o_d_id)
+//);
+//
+//COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
+//FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND HEADER=FALSE;
+//
+//CREATE INDEX ON order_tab (o_carrier_id);
+//CREATE INDEX on order_tab (o_c_id) ;
 
-COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
-FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND NULL='' AND HEADER=FALSE;
 
 CREATE TABLE item_tab (
 i_id    INT,
@@ -163,27 +203,3 @@ PRIMARY KEY (i_id)
 
 COPY item_tab (i_id, i_name, i_price, i_im_id, i_data)
 FROM 'project_files/data_files/item.csv' WITH DELIMITER=',' AND HEADER=FALSE;
-
-CREATE TABLE combined_order_tab (
-ol_w_id INT,
-ol_d_id INT,
-ol_o_id INT,
-ol_number INT,
-ol_i_id INT,
-ol_delivery_d TIMESTAMP,
-ol_amount DECIMAL,
-ol_supply_w_id INT,
-ol_quantity DECIMAL,
-ol_dist_info VARCHAR,
-ol_c_id int,
-ol_carrier_id varchar,
-ol_cnt DECIMAL,
-ol_all_local DECIMAL,
-ol_entry_d TIMESTAMP,
-PRIMARY KEY (ol_w_id, ol_o_id, ol_d_id, ol_number)
-);
-
-COPY combined_order_tab (ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id,
-ol_quantity, ol_dist_info, ol_c_id, ol_carrier_id, ol_cnt, ol_all_local, ol_entry_d)
-FROM 'projecct_files/data_files/order_combined.csv'
-WITH delimiter = ','  AND  header = false  AND  NULL='NULL';
