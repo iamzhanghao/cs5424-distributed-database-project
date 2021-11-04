@@ -7,7 +7,6 @@ import com.datastax.oss.driver.api.core.config.DefaultDriverOption;
 import com.datastax.oss.driver.api.core.config.DriverConfig;
 import com.datastax.oss.driver.api.core.config.DriverConfigLoader;
 import com.datastax.oss.driver.api.core.cql.*;
-import com.datastax.oss.driver.internal.core.cql.DefaultBatchStatement;
 
 import java.io.FileInputStream;
 import java.math.BigDecimal;
@@ -26,7 +25,6 @@ public class Cassandra {
 
     // For testing in local only:
 //    private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
-
 
 
     public static void main(String[] args) throws Exception {
@@ -94,7 +92,7 @@ public class Cassandra {
             String[] splits = line.split(",");
             char txnType = splits[0].toCharArray()[0];
             try {
-                float latency = invokeTransaction(session, splits, scanner);
+                float latency = invokeTransaction(session, splits, scanner, Objects.equals(schema, "A"));
                 // TODO: Add retry count
                 latencies.add(new TransactionStatistics(txnType, latency / 1000000, 0));
                 System.out.printf("<%d/20000> Tnx %c: %.2fms, retry: %d times \n", txnCount, txnType, latency / 1000000, 0);
@@ -121,7 +119,7 @@ public class Cassandra {
         System.err.println(message);
     }
 
-    private static long invokeTransaction(CqlSession session, String[] splits, Scanner scanner) {
+    private static long invokeTransaction(CqlSession session, String[] splits, Scanner scanner, boolean isSchemaA) {
         long start = System.nanoTime();
         switch (splits[0].toCharArray()[0]) {
             case 'N':
@@ -139,7 +137,11 @@ public class Cassandra {
                     supplierWarehouses.add(Integer.parseInt(splits[1]));
                     quantities.add(BigDecimal.valueOf(Integer.parseInt(splits[2])));
                 }
-                newOrderTransaction(session, cid, wid, did, numItems, items, supplierWarehouses, quantities);
+                if (isSchemaA) {
+                    newOrderTransactionA(session, cid, wid, did, numItems, items, supplierWarehouses, quantities);
+                } else {
+                    newOrderTransactionSchemaB(session, cid, wid, did, numItems, items, supplierWarehouses, quantities);
+                }
                 break;
 
             case 'P':
@@ -147,20 +149,32 @@ public class Cassandra {
                 int cdid = Integer.parseInt(splits[2]);
                 cid = Integer.parseInt(splits[3]);
                 BigDecimal payment = new BigDecimal(splits[4]);
-                paymentTransaction(session, cwid, cdid, cid, payment);
+                if (isSchemaA) {
+                    paymentTransactionSchemaA(session, cwid, cdid, cid, payment);
+                } else {
+                    paymentTransactionSchemaB(session, cwid, cdid, cid, payment);
+                }
                 break;
 
             case 'D':
                 wid = Integer.parseInt(splits[1]);
                 int carrierid = Integer.parseInt(splits[2]);
-                deliveryTransaction(session, wid, carrierid);
+                if (isSchemaA) {
+                    deliveryTransactionSchemaA(session, wid, carrierid);
+                } else {
+                    deliveryTransactionSchemaB(session, wid, carrierid);
+                }
                 break;
 
             case 'O':
                 cwid = Integer.parseInt(splits[1]);
                 cdid = Integer.parseInt(splits[2]);
                 cid = Integer.parseInt(splits[3]);
-                orderStatusTransaction(session, cwid, cdid, cid);
+                if (isSchemaA) {
+                    orderStatusTransactionSchemaA(session, cwid, cdid, cid);
+                } else {
+                    orderStatusTransactionSchemaB(session, cwid, cdid, cid);
+                }
                 break;
 
             case 'S':
@@ -168,33 +182,51 @@ public class Cassandra {
                 did = Integer.parseInt(splits[2]);
                 int t = Integer.parseInt(splits[3]);
                 int l = Integer.parseInt(splits[4]);
-                stockLevelTransaction(session, wid, did, t, l);
+                if (isSchemaA) {
+                    stockLevelTransactionSchemaA(session, wid, did, t, l);
+                } else {
+                    stockLevelTransactionSchemaB(session, wid, did, t, l);
+                }
                 break;
 
             case 'I':
                 wid = Integer.parseInt(splits[1]);
                 did = Integer.parseInt(splits[2]);
                 l = Integer.parseInt(splits[3]);
-                popularItemTransaction(session, wid, did, l);
+                if (isSchemaA) {
+                    popularItemTransactionSchemaA(session, wid, did, l);
+                } else {
+                    popularItemTransactionSchemaB(session, wid, did, l);
+                }
                 break;
 
             case 'T':
-                topBalanceTransaction(session);
+                if (isSchemaA) {
+                    topBalanceTransactionSchemaA(session);
+                } else {
+                    topBalanceTransactionSchemaB(session);
+
+                }
                 break;
 
             case 'R':
                 cwid = Integer.parseInt(splits[1]);
                 cdid = Integer.parseInt(splits[2]);
                 cid = Integer.parseInt(splits[3]);
-                relatedCustomerTransaction(session, cwid, cdid, cid);
+                if (isSchemaA) {
+                    relatedCustomerTransactionSchemaA(session, cwid, cdid, cid);
+                } else {
+                    relatedCustomerTransactionSchemaB(session, cwid, cdid, cid);
+
+                }
                 break;
         }
 
         return System.nanoTime() - start;
     }
 
-    private static void newOrderTransaction(CqlSession session, int cid, int wid, int did, int number_of_items,
-                                            ArrayList<Integer> items, ArrayList<Integer> supplier_warehouses, ArrayList<BigDecimal> quantities) {
+    private static void newOrderTransactionA(CqlSession session, int cid, int wid, int did, int number_of_items,
+                                             ArrayList<Integer> items, ArrayList<Integer> supplier_warehouses, ArrayList<BigDecimal> quantities) {
         try {
             ResultSet rs = session.execute(session.prepare("SELECT D_NEXT_O_ID FROM district_tab WHERE D_W_ID = " + wid + " AND D_ID = " + did).bind().setConsistencyLevel(USE_QUORUM));
             int prev_order_id = rs.one().getInt("D_NEXT_O_ID");
@@ -354,7 +386,7 @@ public class Cassandra {
         }
     }
 
-    private static void paymentTransaction(CqlSession session, int cwid, int cdid, int cid, BigDecimal payment) {
+    private static void paymentTransactionSchemaA(CqlSession session, int cwid, int cdid, int cid, BigDecimal payment) {
         try {
             Row warehouseRow = session.execute(
                     session.prepare(" SELECT w_ytd FROM warehouse_tab WHERE w_id= " + cwid + " ;")
@@ -369,16 +401,16 @@ public class Cassandra {
 
             Row old_d_ytd_row = session.execute(session.prepare("SELECT d_ytd FROM district_tab WHERE d_w_id = ? AND d_id = ?;")
                     .bind()
-                    .setInt(0,cwid)
-                    .setInt(1,cdid)
+                    .setInt(0, cwid)
+                    .setInt(1, cdid)
                     .setConsistencyLevel(USE_QUORUM)).one();
             BigDecimal old_d_ytd = old_d_ytd_row.getBigDecimal("d_ytd");
 
             session.executeAsync(session.prepare("UPDATE district_tab SET d_ytd = ? WHERE d_w_id = ? AND d_id = ?;")
                     .bind()
-                    .setBigDecimal(0,old_d_ytd.add(payment))
-                    .setInt(1,cwid)
-                    .setInt(2,cdid)
+                    .setBigDecimal(0, old_d_ytd.add(payment))
+                    .setInt(1, cwid)
+                    .setInt(2, cdid)
                     .setConsistencyLevel(USE_QUORUM)
             );
 
@@ -413,12 +445,12 @@ public class Cassandra {
             System.out.println("Customer payment");
             System.out.printf("Customer (%d,%d,%d), name: (%s,%s,%s), address: (%s,%s,%s,%s,%s) \nphone %s, c_since %s, c_credit %s, c_credit_lim %f, " +
                             " c_discount %f, c_balance %f\n",
-                    customer.getTupleValue("identifier").getInt(0),customer.getTupleValue("identifier").getInt(1),customer.getTupleValue("identifier").getInt(2),
-                    customer.getTupleValue("name").getString(0),customer.getTupleValue("name").getString(1),customer.getTupleValue("name").getString(2),
-                    customer.getTupleValue("address").getString(0),customer.getTupleValue("address").getString(1),customer.getTupleValue("address").getString(2),
-                    customer.getTupleValue("address").getString(3),customer.getTupleValue("address").getString(4),
-                    customer.getString("c_phone"),customer.getInstant("c_since"),customer.getString("c_credit"),
-                    customer.getBigDecimal("c_credit_lim"),customer.getBigDecimal("c_discount"),customer.getBigDecimal("c_balance"));
+                    customer.getTupleValue("identifier").getInt(0), customer.getTupleValue("identifier").getInt(1), customer.getTupleValue("identifier").getInt(2),
+                    customer.getTupleValue("name").getString(0), customer.getTupleValue("name").getString(1), customer.getTupleValue("name").getString(2),
+                    customer.getTupleValue("address").getString(0), customer.getTupleValue("address").getString(1), customer.getTupleValue("address").getString(2),
+                    customer.getTupleValue("address").getString(3), customer.getTupleValue("address").getString(4),
+                    customer.getString("c_phone"), customer.getInstant("c_since"), customer.getString("c_credit"),
+                    customer.getBigDecimal("c_credit_lim"), customer.getBigDecimal("c_discount"), customer.getBigDecimal("c_balance"));
 
 
             Row warehouse = session.execute(session.prepare(String.format(
@@ -426,16 +458,16 @@ public class Cassandra {
                             "WHERE w_id = %d", cwid
             )).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
             System.out.printf("Warehouse: street_1: %s, street_2: %s, w_city %s, w_state %s, w_zip %s\n",
-                    warehouse.getString("w_street_1"), warehouse.getString("w_street_2"),warehouse.getString("w_city"),
-                    warehouse.getString("w_state"),warehouse.getString("w_zip"));
+                    warehouse.getString("w_street_1"), warehouse.getString("w_street_2"), warehouse.getString("w_city"),
+                    warehouse.getString("w_state"), warehouse.getString("w_zip"));
 
             Row district = session.execute(session.prepare(String.format(
                     "SELECT D_STREET_1, D_STREET_2, D_CITY, D_STATE, D_ZIP FROM district_tab \n" +
                             "WHERE d_w_id = %d AND d_id = %d ", cwid, cdid
             )).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
             System.out.printf("District address: d_street_1: %s, d_street_2: %s, d_city %s, d_state %s, d_zip %s\n",
-                    district.getString("d_street_1"), district.getString("d_street_2"),district.getString("d_city"),
-                    district.getString("d_state"),district.getString("d_zip"));
+                    district.getString("d_street_1"), district.getString("d_street_2"), district.getString("d_city"),
+                    district.getString("d_state"), district.getString("d_zip"));
 
             System.out.printf("Payment amount: %f", payment.doubleValue());
 
@@ -444,7 +476,7 @@ public class Cassandra {
         }
     }
 
-    private static void deliveryTransactionUnit(CqlSession session, int wid, int carrierid, int did) {
+    private static void deliveryTransactionUnitSchemaA(CqlSession session, int wid, int carrierid, int did) {
         // get the yet-to-deliver order with its client id
         PreparedStatement getOrderAndCustomerId = session.prepare(
                 "SELECT\n" +
@@ -591,19 +623,19 @@ public class Cassandra {
         }
     }
 
-    private static void deliveryTransaction(CqlSession session, int wid, int carrierid) {
+    private static void deliveryTransactionSchemaA(CqlSession session, int wid, int carrierid) {
         System.out.println("Delivery Txn");
         // parallel version
         List<Integer> didRange = IntStream.rangeClosed(1, 10)
                 .boxed().collect(Collectors.toList());
         didRange.parallelStream().forEach(
                 did -> {
-                    deliveryTransactionUnit(session, wid, carrierid, did);
+                    deliveryTransactionUnitSchemaA(session, wid, carrierid, did);
                 }
         );
     }
 
-    private static void orderStatusTransaction(CqlSession session, int cwid, int cdid, int cid) {
+    private static void orderStatusTransactionSchemaA(CqlSession session, int cwid, int cdid, int cid) {
         String get_customer = "select c_first, c_middle, c_last, c_balance from customer_tab "
                 + "where c_w_id = %d and c_d_id = %d and c_id = %d ";
         String get_last_order = "SELECT o_w_id, o_d_id, o_c_id, o_id, o_entry_d, o_carrier_id "
@@ -624,9 +656,9 @@ public class Cassandra {
                 customer.getBigDecimal("c_balance").doubleValue());
 
         String entryDate = "NULL";
-        try{
-            entryDate =  last_order.getInstant("o_entry_d").toString();
-        }catch (Exception e){
+        try {
+            entryDate = last_order.getInstant("o_entry_d").toString();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -649,7 +681,7 @@ public class Cassandra {
 
     }
 
-    private static void stockLevelTransaction(CqlSession session, int wid, int did, int threshold, int l) {
+    private static void stockLevelTransactionSchemaA(CqlSession session, int wid, int did, int threshold, int l) {
         try {
             ResultSet rs = session.execute(session.prepare("SELECT d_next_o_id FROM district_tab WHERE d_w_id=" + wid + " AND d_id=" + did + ";").bind().setConsistencyLevel(ConsistencyLevel.ONE));
             Integer latest_order_id = rs.one().getInt("d_next_o_id");
@@ -687,7 +719,7 @@ public class Cassandra {
         }
     }
 
-    private static void popularItemTransaction(CqlSession session, int wid, int did, int l) {
+    private static void popularItemTransactionSchemaA(CqlSession session, int wid, int did, int l) {
         String get_N = "select d_next_o_id from district_tab where d_w_id = %d and d_id = %d";
         String get_order = "select o_id, o_entry_d, o_c_id from order_tab where o_w_id = %d and o_d_id = %d and o_id in ( %s )";
         String get_order_lines = "select ol_o_id, ol_i_id, ol_quantity from order_line_tab "
@@ -805,7 +837,7 @@ public class Cassandra {
         }
     }
 
-    private static void topBalanceTransaction(CqlSession session) {
+    private static void topBalanceTransactionSchemaA(CqlSession session) {
         System.out.println("Top Balance Txn");
 
         CustomerBalanceComparator comparator = new CustomerBalanceComparator();
@@ -890,7 +922,7 @@ public class Cassandra {
         }
     }
 
-    private static void relatedCustomerTransaction(CqlSession session, int cwid, int cdid, int cid) {
+    private static void relatedCustomerTransactionSchemaA(CqlSession session, int cwid, int cdid, int cid) {
 
         Set<Customer> relatedCustomerSet = new HashSet<>();
 
@@ -1000,6 +1032,41 @@ public class Cassandra {
 
 
     }
+
+    private static void newOrderTransactionSchemaB(CqlSession session, int cid, int wid, int did, int number_of_items,
+                                                   ArrayList<Integer> items, ArrayList<Integer> supplier_warehouses, ArrayList<BigDecimal> quantities) {
+        newOrderTransactionA(session, cid, wid, did, number_of_items, items, supplier_warehouses, quantities);
+    }
+
+
+    private static void paymentTransactionSchemaB(CqlSession session, int cwid, int cdid, int cid, BigDecimal payment) {
+        paymentTransactionSchemaA(session, cwid, cdid, cid, payment);
+    }
+
+    private static void deliveryTransactionSchemaB(CqlSession session, int wid, int carrierid) {
+        deliveryTransactionSchemaA(session, wid, carrierid);
+    }
+
+    private static void orderStatusTransactionSchemaB(CqlSession session, int cwid, int cdid, int cid) {
+        orderStatusTransactionSchemaA(session, cwid, cdid, cid);
+    }
+
+    private static void stockLevelTransactionSchemaB(CqlSession session, int wid, int did, int threshold, int l) {
+        stockLevelTransactionSchemaA(session, wid, did, threshold, l);
+    }
+
+    private static void popularItemTransactionSchemaB(CqlSession session, int wid, int did, int l) {
+        popularItemTransactionSchemaA(session, wid, did, l);
+    }
+
+    private static void topBalanceTransactionSchemaB(CqlSession session) {
+        topBalanceTransactionSchemaA(session);
+    }
+
+    private static void relatedCustomerTransactionSchemaB(CqlSession session, int cwid, int cdid, int cid) {
+        relatedCustomerTransactionSchemaA(session, cwid, cdid, cid);
+    }
+
 
     private static void getDbState(CqlSession session) throws Exception {
         System.out.println("====================== DB State ============================");
