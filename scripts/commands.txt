@@ -8,7 +8,7 @@
 
 tail -90  out/cockroachdb-A-2-9.out
 tail -90  out/cockroachdb-A-2-9.out
-tail -90  out/cassandra-A-2-9.out
+tail -90  out/cassandra-A-1-9.out
 tail -90  out/cassandra-B-1-9.out
 
 
@@ -46,3 +46,5 @@ java -jar target/cockroachdb.jar xcnd30.comp.nus.edu.sg 26267 A 0 temp 1
 java -jar target/cockroachdb.jar xcnd30.comp.nus.edu.sg 26267 B 0 temp 1
 java -jar target/cassandra.jar xcnd30.comp.nus.edu.sg 3042 A 0 temp 1
 java -jar target/cassandra.jar xcnd30.comp.nus.edu.sg 3042 B 0 temp 1
+
+/temp/CS4224C/apache-cassandra-4.0.0/bin/cqlsh --request-timeout=3000 xcnd30.comp.nus.edu.sg 3042

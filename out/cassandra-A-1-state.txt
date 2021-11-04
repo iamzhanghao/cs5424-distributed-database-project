@@ -1,0 +1,47 @@
+========================Statistics========================
+Total 1999 transactions, execution time 753.38s, avg latency 375.70ms, throughput 2.65 query/s,
+median latency 252.85ms, 95th percentile latency 1024.25ms, 99th percentile latency 2022.71ms
+
+Txn P: avg latency 37.95ms, retry 0.00 times
+Txn R: avg latency 2091.27ms, retry 0.00 times
+Txn S: avg latency 1317.82ms, retry 0.00 times
+Txn T: avg latency 191.50ms, retry 0.00 times
+Txn D: avg latency 407.52ms, retry 0.00 times
+Txn I: avg latency 439.71ms, retry 0.00 times
+Txn N: avg latency 372.01ms, retry 0.00 times
+Txn O: avg latency 153.48ms, retry 0.00 times
+
+======================DB State ============================
+W_YTD: 302793854.370000
+D_YTD: 3000000.000000
+D_NEXT_O_ID: 608707
+C_BALANCE: 8309955694.550000
+C_YTD_PAYMENT: 310131328.000000
+C_PAYMENT_CNT: 460000
+C_DELIVERY_CNT: 90000.000000
+O_ID: 40601
+O_OL_CNT: 7603548.000000
+OL_AMOUNT: 6961148085.610000
+OL_QUANTITY: 40304246.000000
+S_QUANTITY: 32975543
+S_YTD: 22002794.0
+S_ORDER_CNT: 3994283
+S_REMOTE_CNT: 39573
+======================DB State Plain=======================
+302793854.370000
+3000000.000000
+608707
+8309955694.550000
+310131328.000000
+460000
+90000.000000
+40601
+7603548.000000
+6961148085.610000
+40304246.000000
+32975543
+22002794.0
+3994283
+39573
+
+Current Time at server: 2021-56-03 07:56:03

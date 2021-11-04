@@ -1,0 +1,51 @@
+========================Statistics========================
+
+Slowest Client
+Total 20000 transactions, execution time 5207.19s, avg latency 260.16ms, throughput 3.84 query/s,
+median latency 135.62ms, 95th percentile latency 702.40ms, 99th percentile latency 1021.40ms
+
+Txn P: avg latency 13.12ms, retry 0.00 times
+Txn R: avg latency 598.45ms, retry 0.00 times
+Txn S: avg latency 608.18ms, retry 0.00 times
+Txn T: avg latency 41.87ms, retry 0.00 times
+Txn D: avg latency 408.33ms, retry 0.00 times
+Txn I: avg latency 132.78ms, retry 0.00 times
+Txn N: avg latency 104.72ms, retry 0.00 times
+Txn O: avg latency 131.82ms, retry 0.00 times
+
+
+======================DB State ============================
+W_YTD: 80810654.070000
+D_YTD: 3000000.000000
+D_NEXT_O_ID: 376425
+C_BALANCE: 6208175745.600000
+C_YTD_PAYMENT: 81167616.000000
+C_PAYMENT_CNT: 340000
+C_DELIVERY_CNT: 106627
+O_ID: 41098
+O_OL_CNT: 4702490.000000
+OL_AMOUNT: 6153922201.81
+OL_QUANTITY: 24101251
+S_QUANTITY: 49479105
+S_YTD: 5499232.0
+S_ORDER_CNT: 998488
+S_REMOTE_CNT: 9897
+======================DB State Plain=======================
+
+80810654.070000
+3000000.000000
+376425
+6208175745.600000
+81167616.000000
+340000
+106627
+41098
+4702490.000000
+6153922201.81
+24101251
+49479105
+5499232.0
+998488
+9897
+
+
