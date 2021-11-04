@@ -132,11 +132,8 @@ public class Cassandra {
                     supplierWarehouses.add(Integer.parseInt(splits[1]));
                     quantities.add(BigDecimal.valueOf(Integer.parseInt(splits[2])));
                 }
-                if (isSchemaA) {
-                    newOrderTransactionA(session, cid, wid, did, numItems, items, supplierWarehouses, quantities);
-                } else {
-                    newOrderTransactionSchemaB(session, cid, wid, did, numItems, items, supplierWarehouses, quantities);
-                }
+                newOrderTransactionA(session, cid, wid, did, numItems, items, supplierWarehouses, quantities);
+
                 break;
 
             case 'P':
@@ -144,32 +141,23 @@ public class Cassandra {
                 int cdid = Integer.parseInt(splits[2]);
                 cid = Integer.parseInt(splits[3]);
                 BigDecimal payment = new BigDecimal(splits[4]);
-                if (isSchemaA) {
-                    paymentTransactionSchemaA(session, cwid, cdid, cid, payment);
-                } else {
-                    paymentTransactionSchemaB(session, cwid, cdid, cid, payment);
-                }
+                paymentTransactionSchemaA(session, cwid, cdid, cid, payment);
+
                 break;
 
             case 'D':
                 wid = Integer.parseInt(splits[1]);
                 int carrierid = Integer.parseInt(splits[2]);
-                if (isSchemaA) {
-                    deliveryTransactionSchemaA(session, wid, carrierid);
-                } else {
-                    deliveryTransactionSchemaB(session, wid, carrierid);
-                }
+                deliveryTransactionSchemaA(session, wid, carrierid);
+
                 break;
 
             case 'O':
                 cwid = Integer.parseInt(splits[1]);
                 cdid = Integer.parseInt(splits[2]);
                 cid = Integer.parseInt(splits[3]);
-                if (isSchemaA) {
-                    orderStatusTransactionSchemaA(session, cwid, cdid, cid);
-                } else {
-                    orderStatusTransactionSchemaB(session, cwid, cdid, cid);
-                }
+                orderStatusTransactionSchemaA(session, cwid, cdid, cid);
+
                 break;
 
             case 'S':
@@ -177,43 +165,29 @@ public class Cassandra {
                 did = Integer.parseInt(splits[2]);
                 int t = Integer.parseInt(splits[3]);
                 int l = Integer.parseInt(splits[4]);
-                if (isSchemaA) {
-                    stockLevelTransactionSchemaA(session, wid, did, t, l);
-                } else {
-                    stockLevelTransactionSchemaB(session, wid, did, t, l);
-                }
+                stockLevelTransactionSchemaA(session, wid, did, t, l);
+
                 break;
 
             case 'I':
                 wid = Integer.parseInt(splits[1]);
                 did = Integer.parseInt(splits[2]);
                 l = Integer.parseInt(splits[3]);
-                if (isSchemaA) {
-                    popularItemTransactionSchemaA(session, wid, did, l);
-                } else {
-                    popularItemTransactionSchemaB(session, wid, did, l);
-                }
+                popularItemTransactionSchemaA(session, wid, did, l);
+
                 break;
 
             case 'T':
-                if (isSchemaA) {
-                    topBalanceTransactionSchemaA(session);
-                } else {
-                    topBalanceTransactionSchemaB(session);
+                topBalanceTransactionSchemaA(session);
 
-                }
                 break;
 
             case 'R':
                 cwid = Integer.parseInt(splits[1]);
                 cdid = Integer.parseInt(splits[2]);
                 cid = Integer.parseInt(splits[3]);
-                if (isSchemaA) {
-                    relatedCustomerTransactionSchemaA(session, cwid, cdid, cid);
-                } else {
-                    relatedCustomerTransactionSchemaB(session, cwid, cdid, cid);
+                relatedCustomerTransactionSchemaA(session, cwid, cdid, cid);
 
-                }
                 break;
         }
 
