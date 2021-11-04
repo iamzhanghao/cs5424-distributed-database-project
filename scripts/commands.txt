@@ -30,7 +30,7 @@ ssh cs4224c@xcnd34.comp.nus.edu.sg
 
 sh scripts/run_experiments.sh 3 A cockroachdb 26267
 sh scripts/run_experiments.sh 2 B cockroachdb 26267
-sh scripts/run_experiments.sh 1 A cassandra 3042
+sh scripts/run_experiments.sh 3 A cassandra 3042
 sh scripts/run_experiments.sh 2 B cassandra 3042
 sh scripts/stop_experiments.sh
 
@@ -54,4 +54,10 @@ nodetool garbagecollect schema_b order_line_tab
 nodetool garbagecollect schema_b district_tab
 nodetool garbagecollect schema_b customer_tab
 nodetool garbagecollect schema_b item_tab
+
+nodetool garbagecollect schema_a order_tab
+nodetool garbagecollect schema_a order_line_tab
+nodetool garbagecollect schema_a district_tab
+nodetool garbagecollect schema_a customer_tab
+nodetool garbagecollect schema_a item_tab
 

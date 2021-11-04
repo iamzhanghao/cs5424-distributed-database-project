@@ -1,0 +1,53 @@
+====================== DB State ============================
+W_YTD: 301649721.610000[s0-io-5] WARN com.datastax.oss.driver.internal.core.cql.CqlRequestHandler - Query '[0 values] SELECT sum(W_YTD) as w_ytd from warehouse_tab' generated server side warning(s): Aggregation query used without partition key
+
+D_YTD: 309160747.460000
+D_NEXT_O_ID: 608079
+C_BALANCE: 5406988224.760000
+C_YTD_PAYMENT: 310108544.000000
+C_PAYMENT_CNT: 460000
+C_DELIVERY_CNT: 295898
+O_ID: 40574
+O_OL_CNT: 7594868.000000
+OL_AMOUNT: 5888341566.04
+OL_QUANTITY: 18744245
+S_QUANTITY: 32976489
+S_YTD: 22001848.0
+S_ORDER_CNT: 3994081
+S_REMOTE_CNT: 39572
+======================DB State Plain=======================
+3.0164972161E8
+3.0916074746E8
+608079
+5.40698822476E9
+3.10108544E8
+460000
+295898
+40574
+7594868.0
+
+
+
+
+========================Statistics========================
+
+
+======================DB State ============================
+W_YTD: 
+D_YTD: 
+D_NEXT_O_ID: 
+C_BALANCE: 
+C_YTD_PAYMENT: 
+C_PAYMENT_CNT: 
+C_DELIVERY_CNT: 
+O_ID: 
+O_OL_CNT: 
+OL_AMOUNT: 
+OL_QUANTITY: 
+S_QUANTITY: 
+S_YTD: 
+S_ORDER_CNT: 
+S_REMOTE_CNT: 
+======================DB State Plain=======================
+
+
