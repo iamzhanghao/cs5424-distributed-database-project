@@ -6,10 +6,8 @@ import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.config.DefaultDriverOption;
 import com.datastax.oss.driver.api.core.config.DriverConfig;
 import com.datastax.oss.driver.api.core.config.DriverConfigLoader;
-import com.datastax.oss.driver.api.core.cql.BoundStatement;
-import com.datastax.oss.driver.api.core.cql.PreparedStatement;
-import com.datastax.oss.driver.api.core.cql.ResultSet;
-import com.datastax.oss.driver.api.core.cql.Row;
+import com.datastax.oss.driver.api.core.cql.*;
+import com.datastax.oss.driver.internal.core.cql.DefaultBatchStatement;
 
 import java.io.FileInputStream;
 import java.math.BigDecimal;
@@ -211,7 +209,7 @@ public class Cassandra {
                     .setInt(2, did)
                     .setConsistencyLevel(USE_QUORUM);
 
-            session.execute(updateDistrictBound);
+            session.executeAsync(updateDistrictBound);
 
             int all_local = 0;
             if (supplier_warehouses.stream().distinct().count() <= 1 && supplier_warehouses.contains(wid)) {
@@ -240,6 +238,9 @@ public class Cassandra {
             ArrayList<String> itemNames = new ArrayList<String>();
             ArrayList<BigDecimal> itemPrices = new ArrayList<BigDecimal>();
             ArrayList<BigDecimal> itemStocks = new ArrayList<BigDecimal>();
+
+            BatchStatement batchState = BatchStatement.newInstance(
+                    BatchType.LOGGED);
 
             for (int idx = 0; idx < items.size(); idx++) {
                 int current_item = items.get(idx);
@@ -312,91 +313,10 @@ public class Cassandra {
                         .setBigDecimal(8, quantities.get(idx))
                         .setString(9, "S_DIST_" + did)
                         .setConsistencyLevel(USE_QUORUM);
-                session.execute(insertOrderLineBound);
+                batchState.add(insertOrderLineBound);
             }
 
-            //parallem version
-//            List<Integer> itemIdxRange = IntStream.rangeClosed(1, items.size()-1)
-//                    .boxed().collect(Collectors.toList());
-//            itemIdxRange.parallelStream().forEach(
-//                    idx -> {
-//                        int current_item = items.get(idx);
-//
-//                        ResultSet scoped_rs = session.execute("SELECT i_price, i_name FROM item_tab WHERE i_id = " + current_item);
-//                        Row row = scoped_rs.one();
-//                        BigDecimal price = row.getBigDecimal("i_price");
-//                        String name = row.getString("i_name");
-//
-//                        itemNames.add(name);
-//                        itemPrices.add(price);
-//
-//                        String strDid = "";
-//                        if (did == 10) {
-//                            strDid = String.valueOf(did);
-//                        } else {
-//                            strDid = "0" + did;
-//                        }
-//
-//                        PreparedStatement itemStock = session.prepare("SELECT s_quantity,s_ytd,s_order_cnt," +
-//                                "s_remote_cnt, s_dist_" + strDid + " FROM stock_tab WHERE s_w_id=? AND s_i_id=?;");
-//                        BoundStatement itemStockBound = itemStock.bind()
-//                                .setInt(0, wid)
-//                                .setInt(1, current_item).setConsistencyLevel(USE_QUORUM);
-//                        scoped_rs = session.execute(itemStockBound);
-//                        row = scoped_rs.one();
-//                        BigDecimal s_quantity = row.getBigDecimal("s_quantity");
-//                        BigDecimal s_ytd = row.getBigDecimal("s_ytd");
-//                        int s_order_cnt = row.getInt("s_order_cnt");
-//                        int s_remote_cnt = row.getInt("s_remote_cnt");
-//
-//                        BigDecimal adjusted_quantity = s_quantity.subtract(quantities.get(idx));
-//                        if (adjusted_quantity.compareTo(BigDecimal.TEN) == -1) {
-//                            adjusted_quantity.add(BigDecimal.valueOf(100));
-//                        }
-//                        if (supplier_warehouses.get(idx) != wid) {
-//                            s_remote_cnt += 1;
-//                        }
-//
-//                        PreparedStatement updateStock = session.prepare("UPDATE stock_tab SET " +
-//                                "s_quantity=?, s_ytd=?, s_order_cnt=?, s_remote_cnt=? WHERE s_w_id=? AND s_i_id=?;");
-//                        BoundStatement updateStockBound = updateStock.bind()
-//                                .setBigDecimal(0, adjusted_quantity)
-//                                .setBigDecimal(1, s_ytd.add(quantities.get(idx)))
-//                                .setInt(2, s_order_cnt + 1)
-//                                .setInt(3, s_remote_cnt)
-//                                .setInt(4, wid)
-//                                .setInt(5, current_item)
-//                                .setConsistencyLevel(USE_QUORUM);
-//
-//                        session.execute(updateStockBound);
-//
-//                        itemStocks.add(adjusted_quantity);
-//
-//                        BigDecimal item_amount = price.multiply(quantities.get(idx));
-//                        amount_list.add(item_amount);
-////                        total_amount = total_amount.add(item_amount);
-//
-//                        PreparedStatement insertOrderLine = session.prepare("INSERT INTO order_line_tab (OL_W_ID, OL_D_ID, " +
-//                                "OL_O_ID, OL_NUMBER, OL_I_ID, OL_DELIVERY_D, OL_AMOUNT, OL_SUPPLY_W_ID, OL_QUANTITY, OL_DIST_INFO) " +
-//                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
-//                        BoundStatement insertOrderLineBound = insertOrderLine.bind()
-//                                .setInt(0, wid)
-//                                .setInt(1, did)
-//                                .setInt(2, next_order_id)
-//                                .setInt(3, idx)
-//                                .setInt(4, current_item)
-//                                .setDefaultTimestamp(0)
-//                                .setBigDecimal(6, item_amount)
-//                                .setInt(7, supplier_warehouses.get(idx))
-//                                .setBigDecimal(8, quantities.get(idx))
-//                                .setString(9, "S_DIST_" + did)
-//                                .setConsistencyLevel(USE_QUORUM);
-//                        session.execute(insertOrderLineBound);
-//                    }
-//            );
-//            for(BigDecimal amount: amount_list) {
-//                total_amount.add(amount);
-//            }
+            session.executeAsync(batchState);
 
             rs = session.execute(session.prepare("SELECT c_last, c_credit, c_discount FROM customer_tab " +
                     "WHERE c_id = " + cid + " AND c_d_id = " + did + " AND c_w_id = " + wid).bind().setConsistencyLevel(USE_QUORUM));
