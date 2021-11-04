@@ -367,6 +367,21 @@ public class Cassandra {
                     .setBigDecimal(0, old_ytd.add(payment))
                     .setInt(1, cwid).setConsistencyLevel(USE_QUORUM));
 
+            Row old_d_ytd_row = session.execute(session.prepare("SELECT d_ytd FROM district_tab WHERE d_w_id = ? AND d_id = ?;")
+                    .bind()
+                    .setInt(0,cwid)
+                    .setInt(1,cdid)
+                    .setConsistencyLevel(USE_QUORUM)).one();
+            BigDecimal old_d_ytd = old_d_ytd_row.getBigDecimal("d_ytd");
+
+            session.execute(session.prepare("UPDATE district_tab SET d_ytd = ? WHERE d_w_id = ? AND d_id = ?;")
+                    .bind()
+                    .setBigDecimal(0,old_d_ytd.add(payment))
+                    .setInt(1,cwid)
+                    .setInt(2,cdid)
+                    .setConsistencyLevel(USE_QUORUM)
+            );
+
             Row customer_row = session.execute(session.prepare(
                             "SELECT c_balance, c_ytd_payment, c_payment_cnt FROM customer_tab " +
                                     String.format("WHERE c_w_id = %d AND c_d_id = %d AND c_id = %d  ALLOW FILTERING; ", cwid, cdid, cid))
