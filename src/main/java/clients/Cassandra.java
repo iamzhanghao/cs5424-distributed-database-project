@@ -539,7 +539,6 @@ public class Cassandra {
 
     private static void deliveryTransaction(CqlSession session, int wid, int carrierid) {
         System.out.println("Delivery Txn");
-        final int haha = 2;
         // parallel version
         List<Integer> didRange = IntStream.rangeClosed(1, 10)
                 .boxed().collect(Collectors.toList());
@@ -547,7 +546,6 @@ public class Cassandra {
                 did -> {
 //                    System.out.printf("did: %d ", did);
                     deliveryTransactionUnit(session, wid, carrierid, did);
-                    System.out.println(haha);
                 }
         );
 
