@@ -26,6 +26,16 @@ ol_quantity, ol_dist_info, ol_c_id, ol_carrier_id, ol_cnt, ol_all_local, ol_entr
 FROM 'project_files/data_files/order_combined.csv'
 WITH delimiter = ','  AND  header = false  AND  NULL='NULL';
 
+DROP INDEX IF EXISTS combined_order_carrier_a;
+
+CREATE INDEX IF NOT EXISTS combined_order_carrier_a
+ON schema_b.combined_order_tab (ol_carrier_id);
+
+DROP INDEX IF EXISTS combined_order_customer_a;
+
+CREATE INDEX IF NOT EXISTS combined_order_customer_a
+on schema_b.combined_order_tab (ol_c_id) ;
+
 //CREATE TABLE order_line_tab (
 //ol_w_id        INT,
 //ol_d_id        INT,
