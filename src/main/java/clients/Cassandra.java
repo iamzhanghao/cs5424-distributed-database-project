@@ -21,7 +21,7 @@ public class Cassandra {
 
     // Limit number of txns executed
     private static final ConsistencyLevel USE_QUORUM = ConsistencyLevel.ONE;
-    private static int TXN_LIMIT = 2000000;
+    private static int TXN_LIMIT = 1000;
 
 
     // For testing in local only:
@@ -239,8 +239,7 @@ public class Cassandra {
             ArrayList<BigDecimal> itemPrices = new ArrayList<BigDecimal>();
             ArrayList<BigDecimal> itemStocks = new ArrayList<BigDecimal>();
 
-            BatchStatement batchState = BatchStatement.newInstance(
-                    BatchType.LOGGED);
+            BatchStatement batchState = BatchStatement.newInstance(BatchType.LOGGED);
 
             for (int idx = 0; idx < items.size(); idx++) {
                 int current_item = items.get(idx);
@@ -363,7 +362,7 @@ public class Cassandra {
                             .setConsistencyLevel(USE_QUORUM)).one();
             BigDecimal old_ytd = warehouseRow.getBigDecimal("w_ytd");
 
-            session.execute(session.prepare(
+            session.executeAsync(session.prepare(
                             "UPDATE warehouse_tab SET W_YTD = ? WHERE W_ID = ?;").bind()
                     .setBigDecimal(0, old_ytd.add(payment))
                     .setInt(1, cwid).setConsistencyLevel(USE_QUORUM));
@@ -378,7 +377,7 @@ public class Cassandra {
             float old_c_ytd_payment = customer_row.getFloat("c_ytd_payment");
             int old_c_payment_cnt = customer_row.getInt("c_payment_cnt");
 
-            session.execute(session.prepare(
+            session.executeAsync(session.prepare(
                             "Update customer_tab " +
                                     "SET c_balance = ?,c_ytd_payment = ?, c_payment_cnt = ? " +
                                     "WHERE c_w_id = ? AND c_d_id = ? AND c_id = ? ;").bind()
@@ -442,7 +441,7 @@ public class Cassandra {
                     .setInt(2, did)
                     .setInt(3, orderID)
                     .setConsistencyLevel(USE_QUORUM);
-            session.execute(updateOrderBound);
+            session.executeAsync(updateOrderBound);
 
             // assign the current timestamp to each order line
             // get the count and amount sum of order lines
@@ -479,6 +478,9 @@ public class Cassandra {
                             "\tAND ol_o_id = ?\n" +
                             "\tAND ol_number = ?;"
             );
+
+            BatchStatement batchState = BatchStatement.newInstance(BatchType.LOGGED);
+
             for (int line = 1; line <= orderLineCount; line++) {
                 BoundStatement updateOrderLineBound = updateOrderLine.bind()
                         .setInt(0, wid)
@@ -486,8 +488,10 @@ public class Cassandra {
                         .setInt(2, orderID)
                         .setInt(3, line)
                         .setConsistencyLevel(USE_QUORUM);
-                session.execute(updateOrderLineBound);
+                batchState.add(updateOrderLineBound);
             }
+
+            session.execute(batchState);
 
             // update the customer's balance and delivery info
             // get the present customer balance and delivery count
@@ -532,7 +536,7 @@ public class Cassandra {
                     .setInt(3, wid)
                     .setInt(4, did)
                     .setConsistencyLevel(USE_QUORUM);
-            session.execute(updateCustomerInfoBound);
+            session.executeAsync(updateCustomerInfoBound);
 //            System.out.printf("did: %d order: %d customer %d new balance: %f new count : %d\n", did, orderID, customerID, balance.add(orderLineSum), count + 1);
         }
     }
@@ -545,17 +549,10 @@ public class Cassandra {
                 .boxed().collect(Collectors.toList());
         didRange.parallelStream().forEach(
                 did -> {
-//                    System.out.printf("did: %d ", did);
                     deliveryTransactionUnit(session, wid, carrierid, did);
                     System.out.println(haha);
                 }
         );
-
-        // serial version
-//        for(int did = 1; did <= 10; did ++) {
-//            System.out.printf("did: %d ", did);
-//            deliveryTransactionUnit(session, wid, carrierid, did);
-//        }
     }
 
     private static void orderStatusTransaction(CqlSession session, int cwid, int cdid, int cid) {
