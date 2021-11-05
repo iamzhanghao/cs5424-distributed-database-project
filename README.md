@@ -114,7 +114,7 @@ $ mvn clean package
 3. Run experiments for workload A/B with 40 clients
 
    ```zsh
-   $ ./scripts/run_experiments.sh <experiment-number> <workload-type> cockroachdb 26267
+   $ ./scripts/run_experiments.sh <experiment-number> <workload-type> cassandra 3042
    ```
 
    e.g.
