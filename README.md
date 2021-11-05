@@ -72,6 +72,10 @@ $ mvn clean package
    $ ./scripts/run_experiments.sh 1 A cockroachdb 26267
    ```
 
+   Outputs for each client will be stored at `out/cockroachdb-<experiment-number>-<workload-type>-<client-id>.out`
+
+   Final statistics will be stored at `out/cockroachdb-<experiment-number>-<workload-type>.csv`
+
    If you only need to run one client:
 
    ```zsh
@@ -122,6 +126,10 @@ $ mvn clean package
    ```zsh
    $ ./scripts/run_experiments.sh 1 A cassandra 3042
    ```
+
+   Outputs for each client will be stored at `out/cassandra-<experiment-number>-<workload-type>-<client-id>.out`
+
+   Final statistics will be stored at `out/cassandra-<experiment-number>-<workload-type>.csv`
 
    If you only need to run one client:
 
