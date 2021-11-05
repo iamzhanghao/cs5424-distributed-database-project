@@ -1318,7 +1318,50 @@ public class Cassandra {
     }
 
     private static void orderStatusTransactionSchemaB(CqlSession session, int cwid, int cdid, int cid) {
-        orderStatusTransactionSchemaA(session, cwid, cdid, cid);
+        String get_customer = "select c_first, c_middle, c_last, c_balance from customer_tab "
+                + "where c_w_id = %d and c_d_id = %d and c_id = %d ";
+        String get_last_order = "SELECT ol_o_id, ol_entry_d, ol_carrier_id  "
+                + "FROM combined_order_tab "
+                + "WHERE ol_w_id = %d AND ol_d_id = %d AND ol_c_id = %d "
+                + "group by ol_o_id"
+                + "LIMIT 1 ALLOW FILTERING";
+        String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d "
+                + "from combined_order_tab where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
+
+        // customer last order
+        Row customer = session.execute(session.prepare(String.format(get_customer, cwid, cdid, cid)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+        Row last_order = session.execute(session.prepare(String.format(get_last_order, cwid, cdid, cid)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+        int last_order_id = last_order.getInt("o_id");
+
+        System.out.printf("Customer name: %s %s %s, Balance: %f\n",
+                customer.getString("c_first"),
+                customer.getString("c_middle"),
+                customer.getString("c_last"),
+                customer.getBigDecimal("c_balance").doubleValue());
+
+        String entryDate = "NULL";
+        try {
+            entryDate = last_order.getInstant("ol_entry_d").toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        System.out.printf("Customer last order id: %d, Entry Datetime: %s, Carrier id: %s\n",
+                last_order_id,
+                entryDate,
+                last_order.getString("ol_carrier_id"));
+
+        // order items
+        ResultSet rs_order_items = session.execute(session.prepare(String.format(get_order_items, cwid, cdid, last_order_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE));
+        for (Row item : rs_order_items) {
+            System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %f, Price: %f, Delivery Datetime: %s\n",
+                    item.getInt("ol_i_id"),
+                    item.getInt("ol_supply_w_id"),
+                    item.getBigDecimal("ol_quantity").doubleValue(),
+                    item.getBigDecimal("ol_amount").doubleValue(),
+                    item.getInstant("ol_delivery_d") != null ? item.getInstant("ol_delivery_d").toString() : "");
+        }
+        // orderStatusTransactionSchemaA(session, cwid, cdid, cid);
     }
 
     private static void stockLevelTransactionSchemaB(CqlSession session, int wid, int did, int threshold, int l) {
@@ -1360,7 +1403,120 @@ public class Cassandra {
     }
 
     private static void popularItemTransactionSchemaB(CqlSession session, int wid, int did, int l) {
-        popularItemTransactionSchemaA(session, wid, did, l);
+        String get_N = "select d_next_o_id from district_tab where d_w_id = %d and d_id = %d";
+        String get_order = "select ol_o_id, ol_entry_d, ol_c_id from combined_order_tab where ol_w_id = %d and old_id = %d and ol_o_id in ( %s ) group by ol_o_id allow filtering";
+        String get_order_lines = "select ol_o_id, ol_i_id, ol_quantity from combined_order_tab "
+                + "where ol_w_id = %d and ol_d_id = %d and ol_o_id in ( %s )";
+        String get_customer = "select c_id, c_first, c_middle, c_last from customer_tab "
+                + "where c_w_id = %d and c_d_id = %d and c_id in ( %s )";
+        String get_items = "select i_id, i_name from item_tab where i_id in ( %s )";
+
+        Integer N = session.execute(session.prepare(String.format(get_N, wid, did)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one().getInt("d_next_o_id");
+
+
+        StringJoiner o_ids = new StringJoiner(",");
+        for (int i = N - l; i < N; i++) {
+            o_ids.add((N - i) + "");
+        }
+
+        List<Row> orders = session.execute(session.prepare(String.format(get_order, wid, did, o_ids.toString())).bind().setConsistencyLevel(ConsistencyLevel.ONE)).all();
+        List<Row> order_lines = session.execute(session.prepare(String.format(get_order_lines, wid, did, o_ids.toString())).bind().setConsistencyLevel(ConsistencyLevel.ONE)).all();
+
+        StringJoiner c_ids = new StringJoiner(",");
+        for (Row order : orders) {
+            c_ids.add(order.getInt("ol_c_id") + "");
+        }
+
+        List<Row> customers = session.execute(session.prepare(String.format(get_customer, wid, did, c_ids.toString())).bind().setConsistencyLevel(ConsistencyLevel.ONE)).all();
+
+        System.out.printf("WID: %d, DID: %d, Number of last orders: %d\n", wid, did, l);
+        System.out.println();
+
+
+        Set<Integer> all_popular_items = new HashSet<>();
+        List<Set<Integer>> popular_items_each_order = new ArrayList<Set<Integer>>();
+        Map<Integer, Row> customer_map = new HashMap<>();
+        Map<Integer, List<Row>> ol_map = new HashMap<>();
+        Map<Integer, String> item_map = new HashMap<>();
+
+        // group order_line by o_id
+        for (Row ol : order_lines) {
+            Integer ol_o_id = ol.getInt("ol_o_id");
+            if (!ol_map.containsKey(ol_o_id)) {
+                List<Row> ol_list = new ArrayList<Row>();
+                ol_list.add(ol);
+                ol_map.put(ol_o_id, ol_list);
+            } else {
+                List<Row> ol_list = ol_map.get(ol_o_id);
+                ol_list.add(ol);
+                ol_map.put(ol_o_id, ol_list);
+            }
+        }
+        // group customers by c_id
+        for (Row customer : customers) {
+            customer_map.put(customer.getInt("c_id"), customer);
+        }
+
+        for (Row order : orders) {
+            int o_id = order.getInt("ol_o_id");
+            Row customer = customer_map.get(order.getInt("ol_c_id"));
+            System.out.printf(String.format("OID: %d, O_ENTRY_D: %s, Customer Name: %s\n",
+                    o_id,
+                    order.getInstant("ol_entry_d").toString(),
+                    customer.getString("c_first") + " " + customer.getString("c_middle") + " " + customer.getString("c_last")));
+
+            List<Row> ols = ol_map.get(o_id);
+            Map<Integer, Double> quantity_map = new HashMap<>();
+            for (Row ol : ols) {
+                Integer i_id = ol.getInt("ol_i_id");
+                double ol_quantity = ol.getBigDecimal("ol_quantity").doubleValue();
+                if (!quantity_map.containsKey(i_id)) {
+                    quantity_map.put(i_id, ol_quantity);
+                } else {
+                    quantity_map.put(i_id, quantity_map.get(i_id) + ol_quantity);
+                }
+            }
+            Double max_quantity = Double.MIN_VALUE;
+            for (Map.Entry<Integer, Double> q : quantity_map.entrySet()) {
+                max_quantity = Math.max(max_quantity, q.getValue());
+            }
+
+            Set<Integer> i_ids = new HashSet<>();
+            for (Row ol : ols) {
+                if (ol.getBigDecimal("ol_quantity").doubleValue() == max_quantity) {
+                    all_popular_items.add(ol.getInt("ol_i_id"));
+                    i_ids.add(ol.getInt("ol_i_id"));
+                }
+            }
+
+            StringJoiner i_ids_str = new StringJoiner(",");
+            for (Integer i_id : i_ids) {
+                i_ids_str.add(i_id + "");
+            }
+
+            List<Row> items = session.execute(String.format(get_items, i_ids_str.toString())).all();
+            for (Row item : items) {
+                item_map.put(item.getInt("i_id"), item.getString("i_name"));
+                System.out.printf("Popular I_NAME: %s, Quantity: %f\n",
+                        item.getString("i_name"),
+                        max_quantity);
+            }
+
+            popular_items_each_order.add(i_ids);
+
+        }
+
+        for (Integer i_id : all_popular_items) {
+            int count = 0;
+            for (Set<Integer> items : popular_items_each_order) {
+                if (items.contains(i_id)) {
+                    count++;
+                }
+            }
+            System.out.printf("Popular I_NAME: %s, Percentage of Orders having Popular Items: %f\n",
+                    item_map.get(i_id),
+                    (float) count * 1 / orders.size());
+        }
     }
 
     private static void topBalanceTransactionSchemaB(CqlSession session) {
