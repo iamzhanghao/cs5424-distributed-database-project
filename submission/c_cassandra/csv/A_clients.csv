@@ -1,4 +1,3 @@
-Client ID,Transaction Count,Total Execution Time,Mean Latency,Throughput,Median,95th Percentile,99th Percentile
 14,20000,8096.57,404.65,2.47,51.42,1767.89,6547.90
 22,20000,8140.06,406.83,2.46,53.03,1770.48,6625.59
 34,20000,8138.15,406.74,2.46,44.69,1852.23,6659.94
