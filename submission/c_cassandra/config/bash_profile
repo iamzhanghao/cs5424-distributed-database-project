@@ -1,0 +1,5 @@
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.312.b07-1.el7_9.x86_64
+export M2_HOME=/home/stuproj/cs4224c/apache-maven-3.8.2
+export COCKROACH_HOME=/temp/CS4224C/cockroach-v21.1.8.linux-amd64
+export CASSANDRA_HOME=/temp/CS4224C/apache-cassandra-4.0.0
+export PATH=$JAVA_HOME/bin:$M2_HOME/bin:$COCKROACH_HOME:$CASSANDRA_HOME:$CASSANDRA_HOME/bin:$PATH
