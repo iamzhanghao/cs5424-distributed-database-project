@@ -660,10 +660,8 @@ public class CockroachDB {
         String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d from order_line_tab "
                 + "where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
 
-        Statement st = connHelper.getConn().createStatement();
-
-        // Customer Last Order
-        ResultSet rs_customer_last_order = st.executeQuery(String.format(get_customer_last_order, cwid, cdid, cid));
+        //Customer Last Order
+        ResultSet rs_customer_last_order = connHelper.getConn().prepareStatement(String.format(get_customer_last_order, cwid, cdid, cid)).executeQuery();
 
         if (rs_customer_last_order.next()) {
             int last_order_id = rs_customer_last_order.getInt("o_id");
@@ -675,8 +673,8 @@ public class CockroachDB {
             System.out.printf("Customer last order id: %d, Entry Datetime: %s, Carrier id: %d\n", last_order_id,
                     rs_customer_last_order.getString("o_entry_d"), rs_customer_last_order.getInt("o_carrier_id"));
 
-            // Order items
-            ResultSet rs_order_items = st.executeQuery(String.format(get_order_items, cwid, cdid, last_order_id));
+            //Order items
+            ResultSet rs_order_items = connHelper.getConn().prepareStatement(String.format(get_order_items, cwid, cdid, last_order_id)).executeQuery();
 
             while (rs_order_items.next()) {
                 System.out.printf("Item id: %d, Warehouse id: %d, Quantity: %d, Price: %d, Delivery Datetime: %s\n",
@@ -752,8 +750,7 @@ public class CockroachDB {
                 + "group by ol.ol_o_id, o.o_entry_d, CONCAT(o.c_first, ' ', o.c_middle, ' ', o.c_last), i.i_id, i.i_name "
                 + "having (ol.ol_o_id, sum(ol.ol_quantity)) in (" + get_ol_quantity_max + ")";
 
-        Statement st = connHelper.getConn().createStatement();
-        ResultSet rs_popular_items = st.executeQuery(String.format(get_popular_items, wid, did, l));
+        ResultSet rs_popular_items = connHelper.getConn().prepareStatement(String.format(get_popular_items, wid, did, l)).executeQuery();
 
         Map<Integer, ArrayList<String>> orders = new HashMap<Integer, ArrayList<String>>();
         Map<Integer, Set<Integer>> items = new HashMap<Integer, Set<Integer>>();
