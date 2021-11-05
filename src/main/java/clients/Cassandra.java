@@ -1574,7 +1574,7 @@ public class Cassandra {
 //        select max(O_ID) as o_id, sum(O_OL_CNT) as o_ol_cnt from Order_tab;
 //
 //        Schema B only:
-//        select sum(OL_AMOUNT) as ol_amount, sum(OL_QUANTITY) as ol_quantity,max(O_ID) as o_id, sum(O_OL_CNT) from combined_order_tab;
+//        select sum(OL_AMOUNT) as ol_amount, sum(OL_QUANTITY) as ol_quantity,max(ol_o_ID) as o_id, sum(OL_CNT) from combined_order_tab;
 //
 //        For both schema:
 //
