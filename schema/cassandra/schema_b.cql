@@ -36,29 +36,10 @@ DROP INDEX IF EXISTS combined_order_customer_a;
 CREATE INDEX IF NOT EXISTS combined_order_customer_a
 on schema_b.combined_order_tab (ol_c_id) ;
 
-//CREATE TABLE order_line_tab (
-//ol_w_id        INT,
-//ol_d_id        INT,
-//ol_o_id        INT,
-//ol_number      INT,
-//ol_i_id        INT,
-//ol_delivery_d  TIMESTAMP,
-//ol_amount      DECIMAL,
-//ol_supply_w_id INT,
-//ol_quantity    DECIMAL,
-//ol_dist_info   VARCHAR,
-//PRIMARY KEY (ol_w_id, ol_d_id, ol_o_id, ol_number)
-//);
-//
-//COPY order_line_tab (ol_w_id, ol_d_id, ol_o_id, ol_number, ol_i_id, ol_delivery_d, ol_amount, ol_supply_w_id, ol_quantity, ol_dist_info)
-//FROM 'project_files/data_files/order-line.csv' WITH DELIMITER=',' AND NULL='null' AND HEADER=FALSE;
-//
-//DROP INDEX IF EXISTS order_line_tab_items;
-//
-//DROP INDEX IF EXISTS order_line_tab_items_a;
-//
-//CREATE INDEX IF NOT EXISTS order_line_tab_items_a
-//ON schema_a.order_line_tab ( ol_i_id );
+DROP INDEX IF EXISTS combined_order_items_b;
+
+CREATE INDEX IF NOT EXISTS combined_order_items_b
+    ON schema_b.combined_order_tab ( ol_i_id );
 
 
 CREATE TABLE stock_tab (
@@ -171,25 +152,6 @@ AND c_id IS NOT NULL
 AND c_last IS NOT NULL PRIMARY KEY (
 c_w_id, c_balance, c_d_id, c_id
 );
-
-
-//CREATE TABLE order_tab (
-//o_w_id       INT,
-//o_d_id       INT,
-//o_c_id       INT,
-//o_id         INT,
-//o_carrier_id VARCHAR,
-//o_ol_cnt     DECIMAL,
-//o_all_local  DECIMAL,
-//o_entry_d    TIMESTAMP,
-//PRIMARY KEY (o_w_id, o_id, o_d_id)
-//);
-//
-//COPY order_tab (o_w_id, o_d_id, o_id, o_c_id, o_carrier_id, o_ol_cnt, o_all_local, o_entry_d)
-//FROM 'project_files/data_files/order.csv' WITH DELIMITER=',' AND HEADER=FALSE;
-//
-//CREATE INDEX ON order_tab (o_carrier_id);
-//CREATE INDEX on order_tab (o_c_id) ;
 
 
 CREATE TABLE item_tab (
