@@ -1,2 +1,0 @@
-/temp/CS4224C/apache-cassandra-4.0.0/bin/cqlsh -f schema/cassandra/schema_a.cql xcnd30.comp.nus.edu.sg 3042
-/temp/CS4224C/apache-cassandra-4.0.0/bin/cqlsh -f schema/cassandra/schema_b.cql xcnd30.comp.nus.edu.sg 3042

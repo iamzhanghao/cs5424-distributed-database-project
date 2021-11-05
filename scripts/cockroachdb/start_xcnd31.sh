@@ -1,6 +1,3 @@
-
-cd cs5424-distributed-database-project;
-
 cockroach start --insecure \
   --store=/temp/CS4224C/cockroach_store/xcnd31 \
   --listen-addr=xcnd31.comp.nus.edu.sg:26267 \

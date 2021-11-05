@@ -1,63 +1,140 @@
 # cs5424-distributed-database-project
 
-## Common Download
-download `project_files` and put in project root
+# DB File Download
 
-http://www.comp.nus.edu.sg/~cs4224/project_files_4.zip 
+- Download `project_files` and copy to project root http://www.comp.nus.edu.sg/~cs4224/project_files_4.zip
 
-## Package install 
+- For Cassandra you need download one more csv file for `combined_order_tab` and copy it under `project_files` directory together with other files https://drive.google.com/file/d/18LKAVnvqQEaqbm0BYpNVqsPFT4wV4Xw5/view?usp=sharing
+
+# Install Cassandra and Cockroach DB
+
 ```zsh
-# Mac
-$ brew install cockroachdb/tap/cockroach 
+# Mac (Cockroach)
+$ brew install cockroachdb/tap/cockroach
+$ brew install cassandra
+# Mac (Cassandra)
+$ brew install python
+$ pip install cql
 
-# Linux
-$ curl https://binaries.cockroachdb.com/cockroach-v21.1.11.linux-amd64.tgz | tar -xz && sudo cp -i cockroach-v21.1.11.linux-amd64/cockroach /usr/local/bin/
+# Linux (Cockroach)
+$ curl https://binaries.cockroachdb.com/cockroach-v21.1.7.linux-amd64.tgz | tar -xz && sudo cp -i cockroach-v21.1.7.linux-amd64 /temp/CS4224C/cockroach-v21.1.7.linux-amd64
+
+# Linux (Cassandra)
+$ curl https://downloads.apache.org/cassandra/4.0.0/apache-cassandra-4.0.0-bin.tar.gz.sha256 | tar -xz && sudo cp -i apache-cassandra-4.0.0-bin /temp/CS4224C/apache-cassandra-4.0.0-bin
 ```
 
-## Compile
+# Configuration
+
+1. Copy lines from `config/bash_profile` to your own `.bash_profile`
+2. Use `config/cassandra.yaml` for Cassandra
+
+# Compile `cassandra.jar` and `cockroachdb.jar`
+
+```zsh
+$ mvn clean package
 ```
-mvn clean package
-```
 
-## CockroachDB
-1.  init ssl and start up the cluster with 5 nodes
+# Instructions for running experiments
 
-    ```zsh
-    # Local Debug
-    $ ./scripts/cockroachdb/init_local.sh
-    
-    # Run on server
-    $ ./scripts/cockroachdb/init_server.sh
-    ```
+## Cockroach DB
 
-2. create schema and dump the data by:
-    ```zsh
-    $ ./scripts/cockroachdb/migrate_schema.sh
-    ```
+1. Start 5 nodes
 
-3. run the driver by
-    ```zsh
-    $ java -jar target/cockroachdb.jar  <host> <port> <schema_name> <data_dir>
-    ```
-    or setup IntelliJ Configurations: ` <host> <port> <schema_name> <data_dir>`
+   ```zsh
+   # On xcnd30.comp.nus.edu.sg
+   $ ./scripts/cockroachdb/start_xcnd30.sh
+   # On xcnd31.comp.nus.edu.sg
+   $ ./scripts/cockroachdb/start_xcnd31.sh
+   # On xcnd32.comp.nus.edu.sg
+   $ ./scripts/cockroachdb/start_xcnd32.sh
+   # On xcnd33.comp.nus.edu.sg
+   $ ./scripts/cockroachdb/start_xcnd33.sh
+   # On xcnd34.comp.nus.edu.sg
+   $ ./scripts/cockroachdb/start_xcnd34.sh
 
+   ```
 
-4. Stop CockroachDB cluster 
-    ```zsh
-    $ ./scripts/cockroachdb/reset.sh
-    ```
+2. Init cluster and load initial data
+   ```zsh
+   # Run on xcnd30.comp.nus.edu.sg
+   $ ./scripts/cockroachdb/migrate_data.sh
+   ```
+3. Run experiments for workload A/B with 40 clients
 
+   ```zsh
+   $ ./scripts/run_experiments.sh <experiment-number> <workload-type> cockroachdb 26267
+   ```
+
+   e.g.
+
+   ```zsh
+   $ ./scripts/run_experiments.sh 1 A cockroachdb 26267
+   ```
+
+   If you only need to run one client:
+
+   ```zsh
+   $ java -jar target/cockroachdb.jar <hostname> 26267 <workload-type> <client-id> <statistics-csv-dir> 0
+   ```
+
+   e.g.
+
+   ```zsh
+   $ java -jar target/cockroachdb.jar xcnd30.comp.nus.edu.sg 26267 A a clients.csv 0
+   ```
+
+4. To abort experiments
+   ```
+   $ $ ./scripts/stop_experiments.sh
+   ```
 
 ## Cassandra
-1. start up the cluster
-    
-2. create schema data by:
-    ```zsh
-    $ scripts/cassandra/migrate_schema.sh
-    ```
 
-3. run the driver by
-    ```zsh
-    $ java -jar target/target/cassandra.jar <host> <port> <schema_name> <data_dir>
-    ```
-   or setup IntelliJ Configurations: ` <host> <port> <schema_name> <data_dir>`
+1. Start 5 nodes
+
+   ```zsh
+   # On xcnd30.comp.nus.edu.sg
+   $ cassandra
+   # On xcnd31.comp.nus.edu.sg
+   $ cassandra
+   # On xcnd32.comp.nus.edu.sg
+   $ cassandra
+   # On xcnd33.comp.nus.edu.sg
+   $ cassandra
+   # On xcnd34.comp.nus.edu.sg
+   $ cassandra
+   ```
+
+2. Init cluster and load initial data
+   ```zsh
+   # Run on xcnd30.comp.nus.edu.sg
+   $ ./scripts/cassandra/migrate_data.sh
+   ```
+3. Run experiments for workload A/B with 40 clients
+
+   ```zsh
+   $ ./scripts/run_experiments.sh <experiment-number> <workload-type> cockroachdb 26267
+   ```
+
+   e.g.
+
+   ```zsh
+   $ ./scripts/run_experiments.sh 1 A cassandra 3042
+   ```
+
+   If you only need to run one client:
+
+   ```zsh
+   $ java -jar target/cassandra.jar <hostname> 3042 <workload-type> <client-id> <statistics-csv-dir> 0
+   ```
+
+   e.g.
+
+   ```zsh
+   $ java -jar target/cassandra.jar xcnd30.comp.nus.edu.sg 3042 A a clients.csv 0
+   ```
+
+4. To abort experiments
+   ```
+   $ $ ./scripts/stop_experiments.sh
+   ```

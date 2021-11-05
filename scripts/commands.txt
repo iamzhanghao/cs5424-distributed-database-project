@@ -1,7 +1,7 @@
 
 
 `>vGUXc9XcPeKHY`
-
+# Cassandra
 /temp/CS4224C/apache-cassandra-4.0.0/bin/cassandra
 
 ./ngrok http http://localhost:8090

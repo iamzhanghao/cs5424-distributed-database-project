@@ -1,5 +1,5 @@
 
-#cockroach init --insecure --host=xcnd30.comp.nus.edu.sg:26267;
+cockroach init --insecure --host=xcnd30.comp.nus.edu.sg:26267;
 
 cockroach nodelocal upload project_files/data_files/warehouse.csv project_files/data_files/warehouse.csv --insecure --host=xcnd30.comp.nus.edu.sg:26267
 cockroach nodelocal upload project_files/data_files/district.csv project_files/data_files/district.csv --insecure --host=xcnd30.comp.nus.edu.sg:26267
