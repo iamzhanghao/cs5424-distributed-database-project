@@ -1323,7 +1323,8 @@ public class Cassandra {
         String get_last_order = "SELECT ol_o_id, ol_entry_d, ol_carrier_id  "
                 + "FROM combined_order_tab "
                 + "WHERE ol_w_id = %d AND ol_d_id = %d AND ol_c_id = %d "
-                + "group by ol_o_id"
+                + "group by ol_o_id "
+                + "order by ol_o_id desc "
                 + "LIMIT 1 ALLOW FILTERING";
         String get_order_items = "SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d "
                 + "from combined_order_tab where ol_w_id = %d AND ol_d_id = %d AND ol_o_id = %d ";
@@ -1331,7 +1332,7 @@ public class Cassandra {
         // customer last order
         Row customer = session.execute(session.prepare(String.format(get_customer, cwid, cdid, cid)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
         Row last_order = session.execute(session.prepare(String.format(get_last_order, cwid, cdid, cid)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
-        int last_order_id = last_order.getInt("o_id");
+        int last_order_id = last_order.getInt("ol_o_id");
 
         System.out.printf("Customer name: %s %s %s, Balance: %f\n",
                 customer.getString("c_first"),
