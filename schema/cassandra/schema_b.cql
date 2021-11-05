@@ -27,14 +27,16 @@ FROM 'project_files/data_files/order_combined.csv'
 WITH delimiter = ','  AND  header = false  AND  NULL='NULL';
 
 DROP INDEX IF EXISTS combined_order_carrier_a;
+DROP INDEX IF EXISTS combined_order_carrier_b;
 
-CREATE INDEX IF NOT EXISTS combined_order_carrier_a
+
+CREATE INDEX IF NOT EXISTS combined_order_carrier_b
 ON schema_b.combined_order_tab (ol_carrier_id);
 
-DROP INDEX IF EXISTS combined_order_customer_a;
+DROP INDEX IF EXISTS combined_order_customer_b;
 
-CREATE INDEX IF NOT EXISTS combined_order_customer_a
-on schema_b.combined_order_tab (ol_c_id) ;
+-- CREATE INDEX IF NOT EXISTS combined_order_customer_a
+-- on schema_b.combined_order_tab (ol_c_id) ;
 
 DROP INDEX IF EXISTS combined_order_items_b;
 
