@@ -1,12 +1,12 @@
 # cs5424-distributed-database-project
 
-# DB File Download
+## DB File Download
 
 - Download `project_files` and copy to project root http://www.comp.nus.edu.sg/~cs4224/project_files_4.zip
 
 - For Cassandra you need download one more csv file for `combined_order_tab` and copy it under `project_files` directory together with other files https://drive.google.com/file/d/18LKAVnvqQEaqbm0BYpNVqsPFT4wV4Xw5/view?usp=sharing
 
-# Install Cassandra and Cockroach DB
+## Install Cassandra and Cockroach DB
 
 ```zsh
 # Mac (Cockroach)
@@ -23,20 +23,20 @@ $ curl https://binaries.cockroachdb.com/cockroach-v21.1.7.linux-amd64.tgz | tar 
 $ curl https://downloads.apache.org/cassandra/4.0.0/apache-cassandra-4.0.0-bin.tar.gz.sha256 | tar -xz && sudo cp -i apache-cassandra-4.0.0-bin /temp/CS4224C/apache-cassandra-4.0.0-bin
 ```
 
-# Configuration
+## Configuration
 
 1. Copy lines from `config/bash_profile` to your own `.bash_profile`
 2. Use `config/cassandra.yaml` for Cassandra
 
-# Compile `cassandra.jar` and `cockroachdb.jar`
+## Compile `cassandra.jar` and `cockroachdb.jar`
 
 ```zsh
 $ mvn clean package
 ```
 
-# Instructions for running experiments
+## Instructions for running experiments
 
-## Cockroach DB
+### Cockroach DB
 
 1. Start 5 nodes
 
@@ -85,10 +85,10 @@ $ mvn clean package
 
 4. To abort experiments
    ```
-   $ $ ./scripts/stop_experiments.sh
+   $ ./scripts/stop_experiments.sh
    ```
 
-## Cassandra
+### Cassandra
 
 1. Start 5 nodes
 
@@ -136,5 +136,5 @@ $ mvn clean package
 
 4. To abort experiments
    ```
-   $ $ ./scripts/stop_experiments.sh
+   $ ./scripts/stop_experiments.sh
    ```
