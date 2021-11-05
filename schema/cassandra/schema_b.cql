@@ -34,6 +34,8 @@ CREATE INDEX IF NOT EXISTS combined_order_carrier_b
 ON schema_b.combined_order_tab (ol_carrier_id);
 
 DROP INDEX IF EXISTS combined_order_customer_b;
+DROP INDEX IF EXISTS combined_order_customer_a;
+
 
 -- CREATE INDEX IF NOT EXISTS combined_order_customer_a
 -- on schema_b.combined_order_tab (ol_c_id) ;
