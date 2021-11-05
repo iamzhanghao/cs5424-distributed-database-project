@@ -13,16 +13,18 @@ import java.util.*;
 
 public class CockroachDB {
 
-    // Limit number of transactions executed, during actual experiment change to
-    // 20000
-    private static int TXN_LIMIT = 200000;
+    // Limit number of transactions executed, during actual experiment change to 20000
+    private static int TXN_LIMIT = 20000;
+    // Max number of retrys
     private static final int MAX_RETRY_COUNT = 100000000;
-    private static final int RETRY_QUERY_AFTER = 200;
+    // Retry duration
+    private static final int RETRY_QUERY_AFTER_MIN_IN_MS = 100;
+    private static final int RETRY_QUERY_AFTER_MAX_IN_MS = 200;
 
     private static CockroachDbSQLConnectionHelper connHelper;
 
     private static int getDelay(int count) {
-        int random = 100 + (int) (Math.random() * ((RETRY_QUERY_AFTER - 100) + 1));
+        int random = RETRY_QUERY_AFTER_MIN_IN_MS + (int) (Math.random() * ((RETRY_QUERY_AFTER_MAX_IN_MS - RETRY_QUERY_AFTER_MIN_IN_MS) + 1));
         System.out.printf("Retry count= %d, retry in %d milliseconds", count, random);
         return random;
     }
@@ -474,32 +476,7 @@ public class CockroachDB {
         credit = rs.getString("c_credit");
         warehouse_tax_rate = rs.getInt("w_tax");
         district_tax_rate = rs.getInt("d_tax");
-
-        // rs = stmt.executeQuery("SELECT c_last, c_credit, c_discount FROM customer_tab
-        // " +
-        // "WHERE c_id = " + cid + " AND c_d_id = " + did + " AND c_w_id = " + wid);
-        // while (rs.next()) {
-        // discount = rs.getInt("c_discount");
-        // last_name = rs.getString("c_last");
-        // credit = rs.getString("c_credit");
-        // break;
-        // }
-
-        // double warehouse_tax_rate = 0;
-        // rs = stmt.executeQuery("SELECT w_tax FROM warehouse_tab WHERE w_id = " +
-        // wid);
-        // while (rs.next()) {
-        // warehouse_tax_rate = rs.getInt("w_tax");
-        // break;
-        // }
-
-        // double district_tax_rate = 0;
-        // rs = stmt.executeQuery("SELECT d_tax FROM district_tab WHERE d_id = " + did +
-        // " AND d_w_id = " + wid);
-        // while (rs.next()) {
-        // district_tax_rate = rs.getInt("d_tax");
-        // break;
-        // }
+        
         rs.close();
 
         total_amount = total_amount * (1 + warehouse_tax_rate + district_tax_rate) * (1 - discount);
