@@ -1404,7 +1404,7 @@ public class Cassandra {
 
     private static void popularItemTransactionSchemaB(CqlSession session, int wid, int did, int l) {
         String get_N = "select d_next_o_id from district_tab where d_w_id = %d and d_id = %d";
-        String get_order = "select ol_o_id, ol_entry_d, ol_c_id from combined_order_tab where ol_w_id = %d and old_id = %d and ol_o_id in ( %s ) group by ol_o_id allow filtering";
+        String get_order = "select ol_o_id, ol_entry_d, ol_c_id from combined_order_tab where ol_w_id = %d and ol_d_id = %d and ol_o_id in ( %s ) group by ol_o_id allow filtering";
         String get_order_lines = "select ol_o_id, ol_i_id, ol_quantity from combined_order_tab "
                 + "where ol_w_id = %d and ol_d_id = %d and ol_o_id in ( %s )";
         String get_customer = "select c_id, c_first, c_middle, c_last from customer_tab "
