@@ -11,8 +11,9 @@
 ```zsh
 # Mac (Cockroach)
 $ brew install cockroachdb/tap/cockroach
-$ brew install cassandra
+
 # Mac (Cassandra)
+$ brew install cassandra
 $ brew install python
 $ pip install cql
 
