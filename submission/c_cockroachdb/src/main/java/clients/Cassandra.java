@@ -986,8 +986,6 @@ public class Cassandra {
             ArrayList<BigDecimal> itemPrices = new ArrayList<BigDecimal>();
             ArrayList<BigDecimal> itemStocks = new ArrayList<BigDecimal>();
 
-            BatchStatement batchState = BatchStatement.newInstance(BatchType.LOGGED);
-
             for (int idx = 0; idx < items.size(); idx++) {
                 int current_item = items.get(idx);
 
@@ -1052,10 +1050,8 @@ public class Cassandra {
                         .setBigDecimal(13, BigDecimal.valueOf(all_local))
                         .setDefaultTimestamp(System.currentTimeMillis())
                         .setConsistencyLevel(USE_QUORUM);
-                batchState.add(insertOrderBound);
+                session.execute(insertOrderBound);
             }
-
-            session.executeAsync(batchState);
 
             rs = session
                     .execute(session
