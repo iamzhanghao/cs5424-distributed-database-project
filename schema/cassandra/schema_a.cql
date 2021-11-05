@@ -161,8 +161,8 @@ CREATE INDEX IF NOT EXISTS order_tab_carrier_a
 
 DROP INDEX IF EXISTS order_tab_customer_a;
 
-CREATE INDEX IF NOT EXISTS order_tab_customer_a
-    on schema_a.order_tab (o_c_id) ;
+-- CREATE INDEX IF NOT EXISTS order_tab_customer_a
+--     on schema_a.order_tab (o_c_id) ;
 
 
 CREATE TABLE item_tab (

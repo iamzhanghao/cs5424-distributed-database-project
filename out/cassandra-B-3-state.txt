@@ -1,0 +1,63 @@
+========================Statistics========================
+Fastest:
+Total 20000 transactions, execution time 2700.69s, avg latency 149.11ms, throughput 6.66 query/s,
+median latency 92.95ms, 95th percentile latency 553.04ms, 99th percentile latency 822.54ms
+
+Txn P: avg latency 21.34ms, retry 0.00 times
+Txn R: avg latency 127.17ms, retry 0.00 times
+Txn S: avg latency 509.80ms, retry 0.00 times
+Txn T: avg latency 38.76ms, retry 0.00 times
+Txn D: avg latency 400.39ms, retry 0.00 times
+Txn I: avg latency 115.73ms, retry 0.00 times
+Txn N: avg latency 58.00ms, retry 0.00 times
+
+========================Statistics========================
+Slowest
+Total 20000 transactions, execution time 2844.62s, avg latency 157.06ms, throughput 6.33 query/s,
+median latency 94.43ms, 95th percentile latency 609.43ms, 99th percentile latency 918.30ms
+
+Txn P: avg latency 22.71ms, retry 0.00 times
+Txn R: avg latency 130.29ms, retry 0.00 times
+Txn S: avg latency 553.17ms, retry 0.00 times
+Txn T: avg latency 40.94ms, retry 0.00 times
+Txn D: avg latency 416.19ms, retry 0.00 times
+Txn I: avg latency 118.29ms, retry 0.00 times
+Txn N: avg latency 61.89ms, retry 0.00 times
+
+
+
+====================== DB State ============================
+W_YTD: 79439480.810000
+D_YTD: 81026275.330000
+D_NEXT_O_ID: 363540
+C_BALANCE: 5568541205.880000
+C_YTD_PAYMENT: 81167616.000000
+C_PAYMENT_CNT: 340000
+C_DELIVERY_CNT: 96698
+O_ID: 34567
+O_OL_CNT: 4541881.000000
+OL_AMOUNT: 5888341566.04
+OL_QUANTITY: 18744245
+S_QUANTITY: 49484052
+S_YTD: 5494295.0
+S_ORDER_CNT: 997625
+S_REMOTE_CNT: 9880
+======================DB State Plain=======================
+7.943948081E7
+8.102627533E7
+363540
+5.56854120588E9
+8.1167616E7
+340000
+96698
+34567
+4541881.0
+5888341566.04
+18744245
+49484052
+5494295.0
+997625
+9880
+
+
+

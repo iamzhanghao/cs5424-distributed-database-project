@@ -591,13 +591,9 @@ public class Cassandra {
     private static void deliveryTransactionSchemaA(CqlSession session, int wid, int carrierid) {
         System.out.println("Delivery Txn");
         // parallel version
-        List<Integer> didRange = IntStream.rangeClosed(1, 10)
-                .boxed().collect(Collectors.toList());
-        didRange.parallelStream().forEach(
-                did -> {
-                    deliveryTransactionUnitSchemaA(session, wid, carrierid, did);
-                }
-        );
+        for(int did = 1; did <= 10; did++) {
+            deliveryTransactionUnitSchemaA(session, wid, carrierid, did);
+        }
     }
 
     private static void orderStatusTransactionSchemaA(CqlSession session, int cwid, int cdid, int cid) {
@@ -948,30 +944,26 @@ public class Cassandra {
 //                    }
 //                }
 //            }
+            for(Row item: items) {
+                ResultSet relatedOrdersForItem = session.execute(session.prepare(String.format("SELECT ol_w_id, ol_d_id, ol_o_id FROM order_line_tab \n" +
+                                "WHERE ol_i_id = %d \n" +
+                                "ALLOW FILTERING ", item.getInt("ol_i_id")))
+                        .bind()
+                        .setConsistencyLevel(ConsistencyLevel.ONE));
 
-            items.parallelStream().forEach(
-                    item -> {
-                        ResultSet relatedOrdersForItem = session.execute(session.prepare(String.format("SELECT ol_w_id, ol_d_id, ol_o_id FROM order_line_tab \n" +
-                                        "WHERE ol_i_id = %d \n" +
-                                        "ALLOW FILTERING ", item.getInt("ol_i_id")))
-                                .bind()
-                                .setConsistencyLevel(ConsistencyLevel.ONE));
-
-                        for (Row relatedOrderForItem : relatedOrdersForItem) {
-                            Order newOrder = new Order(relatedOrderForItem.getInt("ol_w_id"),
-                                    relatedOrderForItem.getInt("ol_d_id"),
-                                    relatedOrderForItem.getInt("ol_o_id"));
-                            if (newOrder.w_id != cwid) {
-                                if (orderedAtLeastOnce.contains(newOrder)) {
-                                    relatedOrders.add(newOrder);
-                                }
-                                orderedAtLeastOnce.add(newOrder);
-                            }
+                for (Row relatedOrderForItem : relatedOrdersForItem) {
+                    Order newOrder = new Order(relatedOrderForItem.getInt("ol_w_id"),
+                            relatedOrderForItem.getInt("ol_d_id"),
+                            relatedOrderForItem.getInt("ol_o_id"));
+                    if (newOrder.w_id != cwid) {
+                        if (orderedAtLeastOnce.contains(newOrder)) {
+                            relatedOrders.add(newOrder);
                         }
+                        orderedAtLeastOnce.add(newOrder);
                     }
-            );
-
-
+                }
+            }
+            
 //            for (Order relatedOrder : relatedOrders) {
 //                Row relatedCustomer = session.execute(session.prepare(String.format("SELECT o_w_id, o_d_id, o_c_id from order_tab\n" +
 //                        "WHERE o_w_id = %d AND o_d_id= %d AND o_id = %d\n" +
@@ -982,19 +974,16 @@ public class Cassandra {
 //                                relatedCustomer.getInt("o_w_id"),
 //                                relatedCustomer.getInt("o_w_id")));
 //            }
-            relatedOrders.parallelStream().forEach(
-                    relatedOrder -> {
-                        Row relatedCustomer = session.execute(session.prepare(String.format("SELECT o_w_id, o_d_id, o_c_id from order_tab\n" +
-                                "WHERE o_w_id = %d AND o_d_id= %d AND o_id = %d\n" +
-                                "ALLOW FILTERING", relatedOrder.w_id, relatedOrder.d_id, relatedOrder.o_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
+            for(Order relatedOrder: relatedOrders) {
+                Row relatedCustomer = session.execute(session.prepare(String.format("SELECT o_w_id, o_d_id, o_c_id from order_tab\n" +
+                        "WHERE o_w_id = %d AND o_d_id= %d AND o_id = %d\n" +
+                        "ALLOW FILTERING", relatedOrder.w_id, relatedOrder.d_id, relatedOrder.o_id)).bind().setConsistencyLevel(ConsistencyLevel.ONE)).one();
 
-                        relatedCustomerSet.add(
-                                new Customer(relatedCustomer.getInt("o_w_id"),
-                                        relatedCustomer.getInt("o_d_id"),
-                                        relatedCustomer.getInt("o_c_id")));
-                    }
-            );
-
+                relatedCustomerSet.add(
+                        new Customer(relatedCustomer.getInt("o_w_id"),
+                                relatedCustomer.getInt("o_d_id"),
+                                relatedCustomer.getInt("o_c_id")));
+            }
         }
         if (relatedCustomerSet.isEmpty()) {
             System.out.println("No related customer");
@@ -1614,35 +1603,42 @@ public class Cassandra {
         System.out.printf("O_OL_CNT: %f\n", o_ol_cnt);
         res.append(o_ol_cnt.doubleValue() + "\n");
 
-        Row orderLineRow = session.execute(
-                session.prepare("select sum(OL_AMOUNT) as ol_amount, sum(OL_QUANTITY) as ol_quantity from Order_line_tab;")
-                        .bind()
-                        .setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
-        BigDecimal ol_amount = orderLineRow.getBigDecimal("ol_amount");
-        BigDecimal ol_quantity = orderLineRow.getBigDecimal("ol_quantity");
 
-        System.out.printf("OL_AMOUNT: %f\n", ol_amount);
-        res.append(ol_amount.doubleValue() + "\n");
-        System.out.printf("OL_QUANTITY: %f\n", ol_quantity);
-        res.append(ol_quantity.doubleValue() + "\n");
-
-
-        Row stockRow = session.execute(session.prepare(
-                        "select sum(S_QUANTITY) as s_quantity, sum(S_YTD) as s_ytd, sum(S_ORDER_CNT) as s_order_cnt," +
-                                " sum(S_REMOTE_CNT) as s_remote_cnt from Stock_tab;")
-                .bind().setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
-        BigDecimal s_quantity = stockRow.getBigDecimal("s_quantity");
-        System.out.printf("S_QUANTITY: %f\n", s_quantity);
-        res.append(s_quantity.doubleValue() + "\n");
-        BigDecimal s_ytd = stockRow.getBigDecimal("s_ytd");
-        System.out.printf("S_YTD: %f\n", s_ytd);
-        res.append(s_ytd.doubleValue() + "\n");
-        int s_order_cnt = stockRow.getInt("s_order_cnt");
-        System.out.printf("S_ORDER_CNT: %d\n", s_order_cnt);
-        res.append(s_order_cnt + "\n");
-        int s_remote_cnt = stockRow.getInt("s_remote_cnt");
-        System.out.printf("S_REMOTE_CNT: %d\n", s_remote_cnt);
-        res.append(s_remote_cnt + "\n");
+        // NOTE: The follwing 2 queries generate drvier timeout exception, run manually in cqlsh instead
+//        select sum(OL_AMOUNT) as ol_amount, sum(OL_QUANTITY) as ol_quantity from schema_a.Order_line_tab;
+//
+//        select sum(S_QUANTITY) as s_quantity, sum(S_YTD) as s_ytd, sum(S_ORDER_CNT) as s_order_cnt, sum(S_REMOTE_CNT) as s_remote_cnt from schema_a.Stock_tab;
+//
+//
+//        Row orderLineRow = session.execute(
+//                session.prepare("select sum(OL_AMOUNT) as ol_amount, sum(OL_QUANTITY) as ol_quantity from Order_line_tab;")
+//                        .bind()
+//                        .setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
+//        BigDecimal ol_amount = orderLineRow.getBigDecimal("ol_amount");
+//        BigDecimal ol_quantity = orderLineRow.getBigDecimal("ol_quantity");
+//
+//        System.out.printf("OL_AMOUNT: %f\n", ol_amount);
+//        res.append(ol_amount.doubleValue() + "\n");
+//        System.out.printf("OL_QUANTITY: %f\n", ol_quantity);
+//        res.append(ol_quantity.doubleValue() + "\n");
+//
+//
+//        Row stockRow = session.execute(session.prepare(
+//                        "select sum(S_QUANTITY) as s_quantity, sum(S_YTD) as s_ytd, sum(S_ORDER_CNT) as s_order_cnt," +
+//                                " sum(S_REMOTE_CNT) as s_remote_cnt from Stock_tab;")
+//                .bind().setConsistencyLevel(USE_QUORUM).setExecutionProfile(config.getProfile("slow"))).one();
+//        BigDecimal s_quantity = stockRow.getBigDecimal("s_quantity");
+//        System.out.printf("S_QUANTITY: %f\n", s_quantity);
+//        res.append(s_quantity.doubleValue() + "\n");
+//        BigDecimal s_ytd = stockRow.getBigDecimal("s_ytd");
+//        System.out.printf("S_YTD: %f\n", s_ytd);
+//        res.append(s_ytd.doubleValue() + "\n");
+//        int s_order_cnt = stockRow.getInt("s_order_cnt");
+//        System.out.printf("S_ORDER_CNT: %d\n", s_order_cnt);
+//        res.append(s_order_cnt + "\n");
+//        int s_remote_cnt = stockRow.getInt("s_remote_cnt");
+//        System.out.printf("S_REMOTE_CNT: %d\n", s_remote_cnt);
+//        res.append(s_remote_cnt + "\n");
 
 
         System.out.println("======================DB State Plain=======================");
