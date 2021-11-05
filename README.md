@@ -18,10 +18,10 @@ $ brew install python
 $ pip install cql
 
 # Linux (Cockroach)
-$ curl https://binaries.cockroachdb.com/cockroach-v21.1.7.linux-amd64.tgz | tar -xz && sudo cp -i cockroach-v21.1.7.linux-amd64 /temp/CS4224C/cockroach-v21.1.7.linux-amd64
+$ curl https://binaries.cockroachdb.com/cockroach-v21.1.7.linux-amd64.tgz | tar -xz && sudo cp -i cockroach-v21.1.7.linux-amd64 /temp/CS4224C/
 
 # Linux (Cassandra)
-$ curl https://downloads.apache.org/cassandra/4.0.0/apache-cassandra-4.0.0-bin.tar.gz.sha256 | tar -xz && sudo cp -i apache-cassandra-4.0.0-bin /temp/CS4224C/apache-cassandra-4.0.0-bin
+$ curl https://downloads.apache.org/cassandra/4.0.0/apache-cassandra-4.0.0-bin.tar.gz.sha256 | tar -xz && sudo cp -i apache-cassandra-4.0.0-bin /temp/CS4224C/
 ```
 
 ## Configuration
